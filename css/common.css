@@ -55,7 +55,7 @@ section{
 }
 
 .header {
-  background: #111;
+  background: var(--main_black);
   color: #fff;
   position: relative;
   z-index: 1;
