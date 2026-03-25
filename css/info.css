@@ -3,7 +3,7 @@
 
 .plan{
   display: flex;
-  padding: 170px;
+  padding: 170px 120px;
 }
 
 .plan_heading{
@@ -28,16 +28,12 @@
     box-sizing: border-box;
 }
 
-.address {
-    width: 100%;
-    padding-bottom: 56px;
-}
-
 .plan .inner .tit {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 32px;
+    cursor: pointer;
 }
 
 .plan .inner .tit h3 {
@@ -65,7 +61,7 @@
 }
 
 .plan .inner .plus i {
-    font-size: 34px;
+    font-size: 50px;
     line-height: 1;
     font-weight: 300;
 }
@@ -80,8 +76,9 @@
     display: grid;
     grid-template-columns: 20px 1fr;
     column-gap: 24px;
-    align-items: start;
+    align-items: center;
     margin: 26px 0 24px;
+    padding: 20px;
 }
 
 .plan .inner .container[aria-hidden="true"] {
@@ -101,7 +98,7 @@
 
 .plan .inner .icon i {
     color: #f5f5f5;
-    font-size: 18px;
+    font-size: 50px;
     line-height: 1;
 }
 
@@ -114,13 +111,13 @@
 .plan .inner .txt p {
     margin: 0;
     color: #f5f5f5;
-    font-size: 16px;
+    font-size: 22px;
     font-weight: 400;
     line-height: 1.3;
     letter-spacing: -0.02em;
 }
 
-.address_txt p:last-child {
+.address .txt p:last-child {
     margin-top: 2px;
     color: rgba(255, 255, 255, 0.45);
 }
@@ -131,10 +128,67 @@
     background-color: rgba(255, 255, 255, 0.72);
 }
 
-.address_container[aria-hidden="true"] + .accordion_divider {
-    margin-top: 34px;
+.address {
+    width: 100%;
+    padding-bottom: 56px;
 }
 
-.address_container[aria-hidden="false"] + .accordion_divider {
-    margin-top: 0;
+.address .container .txt p:last-child {
+color: #929292;
+font-size: 22px;
+font-weight: 400;
+letter-spacing: -1.1px;
+}
+
+
+
+.opening {
+  width: 100%;
+  padding-bottom: 56px;
+}
+
+.opening .container .txt p:last-child {
+color: #929292;
+font-size: 22px;
+font-weight: 400;
+letter-spacing: -1.1px;
+}
+
+
+.charges{
+  width: 100%;
+  padding-bottom: 56px;
+}
+
+.charges .container .txt p:nth-child(3) {
+color: #929292;
+font-size: 22px;
+font-weight: 400;
+letter-spacing: -1.1px;
+}
+
+.charges .container .txt p:last-child {
+color: #929292;
+font-size: 22px;
+font-weight: 400;
+letter-spacing: -1.1px;
+}
+
+.parking{
+  width: 100%;
+  padding-bottom: 56px;
+}
+
+.parking .container .txt p:nth-child(2) {
+color: #929292;
+font-size: 22px;
+font-weight: 400;
+letter-spacing: -1.1px;
+}
+
+.parking .container .txt p:last-child {
+color: #929292;
+font-size: 22px;
+font-weight: 400;
+letter-spacing: -1.1px;
 }

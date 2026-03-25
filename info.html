@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script src="https://kit.fontawesome.com/b43057b3ba.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <title>National Museum of Modern and Contemporary Art, Korea</title>
     <link rel="stylesheet" href="css/reset.css">
@@ -16,6 +17,7 @@
     <link rel="stylesheet" href="css/common_media.css">
     <link rel="stylesheet" href="css/info.css">
     <script src="js/common.js" defer></script>
+    <script src="js/info.js"></script>
 </head>
 <!-- 햄버거 밑부터 개인별 작업 -->
 
@@ -74,13 +76,13 @@
                 <div class="address">
                     <div class="tit">
                         <h3>Address</h3>
-                        <button class="plus" aria-expanded="false" aria-controls="container">
+                        <button class="plus" aria-expanded="false" aria-controls="address_container">
                             <i class="fa-solid fa-plus" aria-hidden="true"></i>
                         </button>
                     </div><!-- //.address_tit -->
                     <div class="container" id="address_container" role="region" aria-hidden="true">
                         <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
-                        <div class="address_txt">
+                        <div class="txt">
                             <p>30 Samcheong-ro, Jongno-gu</p>
                             <p>Seoul 03062, South Korea</p>
                         </div><!-- //.address_txt_box -->
@@ -90,12 +92,12 @@
                 <div class="opening">
                     <div class="tit">
                         <h3>Opening</h3>
-                        <button class="plus" aria-expanded="false" aria-controls="container">
+                        <button class="plus" aria-expanded="false" aria-controls="opening_container">
                             <i class="fa-solid fa-plus" aria-hidden="true"></i>
                         </button>
                     </div><!-- //.opening_tit -->
                     <div class="container" id="opening_container" role="region" aria-hidden="true">
-                        <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="icon"><i class="fa-regular fa-clock"></i></div>
                         <div class="txt">
                             <p>Monday, Tuesday, Thursday, Friday, Sunday 10:00 AM – 6:00 PM</p>
                             <p>Late night openings on Wednesday and Saturday 10:00–21:00</p>
@@ -104,6 +106,42 @@
                     </div><!-- //.opening_container-->
                     <div class="accordion_divider"></div>
                 </div><!-- //.opening -->
+                <div class="charges">
+                    <div class="tit">
+                        <h3>Charges</h3>
+                        <button class="plus" aria-expanded="false" aria-controls="charges_container">
+                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div><!-- //.charges_tit -->
+                    <div class="container" id="charges_container" role="region" aria-hidden="true">
+                        <div class="icon"><i class="fa-solid fa-money-bill-wave"></i></div>
+                        <div class="txt">
+                            <p>Paid Exhibition Ticket: admission fees vary</p>
+                            <p>All Pass Ticket: 10,000 KRW ※ When operating 3 or more paid exhibitions</p>
+                            <p>Free admission day is the last Wednesday of every month, known as "Culture Day".</p>
+                            <p>Free admission on Wednesdays and Saturdays during late opening hours </p>
+                        </div><!-- //.charges_txt_box -->
+                    </div><!-- //.charges_container-->
+                    <div class="accordion_divider"></div>
+                </div><!-- //.charges -->
+                <div class="parking">
+                    <div class="tit">
+                        <h3>Parking</h3>
+                        <button class="plus" aria-expanded="false" aria-controls="parking_container">
+                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div><!-- //.charges_tit -->
+                    <div class="container" id="parking_container" role="region" aria-hidden="true">
+                        <div class="icon"><i class="fa-solid fa-p"></i></div>
+                        <div class="txt">
+                            <p>Minimum charge: KRW 4,200 for 1 hour<br />Service hours: 08:00 ~ 23:00
+                            </p>
+                            <p>(KRW 700 for every additional 10 minutes, KRW 30,000 per day)</p>
+                            <p>Parking capacity: 384 (Ground level 2 & 3)</p>
+                        </div><!-- //.parking_txt_box -->
+                    </div><!-- //.parking_container-->
+                    <div class="accordion_divider"></div>
+                </div><!-- //.parking -->
             </div><!-- //.inner -->
         </section><!-- //.plan -->
         <footer>
