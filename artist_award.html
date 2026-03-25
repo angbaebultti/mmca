@@ -1,218 +1,773 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="국립현대미술관 영문 웹사이트 리디자인 프로젝트">
-    <meta name="keywords" content="MMCA, 국립현대미술관, 미술관, 전시, 웹디자인">
-    <meta name="author" content="TEAM 아이조아">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="국립현대미술관 영문 웹사이트 리디자인 프로젝트"
+    />
+    <meta
+      name="keywords"
+      content="MMCA, 국립현대미술관, 미술관, 전시, 웹디자인"
+    />
+    <meta name="author" content="TEAM 아이조아" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <script src="https://kit.fontawesome.com/b43057b3ba.js" crossorigin="anonymous"></script>
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <script
+      src="https://kit.fontawesome.com/b43057b3ba.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <title>National Museum of Modern and Contemporary Art, Korea</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/common_media.css">
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/common_media.css" />
+    <link rel="stylesheet" href="css/artist.css" />
     <script src="js/common.js" defer></script>
-</head>
-<!-- 햄버거 밑부터 개인별 작업 -->
-<body>
+    <script src="js/artist.js"></script>
+  </head>
+  <!-- 햄버거 밑부터 개인별 작업 -->
+  <body>
     <div class="wrap">
-        <header class="header">
-            <div class="inner">
-                <div class="header_top">
-                    <h1><a href="#"><img src="img/logo_icon.png">MMCA</a></h1>
-                </div>
-                <div class="nav">
-                    <div class="nav_top">
-                        <a href="#"><iconify-icon icon="radix-icons:magnifying-glass"></iconify-icon></a>
-                        <a href="#"><iconify-icon icon="lets-icons:globe-light"></iconify-icon></a>
-                        <a href="#"><span>Sign in</span></a>
-                    </div><!-- //.nav_top -->
-                    <div class="nav_bottom">
-                        <ul class="gnb_l">
-                            <li><a href="#">VISIT</a></li>
-                            <li><a href="#">ARTIST</a></li>
-                            <li><a href="#">EXPLORE</a></li>
-                            <li><a href="#">PROGRAM</a></li>
-                            <li><a href="#">ABOUT</a></li>
-                        </ul><!-- //.gnb_l -->
-                        <div class="gnb_r">
-                            <a href="#"><span>TICKETS</span></a>
-                            <a href="#"><i class="fa-solid fa-bars" id="menu_btn"></i></a>
-                        </div><!-- //.gnb_r -->
-                    </div><!-- //.nav_bottom -->
-                </div><!-- //.nav -->
-                <div class="museum_nav">
-                    <div class="row_top">
-                        <a href="#">
-                            <div class="item seoul">SEOUL</div>
-                        </a>
-                        <a href="#">
-                            <div class="item deoksugung">DEOKSUGUNG</div>
-                        </a>
-                    </div><!-- //.row_top -->
-                    <div class="row_bottom">
-                        <a href="#">
-                            <div class="item gwacheon">GWACHEON</div>
-                        </a>
-                        <a href="#">
-                            <div class="item cheongju">CHEONGJU</div>
-                        </a>
-                    </div><!-- //.row_bottom -->
-                </div><!-- //.museum_nav -->
-            </div><!-- //.inner -->
-        </header>
-        <!--  햄버거 -->
-        <div class="menu_overlay" id="menu">
-            <div class="menu_top">
-                <h1><a href="#"><img src="img/logo_icon.png">MMCA</a></h1>
-                <span class="close_btn" id="close_btn">✕</span>
+      <header class="header">
+        <div class="inner">
+          <div class="header_top">
+            <h1>
+              <a href="#"><img src="img/logo_icon.png" />MMCA</a>
+            </h1>
+          </div>
+          <div class="nav">
+            <div class="nav_top">
+              <a href="#"
+                ><iconify-icon
+                  icon="radix-icons:magnifying-glass"
+                ></iconify-icon
+              ></a>
+              <a href="#"
+                ><iconify-icon icon="lets-icons:globe-light"></iconify-icon
+              ></a>
+              <a href="#"><span>Sign in</span></a>
             </div>
-            <div class="menu_top_row">
-                <div class="menu_col">
-                    <h3><a href="#">VISIT</a></h3>
-                    <ul>
-                        <li><a href="#">Location</a></li>
-                        <li class="active"><a href="#">Seoul</a></li>
-                        <li class="active"><a href="#">Gwacheon</a></li>
-                        <li class="active"><a href="#">Deoksugung</a></li>
-                        <li class="active"><a href="#">Cheongju</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3><a href="#">PROGRAM</a></h3>
-                    <ul>
-                        <li><a href="#">Event</a></li>
-                        <li><a href="#">Education</a></li>
-                        <li><a href="#">Tour</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3><a href="#">EXPLORE</a></h3>
-                    <ul>
-                        <li class="active"><a href="#">Collection</a></li>
-                        <li><a href="#">Research</a></li>
-                        <li><a href="#">Archive</a></li>
-                        <li><a href="#">Digital Museum</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3><a href="#">ARTIST</a></h3>
-                    <ul>
-                        <li><a href="#">Prize</a></li>
-                        <li><a href="#">Residency</a></li>
-                        <li><a href="#">Art Bank</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3><a href="#">ABOUT</a></h3>
-                    <ul>
-                        <li><a href="#">About MMCA</a></li>
-                        <li class="active"><a href="#">History</a></li>
-                        <li><a href="#">Mission</a></li>
-                        <li><a href="#">Organization</a></li>
-                        <li><a href="#">News</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3 class="tickets"><a href="#">TICKET</a></h3>
-                    <ul>
-                        <li class="active"><a href="#">Purchase</a></li>
-                        <li><a href="#">Reservation</a></li>
-                    </ul>
-                </div>
+            <!-- //.nav_top -->
+            <div class="nav_bottom">
+              <ul class="gnb_l">
+                <li><a href="#">VISIT</a></li>
+                <li><a href="#">ARTIST</a></li>
+                <li><a href="#">EXPLORE</a></li>
+                <li><a href="#">PROGRAM</a></li>
+                <li><a href="#">ABOUT</a></li>
+              </ul>
+              <!-- //.gnb_l -->
+              <div class="gnb_r">
+                <a href="#"><span>TICKETS</span></a>
+                <a href="#"><i class="fa-solid fa-bars" id="menu_btn"></i></a>
+              </div>
+              <!-- //.gnb_r -->
             </div>
-            <div class="menu_bottom_row">
-                <div class="menu_col">
-                    <h3><a href="#">MEMBERSHIP</a></h3>
-                    <ul>
-                        <li><a href="">Membership</a></li>
-                        <li><a href="">Benefits</a></li>
-                        <li><a href="">Program</a></li>
-                    </ul>
-                </div>
-            </div>
+            <!-- //.nav_bottom -->
+          </div>
+          <!-- //.nav -->
+          <!-- //.museum_nav -->
         </div>
-        <footer>
-            <div class="banner" aria-label="museum locations">
-                <ul class="banner_track">
-                    <li>MMCA SEOUL</li>
-                    <li>MMCA DEOKSUGUNG</li>
-                    <li>MMCA GWACHEON</li>
-                    <li>MMCA CHEONGJU</li>
-                    <li>MMCA SEOUL</li>
-                    <li>MMCA DEOKSUGUNG</li>
-                    <li>MMCA GWACHEON</li>
-                    <li>MMCA CHEONGJU</li>
-                    <li>MMCA SEOUL</li>
-                    <li>MMCA DEOKSUGUNG</li>
-                    <li>MMCA GWACHEON</li>
-                    <li>MMCA CHEONGJU</li>
-                    <li>MMCA SEOUL</li>
-                    <li>MMCA DEOKSUGUNG</li>
-                    <li>MMCA GWACHEON</li>
-                    <li>MMCA CHEONGJU</li>
-                </ul><!-- //.banner_track -->
-            </div><!-- //.banner -->
-            <div class="f_top">
-                <!-- f_left -->
-                <ul class="f_left">
-                    <li class="branch">
-                        <span class="branch_name seoul">Seoul</span>
-                        <p class="tel">02-3701-9500</p>
-                        <p>30 Samcheong-ro,<br>Jongno-gu,<br>Seoul</p>
-                    </li>
-                    <li class="branch">
-                        <span class="branch_name deoksugung">Deoksugung</span>
-                        <p class="tel">02-2022-0600</p>
-                        <p>99 Sejong-daero,<br>Jung-gu, Seoul<br>Inside Deoksugung Palace</p>
-                    </li>
-                    <li class="branch">
-                        <span class="branch_name gwacheon">Gwacheon</span>
-                        <p class="tel">02-2188-6000</p>
-                        <p>313 Gwangmyeong-ro,<br>Gwacheon-si,<br>Gyeonggi-do</p>
-                    </li>
-                    <li class="branch">
-                        <span class="branch_name cheongju">Cheongju</span>
-                        <p class="tel">043-261-1400</p>
-                        <p>314 Sangdang-ro,<br>Cheongwon-si,<br>Chungcheongbuk-do</p>
-                    </li>
-                </ul>
-                <!-- f_right -->
-                <div class="f_right">
-                    <div class="f_right_col">
-                        <h4>SNS</h4>
-                        <ul>
-                            <li><a href="#"><span><iconify-icon icon="mdi:instagram"></iconify-icon></span>Instagram</a></li>
-                           <li><a href="#"><span><iconify-icon icon="mingcute:facebook-fill"></iconify-icon></span> Facebook</a></li>
-                            <li><a href="#"><span><iconify-icon icon="mdi:youtube"></iconify-icon></span> YouTube</a></li>
-                            <li><a href="#"><img src="img/blog_icon.svg" alt="Naver Blog"> Naver Blog</a></li>
-                            <li><a href="#"><span><iconify-icon icon="fa6-brands:square-x-twitter"></iconify-icon></span> X</a></li>
-                        </ul>
-                    </div><!-- //.f_right_col -->
-                    <div class="f_right_col">
-                        <h4>Legal</h4>
-                        <ul>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#">Copyright</a></li>
-                            <li><a href="#">Complaints</a></li>
-                            <li><a href="#">Information Disclosure</a></li>
-                            <li><a href="#">Integrity Report</a></li>
-                        </ul>
-                    </div><!-- //.f_right_col -->
-                </div><!-- //.f_right -->
-            </div><!-- //.f_top -->
-            <div class="f_bottom">
-                <div class="f_logo">
-                    <span>MMCA</span>
-                </div><!-- //.f_logo -->
-                <p class="copyright">© 2021 National Museum of Modern and Contemporary Art, Korea</p>
-            </div><!-- //.f_bottom -->
-        </footer>
-    </div><!--//.wrap -->
-</body>
+        <!-- //.inner -->
+      </header>
+      <!--  햄버거 -->
+      <div class="menu_overlay" id="menu">
+        <div class="menu_top">
+          <h1>
+            <a href="#"><img src="img/logo_icon.png" />MMCA</a>
+          </h1>
+          <span class="close_btn" id="close_btn">✕</span>
+        </div>
+        <div class="menu_top_row">
+          <div class="menu_col">
+            <h3><a href="#">VISIT</a></h3>
+            <ul>
+              <li><a href="#">Location</a></li>
+              <li class="active"><a href="#">Seoul</a></li>
+              <li class="active"><a href="#">Gwacheon</a></li>
+              <li class="active"><a href="#">Deoksugung</a></li>
+              <li class="active"><a href="#">Cheongju</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">PROGRAM</a></h3>
+            <ul>
+              <li><a href="#">Event</a></li>
+              <li><a href="#">Education</a></li>
+              <li><a href="#">Tour</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">EXPLORE</a></h3>
+            <ul>
+              <li class="active"><a href="#">Collection</a></li>
+              <li><a href="#">Research</a></li>
+              <li><a href="#">Archive</a></li>
+              <li><a href="#">Digital Museum</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">ARTIST</a></h3>
+            <ul>
+              <li><a href="#">Prize</a></li>
+              <li><a href="#">Residency</a></li>
+              <li><a href="#">Art Bank</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">ABOUT</a></h3>
+            <ul>
+              <li><a href="#">About MMCA</a></li>
+              <li class="active"><a href="#">History</a></li>
+              <li><a href="#">Mission</a></li>
+              <li><a href="#">Organization</a></li>
+              <li><a href="#">News</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3 class="tickets"><a href="#">TICKET</a></h3>
+            <ul>
+              <li class="active"><a href="#">Purchase</a></li>
+              <li><a href="#">Reservation</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="menu_bottom_row">
+          <div class="menu_col">
+            <h3><a href="#">MEMBERSHIP</a></h3>
+            <ul>
+              <li><a href="">Membership</a></li>
+              <li><a href="">Benefits</a></li>
+              <li><a href="">Program</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- //4관 헤더 end -->
 
+      <!-- ===================== PAGE TITLE BAR ===================== -->
+      <section class="page_title_bar">
+        <h1 class="page_title">Korea Artist Prize</h1>
+        <nav class="page_sub_nav">
+          <a href="#">Exhibition</a>
+          <a href="#">Artist</a>
+          <a href="#">Documentary</a>
+        </nav>
+      </section>
+
+      <!-- =====================
+    1번 + 6번: 가로 스크롤 섹션
+    wrapper 높이 = 100vh × 슬라이드 수(4) → sticky로 가로 전환
+  ===================== -->
+      <div class="horizontal_scroll_wrapper" id="artist_section">
+        <div class="horizontal_scroll_sticky">
+          <div class="horizontal_track" id="horizontalTrack">
+            <!-- Slide 1: Yuna Park -->
+            <div class="artist_slide">
+              <div class="slide_layout">
+                <div class="artist_left_col">
+                  <div class="artist_photo_wrap">
+                    <img
+                      src="img/Yuna Park_01.jpg"
+                      alt="Yuna Park"
+                      class="artist_photo"
+                    />
+                  </div>
+
+                  <div class="slide_info">
+                    <h2 class="artist_name">Yuna Park</h2>
+                    <p class="artist_desc">
+                      Yuna Park explores sound and listening as social and
+                      cultural constructs shaped through time. Her recent works
+                      focus on how listening practices emerge within specific
+                      contexts, how auditory perception evolves, and how sound
+                      can function as a medium for alternative narratives,
+                      collective memory, and new forms of knowledge.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="slide_artworks">
+                  <img src="img/yuna_1.png" alt="작품 1" />
+                  <img src="img/yuna_2.png" alt="작품 2" />
+                  <img src="img/yuna_3.png" alt="작품 3" />
+                  <img src="img/yuna_4.png" alt="작품 4" />
+                </div>
+
+                <div class="slide_meta_col">
+                  <div class="slide_year" aria-hidden="true">2025</div>
+                  <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
+                    skip &#8964;
+                  </button>
+                </div>
+                <div class="slide_dots" aria-hidden="true">
+                  <span class="dot active"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <!-- //.slide_layout -->
+            </div>
+            <!-- //.artist_slide -->
+
+            <!-- Slide 2: Seo Rin -->
+            <div class="artist_slide">
+              <div class="slide_layout">
+                <div class="artist_left_col">
+                  <div class="artist_photo_wrap">
+                    <img
+                      src="img/Seo Rin_02.jpg"
+                      alt="Seo Rin"
+                      class="artist_photo"
+                    />
+                  </div>
+
+                  <div class="slide_info">
+                    <h2 class="artist_name">Seo Rin</h2>
+                    <p class="artist_desc">
+                      Seo Rin reinterprets visual traditions inspired by East
+                      Asian aesthetics to reflect on identity, the human body,
+                      and the relationship between nature and society. The
+                      artist reconstructs traditional formats such as panels and
+                      scroll-based compositions into contemporary expressions,
+                      while uncovering overlooked perspectives and imaginative
+                      possibilities.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="slide_artworks">
+                  <img src="img/rin_1.png" alt="작품 1" />
+                  <img src="img/rin_2.png" alt="작품 2" />
+                  <img src="img/rin_3.png" alt="작품 3" />
+                  <img src="img/rin_4.png" alt="작품 4" />
+                </div>
+
+                <div class="slide_meta_col">
+                  <div class="slide_year" aria-hidden="true">2025</div>
+                  <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
+                    skip &#8964;
+                  </button>
+                </div>
+                <div class="slide_dots" aria-hidden="true">
+                  <span class="dot"></span>
+                  <span class="dot active"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <!-- //.slide_layout -->
+            </div>
+            <!-- //.artist_slide -->
+
+            <!-- Slide 3: Null Frame Collective -->
+            <div class="artist_slide">
+              <div class="slide_layout">
+                <div class="artist_left_col">
+                  <div class="artist_photo_wrap">
+                    <img
+                      src="img/Null Frame Collective_03.jpg"
+                      alt="Null Frame Collective"
+                      class="artist_photo"
+                    />
+                  </div>
+
+                  <div class="slide_info">
+                    <h2 class="artist_name">Null Frame Collective</h2>
+                    <p class="artist_desc">
+                      Null Frame Collective investigates how machines perceive
+                      and reconstruct reality. By combining datasets, computer
+                      vision, and generative systems, the group creates works
+                      that expose the hidden logic of algorithms. Their projects
+                      often reinterpret technological processes with irony and
+                      narrative, questioning how digital systems reshape memory
+                      and history.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="slide_artworks">
+                  <img src="img/null_1.png" alt="작품 1" />
+                  <img src="img/null_2.png" alt="작품 2" />
+                  <img src="img/null_3.png" alt="작품 3" />
+                  <img src="img/null_4.png" alt="작품 4" />
+                </div>
+
+                <div class="slide_meta_col">
+                  <div class="slide_year" aria-hidden="true">2025</div>
+                  <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
+                    skip &#8964;
+                  </button>
+                </div>
+                <div class="slide_dots" aria-hidden="true">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot active"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <!-- //.slide_layout -->
+            </div>
+            <!-- //.artist_slide -->
+
+            <!-- Slide 4: Jin Ah Lim -->
+            <div class="artist_slide">
+              <div class="slide_layout">
+                <div class="artist_left_col">
+                  <div class="artist_photo_wrap">
+                    <img
+                      src="img/Jin Ah Lim_04.jpg"
+                      alt="Jin Ah Lim"
+                      class="artist_photo"
+                    />
+                  </div>
+
+                  <div class="slide_info">
+                    <h2 class="artist_name">Jin Ah Lim</h2>
+                    <p class="artist_desc">
+                      Jin Ah Lim explores belief systems and cultural narratives
+                      through a range of media including video, installation,
+                      and interactive formats. By placing scientific
+                      perspectives alongside myth and superstition, the artist
+                      reveals their coexistence in contemporary life. Her works
+                      often unfold as narrative environments that blur the
+                      boundaries between reality, imagination, and speculative
+                      futures.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="slide_artworks">
+                  <img src="img/gina_1.png" alt="작품 1" />
+                  <img src="img/gina_2.png" alt="작품 2" />
+                  <img src="img/gina_3.png" alt="작품 3" />
+                  <img src="img/gina_4.png" alt="작품 4" />
+                </div>
+
+                <div class="slide_meta_col">
+                  <div class="slide_year" aria-hidden="true">2025</div>
+                  <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
+                    skip &#8964;
+                  </button>
+                </div>
+                <div class="slide_dots" aria-hidden="true">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot active"></span>
+                </div>
+              </div>
+              <!-- //.slide_layout -->
+            </div>
+            <!-- //.artist_slide -->
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================
+    2번: History 섹션
+  ===================== -->
+      <h2 class="history_title">History</h2>
+      <section class="history_section" id="history">
+        <div class="history_slider_wrap">
+          <div class="history_track" id="historyTrack">
+            <div class="poster_item">
+              <img src="img/2025-100.jpg" alt="2025 포스터" /><span
+                class="poster_year"
+                >2025</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2024-100.jpg" alt="2024 포스터" /><span
+                class="poster_year"
+                >2024</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2023-100.jpg" alt="2023 포스터" /><span
+                class="poster_year"
+                >2023</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2022-100.jpg" alt="2022 포스터" /><span
+                class="poster_year"
+                >2022</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2021-100.jpg" alt="2021 포스터" /><span
+                class="poster_year"
+                >2021</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2020-100.jpg" alt="2020 포스터" /><span
+                class="poster_year"
+                >2020</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2019-100.jpg" alt="2019 포스터" /><span
+                class="poster_year"
+                >2019</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2018-100.jpg" alt="2018 포스터" /><span
+                class="poster_year"
+                >2018</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2017-100.jpg" alt="2017 포스터" /><span
+                class="poster_year"
+                >2017</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2016-100.jpg" alt="2016 포스터" /><span
+                class="poster_year"
+                >2016</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2015-100.jpg" alt="2015 포스터" /><span
+                class="poster_year"
+                >2015</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2014-100.jpg" alt="2014 포스터" /><span
+                class="poster_year"
+                >2014</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2013-100.jpg" alt="2013 포스터" /><span
+                class="poster_year"
+                >2013</span
+              >
+            </div>
+            <div class="poster_item">
+              <img src="img/2012-100.jpg" alt="2012 포스터" /><span
+                class="poster_year"
+                >2012</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- 슬라이더 레버 -->
+        <div class="history_slider_control">
+          <span class="slider_label">2026</span>
+          <div class="slider_track_wrap" id="sliderTrackWrap">
+            <div class="slider_bar"></div>
+            <div class="slider_thumb" id="sliderThumb"></div>
+          </div>
+          <span class="slider_label">2012</span>
+        </div>
+      </section>
+
+      <!-- =====================
+    3번: 모달
+    왼쪽에서 슬라이드인, 너비 2/3, 오른쪽 빈 공간 클릭 시 닫힘, 내부 세로 스크롤
+  ===================== -->
+      <div
+        class="modal_overlay"
+        id="modalOverlay"
+        role="dialog"
+        aria-modal="true"
+        aria-label="전시 에세이"
+      >
+        <div class="modal_panel" id="modalPanel">
+          <button
+            class="modal_close_btn"
+            id="modalCloseBtn"
+            aria-label="모달 닫기"
+          >
+            &#10005;
+          </button>
+          <div class="modal_content">
+            <h3 class="modal_essay_title">
+              Beyond the Lines and Into New Grounds
+            </h3>
+            <p class="modal_essay_author">
+              Minji Lee<br />
+              <span>Curator / Contemporary Art Institution</span>
+            </p>
+            <div class="modal_essay_body">
+              <p>
+                The Korea Artist Prize is a contemporary art initiative
+                established through a collaboration between a national museum
+                and a cultural foundation, dedicated to supporting artists in
+                developing and presenting new work. Each year, four artists or
+                collectives are invited to expand their practices through newly
+                commissioned projects within an exhibition context. Over time,
+                the format has evolved to allow audiences to encounter not only
+                newly produced works but also selected earlier pieces, offering
+                a broader and more layered understanding of each artist's
+                trajectory.
+              </p>
+              <p>
+                Rather than functioning as four independent presentations, the
+                exhibition creates a shared environment in which different
+                artistic approaches intersect. This format encourages viewers to
+                consider how distinct practices coexist, influence one another,
+                and generate new readings when placed in proximity. At the same
+                time, the structure of recognition within the program raises
+                ongoing questions about how artistic value is perceived,
+                measured, and communicated in a collective exhibition setting.
+              </p>
+              <p>
+                If one shifts focus away from institutional frameworks, what
+                comes into view are the four participating artists themselves:
+                Yuna Park, Seo Rin, Null Frame Collective, and Jin Ah Lim. Each
+                develops a unique artistic language while engaging with broader
+                questions that extend beyond individual concerns. The exhibition
+                becomes a space where these perspectives are brought into close
+                dialogue, allowing their differences and affinities to emerge
+                simultaneously.
+              </p>
+              <p>
+                Korea Artist Prize 2025 does not aim to unify the artists under
+                a single theme. Instead, it emphasizes shared attitudes—such as
+                inquiry, experimentation, and responsiveness—while acknowledging
+                the distinct directions each artist pursues. The exhibition is
+                structured as a deliberate constellation rather than a loose
+                grouping, proposing relationships that may unfold through
+                encounters, tensions, and unexpected connections.
+              </p>
+              <p>
+                As a conceptual framework, the exhibition draws inspiration from
+                a traditional Korean playground activity in which participants
+                define their own areas through simple gestures and movements.
+                This act of marking space can be understood as both a personal
+                and relational process—one that involves negotiation, overlap,
+                and transformation. Within this context, the notion of "ground"
+                extends beyond physical territory, becoming a metaphor for
+                individual perspective and lived experience.
+              </p>
+              <p>
+                While elements of competition inevitably arise in any shared
+                structure, this exhibition reconsiders competition not as
+                opposition, but as a form of interaction. The focus shifts from
+                occupying space to engaging with others—touching, crossing, and
+                redefining boundaries. Through this lens, the exhibition
+                proposes a dynamic field in which multiple trajectories coexist,
+                intersect, and evolve.
+              </p>
+              <p>
+                The numerical sequence often associated with participation can
+                be reinterpreted here as a set of coordinates—markers that guide
+                movement through the exhibition space. These positions are not
+                fixed hierarchies, but points of departure for exploration. As
+                visitors navigate the exhibition, they encounter the traces of
+                each artist's inquiry, shaped by different methods,
+                sensibilities, and intentions.
+              </p>
+              <p>
+                What kinds of lines might emerge from the gestures of Yuna Park,
+                Seo Rin, Null Frame Collective, and Jin Ah Lim? Each approaches
+                the edge of perception from a different standpoint, seeking what
+                lies beyond immediate visibility. Their works invite viewers to
+                move across boundaries, to pause within them, and to reconsider
+                how meaning is formed through these acts of passage.
+              </p>
+              <p>
+                In this sense, the exhibition unfolds as an open field—one
+                shaped not only by the artists' practices, but also by the
+                movements, interpretations, and experiences of those who enter
+                it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================
+    4번: Korea Artist Prize Video
+  ===================== -->
+      <section class="video_section">
+        <h2 class="video_section_title">Korea Artist Prize Video</h2>
+        <div class="video_grid">
+          <div class="video_thumb">
+            <a
+              href="https://youtu.be/Y8zWL1FupD8?si=NTigaSKJEwiNenkE"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://img.youtube.com/vi/Y8zWL1FupD8/mqdefault.jpg"
+                alt="2025 아티스트 토크"
+              />
+              <div class="video_play_icon" aria-hidden="true">&#9654;</div>
+            </a>
+            <p class="video_label">2025 아티스트 토크</p>
+          </div>
+
+          <div class="video_thumb">
+            <a
+              href="https://youtu.be/asestrMKq1I?si=ojFI0rlWKhgiYAop"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://img.youtube.com/vi/asestMkq1P/mqdefault.jpg"
+                alt="2024 아티스트 토크"
+              />
+              <div class="video_play_icon" aria-hidden="true">&#9654;</div>
+            </a>
+            <p class="video_label">2024 아티스트 토크</p>
+          </div>
+
+          <div class="video_thumb">
+            <a
+              href="https://youtu.be/mQTU74dS5g0?si=RuvTXm1oLeiG3In"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="https://img.youtube.com/vi/mQTU74dS5g0/mqdefault.jpg"
+                alt="2021 티처"
+              />
+              <div class="video_play_icon" aria-hidden="true">&#9654;</div>
+            </a>
+            <p class="video_label">2021 티처</p>
+          </div>
+        </div>
+        <a href="#" class="view_more_btn">View More &nbsp;&nbsp;&gt;</a>
+      </section>
+
+      <footer>
+        <div class="banner" aria-label="museum locations">
+          <ul class="banner_track">
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+          </ul>
+          <!-- //.banner_track -->
+        </div>
+        <!-- //.banner -->
+        <div class="f_top">
+          <!-- f_left -->
+          <ul class="f_left">
+            <li class="branch">
+              <span class="branch_name seoul">Seoul</span>
+              <p class="tel">02-3701-9500</p>
+              <p>30 Samcheong-ro,<br />Jongno-gu,<br />Seoul</p>
+            </li>
+            <li class="branch">
+              <span class="branch_name deoksugung">Deoksugung</span>
+              <p class="tel">02-2022-0600</p>
+              <p>
+                99 Sejong-daero,<br />Jung-gu, Seoul<br />Inside Deoksugung
+                Palace
+              </p>
+            </li>
+            <li class="branch">
+              <span class="branch_name gwacheon">Gwacheon</span>
+              <p class="tel">02-2188-6000</p>
+              <p>313 Gwangmyeong-ro,<br />Gwacheon-si,<br />Gyeonggi-do</p>
+            </li>
+            <li class="branch">
+              <span class="branch_name cheongju">Cheongju</span>
+              <p class="tel">043-261-1400</p>
+              <p>314 Sangdang-ro,<br />Cheongwon-si,<br />Chungcheongbuk-do</p>
+            </li>
+          </ul>
+          <!-- f_right -->
+          <div class="f_right">
+            <div class="f_right_col">
+              <h4>SNS</h4>
+              <ul>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon icon="mdi:instagram"></iconify-icon></span
+                    >Instagram</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon
+                        icon="mingcute:facebook-fill"
+                      ></iconify-icon
+                    ></span>
+                    Facebook</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon icon="mdi:youtube"></iconify-icon
+                    ></span>
+                    YouTube</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><img src="img/blog_icon.svg" alt="Naver Blog" /> Naver
+                    Blog</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon
+                        icon="fa6-brands:square-x-twitter"
+                      ></iconify-icon
+                    ></span>
+                    X</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <!-- //.f_right_col -->
+            <div class="f_right_col">
+              <h4>Legal</h4>
+              <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Copyright</a></li>
+                <li><a href="#">Complaints</a></li>
+                <li><a href="#">Information Disclosure</a></li>
+                <li><a href="#">Integrity Report</a></li>
+              </ul>
+            </div>
+            <!-- //.f_right_col -->
+          </div>
+          <!-- //.f_right -->
+        </div>
+        <!-- //.f_top -->
+        <div class="f_bottom">
+          <div class="f_logo">
+            <span>MMCA</span>
+          </div>
+          <!-- //.f_logo -->
+          <p class="copyright">
+            © 2021 National Museum of Modern and Contemporary Art, Korea
+          </p>
+        </div>
+        <!-- //.f_bottom -->
+      </footer>
+    </div>
+    <!--//.wrap -->
+  </body>
 </html>
