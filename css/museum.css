@@ -1,7 +1,5 @@
 @charset "utf-8";
 
-/* ---------------- base ---------------- */
-
 html,
 body {
   width: 100%;
@@ -53,7 +51,6 @@ button {
   --face-w: 1000px;
   --face-h: 560px;
   --depth: 500px;
-
   position: relative;
   width: var(--face-w);
   height: var(--face-h);
@@ -89,7 +86,7 @@ button {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  color: #fff;
+  color: var(--main_white);
   font-size: clamp(56px, 6vw, 96px);
   font-weight: 700;
   letter-spacing: -0.05em;
@@ -214,7 +211,6 @@ button {
   z-index: 99999;
   opacity: 0;
   pointer-events: none;
-  background: #000;
   transition: opacity 0.7s ease;
 }
 
@@ -233,10 +229,206 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #fff;
   font-size: clamp(64px, 7vw, 120px);
   font-weight: 700;
   letter-spacing: -0.05em;
   text-align: center;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
+
+/* =========================
+   SECTION BASE
+========================= */
+.museum_exhibit_section .museum_inner {
+  width: 1500px;
+  margin: 0 auto;
+  padding: 140px 0;
+}
+
+/* =========================
+   HEAD
+========================= */
+.museum_head {
+  margin-bottom: 60px;
+}
+
+.museum_label {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: var(--gray_05)
+}
+
+.museum_name {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.museum_tabs {
+  display: flex;
+  gap: 55px;
+  margin-top: 30px;
+}
+
+.museum_tabs button {
+  font-size: 32px;
+  color: var(--gray_03);
+  border: none;
+  cursor: pointer;
+  padding-bottom: 14px;
+}
+
+.museum_tabs button.is_active {
+  color: var(--gray_06);
+  border-bottom: 2px solid var(--gray_06);
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+.museum_exhibit_card {
+  display: flex;
+  gap: 120px;
+  margin-top: 60px;
+}
+
+/* 좌측 포스터 */
+.museum_poster {
+  width: 420px;
+  flex-shrink: 0;
+}
+
+.museum_poster img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 우측 내용 */
+.museum_content {
+  flex: 1;
+}
+
+/*TEXT */
+
+.museum_title {
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.museum_meta {
+  margin-bottom: 18px;
+}
+
+.museum_meta li {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 24px;
+  color: var(--gray_06);
+  margin-bottom: 6px;
+}
+
+.museum_meta i {
+  font-size: 20px;
+}
+
+.museum_desc {
+  font-size: 20px;
+  color: var(--gray_03);
+  line-height: 1.6;
+  margin-top: 10px;
+  max-width: 920px;
+}
+
+/* =========================
+   TICKET BUTTON
+========================= */
+.museum_ticket {
+  display: inline-flex;
+  margin-top: 24px;
+  text-decoration: none;
+}
+
+.ticket_main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--main_white);
+  color: var(--main_black);
+  padding: 10px 20px;
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.ticket_stub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gray_06);
+  color: var(--main_black);
+  padding: 10px 12px;
+}
+
+/* =========================
+   HIGHLIGHTS
+========================= */
+.museum_highlights {
+  margin-top: 60px;
+}
+
+.museum_highlights strong {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 32px;
+  margin-bottom: 24px;
+
+}
+
+/* 오른쪽 라인 */
+.museum_highlights strong::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--gray_04);
+}
+
+/* 이미지 */
+.highlight_list {
+  display: flex;
+  gap: 20px;
+}
+
+.highlight_item {
+  width: 300px;
+  height: 150px;
+  overflow: hidden;
+}
+
+.highlight_item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =========================
+   EMPTY (덕수궁)
+========================= */
+.museum_empty {
+  text-align: center;
+  padding: 140px 0;
+}
+
+.museum_empty h3 {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.museum_empty p {
+  color: rgba(255,255,255,0.6);
+  line-height: 1.6;
+}
+
