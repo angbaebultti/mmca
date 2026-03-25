@@ -286,8 +286,8 @@ section {}
 
 .close_btn {
   position: absolute;
-  right: 27px;
-  top: 58px;
+  right: -1.2%;
+  top: 38%;
   font-size: 32px;
   color: #fff;
   cursor: pointer;
