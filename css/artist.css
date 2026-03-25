@@ -11,7 +11,7 @@
   padding: 20px 136px;
   border-bottom: 1px solid var(--gray_06);
   /* 이거 추가해 뒀어요! */
-  margin-top: 160px;
+  margin-top: 184px;
 }
  
 .page_title {
@@ -79,6 +79,7 @@
   max-width: 1448px;
   margin: 0 auto;
   padding: 50px 80px;
+  padding-top: 60px;
   /* display: grid; */
   grid-template-columns: minmax(0, 1fr) 176px 84px;
   display: flex;
@@ -154,10 +155,10 @@
 
 .slide_meta_col {
   height: 100%;
-  padding-block: 90px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 470px;
   align-items: center;
 }
 
@@ -165,7 +166,7 @@
   font-size: 96px;
   font-weight: 500;
   line-height: 0.82;
-  color: rgba(140, 59, 45, 0.95);
+  color: rgba(140, 59, 45, 0.7);
   /* writing-mode: vertical-rl; */
   writing-mode: vertical-rl;
   writing-mode: sideways-lr;
@@ -194,7 +195,7 @@
 .slide_dots {
   width: 100%;
   position: absolute;
-  left: 50%;
+  /* left: 50%; */
   /* bottom: -18px; */
   bottom: 60px;
   transform: translateY(-50%);
@@ -212,6 +213,56 @@
 
 .dot.active {
   background: var(--main_white);
+}
+
+
+/* scroll down */
+#section05 a {
+  position: absolute;
+  padding-top: 80px;
+  bottom: 40px;
+  left: 50%;
+}
+#section05 a span {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-animation: sdb05 1.5s infinite;
+  animation: sdb05 1.5s infinite;
+  box-sizing: border-box;
+}
+@-webkit-keyframes sdb05 {
+  0% {
+    -webkit-transform: rotate(-45deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotate(-45deg) translate(-20px, 20px);
+    opacity: 0;
+  }
+}
+@keyframes sdb05 {
+  0% {
+    transform: rotate(-45deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-45deg) translate(-20px, 20px);
+    opacity: 0;
+  }
 }
  
  
