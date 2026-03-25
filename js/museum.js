@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let startAngle = 0;
   let movedDistance = 0;
 
-  /* =========================
-     드래그 시작
-  ========================= */
+
+    //드래그 시작
+
   cubeHitArea.addEventListener("pointerdown", (event) => {
     if (isTransitioning) return;
 
@@ -38,9 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cubeHitArea.setPointerCapture(event.pointerId);
   });
 
-  /* =========================
-     드래그 중
-  ========================= */
+
+     //드래그 중
+
   cubeHitArea.addEventListener("pointermove", (event) => {
     if (!isDragging || isTransitioning) return;
 
@@ -51,9 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
     cube.style.transform = `rotateY(${currentAngle}deg)`;
   });
 
-  /* =========================
-     드래그 끝
-  ========================= */
+
+     //드래그 끝
+
   cubeHitArea.addEventListener("pointerup", (event) => {
     if (!isDragging || isTransitioning) return;
 
@@ -75,9 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
     snapToNearest();
   });
 
-  /* =========================
-     가장 가까운 면으로 스냅
-  ========================= */
+
+     //가장 가까운 면으로 스냅
+
   function snapToNearest() {
     const snappedAngle = Math.round(currentAngle / 90) * 90;
     currentAngle = snappedAngle;
@@ -86,9 +86,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cube.style.transform = `rotateY(${currentAngle}deg)`;
   }
 
-  /* =========================
-     클릭된 면 찾기
-  ========================= */
+
+     //클릭된 면 찾기
   function handleFaceSelect(clientX, clientY) {
     cubeHitArea.style.pointerEvents = "none";
 
@@ -103,35 +102,37 @@ document.addEventListener("DOMContentLoaded", () => {
     expandFace(clickedFace);
   }
 
-  /* =========================
-     모든 전시관 섹션 숨기기
-  ========================= */
+
+     //모든 전시관 섹션 숨기기
   function hideAllMuseumSections() {
     museumSections.forEach((section) => {
       section.classList.remove("active");
     });
   }
 
-  /* =========================
-     가로 섹션 높이 세팅
-     - 활성화된 섹션만 처리
-     - rAF 두 번으로 레이아웃 확정 후 scrollWidth 읽기
-  ========================= */
+
+     //가로 섹션 높이 세팅
+     //- 활성화된 섹션만 처리
+     //- rAF 두 번으로 레이아웃 확정 후 scrollWidth 읽기
   function setupHorizontalSections(callback) {
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         horizontalSections.forEach((section) => {
-          // 비활성 섹션은 display:none이라 scrollWidth가 0 → 건너뜀
           if (!section.classList.contains("active")) return;
 
           const track = section.querySelector(".museum_h_track");
           if (!track) return;
 
+          const SCROLL_SPEED = 1.5;
+          const cardCount = track.querySelectorAll(".museum_exhibit_card").length;
+          // 카드가 2개 이상일 때만 마지막 카드 여유 스크롤 추가
+          const EXTRA_SCROLL = cardCount >= 2 ? window.innerWidth * 0.6 : 0;
+
           const totalScrollX = Math.max(
             track.scrollWidth - window.innerWidth,
             0
           );
-          const sectionHeight = window.innerHeight + totalScrollX;
+          const sectionHeight = window.innerHeight + totalScrollX * SCROLL_SPEED + EXTRA_SCROLL;
           section.style.height = `${sectionHeight}px`;
         });
 
@@ -140,41 +141,87 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================
-     세로 스크롤 -> 가로 이동
-     - offsetTop 대신 getBoundingClientRect + scrollY로 정확한 기준점 계산
-  ========================= */
+
+  //세로 스크롤 -> 가로 이동 (lerp 보간으로 부드럽게)
+
   function getSectionTop(section) {
-    // offsetTop은 부모 기준이라 누적 계산이 필요함
-    // getBoundingClientRect + scrollY로 문서 절대 위치를 구함
     return section.getBoundingClientRect().top + window.scrollY;
   }
 
+  // 각 섹션별 현재 렌더 위치 저장
+  const currentX = new WeakMap();
+  let rafId = null;
+
+  function lerp(a, b, t) {
+    return a + (b - a) * t;
+  }
+
+  const SCROLL_SPEED = 1.5; // setupHorizontalSections와 반드시 동일하게
+
+  function getTargetX(section) {
+    const track = section.querySelector(".museum_h_track");
+    if (!track) return 0;
+
+    const sectionTop = getSectionTop(section);
+    const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
+    const progress = window.scrollY - sectionTop;
+    // 세로 스크롤 진행도를 SCROLL_SPEED로 나눠서 실제 가로 이동량 계산
+    return Math.max(0, Math.min(progress / SCROLL_SPEED, maxTranslate));
+  }
+
+  function animateHorizontal() {
+    let stillMoving = false;
+
+    horizontalSections.forEach((section) => {
+      if (!section.classList.contains("active")) return;
+
+      const track = section.querySelector(".museum_h_track");
+      if (!track) return;
+
+      const target = getTargetX(section);
+      const current = currentX.has(section) ? currentX.get(section) : target;
+      const next = lerp(current, target, 0.1); // 0.1 = 부드러움 강도 (낮을수록 더 부드럽게)
+
+      currentX.set(section, next);
+      track.style.transform = `translate3d(${-next}px, 0, 0)`;
+
+      // 목표값과 충분히 가까워지면 멈춤
+      if (Math.abs(next - target) > 0.5) stillMoving = true;
+    });
+
+    if (stillMoving) {
+      rafId = requestAnimationFrame(animateHorizontal);
+    } else {
+      rafId = null;
+    }
+  }
+
+  function handleHorizontalScroll() {
+    if (!rafId) {
+      rafId = requestAnimationFrame(animateHorizontal);
+    }
+  }
+
   function updateHorizontalSection(section) {
+    // 초기 진입 시 즉시 위치 맞추기 (lerp 없이 순간 이동)
     if (!section || !section.classList.contains("active")) return;
 
     const track = section.querySelector(".museum_h_track");
     if (!track) return;
 
-    const sectionTop = getSectionTop(section);
-    const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
-    const progress = window.scrollY - sectionTop;
-    const clamped = Math.max(0, Math.min(progress, maxTranslate));
-
-    track.style.transform = `translate3d(${-clamped}px, 0, 0)`;
+    const target = getTargetX(section);
+    currentX.set(section, target);
+    track.style.transform = `translate3d(${-target}px, 0, 0)`;
   }
 
-  function handleHorizontalScroll() {
-    horizontalSections.forEach((section) => {
-      if (section.classList.contains("active")) {
-        updateHorizontalSection(section);
-      }
-    });
-  }
+  let expandTimer1 = null;
+  let expandTimer2 = null;
+  let expandTimer3 = null;
+  let expandTimer4 = null;
 
-  /* =========================
-     큐브 선택 → 전시관 1개만 표시
-  ========================= */
+
+     //큐브 선택 → 전시관 1개만 표시
+
   function expandFace(face) {
     const targetAngle = Number(face.dataset.angle);
     const targetId = face.dataset.target;
@@ -192,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cube.style.transform = `rotateY(${targetAngle}deg)`;
     currentAngle = targetAngle;
 
-    setTimeout(() => {
+    expandTimer1 = setTimeout(() => {
       /* 2. 전환막 표시 */
       introFullscreenImg.src = faceImg.src;
       introFullscreenImg.alt = faceImg.alt;
@@ -200,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
       introFullscreen.classList.add("is_visible");
 
       /* 3. 풀페이지 충분히 보여준 뒤 → 섹션 준비 → 페이드아웃 */
-      setTimeout(() => {
+      expandTimer2 = setTimeout(() => {
         /* 인트로 숨기고, 전시 wrapper 열고, 전시관은 하나만 active */
         introScene.style.display = "none";
         museumWrap.classList.add("active");
@@ -221,20 +268,20 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         /* 전환막 자연스럽게 페이드아웃 */
-        setTimeout(() => {
+        expandTimer3 = setTimeout(() => {
           introFullscreen.classList.remove("is_visible");
-          setTimeout(() => {
+          expandTimer4 = setTimeout(() => {
             isTransitioning = false;
-          }, 700); // CSS transition 끝날 때까지 대기
+          }, 700);
         }, 80);
 
-      }, 900); // 풀페이지 노출 시간 0.9초
+      }, 900);
     }, 420);
   }
 
-  /* =========================
-     스크롤 / 리사이즈
-  ========================= */
+
+    //스크롤 / 리사이즈
+
   window.addEventListener("scroll", handleHorizontalScroll, { passive: true });
 
   window.addEventListener("resize", () => {
@@ -243,20 +290,37 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* =========================
-     큐브로 돌아가기 공통 함수
-  ========================= */
+
+    //큐브로 돌아가기 공통 함수
+
   function returnToCube() {
+    // 진행 중인 타이머 전부 취소
+    clearTimeout(expandTimer1);
+    clearTimeout(expandTimer2);
+    clearTimeout(expandTimer3);
+    clearTimeout(expandTimer4);
+
     museumWrap.classList.remove("active");
     hideAllMuseumSections();
     introFullscreen.classList.remove("is_visible");
     introScene.style.display = "";
     if (topBtnWrap) topBtnWrap.classList.remove("active");
 
+    // 상태 전부 리셋
+    isTransitioning = false;
+    isDragging = false;
+    cubeHitArea.style.pointerEvents = "auto";
+
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+
     horizontalSections.forEach((section) => {
       const track = section.querySelector(".museum_h_track");
       if (track) track.style.transform = "translate3d(0, 0, 0)";
       section.style.height = "";
+      currentX.delete(section);
     });
 
     introScene.scrollIntoView({
@@ -265,9 +329,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================
-     탑버튼 → 다시 큐브로
-  ========================= */
+
+  //탑버튼 → 다시 큐브로
+
   if (topBtn) {
     topBtn.addEventListener("click", (event) => {
       event.preventDefault();
