@@ -12,6 +12,8 @@
     />
     <meta name="author" content="TEAM 아이조아" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script
       src="https://kit.fontawesome.com/b43057b3ba.js"
@@ -29,7 +31,7 @@
   <!-- 햄버거 밑부터 개인별 작업 -->
   <body>
     <div class="wrap">
-      <!-- <header class="header">
+      <header class="header">
         <div class="inner">
           <div class="header_top">
             <h1>
@@ -67,7 +69,7 @@
             <!-- //.nav_bottom -->
           </div>
           <!-- //.nav -->
-          <!-- <div class="museum_nav">
+          <div class="museum_nav">
             <div class="row_top">
               <a href="#">
                 <div class="item seoul">SEOUL</div>
@@ -77,21 +79,22 @@
               </a>
             </div>
             <!-- //.row_top -->
-            <!-- <div class="row_bottom">
+            <div class="row_bottom">
               <a href="#">
                 <div class="item gwacheon">GWACHEON</div>
               </a>
               <a href="#">
                 <div class="item cheongju">CHEONGJU</div>
               </a>
-            </div> -->
+            </div>
             <!-- //.row_bottom -->
-          </div> -->
+          </div>
           <!-- //.museum_nav -->
         </div>
         <!-- //.inner -->
-      </header> -->
-      <!-- <div class="menu_overlay" id="menu">
+      </header>
+      <!--  햄버거 -->
+      <div class="menu_overlay" id="menu">
         <div class="menu_top">
           <h1>
             <a href="#"><img src="img/logo_icon.png" />MMCA</a>
@@ -162,7 +165,7 @@
             </ul>
           </div>
         </div>
-      </div> -->
+      </div>
       <main class="plan_main">
         <div class="plan_inner">
           <!-- LEFT COLUMN -->
@@ -178,7 +181,7 @@
               </div>
               <div class="hero_img_box">
                 <div class="hero_poster">
-                 <img src="img/seoulposter1.png" alt="">
+                  <img src="img/seoulposter1.png" alt="" />
                 </div>
                 <div class="hero_desc">
                   <p>
@@ -197,88 +200,50 @@
                 <h3>SELECT DATE&amp;TIME</h3>
               </div>
 
-              <!-- Calendar -->
-              <div class="calendar">
-                <div class="cal_header">
-                  <div class="cal_month_wrap">
-                    <span class="cal_month_label"
-                      >MARCH&nbsp;&nbsp;&nbsp;2026</span
-                    >
-                    <button class="cal_dropdown" aria-label="Select month">
-                      <svg
-                        width="20"
-                        height="12"
-                        viewBox="0 0 20 12"
-                        fill="none"
+              <div class="date_inner">
+                <div class="calendar">
+                  <div class="cal_header">
+                    <div class="cal_month_wrap">
+                      <span class="cal_month_label"
+                        >MARCH&nbsp;&nbsp;&nbsp;2026</span
                       >
-                        <path
-                          d="M1 1L10 10L19 1"
-                          stroke="white"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </button>
+                      <button class="cal_dropdown" aria-label="Select month">
+                        <i class="fa-solid fa-chevron-up"></i>
+                      </button>
+                    </div>
+                    <div class="cal_nav">
+                      <button class="cal_prev" aria-label="Previous month">
+                        <i class="fa-solid fa-chevron-down"></i>
+                      </button>
+                      <button class="cal_next" aria-label="Next month">
+                        <i class="fa-solid fa-chevron-up"></i>
+                      </button>
+                    </div>
                   </div>
-                  <div class="cal_nav">
-                    <button class="cal_prev" aria-label="Previous month">
-                      <svg
-                        width="50"
-                        height="11"
-                        viewBox="0 0 50 11"
-                        fill="none"
-                      >
-                        <path
-                          d="M0 5.5H48M48 5.5L43 1M48 5.5L43 10"
-                          stroke="white"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </button>
-                    <button class="cal_next" aria-label="Next month">
-                      <svg
-                        width="50"
-                        height="11"
-                        viewBox="0 0 50 11"
-                        fill="none"
-                      >
-                        <path
-                          d="M50 5.5H2M2 5.5L7 1M2 5.5L7 10"
-                          stroke="white"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                        />
-                      </svg>
-                    </button>
+
+                  <div class="cal_week">
+                    <span>Su</span><span>Mo</span><span>Tu</span><span>We</span
+                    ><span>Th</span><span>Fr</span><span>Sa</span>
+                  </div>
+
+                  <div class="cal_days" id="cal_days">
+                    <!-- rendered by JS -->
                   </div>
                 </div>
-
-                <div class="cal_week">
-                  <span>Su</span><span>Mo</span><span>Tu</span><span>We</span
-                  ><span>Th</span><span>Fr</span><span>Sa</span>
+                <div class="time_select">
+                  <button class="time_btn" data-time="10:00~18:00">
+                    10:00~18:00
+                  </button>
+                  <button class="time_btn" data-time="18:00~21:00">
+                    18:00~21:00
+                  </button>
                 </div>
-
-                <div class="cal_days" id="cal_days">
-                  <!-- rendered by JS -->
+                <div class="guide_links">
+                  <a href="#">Cancellation</a>
+                  <a href="#">Admission Guide</a>
+                  <a href="#">Refund Policy</a>
                 </div>
-              </div>
-
-              <!-- Time buttons -->
-              <div class="time_select">
-                <button class="time_btn active" data-time="10:00~18:00">
-                  10:00~18:00
-                </button>
-                <button class="time_btn" data-time="18:00~21:00">
-                  18:00~21:00
-                </button>
-              </div>
-
-              <!-- Guide links -->
-              <div class="guide_links">
-                <a href="#">Cancellation</a>
-                <a href="#">Admission Guide</a>
-                <a href="#">Refund Policy</a>
+                <!-- //.guide_links -->
               </div>
             </section>
 

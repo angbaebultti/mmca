@@ -6,44 +6,41 @@
 .plan_main {
   background: var(--main_black);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 150px 180px;
+  padding: 120px 220px;
+  margin-top: 120px;
 }
- 
-/* ─── plan_inner grid ────────────────────────────────────── */
+
 .plan_inner {
   max-width: var(--inner-max);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 518px;
-  gap: 100px;
+  grid-template-columns: 820px 420px;
+  gap: 60px;
   align-items: start;
   position: relative;
 }
- 
-/* 세로 구분선 — position:absolute는 height를 명시해야 함 */
+
 .plan_inner::after {
   content: '';
   position: absolute;
   top: 0;
-  right: 618px;   /* 518px 카드 + 100px gap */
+  right: 618px;
   width: 1px;
   height: 100%;
   background: rgba(255, 255, 255, 0.25);
   pointer-events: none;
 }
- 
-/* ─── LEFT ───────────────────────────────────────────────── */
+
 .plan_left {
   display: flex;
   flex-direction: column;
-  gap: 0;          /* section_label 안에 padding-top으로 간격 제어 */
+  gap: 0;
 }
- 
-/* ─── HERO ───────────────────────────────────────────────── */
+
 .hero_title {
   margin-bottom: 80px;
 }
- 
+
 .hero_title h2 {
   font-size: 130px;
   font-weight: 500;
@@ -52,7 +49,7 @@
   margin-bottom: 18px;
   color: #fff;
 }
- 
+
 .hero_sub {
   font-size: 24px;
   font-weight: 300;
@@ -60,27 +57,27 @@
   color: #fff;
   opacity: 0.7;
 }
- 
+
 .hero_img_box {
   display: flex;
   align-items: stretch;
   width: 835px;
   height: 406px;
 }
- 
+
 .hero_poster {
   width: 288px;
   min-width: 288px;
   overflow: hidden;
 }
- 
+
 .hero_poster img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
- 
+
 .hero_desc {
   flex: 1;
   display: flex;
@@ -90,21 +87,20 @@
   background: #fff;
   color: #1e1e1e;
 }
- 
+
 .hero_desc p {
   font-size: 20px;
   font-weight: 400;
   line-height: 1.7;
   letter-spacing: -0.03em;
 }
- 
-/* ─── SECTION LABEL (01, 02) ─────────────────────────────── */
+
 .date_time_section,
 .visitor_section {
   display: flex;
   flex-direction: column;
 }
- 
+
 .section_label {
   display: flex;
   align-items: center;
@@ -114,7 +110,7 @@
   margin-bottom: 40px;
   margin-top: 40px;
 }
- 
+
 .section_num {
   display: inline-flex;
   align-items: center;
@@ -128,7 +124,7 @@
   letter-spacing: -0.05em;
   flex-shrink: 0;
 }
- 
+
 .section_label h3 {
   font-size: 53px;
   font-weight: 500;
@@ -136,26 +132,43 @@
   text-transform: uppercase;
   color: #fff;
 }
- 
-/* ─── CALENDAR ───────────────────────────────────────────── */
-.calendar {
+
+
+.date_inner {
   width: 710px;
-  margin-top: 40px;
+  margin: 0 auto;
 }
- 
+
+
+.calendar {
+  width: 100%;
+  max-width: 710px;
+  margin-top: 40px;
+  padding: 0; 
+}
+
 .cal_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 48px;
+  margin-bottom: 30px;
+  padding: 0 23px;
 }
- 
+
 .cal_month_wrap {
   display: flex;
   align-items: center;
   gap: 24px;
 }
- 
+
+.cal_month_wrap i {
+  font-size: 36px;
+  width: 26px;
+  height: 43px;
+  color: #fff;
+}
+
+
 .cal_month_label {
   font-size: 32px;
   font-weight: 700;
@@ -163,7 +176,7 @@
   white-space: pre;
   color: #fff;
 }
- 
+
 .cal_dropdown {
   background: none;
   border: none;
@@ -172,12 +185,19 @@
   align-items: center;
   cursor: pointer;
 }
- 
+
 .cal_nav {
   display: flex;
-  gap: 20px;
+  gap: 40px;
 }
- 
+
+.cal_nav i {
+  font-size: 36px;
+  width: 26px;
+  height: 43px;
+  color: #fff;
+}
+
 .cal_prev,
 .cal_next {
   background: none;
@@ -189,39 +209,38 @@
   transition: opacity 0.2s;
   cursor: pointer;
 }
- 
+
 .cal_prev:hover,
-.cal_next:hover { opacity: 1; }
- 
-/* 요일 헤더 */
+.cal_next:hover {
+  opacity: 1;
+}
+
 .cal_week {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
   margin-bottom: 28px;
 }
- 
+
 .cal_week span {
   font-size: 32px;
   font-weight: 300;
   letter-spacing: -0.05em;
-  opacity: 0.5;
   color: #fff;
 }
- 
-/* 날짜 그리드 */
+
 .cal_days {
   display: flex;
   flex-direction: column;
   gap: 28px;
 }
- 
+
 .cal_week_row {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   justify-items: center;
 }
- 
+
 .cal_day {
   width: 52px;
   height: 52px;
@@ -236,23 +255,23 @@
   transition: background 0.2s, color 0.2s;
   color: #fff;
 }
- 
+
 .cal_day.other-month {
   opacity: 0.3;
   cursor: default;
 }
- 
+
 .cal_day:not(.other-month):hover {
   background: rgba(255, 255, 255, 0.15);
 }
- 
+
 .cal_day.selected {
   background: var(--blue);
   color: #fff;
   border: 2px solid var(--blue);
 }
- 
-/* ─── TIME SELECT ────────────────────────────────────────── */
+
+
 .time_select {
   display: flex;
   gap: 40px;
@@ -260,35 +279,29 @@
   align-items: center;
   justify-content: center;
 }
- 
+
 .time_btn {
-  padding: 14px 90px;
+  padding: 14px 60px;
   border-radius: 999px;
-  background: var(--light-gray);
-  border: 1px solid #1e1e1e;
-  color: #1e1e1e;
-  font-size: 27px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.05em;
   transition: all 0.3s;
   cursor: pointer;
   white-space: nowrap;
+  width: 300px;
 }
- 
-.time_btn.active,
-.time_btn:hover {
-  background: #1e1e1e;
-  color: #fff;
-  border-color: #fff;
-}
- 
-/* ─── GUIDE LINKS ────────────────────────────────────────── */
+
+
 .guide_links {
   display: flex;
   justify-content: center;
   gap: 0;
 }
- 
+
 .guide_links a {
   font-size: 20px;
   font-weight: 500;
@@ -298,18 +311,14 @@
   padding: 10px 14px;
   display: block;
   color: #fff;
-  opacity: 0.8;
-  transition: opacity 0.2s;
 }
- 
-.guide_links a:hover { opacity: 1; }
- 
-/* ─── VISITOR BOX ────────────────────────────────────────── */
+
+
 .visitor_box {
   background: #424242;
   padding: 10px 0;
 }
- 
+
 .visitor_item {
   display: flex;
   align-items: center;
@@ -317,21 +326,23 @@
   padding: 24px 80px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
- 
-.visitor_item:last-child { border-bottom: none; }
- 
+
+.visitor_item:last-child {
+  border-bottom: none;
+}
+
 .visitor_info {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
- 
+
 .visitor_info strong {
   font-size: 20px;
   font-weight: 600;
   color: #f5f5f5;
 }
- 
+
 .visitor_info em {
   font-size: 14px;
   font-weight: 300;
@@ -340,13 +351,13 @@
   letter-spacing: -0.05em;
   opacity: 0.7;
 }
- 
+
 .count_ctrl {
   display: flex;
   align-items: center;
   gap: 20px;
 }
- 
+
 .count_btn {
   background: none;
   border: none;
@@ -361,9 +372,11 @@
   transition: opacity 0.2s;
   cursor: pointer;
 }
- 
-.count_btn:hover { opacity: 1; }
- 
+
+.count_btn:hover {
+  opacity: 1;
+}
+
 .count_num {
   font-size: 20px;
   font-weight: 700;
@@ -371,33 +384,25 @@
   text-align: center;
   color: #f5f5f5;
 }
- 
-/* ─── RIGHT COLUMN ───────────────────────────────────────── */
+
 .plan_right {
   position: relative;
 }
- 
+
 .summary_card {
   position: sticky;
-  top: 60px;                   /* 헤더 없는 환경에서도 잘 보이도록 */
-  background: #ffffff;         /* ⚠️ 흰 배경 명시 — 없으면 투명으로 보임 */
+   top: 140px;
+  background: #fff;
   color: #1e1e1e;
-  padding: 68px 55px 55px;
-  width: 518px;
-  text-align: center;
-  border: 1.4px solid #dde1e6;
- 
-  /* 초기 숨김 상태 (JS로 나타남) */
   opacity: 0;
-  transform: translateY(60px);
-  /* transition은 JS fallback에서 동적으로 추가 */
+  transform: translateY(-120px); 
+  will-change: transform, opacity; 
 }
- 
+
 .summary_card:hover {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
- 
-/* 클립 장식 */
+
 .summary_clip {
   position: absolute;
   top: -10px;
@@ -408,7 +413,7 @@
   background: #f2f4f8;
   border-radius: 20px;
 }
- 
+
 .summary_card h3 {
   font-size: 44px;
   font-weight: 700;
@@ -416,32 +421,32 @@
   margin-bottom: 8px;
   color: #1e1e1e;
 }
- 
+
 .summary_sub {
   font-size: 22px;
   font-weight: 400;
   color: #666;
   margin-bottom: 32px;
 }
- 
+
 .summary_poster {
   margin: 0 auto 32px;
   width: 284px;
 }
- 
+
 .summary_poster img {
   width: 100%;
   height: auto;
   display: block;
 }
- 
+
 .summary_info {
   font-family: 'Red Hat Mono', monospace;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
- 
+
 .summary_info strong {
   font-size: 24px;
   font-weight: 500;
@@ -449,7 +454,7 @@
   letter-spacing: -0.05em;
   color: #1e1e1e;
 }
- 
+
 .summary_date,
 .summary_ticket {
   font-size: 18px;
@@ -457,15 +462,14 @@
   letter-spacing: -0.05em;
   text-transform: lowercase;
 }
- 
+
 .summary_note {
   font-size: 13px;
   color: #999;
   letter-spacing: -0.03em;
   text-transform: lowercase;
 }
- 
-/* 결제 버튼 */
+
 .btn_payment {
   display: block;
   width: 100%;
@@ -482,7 +486,7 @@
   cursor: pointer;
   font-family: inherit;
 }
- 
+
 .btn_payment:hover {
   background: #1e1e1e;
   color: #fff;

@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/common_media.css" />
-    <link rel="stylesheet" href="css/reserve.css">
+    <link rel="stylesheet" href="css/reserve.css" />
     <script src="js/common.js" defer></script>
   </head>
   <!-- 햄버거 밑부터 개인별 작업 -->
@@ -163,15 +163,120 @@
           </div>
         </div>
       </div>
-      <section class="reserve">
+      <section class="checkout">
         <div class="inner">
-            <div class="title">
-                <h2>Reserve Your Visit</h2>
-                <p class="sub">Book tickets and reserve your visit in advance.</p>
-            </div><!-- //.title -->
-            
-        </div><!-- //.inner -->
-      </section><!-- //.reserve -->
+          <!-- top title -->
+          <div class="checkout_head">
+            <h2>Reserve Your Visit</h2>
+            <p>Book tickets and reserve your visit in advance.</p>
+          </div>
+
+          <div class="checkout_wrap">
+            <!-- LEFT -->
+            <div class="checkout_left">
+              <p class="small_title">SECURE CHECKOUT</p>
+              <h3 class="main_title">Finalize Your Visit</h3>
+
+              <!-- 01 -->
+              <div class="step">
+                <div class="step_head">
+                  <span class="num">01</span>
+                  <h4>Visitor Details</h4>
+                </div>
+
+                <div class="form_group">
+                  <label>FULL NAME</label>
+                  <input type="text" placeholder="JANE DOE" />
+                </div>
+
+                <div class="form_group email">
+                  <label>EMAIL ADDRESS</label>
+                  <div class="input_row">
+                    <input type="text" placeholder="YOU@EXAMPLE.COM" />
+                    <button class="send_btn">Send Code</button>
+                  </div>
+                  <span class="helper"
+                    >We will send a 6-digit verification code</span
+                  >
+                </div>
+
+                <div class="form_group">
+                  <label>USER VERIFICATION</label>
+                  <input type="text" placeholder="[ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ] [ 6 ]" />
+                </div>
+              </div>
+
+              <!-- 02 -->
+              <div class="step">
+                <div class="step_head">
+                  <span class="num">02</span>
+                  <h4>Payment Method</h4>
+                </div>
+
+                <div class="card_box">
+                  <p class="card_title">CREDIT / DEBIT CARD</p>
+
+                  <div class="form_group">
+                    <label>CARD NUMBER</label>
+                    <input type="text" placeholder="0000 0000 0000 0000" />
+                  </div>
+
+                  <div class="row">
+                    <div class="form_group">
+                      <label>EXPIRY DATE</label>
+                      <input type="text" placeholder="MM/YY" />
+                    </div>
+
+                    <div class="form_group">
+                      <label>CVC</label>
+                      <input type="text" placeholder="•••" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 03 -->
+              <div class="step">
+                <div class="step_head">
+                  <span class="num">03</span>
+                  <h4>Agreement</h4>
+                </div>
+
+                <label class="agree">
+                  <input type="checkbox" />
+                  I agree to the Terms of Service and confirm that I have
+                  reviewed the exhibition guidelines.
+                </label>
+
+                <div class="notice">
+                  <strong>CANCELLATION DEADLINE</strong>
+                  <p>
+                    Cancellations and full refunds are available until 24 hours
+                    prior to the scheduled entry time.
+                  </p>
+                </div>
+              </div>
+
+              <button class="purchase_btn">COMPLETE PURCHASE</button>
+            </div>
+
+            <!-- RIGHT -->
+            <div class="checkout_right">
+              <div class="ticket_preview">
+                <span class="label left">(RESERVATION)</span>
+                <span class="label right">(TICKET)</span>
+
+                <div class="ticket">
+                  <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=MMCA"
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <footer>
         <div class="banner" aria-label="museum locations">
           <ul class="banner_track">
