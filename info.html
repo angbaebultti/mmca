@@ -14,9 +14,11 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/common_media.css">
+    <link rel="stylesheet" href="css/info.css">
     <script src="js/common.js" defer></script>
 </head>
 <!-- 햄버거 밑부터 개인별 작업 -->
+
 <body>
     <div class="wrap">
         <header class="header">
@@ -65,76 +67,45 @@
             </div><!-- //.inner -->
         </header>
         <!--  햄버거 -->
-        <div class="menu_overlay" id="menu">
-            <div class="menu_top">
-                <h1><a href="#"><img src="img/logo_icon.png">MMCA</a></h1>
-                <span class="close_btn" id="close_btn">✕</span>
-            </div>
-            <div class="menu_top_row">
-                <div class="menu_col">
-                    <h3><a href="#">VISIT</a></h3>
-                    <ul>
-                        <li><a href="#">Location</a></li>
-                        <li class="active"><a href="#">Seoul</a></li>
-                        <li class="active"><a href="#">Gwacheon</a></li>
-                        <li class="active"><a href="#">Deoksugung</a></li>
-                        <li class="active"><a href="#">Cheongju</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3><a href="#">PROGRAM</a></h3>
-                    <ul>
-                        <li><a href="#">Event</a></li>
-                        <li><a href="#">Education</a></li>
-                        <li><a href="#">Tour</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3><a href="#">EXPLORE</a></h3>
-                    <ul>
-                        <li class="active"><a href="#">Collection</a></li>
-                        <li><a href="#">Research</a></li>
-                        <li><a href="#">Archive</a></li>
-                        <li><a href="#">Digital Museum</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3><a href="#">ARTIST</a></h3>
-                    <ul>
-                        <li><a href="#">Prize</a></li>
-                        <li><a href="#">Residency</a></li>
-                        <li><a href="#">Art Bank</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3><a href="#">ABOUT</a></h3>
-                    <ul>
-                        <li><a href="#">About MMCA</a></li>
-                        <li class="active"><a href="#">History</a></li>
-                        <li><a href="#">Mission</a></li>
-                        <li><a href="#">Organization</a></li>
-                        <li><a href="#">News</a></li>
-                    </ul>
-                </div>
-                <div class="menu_col">
-                    <h3 class="tickets"><a href="#">TICKET</a></h3>
-                    <ul>
-                        <li class="active"><a href="#">Purchase</a></li>
-                        <li><a href="#">Reservation</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="menu_bottom_row">
-                <div class="menu_col">
-                    <h3><a href="#">MEMBERSHIP</a></h3>
-                    <ul>
-                        <li><a href="">Membership</a></li>
-                        <li><a href="">Benefits</a></li>
-                        <li><a href="">Program</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <section class="plan">
+            <h1 class="plan_heading">Plan your<br />visit</h1>
+            <!-- Address -->
+            <div class="inner">
+                <div class="address">
+                    <div class="tit">
+                        <h3>Address</h3>
+                        <button class="plus" aria-expanded="false" aria-controls="container">
+                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div><!-- //.address_tit -->
+                    <div class="container" id="address_container" role="region" aria-hidden="true">
+                        <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="address_txt">
+                            <p>30 Samcheong-ro, Jongno-gu</p>
+                            <p>Seoul 03062, South Korea</p>
+                        </div><!-- //.address_txt_box -->
+                    </div><!-- //.address_container-->
+                    <div class="accordion_divider"></div>
+                </div><!-- //.address -->
+                <div class="opening">
+                    <div class="tit">
+                        <h3>Opening</h3>
+                        <button class="plus" aria-expanded="false" aria-controls="container">
+                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div><!-- //.opening_tit -->
+                    <div class="container" id="opening_container" role="region" aria-hidden="true">
+                        <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+                        <div class="txt">
+                            <p>Monday, Tuesday, Thursday, Friday, Sunday 10:00 AM – 6:00 PM</p>
+                            <p>Late night openings on Wednesday and Saturday 10:00–21:00</p>
+                            <p>Closed January 1, Seollal, and chuseok</p>
+                        </div><!-- //.opening_txt_box -->
+                    </div><!-- //.opening_container-->
+                    <div class="accordion_divider"></div>
+                </div><!-- //.opening -->
+            </div><!-- //.inner -->
+        </section><!-- //.plan -->
         <footer>
             <div class="banner" aria-label="museum locations">
                 <ul class="banner_track">
@@ -185,11 +156,16 @@
                     <div class="f_right_col">
                         <h4>SNS</h4>
                         <ul>
-                            <li><a href="#"><span><iconify-icon icon="mdi:instagram"></iconify-icon></span>Instagram</a></li>
-                           <li><a href="#"><span><iconify-icon icon="mingcute:facebook-fill"></iconify-icon></span> Facebook</a></li>
-                            <li><a href="#"><span><iconify-icon icon="mdi:youtube"></iconify-icon></span> YouTube</a></li>
+                            <li><a href="#"><span><iconify-icon icon="mdi:instagram"></iconify-icon></span>Instagram</a>
+                            </li>
+                            <li><a href="#"><span><iconify-icon icon="mingcute:facebook-fill"></iconify-icon></span>
+                                    Facebook</a></li>
+                            <li><a href="#"><span><iconify-icon icon="mdi:youtube"></iconify-icon></span> YouTube</a>
+                            </li>
                             <li><a href="#"><img src="img/blog_icon.svg" alt="Naver Blog"> Naver Blog</a></li>
-                            <li><a href="#"><span><iconify-icon icon="fa6-brands:square-x-twitter"></iconify-icon></span> X</a></li>
+                            <li><a href="#"><span><iconify-icon
+                                            icon="fa6-brands:square-x-twitter"></iconify-icon></span>
+                                    X</a></li>
                         </ul>
                     </div><!-- //.f_right_col -->
                     <div class="f_right_col">
