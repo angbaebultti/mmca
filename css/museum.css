@@ -21,16 +21,30 @@ button {
   border: 0;
   background: none;
   font: inherit;
+  padding: 0;
+  cursor: pointer;
 }
 
-/* ---------------- layout ---------------- */
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-
+/* ---------------- intro / cube ---------------- */
 
 .intro_scene {
+  position: relative;
+  width: 100%;
+  height: 320vh;
+  background: #000;
+  overflow: visible;
+}
+
+.cube_pin {
+  position: sticky;
+  top: 0;
   width: 100%;
   height: 100vh;
-  min-height: 1080px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,9 +59,10 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  z-index: 2;
 }
-
-/* ---------------- cube ---------------- */
 
 .cube {
   --face-w: 1000px;
@@ -57,9 +72,7 @@ button {
   width: var(--face-w);
   height: var(--face-h);
   transform-style: preserve-3d;
-  transform: rotateY(-30deg);
-  transition: transform 0.8s ease;
-  z-index: 1;
+  will-change: transform;
 }
 
 .cube_face {
@@ -72,18 +85,39 @@ button {
   backface-visibility: hidden;
   background: #000;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
-  -webkit-user-drag: none;
-  user-select: none;
-  cursor: pointer;
+  isolation: isolate;
 }
 
-.cube_face img {
+.cube_face::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.12) 45%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+
+.cube_face_img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cube_face_img img {
   transition: transform 0.5s ease;
   -webkit-user-drag: none;
   user-select: none;
 }
 
-.face_title {
+.cube_face:hover .cube_face_img img {
+  transform: scale(1.04);
+}
+
+.cube_face_label {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -95,11 +129,8 @@ button {
   letter-spacing: -0.05em;
   text-align: center;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  -webkit-user-drag: none;
-  user-select: none;
+  pointer-events: none;
 }
-
-/* ---------------- 4 faces ---------------- */
 
 .face_seoul {
   transform: rotateY(0deg) translateZ(var(--depth));
@@ -117,86 +148,57 @@ button {
   transform: rotateY(-90deg) translateZ(var(--depth));
 }
 
-/* ---------------- hit area ---------------- */
+/* ---------------- expand overlay ---------------- */
 
-.cube_hit_area {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1180px;
-  height: 720px;
-  transform: translate(-50%, -50%);
-  z-index: 5;
-  cursor: grab;
-  touch-action: none;
-  background: transparent;
-}
-
-.cube_hit_area:active {
-  cursor: grabbing;
-}
-
-/* 클릭 모드일 때 hit area 끄기 */
-.cube_stage.is_click_mode .cube_hit_area {
-  pointer-events: none;
-}
-
-/* ---------------- fullscreen transition ---------------- */
-
-.intro_fullscreen {
+.cube_expand_overlay {
   position: fixed;
   inset: 0;
-  z-index: 99999;
+  z-index: 9999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.7s ease; /* ← 0.45s → 0.7s 로 늘려서 자연스럽게 */
 }
 
-.intro_fullscreen.is_visible {
-  opacity: 1;
+.cube_expand_box {
+  position: fixed;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
 }
 
-.intro_fullscreen_img {
+.cube_expand_box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.intro_fullscreen_title {
+.cube_expand_box .cube_face_label {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: clamp(64px, 7vw, 120px);
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  text-align: center;
-  color: #fff;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* ---------------- museum visibility ---------------- */
+/* ---------------- museum base ---------------- */
 
 .museum_wrap {
   display: none;
+  position: relative;
+  width: 100%;
+  padding-bottom: 160px;
 }
 
 .museum_wrap.active {
   display: block;
 }
 
-/* 전시관 section 기본 숨김 */
 .museum_exhibit_section {
   display: none;
   width: 100%;
 }
 
-/* 선택된 section만 보여주기 */
 .museum_exhibit_section.active {
   display: block;
 }
-
-/* ---------------- section base ---------------- */
 
 .museum_exhibit_section .museum_inner {
   width: 1500px;
@@ -208,6 +210,11 @@ button {
 
 .museum_head {
   margin-bottom: 60px;
+}
+
+.museum_head_left {
+  display: flex;
+  flex-direction: column;
 }
 
 .museum_label {
@@ -231,7 +238,6 @@ button {
 .museum_tabs button {
   font-size: 32px;
   color: var(--gray_03);
-  cursor: pointer;
   padding-bottom: 14px;
 }
 
@@ -250,7 +256,7 @@ button {
 .museum_exhibit_section.is_horizontal .museum_inner {
   width: 100%;
   margin: 0;
-  padding: 0;        /* ← 기존 200 0 → 0으로 제거 (오타도 있었음) */
+  padding: 0;
   height: 100%;
 }
 
@@ -262,16 +268,16 @@ button {
 }
 
 .museum_exhibit_section.is_horizontal .museum_head {
-  width: 1500px;
-  margin: 0 auto 40px;
-  padding-top: 40px; /* ← 80px → 40px, 상단 패딩 줄임 */
   position: relative;
   z-index: 3;
+  width: 1500px;
+  margin: 0 auto 40px;
+  padding-top: 40px;
 }
 
 .museum_h_scroll {
   width: 100%;
-  height: calc(100vh - 220px); /* ← 260px → 220px, 헤드 패딩 줄인 만큼 조정 */
+  height: calc(100vh - 220px);
   overflow: hidden;
 }
 
@@ -282,11 +288,10 @@ button {
   will-change: transform;
 }
 
-/* 가로 카드: 한 장이 한 화면 */
 .museum_exhibit_section.is_horizontal .museum_exhibit_card {
   width: 100vw;
   min-width: 100vw;
-  height: calc(100vh - 220px); /* ← 260px → 220px */
+  height: calc(100vh - 220px);
   margin-top: 0;
   padding: 0 0 80px;
   box-sizing: border-box;
@@ -295,12 +300,11 @@ button {
   gap: 120px;
 }
 
-/* 카드 안 실제 콘텐츠 폭 위치 맞추기 */
-.museum_exhibit_section.is_horizontal .museum_exhibit_card>.museum_poster {
+.museum_exhibit_section.is_horizontal .museum_exhibit_card > .museum_poster {
   margin-left: calc((100vw - 1500px) / 2);
 }
 
-/* ---------------- default card layout ---------------- */
+/* ---------------- card layout ---------------- */
 
 .museum_exhibit_card {
   display: flex;
@@ -322,8 +326,6 @@ button {
 .museum_content {
   flex: 1;
 }
-
-/* ---------------- text ---------------- */
 
 .museum_title {
   font-size: 72px;
@@ -350,42 +352,44 @@ button {
 }
 
 .museum_desc {
-  font-size: 18px;
-  color: var(--gray_03);
-  line-height: 1.6;
-  margin-top: 30px;
   max-width: 920px;
+  margin-top: 30px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--gray_03);
 }
 
-/* ---------------- ticket button ---------------- */
+/* ---------------- ticket ---------------- */
 
 .museum_ticket {
   display: inline-flex;
   margin-top: 40px;
-  text-decoration: none;
 }
 
 .ticket_main {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 56px;
+  padding: 8px 18px;
+  border-radius: 5px 0 0 5px;
+  border-right: 2px dashed var(--gray_01);
   background: var(--main_white);
   color: var(--main_black);
-  padding: 8px 10px;
   font-size: 24px;
   font-weight: 600;
-  border-radius: 5px;
-  border-right: 2px dashed var(--gray_01);
 }
 
 .ticket_stub {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 58px;
+  min-height: 56px;
+  padding: 10px;
+  border-radius: 0 5px 5px 0;
   background: var(--gray_06);
   color: var(--main_black);
-  padding: 10px 10px;
-  border-radius: 5px;
 }
 
 /* ---------------- highlights ---------------- */
@@ -398,8 +402,8 @@ button {
   display: flex;
   align-items: center;
   gap: 20px;
-  font-size: 32px;
   margin-bottom: 24px;
+  font-size: 32px;
 }
 
 .museum_highlights strong::after {
@@ -425,29 +429,52 @@ button {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 /* ---------------- empty ---------------- */
 
 .museum_empty {
-  text-align: center;
   padding: 140px 0;
+  text-align: center;
 }
 
 .museum_empty h3 {
+  margin-bottom: 50px;
   font-size: 72px;
   font-weight: 700;
-  margin-bottom: 50px;
 }
 
 .museum_empty p {
-  color: var(--gray_04);
-  line-height: 1.6;
   font-size: 32px;
+  line-height: 1.6;
+  color: var(--gray_04);
 }
 
-/* 전시 섹션과 푸터 사이 간격 */
-.museum_wrap {
-  padding-bottom: 160px;
+/* ---------------- top button ---------------- */
+
+.top_btn {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.top_btn.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.top_btn a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  backdrop-filter: blur(10px);
 }

@@ -165,61 +165,67 @@
         </div>
       </div>
 
-      <section class="intro_scene">
-        <div class="cube_stage">
-          <div class="cube" id="cube">
-            <button
-              class="cube_face face_seoul"
-              data_angle="0"
-              data-target="seoul"
-            >
-              <img src="img/seoul.png" alt="Seoul" />
-              <span class="face_title">Seoul</span>
-            </button>
+      <!-- INTRO / CUBE -->
+      <section class="intro_scene" id="introScene">
+        <div class="cube_pin">
+          <div class="cube_stage">
+            <div class="cube" id="cube">
+              <button
+                type="button"
+                class="cube_face face_seoul"
+                data-target="seoul"
+              >
+                <span class="cube_face_label">Seoul</span>
+                <span class="cube_face_img">
+                  <img src="img/seoul.png" alt="Seoul preview" />
+                </span>
+              </button>
 
-            <button
-              class="cube_face face_deoksugung"
-              data_angle="-90"
-              data-target="deoksugung"
-            >
-              <img src="img/deoksugung.png" alt="Deoksugung" />
-              <span class="face_title">Deoksugung</span>
-            </button>
+              <button
+                type="button"
+                class="cube_face face_deoksugung"
+                data-target="deoksugung"
+              >
+                <span class="cube_face_label">Deoksugung</span>
+                <span class="cube_face_img">
+                  <img src="img/deoksugung.png" alt="Deoksugung preview" />
+                </span>
+              </button>
 
-            <button
-              class="cube_face face_gwacheon"
-              data_angle="-180"
-              data-target="gwacheon"
-            >
-              <img src="img/gwacheon.png" alt="Gwacheon" />
-              <span class="face_title">Gwacheon</span>
-            </button>
+              <button
+                type="button"
+                class="cube_face face_gwacheon"
+                data-target="gwacheon"
+              >
+                <span class="cube_face_label">Gwacheon</span>
+                <span class="cube_face_img">
+                  <img src="img/gwacheon.png" alt="Gwacheon preview" />
+                </span>
+              </button>
 
-            <button
-              class="cube_face face_cheongju"
-              data_angle="-270"
-              data-target="cheongju"
-            >
-              <img src="img/cheong.png" alt="Cheongju" />
-              <span class="face_title">Cheongju</span>
-            </button>
+              <button
+                type="button"
+                class="cube_face face_cheongju"
+                data-target="cheongju"
+              >
+                <span class="cube_face_label">Cheongju</span>
+                <span class="cube_face_img">
+                  <img src="img/cheong.png" alt="Cheongju preview" />
+                </span>
+              </button>
+            </div>
           </div>
-
-          <div class="cube_hit_area" id="cubeHitArea" aria-hidden="true"></div>
         </div>
       </section>
 
-      <div class="intro_fullscreen" id="introFullscreen" aria-hidden="true">
-        <img
-          class="intro_fullscreen_img"
-          id="introFullscreenImg"
-          src=""
-          alt=""
-        />
-        <span class="intro_fullscreen_title" id="introFullscreenTitle"></span>
-      </div>
+      <!-- 선택한 면이 커질 오버레이 -->
+      <div
+        class="cube_expand_overlay"
+        id="cubeExpandOverlay"
+        aria-hidden="true"
+      ></div>
 
-      <!-- 전시 전체 wrapper -->
+      <!-- EXHIBITIONS -->
       <div class="museum_wrap" id="museumWrap">
         <!-- 1. SEOUL -->
         <section id="seoul" class="museum_exhibit_section is_horizontal">
@@ -230,12 +236,14 @@
                   <p class="museum_label">On View at MMCA,</p>
                   <h2 class="museum_name">Seoul</h2>
                 </div>
+
                 <div class="museum_tabs">
                   <button type="button" class="is_active">Current</button>
                   <button type="button">Upcoming</button>
                   <button type="button">Past</button>
                 </div>
               </div>
+
               <div class="museum_h_scroll">
                 <div class="museum_h_track">
                   <article class="museum_exhibit_card">
@@ -245,9 +253,11 @@
                         alt="Seoul exhibition poster 1"
                       />
                     </div>
+
                     <div class="museum_content">
                       <div class="museum_info">
                         <h3 class="museum_title">UNSTABLE REALITIES</h3>
+
                         <ul class="museum_meta">
                           <li>
                             <i class="fa-solid fa-calendar"></i>
@@ -276,6 +286,7 @@
 
                       <div class="museum_highlights">
                         <strong>Exhibition Highlights</strong>
+
                         <div class="highlight_list">
                           <div class="highlight_item">
                             <img
@@ -311,10 +322,11 @@
                     <div class="museum_content">
                       <div class="museum_info">
                         <h3 class="museum_title">SHIFTING MATTER</h3>
+
                         <ul class="museum_meta">
                           <li>
                             <i class="fa-solid fa-calendar"></i>
-                            <span>May 01, 2025 - May 31, 2026</span>
+                            <span>May 01, 2025 – May 31, 2026</span>
                           </li>
                           <li>
                             <i class="fa-solid fa-location-dot"></i>
@@ -338,6 +350,7 @@
 
                       <div class="museum_highlights">
                         <strong>Exhibition Highlights</strong>
+
                         <div class="highlight_list">
                           <div class="highlight_item">
                             <img
@@ -452,6 +465,7 @@
 
                       <div class="museum_highlights">
                         <strong>Exhibition Highlights</strong>
+
                         <div class="highlight_list">
                           <div class="highlight_item">
                             <img
@@ -491,7 +505,7 @@
                         <ul class="museum_meta">
                           <li>
                             <i class="fa-solid fa-calendar"></i>
-                            <span>Oct 02, 2025 - Jan 03, 2027</span>
+                            <span>Oct 02, 2025 – Jan 03, 2027</span>
                           </li>
                           <li>
                             <i class="fa-solid fa-location-dot"></i>
@@ -516,6 +530,7 @@
 
                       <div class="museum_highlights">
                         <strong>Exhibition Highlights</strong>
+
                         <div class="highlight_list">
                           <div class="highlight_item">
                             <img
@@ -575,6 +590,7 @@
                     <div class="museum_content">
                       <div class="museum_info">
                         <h3 class="museum_title">ARCHIVE IN MOTION</h3>
+
                         <ul class="museum_meta">
                           <li>
                             <i class="fa-solid fa-calendar"></i>
@@ -603,6 +619,7 @@
 
                       <div class="museum_highlights">
                         <strong>Exhibition Highlights</strong>
+
                         <div class="highlight_list">
                           <div class="highlight_item">
                             <img
@@ -642,11 +659,11 @@
                         <ul class="museum_meta">
                           <li>
                             <i class="fa-solid fa-calendar"></i>
-                            <span>Jul 22, 2025 - Dec 31, 2026</span>
+                            <span>Jul 22, 2025 – Dec 31, 2026</span>
                           </li>
                           <li>
                             <i class="fa-solid fa-location-dot"></i>
-                            <span>CheongJu 4F, Special Storage</span>
+                            <span>Cheongju 4F, Special Storage</span>
                           </li>
                         </ul>
 
@@ -667,6 +684,7 @@
 
                       <div class="museum_highlights">
                         <strong>Exhibition Highlights</strong>
+
                         <div class="highlight_list">
                           <div class="highlight_item">
                             <img
@@ -695,6 +713,20 @@
             </div>
           </div>
         </section>
+      </div>
+
+      <!-- TOP BUTTON -->
+      <div class="top_btn">
+        <a href="#introScene" aria-label="Back to cube">
+          <i class="fa-solid fa-arrow-up"></i>
+        </a>
+      </div>
+
+      <!-- TOP BUTTON -->
+      <div class="top_btn">
+        <a href="#introScene" aria-label="Back to cube">
+          <i class="fa-solid fa-arrow-up"></i>
+        </a>
       </div>
       <footer>
         <div class="banner" aria-label="museum locations">
@@ -822,9 +854,6 @@
         </div>
         <!-- //.f_bottom -->
       </footer>
-    </div>
-    <div class="top_btn">
-      <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
     </div>
     <!--//.wrap -->
   </body>
