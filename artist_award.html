@@ -1,12 +1,218 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="국립현대미술관 영문 웹사이트 리디자인 프로젝트">
+    <meta name="keywords" content="MMCA, 국립현대미술관, 미술관, 전시, 웹디자인">
+    <meta name="author" content="TEAM 아이조아">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>artist_award</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://kit.fontawesome.com/b43057b3ba.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <title>National Museum of Modern and Contemporary Art, Korea</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/common_media.css">
+    <script src="js/common.js" defer></script>
 </head>
 <!-- 햄버거 밑부터 개인별 작업 -->
 <body>
-    
+    <div class="wrap">
+        <header class="header">
+            <div class="inner">
+                <div class="header_top">
+                    <h1><a href="#"><img src="img/logo_icon.png">MMCA</a></h1>
+                </div>
+                <div class="nav">
+                    <div class="nav_top">
+                        <a href="#"><iconify-icon icon="radix-icons:magnifying-glass"></iconify-icon></a>
+                        <a href="#"><iconify-icon icon="lets-icons:globe-light"></iconify-icon></a>
+                        <a href="#"><span>Sign in</span></a>
+                    </div><!-- //.nav_top -->
+                    <div class="nav_bottom">
+                        <ul class="gnb_l">
+                            <li><a href="#">VISIT</a></li>
+                            <li><a href="#">ARTIST</a></li>
+                            <li><a href="#">EXPLORE</a></li>
+                            <li><a href="#">PROGRAM</a></li>
+                            <li><a href="#">ABOUT</a></li>
+                        </ul><!-- //.gnb_l -->
+                        <div class="gnb_r">
+                            <a href="#"><span>TICKETS</span></a>
+                            <a href="#"><i class="fa-solid fa-bars" id="menu_btn"></i></a>
+                        </div><!-- //.gnb_r -->
+                    </div><!-- //.nav_bottom -->
+                </div><!-- //.nav -->
+                <div class="museum_nav">
+                    <div class="row_top">
+                        <a href="#">
+                            <div class="item seoul">SEOUL</div>
+                        </a>
+                        <a href="#">
+                            <div class="item deoksugung">DEOKSUGUNG</div>
+                        </a>
+                    </div><!-- //.row_top -->
+                    <div class="row_bottom">
+                        <a href="#">
+                            <div class="item gwacheon">GWACHEON</div>
+                        </a>
+                        <a href="#">
+                            <div class="item cheongju">CHEONGJU</div>
+                        </a>
+                    </div><!-- //.row_bottom -->
+                </div><!-- //.museum_nav -->
+            </div><!-- //.inner -->
+        </header>
+        <!--  햄버거 -->
+        <div class="menu_overlay" id="menu">
+            <div class="menu_top">
+                <h1><a href="#"><img src="img/logo_icon.png">MMCA</a></h1>
+                <span class="close_btn" id="close_btn">✕</span>
+            </div>
+            <div class="menu_top_row">
+                <div class="menu_col">
+                    <h3><a href="#">VISIT</a></h3>
+                    <ul>
+                        <li><a href="#">Location</a></li>
+                        <li class="active"><a href="#">Seoul</a></li>
+                        <li class="active"><a href="#">Gwacheon</a></li>
+                        <li class="active"><a href="#">Deoksugung</a></li>
+                        <li class="active"><a href="#">Cheongju</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3><a href="#">PROGRAM</a></h3>
+                    <ul>
+                        <li><a href="#">Event</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Tour</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3><a href="#">EXPLORE</a></h3>
+                    <ul>
+                        <li class="active"><a href="#">Collection</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Archive</a></li>
+                        <li><a href="#">Digital Museum</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3><a href="#">ARTIST</a></h3>
+                    <ul>
+                        <li><a href="#">Prize</a></li>
+                        <li><a href="#">Residency</a></li>
+                        <li><a href="#">Art Bank</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3><a href="#">ABOUT</a></h3>
+                    <ul>
+                        <li><a href="#">About MMCA</a></li>
+                        <li class="active"><a href="#">History</a></li>
+                        <li><a href="#">Mission</a></li>
+                        <li><a href="#">Organization</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3 class="tickets"><a href="#">TICKET</a></h3>
+                    <ul>
+                        <li class="active"><a href="#">Purchase</a></li>
+                        <li><a href="#">Reservation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu_bottom_row">
+                <div class="menu_col">
+                    <h3><a href="#">MEMBERSHIP</a></h3>
+                    <ul>
+                        <li><a href="">Membership</a></li>
+                        <li><a href="">Benefits</a></li>
+                        <li><a href="">Program</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="banner" aria-label="museum locations">
+                <ul class="banner_track">
+                    <li>MMCA SEOUL</li>
+                    <li>MMCA DEOKSUGUNG</li>
+                    <li>MMCA GWACHEON</li>
+                    <li>MMCA CHEONGJU</li>
+                    <li>MMCA SEOUL</li>
+                    <li>MMCA DEOKSUGUNG</li>
+                    <li>MMCA GWACHEON</li>
+                    <li>MMCA CHEONGJU</li>
+                    <li>MMCA SEOUL</li>
+                    <li>MMCA DEOKSUGUNG</li>
+                    <li>MMCA GWACHEON</li>
+                    <li>MMCA CHEONGJU</li>
+                    <li>MMCA SEOUL</li>
+                    <li>MMCA DEOKSUGUNG</li>
+                    <li>MMCA GWACHEON</li>
+                    <li>MMCA CHEONGJU</li>
+                </ul><!-- //.banner_track -->
+            </div><!-- //.banner -->
+            <div class="f_top">
+                <!-- f_left -->
+                <ul class="f_left">
+                    <li class="branch">
+                        <span class="branch_name seoul">Seoul</span>
+                        <p class="tel">02-3701-9500</p>
+                        <p>30 Samcheong-ro,<br>Jongno-gu,<br>Seoul</p>
+                    </li>
+                    <li class="branch">
+                        <span class="branch_name deoksugung">Deoksugung</span>
+                        <p class="tel">02-2022-0600</p>
+                        <p>99 Sejong-daero,<br>Jung-gu, Seoul<br>Inside Deoksugung Palace</p>
+                    </li>
+                    <li class="branch">
+                        <span class="branch_name gwacheon">Gwacheon</span>
+                        <p class="tel">02-2188-6000</p>
+                        <p>313 Gwangmyeong-ro,<br>Gwacheon-si,<br>Gyeonggi-do</p>
+                    </li>
+                    <li class="branch">
+                        <span class="branch_name cheongju">Cheongju</span>
+                        <p class="tel">043-261-1400</p>
+                        <p>314 Sangdang-ro,<br>Cheongwon-si,<br>Chungcheongbuk-do</p>
+                    </li>
+                </ul>
+                <!-- f_right -->
+                <div class="f_right">
+                    <div class="f_right_col">
+                        <h4>SNS</h4>
+                        <ul>
+                            <li><a href="#"><span><iconify-icon icon="mdi:instagram"></iconify-icon></span>Instagram</a></li>
+                           <li><a href="#"><span><iconify-icon icon="mingcute:facebook-fill"></iconify-icon></span> Facebook</a></li>
+                            <li><a href="#"><span><iconify-icon icon="mdi:youtube"></iconify-icon></span> YouTube</a></li>
+                            <li><a href="#"><img src="img/blog_icon.svg" alt="Naver Blog"> Naver Blog</a></li>
+                            <li><a href="#"><span><iconify-icon icon="fa6-brands:square-x-twitter"></iconify-icon></span> X</a></li>
+                        </ul>
+                    </div><!-- //.f_right_col -->
+                    <div class="f_right_col">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Terms</a></li>
+                            <li><a href="#">Copyright</a></li>
+                            <li><a href="#">Complaints</a></li>
+                            <li><a href="#">Information Disclosure</a></li>
+                            <li><a href="#">Integrity Report</a></li>
+                        </ul>
+                    </div><!-- //.f_right_col -->
+                </div><!-- //.f_right -->
+            </div><!-- //.f_top -->
+            <div class="f_bottom">
+                <div class="f_logo">
+                    <span>MMCA</span>
+                </div><!-- //.f_logo -->
+                <p class="copyright">© 2021 National Museum of Modern and Contemporary Art, Korea</p>
+            </div><!-- //.f_bottom -->
+        </footer>
+    </div><!--//.wrap -->
 </body>
+
 </html>
