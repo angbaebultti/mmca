@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // top 버튼 부드럽게 
-    const top_btn = document.querySelector('.top');
+    const top_btn = document.querySelector('.top_btn');
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
