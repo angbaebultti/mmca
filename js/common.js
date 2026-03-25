@@ -30,5 +30,20 @@ document.addEventListener('DOMContentLoaded', () => {
             top_btn.classList.remove('active');
         }
     });
+
+    //header 쉬링크
+    const header = document.querySelector(".header");
+
+    window.addEventListener("scroll", function(){
+
+      if(window.scrollY > 500){
+    header.classList.add("shrink");
+      }else{
+    header.classList.remove("shrink");
+      }
+});
+
+
+
 });
 //dom end

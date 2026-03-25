@@ -95,14 +95,102 @@ body {
 }
 
 section {}
-
-.header {
+/* header */
+.header{
   background: var(--main_black);
-  color: #fff;
-  position: relative;
-  z-index: 1;
+  color:#fff;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  transition:all .35s ease;
 }
 
+/* shrink 상태 */
+.header.shrink{
+  backdrop-filter:blur(8px);
+  background:rgba(30,30,30,0.95);
+}
+
+/* 로고 영역 */
+.header_top{
+  height:50px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-top:60px;
+  transition:all .35s ease;
+}
+
+/* shrink 시 로고라인 제거 */
+.header.shrink .header_top{
+  height:0;
+  padding:0;
+  overflow:hidden;
+}
+
+/* nav */
+.nav{
+  padding:8px 4vw;
+  border-bottom:1px solid #fff;
+  transition:all .35s ease;
+}
+
+/* shrink 시 nav 변경 */
+.header.shrink .nav{
+  padding:14px 4vw;
+  border-bottom:none;
+}
+
+/* 상단 아이콘라인 */
+.nav_top{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:16px;
+  font-size:30px;
+  transition:all .35s ease;
+}
+
+/* shrink 시 상단라인 제거 */
+.header.shrink .nav_top{
+  height:0;
+  opacity:0;
+  overflow:hidden;
+}
+/* shrink header */
+.header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  transition:all .35s ease;
+}
+
+/* 스크롤 상태 */
+.header.shrink .header_top,
+.header.shrink .nav_top,
+.header.shrink .row_top,
+.header.shrink .row_bottom{
+  height:0;
+  opacity:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+/* nav만 남기기 */
+.header.shrink .nav{
+  padding:14px 4vw;
+  border-bottom:none;
+}
+
+/* body 밀어주기 */
+/* body{
+  padding-top:160px;
+} */
+ 
 .inner {
   max-width: 1920px;
   margin: 0 auto;
@@ -120,7 +208,7 @@ section {}
   display: flex;
   align-items: center;
   gap: 15px;
-  font-size: 40px;
+  font-size: 45px;
   font-weight: 600;
   letter-spacing: -0.06em;
 }
@@ -171,6 +259,28 @@ section {}
   font-size: 27px;
 }
 
+.gnb_l a,
+.gnb_r a,
+.nav_top span{
+  transition:0.3s;
+}
+
+/* hover 효과 */
+.gnb_l a:hover,
+.gnb_r a:hover,
+.nav_top span:hover{
+  opacity:0.5;
+}
+
+/* 아이콘 hover 막기 */
+.nav_top a:has(iconify-icon):hover{
+  opacity:1;
+}
+
+.gnb_r a:last-child:hover{
+  opacity:1;
+}
+
 .gnb_r {
   display: flex;
   gap: 16px;
@@ -204,21 +314,6 @@ section {}
   border-right: none;
 }
 
-.seoul:hover {
-  color: #DC4D3A;
-}
-
-.deoksugung:hover {
-  color: #B54173;
-}
-
-.gwacheon:hover {
-  color: #00A169;
-}
-
-.cheongju:hover {
-  color: #3D8CBC;
-}
 
 .row_top .item:nth-child(2),
 .row_bottom .item:nth-child(2) {
@@ -229,6 +324,52 @@ section {}
   border-bottom: none;
 }
 
+/* 헤더 각 관 hover */
+/* 기본 item */
+.item{
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: color 0.3s ease;
+}
+
+/* 채워지는 배경 */
+.item::before{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:0;
+  z-index:-1;
+  transition: height 0.4s ease;
+}
+
+/* hover 시 위로 채워짐 */
+.item:hover{
+  color:#fff;
+}
+
+.item:hover::before{
+  height:100%;
+}
+
+/* 관별 색 */
+.seoul::before{
+  background:#DC4D3A;
+}
+
+.deoksugung::before{
+  background:#B54173;
+}
+
+.gwacheon::before{
+  background:#00A169;
+}
+
+.cheongju::before{
+  background:#3D8CBC;
+}
 
 .menu_overlay {
   position: fixed;
@@ -261,27 +402,27 @@ section {}
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 77px;
+  padding-bottom: 46px;
   padding-top: 77px;
 }
 
 .menu_top h1 {
   position: absolute;
-  left: 41%;
-  bottom: 60%;
+  left: 44.4%;
+  bottom: 80%;
 }
 
 .menu_top h1 a {
   display: flex;
   align-items: center;
   gap: 15px;
-  font-size: 54px;
+  font-size: 45px;
   font-weight: 600;
   padding-top: 20px;
 }
 
 .menu_top img {
-  height: 54px;
+  height: 40px;
 }
 
 .close_btn {
@@ -320,6 +461,8 @@ section {}
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 40px;
+  cursor:default;
+  pointer-events:none;
 }
 
 .menu_col ul {
@@ -334,13 +477,28 @@ section {}
 
 .menu_col ul li a {
   font-size: 24px;
-  opacity: 0.7;
+  opacity: 0.3;
   transition: 0.3s;
 }
 
 .menu_col ul li.active a {
   opacity: 1;
   color: #fff;
+}
+
+.menu_col ul li.active a{
+  opacity:1;
+  transition:0.3s;
+}
+
+.menu_col ul li.active a:hover{
+  opacity:0.5;
+}
+
+/* 비활성메뉴 커서제거 */
+.menu_col ul li:not(.active) a{
+  pointer-events:none;
+  cursor:default;
 }
 
 .tickets {
