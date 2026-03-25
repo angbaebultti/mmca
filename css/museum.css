@@ -149,7 +149,7 @@ button {
   z-index: 99999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.45s ease;
+  transition: opacity 0.7s ease; /* ← 0.45s → 0.7s 로 늘려서 자연스럽게 */
 }
 
 .intro_fullscreen.is_visible {
@@ -250,7 +250,7 @@ button {
 .museum_exhibit_section.is_horizontal .museum_inner {
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 0;        /* ← 기존 200 0 → 0으로 제거 (오타도 있었음) */
   height: 100%;
 }
 
@@ -258,21 +258,20 @@ button {
   position: sticky;
   top: 0;
   height: 100vh;
-
   overflow: clip;
 }
 
 .museum_exhibit_section.is_horizontal .museum_head {
   width: 1500px;
   margin: 0 auto 40px;
-  padding-top: 80px;
+  padding-top: 40px; /* ← 80px → 40px, 상단 패딩 줄임 */
   position: relative;
   z-index: 3;
 }
 
 .museum_h_scroll {
   width: 100%;
-  height: calc(100vh - 260px);
+  height: calc(100vh - 220px); /* ← 260px → 220px, 헤드 패딩 줄인 만큼 조정 */
   overflow: hidden;
 }
 
@@ -287,7 +286,7 @@ button {
 .museum_exhibit_section.is_horizontal .museum_exhibit_card {
   width: 100vw;
   min-width: 100vw;
-  height: calc(100vh - 260px);
+  height: calc(100vh - 220px); /* ← 260px → 220px */
   margin-top: 0;
   padding: 0 0 80px;
   box-sizing: border-box;
@@ -446,4 +445,9 @@ button {
   color: var(--gray_04);
   line-height: 1.6;
   font-size: 32px;
+}
+
+/* 전시 섹션과 푸터 사이 간격 */
+.museum_wrap {
+  padding-bottom: 160px;
 }
