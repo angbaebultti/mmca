@@ -25,6 +25,8 @@ button {
 
 /* ---------------- layout ---------------- */
 
+
+
 .intro_scene {
   width: 100%;
   height: 100vh;
@@ -242,19 +244,22 @@ button {
 
 .museum_exhibit_section.is_horizontal {
   position: relative;
+  height: 300vh;
 }
 
 .museum_exhibit_section.is_horizontal .museum_inner {
   width: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 .museum_h_sticky {
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: hidden;
+
+  overflow: clip;
 }
 
 .museum_exhibit_section.is_horizontal .museum_head {
@@ -292,7 +297,7 @@ button {
 }
 
 /* 카드 안 실제 콘텐츠 폭 위치 맞추기 */
-.museum_exhibit_section.is_horizontal .museum_exhibit_card > .museum_poster {
+.museum_exhibit_section.is_horizontal .museum_exhibit_card>.museum_poster {
   margin-left: calc((100vw - 1500px) / 2);
 }
 

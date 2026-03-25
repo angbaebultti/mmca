@@ -237,6 +237,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* 최초 1회 */
   setupHorizontalSections();
+
 });
