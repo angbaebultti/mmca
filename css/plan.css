@@ -1,307 +1,489 @@
 @charset "utf-8";
-@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700;1,300..700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700&display=swap');
 /* font-family: "Red Hat Mono", monospace; */
 
-.plan {
-  background: #000;
-  color: #fff;
-  padding: 120px 0;
-}
 
-.plan .inner {
-  display: flex;
-  gap: 120px;
-  max-width: 1400px;
+.plan_main {
+  background: var(--main_black);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 150px 180px;
+}
+ 
+/* ─── plan_inner grid ────────────────────────────────────── */
+.plan_inner {
+  max-width: var(--inner-max);
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 518px;
+  gap: 100px;
+  align-items: start;
   position: relative;
 }
-
-/* 좌측 */
+ 
+/* 세로 구분선 — position:absolute는 height를 명시해야 함 */
+.plan_inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 618px;   /* 518px 카드 + 100px gap */
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+}
+ 
+/* ─── LEFT ───────────────────────────────────────────────── */
 .plan_left {
-  flex: 1;
-}
-
-/* 우측 summary */
-.plan_right {
-  width: 360px;
-  position: relative;
-}
-
-/* ================= HERO ================= */
-.hero h2 {
-  font-size: 72px;
-  font-weight: 600;
-  margin-bottom: 16px;
-}
-
-.hero .sub {
-  font-size: 14px;
-  opacity: 0.6;
-  margin-bottom: 60px;
-}
-
-.hero_content {
   display: flex;
-  gap: 0;
+  flex-direction: column;
+  gap: 0;          /* section_label 안에 padding-top으로 간격 제어 */
 }
-
-.hero_img {
-  width: 300px;
-  height: 300px;
-  flex-shrink: 0;
+ 
+/* ─── HERO ───────────────────────────────────────────────── */
+.hero_title {
+  margin-bottom: 80px;
 }
-
-.hero_img img {
+ 
+.hero_title h2 {
+  font-size: 130px;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin-bottom: 18px;
+  color: #fff;
+}
+ 
+.hero_sub {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  color: #fff;
+  opacity: 0.7;
+}
+ 
+.hero_img_box {
+  display: flex;
+  align-items: stretch;
+  width: 835px;
+  height: 406px;
+}
+ 
+.hero_poster {
+  width: 288px;
+  min-width: 288px;
+  overflow: hidden;
+}
+ 
+.hero_poster img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
-
+ 
 .hero_desc {
-  background: #e5e5e5;
-  color: #000;
-  padding: 40px;
+  flex: 1;
   display: flex;
   align-items: center;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.hero_desc p {
-  font-family: var(--pretendard);
-}
-
-.section_title {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  border-top: 1px solid #333;
-  padding: 40px 0 30px;
-  margin-top: 80px;
-}
-
-.section_title span {
-  display: inline-block;
+  justify-content: center;
+  padding: 40px 48px;
   background: #fff;
-  color: #000;
-  padding: 4px 10px;
-  font-size: 14px;
+  color: #1e1e1e;
 }
-
-.section_title h3 {
+ 
+.hero_desc p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.03em;
+}
+ 
+/* ─── SECTION LABEL (01, 02) ─────────────────────────────── */
+.date_time_section,
+.visitor_section {
+  display: flex;
+  flex-direction: column;
+}
+ 
+.section_label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 120px 0 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+ 
+.section_num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: #fff;
+  color: #1e1e1e;
   font-size: 28px;
-  letter-spacing: 0.05em;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  flex-shrink: 0;
 }
-
+ 
+.section_label h3 {
+  font-size: 53px;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: #fff;
+}
+ 
+/* ─── CALENDAR ───────────────────────────────────────────── */
 .calendar {
-  margin-top: 30px;
+  width: 710px;
+  margin-top: 40px;
 }
-
+ 
 .cal_header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  margin-bottom: 48px;
 }
-
-.cal_header span {
-  font-weight: 700;
+ 
+.cal_month_wrap {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+ 
+.cal_month_label {
   font-size: 32px;
-  letter-spacing: 0.1em;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  white-space: pre;
+  color: #fff;
 }
-
-.cal_arrow a{
-  display: inline-block;
+ 
+.cal_dropdown {
+  background: none;
+  border: none;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
-
-.cal_arrow i {
-  margin-left: 10px;
-  width: 40px;
-  height: 40px;
+ 
+.cal_nav {
+  display: flex;
+  gap: 20px;
 }
-
-.cal_week,
-.cal_date {
+ 
+.cal_prev,
+.cal_next {
+  background: none;
+  border: none;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+ 
+.cal_prev:hover,
+.cal_next:hover { opacity: 1; }
+ 
+/* 요일 헤더 */
+.cal_week {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
+  margin-bottom: 28px;
 }
-
-.cal_week {
-  margin-bottom: 16px;
-  opacity: 0.6;
+ 
+.cal_week span {
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  opacity: 0.5;
+  color: #fff;
 }
-
-.cal_date span {
-  padding: 12px 0;
+ 
+/* 날짜 그리드 */
+.cal_days {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
-
-.cal_date .active {
-  background: #2a7de1;
+ 
+.cal_week_row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+}
+ 
+.cal_day {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  cursor: pointer;
   border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+  color: #fff;
 }
-
+ 
+.cal_day.other-month {
+  opacity: 0.3;
+  cursor: default;
+}
+ 
+.cal_day:not(.other-month):hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+ 
+.cal_day.selected {
+  background: var(--blue);
+  color: #fff;
+  border: 2px solid var(--blue);
+}
+ 
+/* ─── TIME SELECT ────────────────────────────────────────── */
 .time_select {
   display: flex;
   gap: 40px;
-  margin: 40px 0;
+  margin: 80px 0 48px 0;
+  align-items: center;
+  justify-content: center;
 }
-
-.time_select button {
-  flex: 1;
-  padding: 14px 54PX;
+ 
+.time_btn {
+  padding: 14px 90px;
   border-radius: 999px;
-  background: #F5F5F5;
-  border: none;
+  background: var(--light-gray);
+  border: 1px solid #1e1e1e;
+  color: #1e1e1e;
   font-size: 27px;
   font-weight: 600;
+  letter-spacing: -0.05em;
+  transition: all 0.3s;
+  cursor: pointer;
+  white-space: nowrap;
 }
-
+ 
+.time_btn.active,
+.time_btn:hover {
+  background: #1e1e1e;
+  color: #fff;
+  border-color: #fff;
+}
+ 
+/* ─── GUIDE LINKS ────────────────────────────────────────── */
 .guide_links {
   display: flex;
-  gap: 20px;
+  justify-content: center;
+  gap: 0;
+}
+ 
+.guide_links a {
   font-size: 20px;
   font-weight: 500;
-  justify-content: center;
-  align-items: center;
-}
-
-.guide_links a{
-  display: block;
   text-decoration: underline;
+  text-underline-offset: 3px;
+  letter-spacing: 0.02em;
+  padding: 10px 14px;
+  display: block;
+  color: #fff;
+  opacity: 0.8;
+  transition: opacity 0.2s;
 }
-
+ 
+.guide_links a:hover { opacity: 1; }
+ 
+/* ─── VISITOR BOX ────────────────────────────────────────── */
 .visitor_box {
   background: #424242;
-  padding: 30px;
-  margin-top: 40px;
+  padding: 10px 0;
 }
-
+ 
 .visitor_item {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  padding: 24px 80px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
-
-.visitor_item strong {
-  display: block;
+ 
+.visitor_item:last-child { border-bottom: none; }
+ 
+.visitor_info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.visitor_info strong {
   font-size: 20px;
   font-weight: 600;
+  color: #f5f5f5;
 }
-
-.visitor_item p {
+ 
+.visitor_info em {
   font-size: 14px;
   font-weight: 300;
-  color: #F5F5F5;
+  font-style: normal;
+  color: #f5f5f5;
+  letter-spacing: -0.05em;
+  opacity: 0.7;
 }
-
-.count {
+ 
+.count_ctrl {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 20px;
 }
-
-.count button {
+ 
+.count_btn {
   background: none;
   border: none;
   color: #fff;
-  font-size: 16px;
+  font-size: 22px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  cursor: pointer;
 }
-
-.summary {
-  width: 360px;
-  background: #e6e6e6;
-  color: #111;
-  padding: 40px 28px;
+ 
+.count_btn:hover { opacity: 1; }
+ 
+.count_num {
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 20px;
   text-align: center;
-
-  position: sticky;
-  top: 120px;
-
-  /* 등장 애니메이션용 */
-  opacity: 0;
-  transform: translateY(80px);
+  color: #f5f5f5;
 }
-
-/* 🔥 상단 클립 (핵심) */
-.summary::before {
-  content: "";
+ 
+/* ─── RIGHT COLUMN ───────────────────────────────────────── */
+.plan_right {
+  position: relative;
+}
+ 
+.summary_card {
+  position: sticky;
+  top: 60px;                   /* 헤더 없는 환경에서도 잘 보이도록 */
+  background: #ffffff;         /* ⚠️ 흰 배경 명시 — 없으면 투명으로 보임 */
+  color: #1e1e1e;
+  padding: 68px 55px 55px;
+  width: 518px;
+  text-align: center;
+  border: 1.4px solid #dde1e6;
+ 
+  /* 초기 숨김 상태 (JS로 나타남) */
+  opacity: 0;
+  transform: translateY(60px);
+  /* transition은 JS fallback에서 동적으로 추가 */
+}
+ 
+.summary_card:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+ 
+/* 클립 장식 */
+.summary_clip {
   position: absolute;
   top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 90px;
-  height: 14px;
-  background: #cfcfcf;
-  border-radius: 10px;
+  width: 120px;
+  height: 18px;
+  background: #f2f4f8;
+  border-radius: 20px;
 }
-
-/* ================= TITLE ================= */
-.summary h3 {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 6px;
+ 
+.summary_card h3 {
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: #1e1e1e;
 }
-
-.summary .sub {
-  font-size: 13px;
+ 
+.summary_sub {
+  font-size: 22px;
+  font-weight: 400;
   color: #666;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
-
-/* ================= IMAGE ================= */
-.summary_img img {
-  width: 220px;
-  height: auto;
-  margin: 0 auto 28px;
-  display: block;
+ 
+.summary_poster {
+  margin: 0 auto 32px;
+  width: 284px;
 }
-
-/* ================= INFO ================= */
-.summary_info {
-  text-align: center;
-  font-family: "Red Hat Mono", monospace;
-}
-
-.summary_info strong {
-  display: block;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 1.6;
-  margin-bottom: 14px;
-}
-
-.summary_info p {
-  font-size: 12px;
-  color: #555;
-  margin-bottom: 6px;
-}
-
-.summary_info .note {
-  display: block;
-  font-size: 10px;
-  color: #999;
-  margin-top: 10px;
-}
-
-/* ================= BUTTON ================= */
-.btn_payment {
-  margin-top: 30px;
+ 
+.summary_poster img {
   width: 100%;
-  padding: 14px;
-
-  font-size: 13px;
-  letter-spacing: 0.1em;
-
-  background: none;
-  border: 1px solid #111;
-  cursor: pointer;
-
-  transition: all 0.3s ease;
+  height: auto;
+  display: block;
 }
-
+ 
+.summary_info {
+  font-family: 'Red Hat Mono', monospace;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+ 
+.summary_info strong {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.05em;
+  color: #1e1e1e;
+}
+ 
+.summary_date,
+.summary_ticket {
+  font-size: 18px;
+  color: #585858;
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+}
+ 
+.summary_note {
+  font-size: 13px;
+  color: #999;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+}
+ 
+/* 결제 버튼 */
+.btn_payment {
+  display: block;
+  width: 100%;
+  margin-top: 36px;
+  padding: 22px 0;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: none;
+  border: 1.4px solid #1e1e1e;
+  color: #1e1e1e;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-family: inherit;
+}
+ 
 .btn_payment:hover {
-  background: #111;
+  background: #1e1e1e;
   color: #fff;
 }

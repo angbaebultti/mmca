@@ -10,6 +10,8 @@
   align-items: center;
   padding: 20px 136px;
   border-bottom: 1px solid var(--gray_06);
+  /* 이거 추가해 뒀어요! */
+  margin-top: 160px;
 }
  
 .page_title {
