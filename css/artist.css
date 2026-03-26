@@ -1,8 +1,5 @@
 @charset "utf-8";
 
-/* =============================================
-   PAGE TITLE BAR
-============================================= */
 .page_title_bar {
   display: flex;
   align-items: baseline;
@@ -10,8 +7,8 @@
   align-items: center;
   padding: 20px 136px;
   border-bottom: 1px solid var(--gray_06);
-  /* 이거 추가해 뒀어요! 헤더에 가려져서 */
   margin-top: 161px;
+  
 }
 
 .page_title {

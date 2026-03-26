@@ -3,7 +3,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ─── State ──────────────────────────────────────────────── */
   const state = {
     year: 2026,
     month: 2,
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
   ];
 
-  /* ─── 달력 렌더 ─────────────────────────────────────────── */
   function renderCalendar() {
     const grid = document.getElementById('cal_days');
     if (!grid) return;
@@ -50,10 +48,21 @@ document.addEventListener('DOMContentLoaded', () => {
           el.classList.add('other-month');
         } else {
           if (cell.day === selectedDay) el.classList.add('selected');
+
           el.addEventListener('click', () => {
-            state.selectedDay = cell.day;
-            renderCalendar();
-            updateSummary();
+            gsap.fromTo(el,
+              { scale: 0.98 },
+              {
+                scale: 1.02,
+                duration: 0.2,
+                ease: "power1.out",
+                onComplete: () => {
+                  state.selectedDay = cell.day;
+                  renderCalendar();
+                  updateSummary();
+                }
+              }
+            );
           });
         }
         row.appendChild(el);
@@ -62,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* ─── 달력 네비게이션 ──────────────────────────────────── */
   function initCalNav() {
     const prev = document.querySelector('.cal_prev');
     const next = document.querySelector('.cal_next');
@@ -87,10 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-
-
-  /* ─── 방문객 카운트 ───────────────────────────────────── */
   function initCountButtons() {
     document.querySelectorAll('.count_btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -105,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ─── Summary 업데이트 ────────────────────────────────── */
   function updateSummary() {
     const { year, month, selectedDay, selectedTime, counts } = state;
     const monthAbbr = MONTHS[month].slice(0, 3).toLowerCase();
@@ -134,56 +137,63 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.fromTo(card,
       {
         opacity: 0,
-        y: -120
+        y: 40,
       },
       {
-        opacity: 1,
+        opacity: 0.4, 
         y: 0,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: trigger,
-          start: 'top 80%',   // 👈 살짝 보일 때 시작
-          end: 'top 30%',     // 👈 여기까지 자연스럽게 완료
-          scrub: true,        // ⭐ 핵심 (스크롤 따라 움직임)
+          start: 'top 80%',
+          end: 'top 60%',
+          scrub: true,
         }
       }
     );
+
+    gsap.to(card, {
+      opacity: 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: trigger,
+        start: 'top 60%',
+        end: 'bottom 20%',
+        scrub: true,
+      }
+    });
   }
 
-  /* ─── 햄버거 메뉴 ─────────────────────────────────────── */
-  function initMenu() {
-    const openBtn = document.getElementById('menu_btn');
-    const closeBtn = document.getElementById('close_btn');
-    const overlay = document.getElementById('menu_overlay');
-    if (!overlay) return;
-    openBtn && openBtn.addEventListener('click', () => { overlay.classList.add('open'); document.body.style.overflow = 'hidden'; });
-    closeBtn && closeBtn.addEventListener('click', () => { overlay.classList.remove('open'); document.body.style.overflow = ''; });
-    overlay.addEventListener('click', e => { if (e.target === overlay) { overlay.classList.remove('open'); document.body.style.overflow = ''; } });
-  }
 
-  /* ─── 결제 버튼 ──────────────────────────────────────── */
   function initPaymentButton() {
     const btn = document.querySelector('.btn_payment');
     btn && btn.addEventListener('click', () => {
       const total = Object.values(state.counts).reduce((a, b) => a + b, 0);
       if (total === 0) { alert('Please select at least one visitor.'); return; }
       alert(`Proceeding to payment!\n\nDate: ${MONTHS[state.month].slice(0, 3)} ${state.selectedDay}, ${state.year}\nTime: ${state.selectedTime}\nVisitors: ${total}`);
+      window.location.href = 'reserve.html';
     });
   }
 
-  /* ─── 배너 무한 루프 ──────────────────────────────────── */
   function initBanner() {
     const track = document.querySelector('.banner_track');
     if (!track) return;
     track.parentElement.appendChild(track.cloneNode(true));
   }
 
-  /* ─── 초기화 실행 ─────────────────────────────────────── */
+  document.querySelectorAll('.time_btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.time_btn')
+        .forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
   renderCalendar();
   initCalNav();
   initCountButtons();
   updateSummary();
-  initMenu();
+
   initPaymentButton();
   initBanner();
   setTimeout(initSummaryAnimation, 150);

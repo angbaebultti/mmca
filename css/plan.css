@@ -16,7 +16,6 @@
   display: grid;
   grid-template-columns: 820px 420px;
   gap: 60px;
-  align-items: start;
   position: relative;
 }
 
@@ -144,7 +143,7 @@
   width: 100%;
   max-width: 710px;
   margin-top: 40px;
-  padding: 0; 
+  padding: 0;
 }
 
 .cal_header {
@@ -205,7 +204,6 @@
   padding: 4px;
   display: flex;
   align-items: center;
-  opacity: 0.8;
   transition: opacity 0.2s;
   cursor: pointer;
 }
@@ -251,9 +249,15 @@
   font-weight: 400;
   letter-spacing: -0.05em;
   cursor: pointer;
-  border-radius: 50%;
-  transition: background 0.2s, color 0.2s;
   color: #fff;
+  transition:
+    background 0.25s ease,
+    transform 0.15s ease,
+    color 0.2s ease;
+}
+
+.cal_day:active {
+  transform: scale(0.92);
 }
 
 .cal_day.other-month {
@@ -266,7 +270,7 @@
 }
 
 .cal_day.selected {
-  background: skyblue;
+  background: #0078D7;
   color: #fff;
 }
 
@@ -280,20 +284,34 @@
 }
 
 .time_btn {
-  padding: 14px 60px;
-  border-radius: 999px;
+  padding: 16px 60px;
   background: transparent;
   border: 1px solid white;
   color: white;
   font-size: 20px;
   font-weight: 400;
   letter-spacing: -0.05em;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   cursor: pointer;
   white-space: nowrap;
   width: 300px;
+  font-family: var(--pretendard);
 }
 
+.time_btn:hover {
+  background: rgba(199, 49, 49, 0.08);
+}
+
+.time_btn:active {
+  transform: scale(0.96);
+}
+
+.time_btn.active {
+  background: #0078D7;
+  color: #fff;
+  border-color: #0078D7;
+  font-weight: 500;
+}
 
 
 .guide_links {
@@ -387,16 +405,18 @@
 
 .plan_right {
   position: relative;
+  transform: translateX(35%);
 }
 
 .summary_card {
   position: sticky;
-   top: 140px;
+  top: 80px;
+  padding: 40px;
   background: #fff;
   color: #1e1e1e;
   opacity: 0;
-  transform: translateY(-120px); 
-  will-change: transform, opacity; 
+  will-change: transform, opacity;
+  transform: translateX(80px);
 }
 
 .summary_card:hover {
@@ -410,28 +430,30 @@
   transform: translateX(-50%);
   width: 120px;
   height: 18px;
-  background: #f2f4f8;
+  background: #e6e6e7;
   border-radius: 20px;
 }
 
 .summary_card h3 {
-  font-size: 44px;
+  font-size: 36px;
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 8px;
   color: #1e1e1e;
+  text-align: center;
 }
 
 .summary_sub {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 400;
   color: #666;
   margin-bottom: 32px;
+  text-align: center;
 }
 
 .summary_poster {
   margin: 0 auto 32px;
-  width: 284px;
+  width: 200px;
 }
 
 .summary_poster img {
@@ -445,6 +467,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  text-align: center;
 }
 
 .summary_info strong {
