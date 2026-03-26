@@ -152,7 +152,7 @@ a {
   transform: translate(-50%, -50%) scale(0.333);
   transform-origin: center center;
   font-weight: 700;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
   text-align: center;
   text-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
   pointer-events: none;
@@ -192,6 +192,7 @@ a {
 .museum_wrap {
   position: relative;
   width: 100%;
+  padding-top: 140px;
   padding-bottom: 140px;
   opacity: 0;
   visibility: hidden;
@@ -243,21 +244,24 @@ a {
 
 .museum_label {
   font-size: 32px;
+  margin-top: 10px;
   margin-bottom: 10px;
   color: var(--gray_05);
+  letter-spacing: 0.05em;
 }
 
 .museum_name {
-  font-size: 72px;
+  font-size: 76px;
   font-weight: 700;
   line-height: 1.1;
-  padding-top: 15px;
+  letter-spacing: 0.04em;
 }
 
 .museum_tabs {
   display: flex;
   gap: 55px;
   margin-top: 40px;
+  letter-spacing: 0.05em;
 }
 
 .museum_tabs button {
@@ -297,7 +301,7 @@ a {
   z-index: 3;
   width: 1500px;
   margin: 0 auto 40px;
-  padding-top: 40px;
+  padding-top: 0px;
 }
 
 .museum_exhibit_section.is_horizontal.is_compact .museum_head {
@@ -334,7 +338,7 @@ a {
   min-width: 100vw;
   flex: 0 0 100vw;
   height: calc(100vh - 220px);
-  margin-top: 0;
+  margin-top: 50px;
   padding: 0 0 80px;
   box-sizing: border-box;
   display: flex;
@@ -380,6 +384,7 @@ a {
   font-weight: 600;
   line-height: 1.2;
   margin-bottom: 30px;
+  letter-spacing: 0.06em;
 }
 
 .museum_meta {
@@ -393,10 +398,11 @@ a {
   font-size: 20px;
   color: var(--gray_06);
   margin-bottom: 6px;
+  letter-spacing: 0.04em;
 }
 
 .museum_meta i {
-  font-size: 20px;
+  font-size: 26px;
 }
 
 .museum_desc {
@@ -405,6 +411,7 @@ a {
   font-size: 18px;
   line-height: 1.6;
   color: var(--gray_03);
+  letter-spacing: 0.04em;
 }
 
 /* ---------------- ticket ---------------- */
@@ -427,6 +434,7 @@ a {
   color: var(--main_black);
   font-size: 24px;
   font-weight: 600;
+  letter-spacing: 0.04em;
   transition:
     background 0.35s ease,
     color 0.35s ease,
@@ -437,7 +445,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px;
   border-radius: 6px;
   background: var(--gray_06);
   color: var(--main_black);
@@ -449,6 +456,10 @@ a {
   border-left: 2px dashed var(--gray_01);
 }
 
+.ticket_stub i{
+  font-size: 32px;
+}
+
 /* 호버 */
 .museum_ticket:hover {
   transform: rotate(-5deg);
@@ -456,8 +467,9 @@ a {
 
 .museum_ticket:hover .ticket_main,
 .museum_ticket:hover .ticket_stub {
-  color: var(--main_black);
-  /* background: #FF4B24; */
+  color: var(--main_white);
+  background: var(--gray_03);
+
 }
 
 .museum_ticket:hover .ticket_main {
@@ -481,6 +493,8 @@ a {
   gap: 40px;
   margin-bottom: 24px;
   font-size: 30px;
+  letter-spacing: 0.04em;
+  color: var(--gray_05);
 }
 
 .museum_highlights strong::after {

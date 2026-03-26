@@ -214,7 +214,7 @@ function setupHorizontalSections(callback) {
 
         const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
         const startHold = 600;
-        const extraScroll = 1200; // 이 숫자 키우면 스크롤 길어짐
+        const extraScroll = 1600; // 이 숫자 키우면 스크롤 길어짐
 
         section.style.height = `${
           window.innerHeight + totalScrollX + startHold + extraScroll
@@ -326,7 +326,7 @@ function expandSelectedFace(face) {
 
   tl.to(cube, {
     rotateY,
-    duration: 1,
+    duration: 0.9,
     ease: "power2.inOut",
   })
     .to(
@@ -334,7 +334,7 @@ function expandSelectedFace(face) {
       {
         scale: 2.15,
         y: -20,
-        duration: 1.4,
+        duration: 1.5,
         ease: "power3.out",
       },
       "-=0.1"
@@ -360,14 +360,17 @@ function expandSelectedFace(face) {
   function triggerAutoExpand() {
     if (isTransitioning || hasTriggeredExpand) return;
 
+    // [BUG FIX] 플래그를 먼저 세팅해야 seoulFace 없을 때 무한 반복 호출 방지
     hasTriggeredExpand = true;
     isTransitioning = true;
 
-    lenis.stop();
-
     const seoulFace = document.querySelector('[data-target="seoul"]');
-    if (!seoulFace) return;
+    if (!seoulFace) {
+      isTransitioning = false; // 복구
+      return;
+    }
 
+    lenis.stop();
     expandSelectedFace(seoulFace);
   }
 
@@ -546,4 +549,32 @@ function expandSelectedFace(face) {
       expandSelectedFace(face);
     });
   });
+
+  /* =========================================================
+   * 20. 헤더 스크롤 숨김
+   * - 아래로 스크롤 시 헤더 위로 숨김
+   * - 위로 스크롤 시 헤더 다시 표시
+   * - 전시 전환(isTransitioning) 중엔 동작 안 함
+   * ========================================================= */
+  const header = document.querySelector(".header");
+
+  if (header) {
+    header.style.transition = "transform 0.35s ease";
+
+    let lastScrollY = 0;
+
+    lenis.on("scroll", ({ scroll }) => {
+      if (isTransitioning) return;
+
+      if (scroll > lastScrollY && scroll > 80) {
+        // 아래로 스크롤 → 헤더 숨김
+        header.style.transform = "translateY(-100%)";
+      } else {
+        // 위로 스크롤 → 헤더 표시
+        header.style.transform = "translateY(0)";
+      }
+
+      lastScrollY = scroll;
+    });
+  }
 });

@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const aboutContent = qs('.about_content');
   const stats = qsa('.stat');
 
-  /* ================= 티켓 배경 생성 ================= */
   const ticket_bg = qs(".ticket_bg");
 
   for (let i = 0; i < 12; i++) {
@@ -31,19 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const tickets = qsa('.t');
 
-
-  gsap.set(ticketLeft, {
-    rotation: 0,
-    x: 0,
-    y: 0
-  });
-
-  gsap.set(ticketRight, {
-    rotation: 0,
-    x: 0,
-    y: 0
-  });
-
+  gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0 });
+  gsap.set(ticketRight, { rotation: 0, x: 0, y: 0 });
 
   gsap.to(ticketWrap, {
     duration: 1.4,
@@ -60,42 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  mainTL.to(mainTitle, {
-    opacity: 0,
-    ease: 'power1.out'
-  }, 0);
-
-  mainTL.to(ticketLeft, {
-    rotation: -25,
-    x: -80,
-    y: 40,
-    ease: 'none'
-  }, 0);
-
-  mainTL.to(ticketRight, {
-    rotation: 25,
-    x: 80,
-    y: 40,
-    ease: 'none'
-  }, 0);
-
+  mainTL.to(mainTitle, { opacity: 0, ease: 'power1.out' }, 0);
+  mainTL.to(ticketLeft, { rotation: -25, x: -80, y: 40, ease: 'none' }, 0);
+  mainTL.to(ticketRight, { rotation: 25, x: 80, y: 40, ease: 'none' }, 0);
   mainTL.to({}, { duration: 0.6 });
-
-  mainTL.to(ticketLeft, {
-    rotation: -60,
-    x: -280,
-    y: 700,
-    opacity: 0.3,
-    ease: "power3.in"
-  }, 0.9);
-
-  mainTL.to(ticketRight, {
-    rotation: 30,
-    x: 120,
-    y: 400,
-    opacity: 0.5,
-    ease: "power2.out"
-  }, 1.3);
+  mainTL.to(ticketLeft, { rotation: -60, x: -280, y: 700, opacity: 0.3, ease: "power3.in" }, 0.9);
+  mainTL.to(ticketRight, { rotation: 30, x: 120, y: 400, opacity: 0.5, ease: "power2.out" }, 1.3);
 
   const aboutTL = gsap.timeline({
     scrollTrigger: {
@@ -106,11 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  aboutTL.to(aboutHero, {
-    opacity: 0,
-    scale: 0.92,
-    ease: 'none'
-  }, 0);
+  aboutTL.to(aboutHero, { opacity: 0, scale: 0.92, ease: 'none' }, 0);
 
   tickets.forEach((t, i) => {
     aboutTL.to(t, {
@@ -123,11 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, i * 0.18);
   });
 
-  aboutTL.to(aboutContent, {
-    opacity: 1,
-    y: 0,
-    ease: 'none'
-  }, 0.3);
+  aboutTL.to(aboutContent, { opacity: 1, y: 0, ease: 'none' }, 0.3);
 
   stats.forEach((stat, i) => {
     gsap.to(stat, {
@@ -169,111 +119,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const cards = gsap.utils.toArray(".card");
-
-  gsap.from(cards, {
-    y: 200,
-    opacity: 0,
-    scale: 0.9,
-    rotation: () => gsap.utils.random(-12, 12),
-    x: () => gsap.utils.random(-60, 60),
-    stagger: { each: 0.12, from: "random" },
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".artist_prize",
-      start: "top 70%",
-    }
-  });
-
-  cards.forEach((card) => {
-    gsap.to(card, {
-      rotation: 0,
-      y: -120,
-      scale: 1,
-      x: gsap.utils.random(-40, 40),
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".artist_prize",
-        start: "top 40%",
-        end: "top -20%",
-        scrub: true
-      }
-    });
-  });
-
-  cards.forEach((card) => {
-    gsap.to(card, {
-      rotation: "+=2",
-      repeat: -1,
-      yoyo: true,
-      duration: gsap.utils.random(2, 3),
-      ease: "sine.inOut"
-    });
-  });
-
-  gsap.to(".card_2025", {
-    rotation: 20,
-    scrollTrigger: {
-      trigger: ".artist_prize",
-      scrub: true
-    }
-  });
-
-  const lines = gsap.utils.toArray(".line");
-
-  const masterTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".artist_prize",
-      start: "top top",
-      end: "+=1800",
-      scrub: 1.2,
-      pin: true,
-      anticipatePin: 1
-    }
-  });
-
-  lines.forEach((line, i) => {
-    const spans = line.querySelectorAll("span");
-
-    masterTL.to(spans, {
-      color: "#fff",
-      stagger: 0.04,
-      ease: "none"
-    }, i * 0.1);
-  });
-
-  const sub = document.querySelector(".title_sub");
 
 
-  gsap.set(".title_sub", {
-    opacity: 0,
-    y: 100
-  });
+const artist_cards = gsap.utils.toArray(".artist_card");
+const lines = gsap.utils.toArray(".line");
+const letters = gsap.utils.toArray(".title_main span");
 
-  masterTL.to(sub, {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    filter: "blur(0px)",
-    ease: "power4.out"
-  }, 0.3);
+// 카드 초기 위치 세팅 — 오른쪽 밖에서 대기
+gsap.set(artist_cards, { opacity: 0, xPercent: 30 });
 
-  masterTL.to({}, { duration: 0.1 });
+function getScrollAmount() {
+  const track = document.querySelector(".artist_track");
+  return -(track.scrollWidth - window.innerWidth);
+}
 
-  const letters = gsap.utils.toArray(".title_main span");
+const masterTL = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".artist_prize",
+    start: "top top",
+    end: "+=4000", 
+    scrub: 1.2,
+    pin: true,
+    anticipatePin: 1,
+  }
+});
 
-  masterTL.to(letters, {
-    x: () => gsap.utils.random(-150, 150),
-    y: () => gsap.utils.random(-150, 150),
-    rotation: () => gsap.utils.random(-50, 50),
-    opacity: 0,
-    filter: "blur(6px)",
-    stagger: {
-      each: 0.03,
-      from: "random"
-    },
-    ease: "power2.out"
-  });
+
+lines.forEach((line, i) => {
+  const spans = line.querySelectorAll("span");
+  masterTL.to(spans, {
+    color: "#fff",
+    stagger: 0.05,
+    ease: "none",
+    duration: 0.3,
+  }, i * 0.15);
+});
+
+masterTL.to({}, { duration: 0.3 }); 
+
+masterTL.to(letters, {
+  x: () => gsap.utils.random(-200, 200),
+  y: () => gsap.utils.random(-200, 200),
+  rotation: () => gsap.utils.random(-60, 60),
+  opacity: 0,
+  filter: "blur(8px)",
+  stagger: { each: 0.02, from: "random" },
+  ease: "power2.out",
+  duration: 0.4,
+});
+
+masterTL.to({}, { duration: 0.2 }); 
+
+masterTL.to(artist_cards, {
+  opacity: 1,
+  xPercent: 0,
+  stagger: 0.06,
+  ease: "power3.out",
+  duration: 0.4,
+});
+
+masterTL.to(".artist_track", {
+  x: getScrollAmount,
+  ease: "none",
+  duration: 1,      
+});
+
+  /* ================= NEWS ================= */
 
   const groups = Array.from(document.querySelectorAll('.news_group'));
 
@@ -289,20 +200,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
-
     target.addEventListener('mouseleave', () => {
-      groups.forEach((g) => {
-        g.classList.remove('is-active', 'is-dimmed');
-      });
+      groups.forEach((g) => g.classList.remove('is-active', 'is-dimmed'));
     });
   });
 
   const newsInner = document.querySelector('.news_inner');
   newsInner.addEventListener('mouseleave', () => {
-    groups.forEach((g) => {
-      g.classList.remove('is-active', 'is-dimmed');
-    });
+    groups.forEach((g) => g.classList.remove('is-active', 'is-dimmed'));
   });
+
+  /* ================= SHOP ================= */
 
   const positions = [
     { x: -580, y: -280, r: -15 },
@@ -317,10 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   gsap.set(".p", {
-    x: 0,
-    y: 0,
-    scale: 0.5,
-    opacity: 0,
+    x: 0, y: 0, scale: 0.5, opacity: 0,
     rotation: (i) => positions[i].r * 0.3,
   });
 
@@ -333,48 +238,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  shop_tl.to(".p", {
-    opacity: 0.7,
-    scale: 0.6,
-    duration: 0.25,
-    ease: "power1.out"
-  }, 0);
+  shop_tl.to(".p", { opacity: 0.7, scale: 0.6, duration: 0.25, ease: "power1.out" }, 0);
 
   document.querySelectorAll(".p").forEach((el, i) => {
     shop_tl.to(el, {
-      opacity: 1,
-      scale: 1,
-      x: positions[i].x,
-      y: positions[i].y,
-      rotation: positions[i].r,
-      ease: "expo.out",
-      duration: 0.7
+      opacity: 1, scale: 1,
+      x: positions[i].x, y: positions[i].y, rotation: positions[i].r,
+      ease: "expo.out", duration: 0.7
     }, 0.25);
   });
 
   shop_tl.to(".glass_front", {
     background: "rgba(255, 255, 255, 0.95)",
     boxShadow: "0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)",
-    backdropFilter: "blur(0px)",
-    duration: 0.4
+    backdropFilter: "blur(0px)", duration: 0.4
   }, 0.25);
 
   shop_tl.to(".glass_front h2", { color: "#000", duration: 0.3 }, 0.3);
   shop_tl.to(".glass_front p", { color: "#555", duration: 0.3 }, 0.3);
+  shop_tl.to(".glow_bg", { opacity: 0.7, scale: 1.8, filter: "blur(80px)", duration: 0.5 }, 0.25);
+  shop_tl.to(".glass_box", { scale: 1.04, z: 80, duration: 0.8, ease: "power3.out" }, 0.25);
 
-  shop_tl.to(".glow_bg", {
-    opacity: 0.7,
-    scale: 1.8,
-    filter: "blur(80px)",
-    duration: 0.5
-  }, 0.25);
-
-  shop_tl.to(".glass_box", {
-    scale: 1.04,
-    z: 80,
-    duration: 0.8,
-    ease: "power3.out"
-  }, 0.25);
 
   document.body.insertAdjacentHTML('beforeend', `
     <div class="cursor-ring" id="cursorRing">ENTER ↗</div>
@@ -419,27 +303,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const rect = glassBox.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-    gsap.to(glassBox, {
-      x: x * 0.08,
-      y: y * 0.08,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
+    gsap.to(glassBox, { x: x * 0.08, y: y * 0.08, duration: 0.5, ease: 'power2.out' });
   });
 
   glassBox.addEventListener('mouseleave', () => {
-    gsap.to(glassBox, {
-      x: 0, y: 0,
-      duration: 0.8,
-      ease: 'elastic.out(1, 0.4)'
-    });
+    gsap.to(glassBox, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)' });
   });
 
-  ScrollTrigger.create({
-    trigger: newsSection,
-    start: "top top",
-    end: "+=1000",
-    pin: true,
-    pinSpacing: true,
-  });
 });

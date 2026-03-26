@@ -266,9 +266,8 @@
 }
 
 .cal_day.selected {
-  background: var(--blue);
+  background: skyblue;
   color: #fff;
-  border: 2px solid var(--blue);
 }
 
 
@@ -286,14 +285,15 @@
   background: transparent;
   border: 1px solid white;
   color: white;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
   letter-spacing: -0.05em;
   transition: all 0.3s;
   cursor: pointer;
   white-space: nowrap;
   width: 300px;
 }
+
 
 
 .guide_links {
