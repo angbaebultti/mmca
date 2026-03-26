@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 티켓 생성(배경)
   const ticket_bg = qs(".ticket_bg");
 
-  for (let i = 0; i < 12; i++) { // 🔥 개수 줄임
+  for (let i = 0; i < 12; i++) {
     const img = document.createElement("img");
 
     img.src = "img/ticket_full.png";

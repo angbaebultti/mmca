@@ -324,8 +324,6 @@ section {}
   border-bottom: none;
 }
 
-/* 헤더 각 관 hover */
-/* 기본 item */
 .item{
   position: relative;
   overflow: hidden;
@@ -333,7 +331,6 @@ section {}
   transition: color 0.3s ease;
 }
 
-/* 채워지는 배경 */
 .item::before{
   content:"";
   position:absolute;
