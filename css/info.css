@@ -368,8 +368,11 @@ background: #2F2F2F;
     padding: 8px 10px;
     align-items: center;
     gap: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--main_white);
+    border-bottom: 1px solid var(--main_white);
+    font-size: 24px;
+    letter-spacing: normal;
+    /* border-radius: 10px;
+    border: 1px solid var(--main_white); */
 }
 
 .getting .inner .info_box .s_bottom .txt{

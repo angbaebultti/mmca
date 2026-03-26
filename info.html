@@ -3,22 +3,29 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="국립현대미술관 영문 웹사이트 리디자인 프로젝트">
     <meta name="keywords" content="MMCA, 국립현대미술관, 미술관, 전시, 웹디자인">
     <meta name="author" content="TEAM 아이조아">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <script src="https://kit.fontawesome.com/b43057b3ba.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
     <title>National Museum of Modern and Contemporary Art, Korea</title>
+
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+    <!-- icon library -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <!-- css -->
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/common_media.css">
     <link rel="stylesheet" href="css/info.css">
-    <script src="https://kit.fontawesome.com/b43057b3ba.js" crossorigin="anonymous"></script>
+
+    <!-- js -->
     <script src="js/common.js" defer></script>
-    <script src="js/info.js"></script>
+    <script src="js/info.js" defer></script>
 </head>
 <!-- 햄버거 밑부터 개인별 작업 -->
 
@@ -264,8 +271,8 @@
                                     </div>
                                 </div><!-- //.seq -->
                                 <button class="viewmap_btn">
-                                    View Map
-                                    <i class="ri-external-link-line" aria-hidden="true"></i>
+                                    <span>View Map</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                 </button>
                             </div><!-- //.s_bottom -->
                         </div><!-- //.left -->
@@ -292,7 +299,14 @@
                                 </div><!-- //.seq -->
                                 <button class="viewmap_btn">
                                     View Map
-                                    <i class="ri-external-link-line" aria-hidden="true"></i>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                                        <path d="M12.71 12.71 19 6.41V11h2V3h-8v2h4.59l-6.3 6.29z"></path>
+                                        <path
+                                            d="M11 5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z">
+                                        </path>
+                                    </svg>
                                 </button>
                             </div><!-- //.s_bottom -->
                         </div><!-- //.right -->
