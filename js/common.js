@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ================= 햄버거 메뉴 ================= */
     const menuBtn = document.getElementById("menu_btn");
     const closeBtn = document.getElementById("close_btn");
     const menu = document.getElementById("menu");
@@ -14,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.body.style.position = "fixed";
         document.body.style.top = `-${scrollY}px`;
-        document.body.style.width = "100%"; // 🔥 흔들림 방지
+        document.body.style.width = "100%"; 
     });
 
     closeBtn.addEventListener("click", () => {
@@ -28,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    /* ================= TOP 버튼 ================= */
     const top_btn = document.querySelector('.top_btn');
 
     window.addEventListener('scroll', () => {
@@ -40,23 +38,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    /* ================= HEADER 인터랙션 ================= */
-    const header = document.querySelector(".header");
+   
+const header = document.querySelector(".header");
 
-    let lastScroll = 0;
+let lastScroll = 0;
+let scrollUpStart = 0;
 
-    window.addEventListener("scroll", () => {
-        const currentScroll = window.scrollY;
+window.addEventListener("scroll", () => {
+    const currentScroll = window.scrollY;
 
-        if (currentScroll > 60) {
-            header.classList.add("shrink");
-        } else {
-            header.classList.remove("shrink");
+    if (currentScroll > 60) {
+        header.classList.add("shrink");
+    } else {
+        header.classList.remove("shrink");
+    }
+
+    if (currentScroll > lastScroll && currentScroll > 100) {
+        header.classList.add("hide");
+        scrollUpStart = currentScroll;
+    } else {
+        if (scrollUpStart - currentScroll > 60) {
+            header.classList.remove("hide");
         }
+    }
 
-        lastScroll = currentScroll;
-    });
-
+    lastScroll = currentScroll;
+});
 
     gsap.registerPlugin(ScrollTrigger);
 

@@ -108,9 +108,16 @@ section {}
   left: 0;
   width: 100%;
   height: auto;
-  background: transparent;
+  background: var(--main_black);
   z-index: 1000;
   transition: all 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease;
+  will-change: transform;
+}
+
+.header.hide {
+  transform: translateY(-100vh);
 }
 
 .header.shrink {
@@ -168,7 +175,9 @@ section {}
   transition:
     padding 0.5s ease,
     border 0.3s ease;
-  max-width: 1920px;
+    width: 100%;
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
 .header.shrink .nav {
@@ -198,6 +207,7 @@ section {}
 .gnb_l a,
 .gnb_r a {
   transition: 0.3s;
+  font-weight: 300;
 }
 
 .gnb_l a:hover,
@@ -245,22 +255,26 @@ section {}
 }
 
 
+.row_top a:nth-child(2) .item,
+.row_bottom a:nth-child(2) .item {
+  border-right: none;
+}
+
+.row_bottom .item {
+  border-bottom: none;
+}
+
 .item {
   height: 100px;
   display: flex;
   align-items: center;
-  padding-left: 25px;
   font-size: 72px;
   border-right: 1px solid #fff;
   border-bottom: 1px solid #fff;
   position: relative;
   overflow: hidden;
-  transition:
-    color 0.3s ease,
-    background 0.3s ease;
-  z-index: 1;
+  z-index: 0;
   color: #fff;
-
 }
 
 .row_top a:nth-child(2) .item,
@@ -274,33 +288,17 @@ section {}
 
 .item .bg {
   position: absolute;
-  inset: 0;
-  transform: scaleY(0);
-  transform-origin: bottom;
-  z-index: -1;
-  padding-left: 20px;
-}
-
-.item::before {
-  content: "";
-  position: absolute;
+  top: 0;
   left: 0;
-  bottom: 0;
-  width: 100%;
+  width: 0%;
   height: 100%;
-  transform: scaleY(0);
-  transform-origin: bottom;
   z-index: -1;
+  transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-.item:hover {
-  color: #fff;
+.item:hover .bg {
+  width: 100%;
 }
-
-.item:hover::before {
-  height: 100%;
-}
-
 
 .seoul .bg {
   background: #DC4D3A;
@@ -316,6 +314,17 @@ section {}
 
 .cheongju .bg {
   background: #3D8CBC;
+}
+
+
+.item span {
+  position: relative;
+  z-index: 1;
+  margin-left: 20px;
+}
+
+.item:hover {
+  color: #fff;
 }
 
 .menu_overlay {
@@ -394,7 +403,7 @@ section {}
 }
 
 .menu_top_row {
-  padding-top: 77px;
+  padding-top: 50px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 40px;

@@ -60,7 +60,7 @@
 
 .ticket_right {
   position: absolute;
-  left: 180px; /* 🔥 여기 중요 (붙는 위치) */
+  left: 180px; 
   bottom: 0px;
   width: 430px;
   z-index: 1;
@@ -544,6 +544,7 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
+
 }
 
 .view_btn a {
@@ -559,6 +560,7 @@
   position: relative;
   overflow: hidden;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .view_btn a::before {
