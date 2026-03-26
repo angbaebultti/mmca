@@ -44,14 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
     y: 0
   });
 
-  /* ================= 티켓 등장 ================= */
+
   gsap.to(ticketWrap, {
     duration: 1.4,
     ease: 'power3.out',
     delay: 0.4
   });
 
-  /* ================= 메인 티켓 연출 ================= */
   const mainTL = gsap.timeline({
     scrollTrigger: {
       trigger: '.main_visual',
@@ -98,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ease: "power2.out"
   }, 1.3);
 
-  /* ================= ABOUT ================= */
   const aboutTL = gsap.timeline({
     scrollTrigger: {
       trigger: about,
@@ -157,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* ================= ARTIST ================= */
   gsap.utils.toArray(".line").forEach((line, i) => {
     gsap.to(line.querySelectorAll("span"), {
       scrollTrigger: {
@@ -222,7 +219,62 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* ================= NEWS ================= */
+  const lines = gsap.utils.toArray(".line");
+
+  const masterTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".artist_prize",
+      start: "top top",
+      end: "+=1800",
+      scrub: 1.2,
+      pin: true,
+      anticipatePin: 1
+    }
+  });
+
+  lines.forEach((line, i) => {
+    const spans = line.querySelectorAll("span");
+
+    masterTL.to(spans, {
+      color: "#fff",
+      stagger: 0.04,
+      ease: "none"
+    }, i * 0.1);
+  });
+
+  const sub = document.querySelector(".title_sub");
+
+
+  gsap.set(".title_sub", {
+    opacity: 0,
+    y: 100
+  });
+
+  masterTL.to(sub, {
+    y: 0,
+    opacity: 1,
+    scale: 1,
+    filter: "blur(0px)",
+    ease: "power4.out"
+  }, 0.3);
+
+  masterTL.to({}, { duration: 0.1 });
+
+  const letters = gsap.utils.toArray(".title_main span");
+
+  masterTL.to(letters, {
+    x: () => gsap.utils.random(-150, 150),
+    y: () => gsap.utils.random(-150, 150),
+    rotation: () => gsap.utils.random(-50, 50),
+    opacity: 0,
+    filter: "blur(6px)",
+    stagger: {
+      each: 0.03,
+      from: "random"
+    },
+    ease: "power2.out"
+  });
+
   const groups = Array.from(document.querySelectorAll('.news_group'));
 
   groups.forEach((target) => {
@@ -239,15 +291,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     target.addEventListener('mouseleave', () => {
-      // mouseleave가 다른 그룹으로 진입 시 튀는 것 방지:
-      // relatedTarget이 다른 news_group 안에 있으면 무시
       groups.forEach((g) => {
         g.classList.remove('is-active', 'is-dimmed');
       });
     });
   });
 
-  /* news_inner 자체에서 마우스가 완전히 빠져나갈 때만 초기화 */
   const newsInner = document.querySelector('.news_inner');
   newsInner.addEventListener('mouseleave', () => {
     groups.forEach((g) => {
@@ -255,7 +304,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ================= SHOP ================= */
   const positions = [
     { x: -580, y: -280, r: -15 },
     { x: 120, y: -320, r: 10 },
@@ -328,7 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ease: "power3.out"
   }, 0.25);
 
-  /* ================= CURSOR ================= */
   document.body.insertAdjacentHTML('beforeend', `
     <div class="cursor-ring" id="cursorRing">ENTER ↗</div>
     <div class="cursor-dot" id="cursorDot"></div>
@@ -366,7 +413,6 @@ document.addEventListener('DOMContentLoaded', () => {
     dot.style.opacity = '1';
   });
 
-  /* Magnetic — glass_box 전체 */
   const glassBox = document.querySelector('.glass_box');
 
   glassBox.addEventListener('mousemove', (e) => {
@@ -392,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ScrollTrigger.create({
     trigger: newsSection,
     start: "top top",
-    end: "+=1000",   // 이 600px 구간 동안 화면 고정
+    end: "+=1000",
     pin: true,
     pinSpacing: true,
   });
