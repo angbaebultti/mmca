@@ -35,9 +35,14 @@ a {
 .intro_scene {
   position: relative;
   width: 100%;
-  height: 320vh;
-  background: #000;
+  height: 500vh;
   overflow: visible;
+  transition: opacity 0.55s ease;
+}
+
+.intro_scene.is_leaving {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .cube_pin {
@@ -53,15 +58,19 @@ a {
 }
 
 .cube_stage {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 1000px;
   height: 560px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translate(-50%, -50%);
   transform-style: preserve-3d;
   will-change: transform, opacity;
   z-index: 2;
+  transform-origin: center center;
 }
 
 .cube {
@@ -86,8 +95,18 @@ a {
   background: #000;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
   isolation: isolate;
+  transition: opacity 0.45s ease, filter 0.45s ease, border-radius 0.6s ease;;
 }
 
+.cube_face.is_active {
+  z-index: 10;
+  border-radius: 0;
+}
+
+.cube_face.is_hidden {
+  opacity: 0;
+  pointer-events: none;
+}
 .cube_face::after {
   content: "";
   position: absolute;
@@ -148,47 +167,31 @@ a {
   transform: rotateY(-90deg) translateZ(var(--depth));
 }
 
-/* ---------------- expand overlay ---------------- */
-
-.cube_expand_overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
+.cube_face.is_hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-.cube_expand_box {
-  position: fixed;
-  overflow: hidden;
-  background: #000;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
-}
-
-.cube_expand_box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.cube_expand_box .cube_face_label {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.cube_face.is_active {
+  z-index: 10;
 }
 
 /* ---------------- museum base ---------------- */
 
 .museum_wrap {
-  display: none;
   position: relative;
   width: 100%;
-  padding-bottom: 160px;
+  padding-bottom: 140px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
 }
 
 .museum_wrap.active {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .museum_exhibit_section {
@@ -209,12 +212,22 @@ a {
 /* ---------------- head ---------------- */
 
 .museum_head {
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+  transition: padding-top 0.35s ease, margin 0.35s ease;
+}
+
+.museum_h_track {
+  transform: translate3d(0, 0, 0);
 }
 
 .museum_head_left {
   display: flex;
   flex-direction: column;
+}
+
+.museum_label,
+.museum_tabs {
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .museum_label {
@@ -227,6 +240,7 @@ a {
   font-size: 72px;
   font-weight: 700;
   line-height: 1.1;
+  padding-top: 15px;
 }
 
 .museum_tabs {
@@ -250,21 +264,21 @@ a {
 
 .museum_exhibit_section.is_horizontal {
   position: relative;
-  height: 300vh;
+  height: auto;
 }
 
 .museum_exhibit_section.is_horizontal .museum_inner {
   width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 .museum_h_sticky {
   position: sticky;
   top: 0;
   height: 100vh;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .museum_exhibit_section.is_horizontal .museum_head {
@@ -275,15 +289,31 @@ a {
   padding-top: 40px;
 }
 
+.museum_exhibit_section.is_horizontal.is_compact .museum_head {
+  padding-top: 12px;
+  margin-bottom: 20px;
+}
+
+.museum_exhibit_section.is_horizontal.is_compact .museum_label {
+  opacity: 0;
+  transform: translateY(-12px);
+  max-height: 0;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+
+.museum_exhibit_section.is_horizontal.is_compact .museum_tabs {
+  margin-top: 18px;
+}
+
 .museum_h_scroll {
   width: 100%;
-  height: calc(100vh - 220px);
+  height: 100vh;
   overflow: hidden;
 }
 
 .museum_h_track {
   display: flex;
-  align-items: center;
   height: 100%;
   will-change: transform;
 }
@@ -291,6 +321,7 @@ a {
 .museum_exhibit_section.is_horizontal .museum_exhibit_card {
   width: 100vw;
   min-width: 100vw;
+  flex: 0 0 100vw;
   height: calc(100vh - 220px);
   margin-top: 0;
   padding: 0 0 80px;
@@ -301,7 +332,12 @@ a {
 }
 
 .museum_exhibit_section.is_horizontal .museum_exhibit_card > .museum_poster {
-  margin-left: calc((100vw - 1500px) / 2);
+  margin-left: max(calc((100vw - 1500px) / 2), 0px);
+}
+
+.museum_exhibit_section.is_horizontal .museum_content {
+  flex: 0 0 calc(1500px - 420px - 120px);
+  max-width: calc(1500px - 420px - 120px);
 }
 
 /* ---------------- card layout ---------------- */
@@ -310,6 +346,7 @@ a {
   display: flex;
   gap: 120px;
   margin-top: 100px;
+  height: 100vh;
 }
 
 .museum_poster {
@@ -370,9 +407,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 56px;
-  padding: 8px 18px;
-  border-radius: 5px 0 0 5px;
+  padding: 8px 16px;
+  border-radius: 5px;
   border-right: 2px dashed var(--gray_01);
   background: var(--main_white);
   color: var(--main_black);
@@ -384,10 +420,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 58px;
-  min-height: 56px;
-  padding: 10px;
-  border-radius: 0 5px 5px 0;
+  padding: 8px;
+  border-radius: 5px;
   background: var(--gray_06);
   color: var(--main_black);
 }
@@ -401,16 +435,17 @@ a {
 .museum_highlights strong {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 40px;
   margin-bottom: 24px;
-  font-size: 32px;
+  font-size: 30px;
 }
 
 .museum_highlights strong::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--gray_04);
+  background: var(--gray_03);
+  min-width: 0;
 }
 
 .highlight_list {
@@ -454,27 +489,35 @@ a {
 
 .top_btn {
   position: fixed;
-  right: 32px;
-  bottom: 32px;
-  z-index: 100;
+  right: 40px;
+  bottom: 40px;
+  z-index: 999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transform: translateY(20px);
+  transition: 0.3s;
 }
 
 .top_btn.active {
   opacity: 1;
   pointer-events: auto;
+  transform: translateY(0);
 }
 
 .top_btn a {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 58px;
-  height: 58px;
+  width: 60px;
+  height: 60px;
+  background: var(--main_white);
+  color: #000;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.72);
-  color: #fff;
-  backdrop-filter: blur(10px);
+  font-size: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.top_btn a:hover {
+  transform: translateY(-4px);
 }
