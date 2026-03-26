@@ -427,6 +427,7 @@ a {
   color: var(--main_black);
   font-size: 24px;
   font-weight: 600;
+  letter-spacing: 0.04em;
   transition:
     background 0.35s ease,
     color 0.35s ease,
@@ -447,6 +448,7 @@ a {
     color 0.35s ease,
     transform 0.4s ease;
   border-left: 2px dashed var(--gray_01);
+
 }
 
 /* 호버 */
@@ -456,8 +458,9 @@ a {
 
 .museum_ticket:hover .ticket_main,
 .museum_ticket:hover .ticket_stub {
-  color: var(--main_black);
-  /* background: #FF4B24; */
+  color: var(--main_white);
+  background: var(--gray_03);
+
 }
 
 .museum_ticket:hover .ticket_main {
