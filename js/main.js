@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const aboutContent = qs('.about_content');
   const stats = qsa('.stat');
 
-  /* ================= 티켓 배경 생성 ================= */
   const ticket_bg = qs(".ticket_bg");
 
   for (let i = 0; i < 12; i++) {
@@ -31,19 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const tickets = qsa('.t');
 
-
-  gsap.set(ticketLeft, {
-    rotation: 0,
-    x: 0,
-    y: 0
-  });
-
-  gsap.set(ticketRight, {
-    rotation: 0,
-    x: 0,
-    y: 0
-  });
-
+  gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0 });
+  gsap.set(ticketRight, { rotation: 0, x: 0, y: 0 });
 
   gsap.to(ticketWrap, {
     duration: 1.4,
@@ -60,42 +48,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  mainTL.to(mainTitle, {
-    opacity: 0,
-    ease: 'power1.out'
-  }, 0);
-
-  mainTL.to(ticketLeft, {
-    rotation: -25,
-    x: -80,
-    y: 40,
-    ease: 'none'
-  }, 0);
-
-  mainTL.to(ticketRight, {
-    rotation: 25,
-    x: 80,
-    y: 40,
-    ease: 'none'
-  }, 0);
-
+  mainTL.to(mainTitle, { opacity: 0, ease: 'power1.out' }, 0);
+  mainTL.to(ticketLeft, { rotation: -25, x: -80, y: 40, ease: 'none' }, 0);
+  mainTL.to(ticketRight, { rotation: 25, x: 80, y: 40, ease: 'none' }, 0);
   mainTL.to({}, { duration: 0.6 });
-
-  mainTL.to(ticketLeft, {
-    rotation: -60,
-    x: -280,
-    y: 700,
-    opacity: 0.3,
-    ease: "power3.in"
-  }, 0.9);
-
-  mainTL.to(ticketRight, {
-    rotation: 30,
-    x: 120,
-    y: 400,
-    opacity: 0.5,
-    ease: "power2.out"
-  }, 1.3);
+  mainTL.to(ticketLeft, { rotation: -60, x: -280, y: 700, opacity: 0.3, ease: "power3.in" }, 0.9);
+  mainTL.to(ticketRight, { rotation: 30, x: 120, y: 400, opacity: 0.5, ease: "power2.out" }, 1.3);
 
   const aboutTL = gsap.timeline({
     scrollTrigger: {
@@ -106,11 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  aboutTL.to(aboutHero, {
-    opacity: 0,
-    scale: 0.92,
-    ease: 'none'
-  }, 0);
+  aboutTL.to(aboutHero, { opacity: 0, scale: 0.92, ease: 'none' }, 0);
 
   tickets.forEach((t, i) => {
     aboutTL.to(t, {
@@ -123,11 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, i * 0.18);
   });
 
-  aboutTL.to(aboutContent, {
-    opacity: 1,
-    y: 0,
-    ease: 'none'
-  }, 0.3);
+  aboutTL.to(aboutContent, { opacity: 1, y: 0, ease: 'none' }, 0.3);
 
   stats.forEach((stat, i) => {
     gsap.to(stat, {
@@ -169,15 +119,105 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
+  /* ─── ARTIST PRIZE : 카드 인터랙션 ─── */
+  /* ─── ARTIST PRIZE : 카드 인터랙션 ─── */
+
   const cards = gsap.utils.toArray(".card");
 
+  // 카드별 parallax 강도
+  const depthMap = {
+    "card_2025": 0.025,
+    "card_2024": 0.018,
+    "card_2023": 0.012,
+    "card_2022": 0.020,
+    "card_2021": 0.015
+  };
+
+  /* ================= FLOATING ================= */
+
+  const floatTweens = new Map();
+
+  cards.forEach((card) => {
+    const tween = gsap.to(card, {
+      y: `+=${gsap.utils.random(8, 18)}`,
+      rotation: `+=${gsap.utils.random(0.5, 1.5)}`,
+      repeat: -1,
+      yoyo: true,
+      duration: gsap.utils.random(2.5, 4),
+      ease: "sine.inOut"
+    });
+
+    floatTweens.set(card, tween);
+  });
+
+  /* ================= 드래그 ================= */
+
+  cards.forEach((card) => {
+    let isDragging = false;
+    let targetX = 0;
+    let targetY = 0;
+
+    let currentX = 0;
+    let currentY = 0;
+
+    card.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      card.dataset.dragging = "true";
+
+      floatTweens.get(card)?.pause();
+
+      gsap.to(card, {
+        scale: 1.08,
+        duration: 0.2
+      });
+
+      card.style.zIndex = 9999;
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+
+      targetX += e.movementX;
+      targetY += e.movementY;
+    });
+
+    window.addEventListener("mouseup", () => {
+      if (!isDragging) return;
+
+      isDragging = false;
+      card.dataset.dragging = "false";
+
+      floatTweens.get(card)?.resume();
+
+      gsap.to(card, {
+        scale: 1,
+        duration: 0.3
+      });
+    });
+
+    // 🔥 핵심: ticker로 부드럽게 따라오게
+    gsap.ticker.add(() => {
+      if (!isDragging) return;
+
+      currentX += (targetX - currentX) * 0.2;
+      currentY += (targetY - currentY) * 0.2;
+
+      gsap.set(card, {
+        x: currentX,
+        y: currentY
+      });
+    });
+  });
+
+  /* ================= 진입 애니 ================= */
+
   gsap.from(cards, {
-    y: 200,
+    y: 180,
     opacity: 0,
-    scale: 0.9,
-    rotation: () => gsap.utils.random(-12, 12),
-    x: () => gsap.utils.random(-60, 60),
-    stagger: { each: 0.12, from: "random" },
+    scale: 0.88,
+    rotation: () => gsap.utils.random(-14, 14),
+    stagger: { each: 0.1, from: "random" },
     ease: "power3.out",
     scrollTrigger: {
       trigger: ".artist_prize",
@@ -185,48 +225,95 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  /* ================= PARALLAX ================= */
+
+  let mouseX = 0, mouseY = 0;
+  let curX = 0, curY = 0;
+
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX - window.innerWidth / 2;
+    mouseY = e.clientY - window.innerHeight / 2;
+  });
+
+  gsap.ticker.add(() => {
+    curX += (mouseX - curX) * 0.06;
+    curY += (mouseY - curY) * 0.06;
+
+    cards.forEach((card) => {
+      if (card.dataset.hovered === "true" || card.dataset.dragging === "true") return;
+
+      const key = [...card.classList].find(c => depthMap[c]);
+      const f = key ? depthMap[key] : 0.015;
+
+      gsap.set(card, {
+        x: curX * f,
+        y: curY * f,
+      });
+    });
+  });
+
+  /* ================= TILT + SHINE ================= */
+
   cards.forEach((card) => {
-    gsap.to(card, {
-      rotation: 0,
-      y: -120,
-      scale: 1,
-      x: gsap.utils.random(-40, 40),
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".artist_prize",
-        start: "top 40%",
-        end: "top -20%",
-        scrub: true
+    const shine = card.querySelector(".shine");
+
+    card.addEventListener("mouseenter", () => {
+      card.dataset.hovered = "true";
+      if (shine) gsap.to(shine, { opacity: 1, duration: 0.3 });
+    });
+
+    card.addEventListener("mousemove", (e) => {
+      if (card.dataset.dragging === "true") return; // 🔥 드래그 중 tilt 막기
+
+      const rect = card.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+
+      const rotX = ((cy / rect.height) - 0.5) * -20;
+      const rotY = ((cx / rect.width) - 0.5) * 20;
+
+      gsap.to(card, {
+        rotationX: rotX,
+        rotationY: rotY,
+        scale: 1.04,
+        transformPerspective: 700,
+        ease: "power2.out",
+        duration: 0.3,
+      });
+
+      if (shine) {
+        gsap.to(shine, {
+          background: `radial-gradient(circle at ${(cx / rect.width) * 100}% ${(cy / rect.height) * 100}%, rgba(255,255,255,0.18) 0%, transparent 60%)`,
+          duration: 0.2,
+        });
       }
     });
-  });
 
-  cards.forEach((card) => {
-    gsap.to(card, {
-      rotation: "+=2",
-      repeat: -1,
-      yoyo: true,
-      duration: gsap.utils.random(2, 3),
-      ease: "sine.inOut"
+    card.addEventListener("mouseleave", () => {
+      card.dataset.hovered = "false";
+
+      gsap.to(card, {
+        rotationX: 0,
+        rotationY: 0,
+        scale: 1,
+        duration: 0.5,
+        ease: "power3.out",
+      });
+
+      if (shine) gsap.to(shine, { opacity: 0, duration: 0.4 });
     });
   });
 
-  gsap.to(".card_2025", {
-    rotation: 20,
-    scrollTrigger: {
-      trigger: ".artist_prize",
-      scrub: true
-    }
-  });
 
   const lines = gsap.utils.toArray(".line");
+  const letters = gsap.utils.toArray(".title_main span");
 
   const masterTL = gsap.timeline({
     scrollTrigger: {
       trigger: ".artist_prize",
       start: "top top",
-      end: "+=1800",
-      scrub: 1.2,
+      end: "+=2000",
+      scrub: 1,
       pin: true,
       anticipatePin: 1
     }
@@ -234,46 +321,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   lines.forEach((line, i) => {
     const spans = line.querySelectorAll("span");
-
     masterTL.to(spans, {
       color: "#fff",
-      stagger: 0.04,
+      stagger: 0.05,
       ease: "none"
-    }, i * 0.1);
+    }, i * 0.15);
   });
 
-  const sub = document.querySelector(".title_sub");
-
-
-  gsap.set(".title_sub", {
-    opacity: 0,
-    y: 100
-  });
-
-  masterTL.to(sub, {
-    y: 0,
-    opacity: 1,
-    scale: 1,
-    filter: "blur(0px)",
-    ease: "power4.out"
-  }, 0.3);
-
-  masterTL.to({}, { duration: 0.1 });
-
-  const letters = gsap.utils.toArray(".title_main span");
-
+  masterTL.to({}, { duration: 0.5 });
   masterTL.to(letters, {
     x: () => gsap.utils.random(-150, 150),
     y: () => gsap.utils.random(-150, 150),
     rotation: () => gsap.utils.random(-50, 50),
     opacity: 0,
     filter: "blur(6px)",
-    stagger: {
-      each: 0.03,
-      from: "random"
-    },
+    stagger: { each: 0.03, from: "random" },
     ease: "power2.out"
   });
+
+
+  /* ================= NEWS ================= */
 
   const groups = Array.from(document.querySelectorAll('.news_group'));
 
@@ -289,20 +356,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     });
-
     target.addEventListener('mouseleave', () => {
-      groups.forEach((g) => {
-        g.classList.remove('is-active', 'is-dimmed');
-      });
+      groups.forEach((g) => g.classList.remove('is-active', 'is-dimmed'));
     });
   });
 
   const newsInner = document.querySelector('.news_inner');
   newsInner.addEventListener('mouseleave', () => {
-    groups.forEach((g) => {
-      g.classList.remove('is-active', 'is-dimmed');
-    });
+    groups.forEach((g) => g.classList.remove('is-active', 'is-dimmed'));
   });
+
+  /* ================= SHOP ================= */
 
   const positions = [
     { x: -580, y: -280, r: -15 },
@@ -317,10 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   gsap.set(".p", {
-    x: 0,
-    y: 0,
-    scale: 0.5,
-    opacity: 0,
+    x: 0, y: 0, scale: 0.5, opacity: 0,
     rotation: (i) => positions[i].r * 0.3,
   });
 
@@ -333,48 +394,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  shop_tl.to(".p", {
-    opacity: 0.7,
-    scale: 0.6,
-    duration: 0.25,
-    ease: "power1.out"
-  }, 0);
+  shop_tl.to(".p", { opacity: 0.7, scale: 0.6, duration: 0.25, ease: "power1.out" }, 0);
 
   document.querySelectorAll(".p").forEach((el, i) => {
     shop_tl.to(el, {
-      opacity: 1,
-      scale: 1,
-      x: positions[i].x,
-      y: positions[i].y,
-      rotation: positions[i].r,
-      ease: "expo.out",
-      duration: 0.7
+      opacity: 1, scale: 1,
+      x: positions[i].x, y: positions[i].y, rotation: positions[i].r,
+      ease: "expo.out", duration: 0.7
     }, 0.25);
   });
 
   shop_tl.to(".glass_front", {
     background: "rgba(255, 255, 255, 0.95)",
     boxShadow: "0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)",
-    backdropFilter: "blur(0px)",
-    duration: 0.4
+    backdropFilter: "blur(0px)", duration: 0.4
   }, 0.25);
 
   shop_tl.to(".glass_front h2", { color: "#000", duration: 0.3 }, 0.3);
   shop_tl.to(".glass_front p", { color: "#555", duration: 0.3 }, 0.3);
+  shop_tl.to(".glow_bg", { opacity: 0.7, scale: 1.8, filter: "blur(80px)", duration: 0.5 }, 0.25);
+  shop_tl.to(".glass_box", { scale: 1.04, z: 80, duration: 0.8, ease: "power3.out" }, 0.25);
 
-  shop_tl.to(".glow_bg", {
-    opacity: 0.7,
-    scale: 1.8,
-    filter: "blur(80px)",
-    duration: 0.5
-  }, 0.25);
-
-  shop_tl.to(".glass_box", {
-    scale: 1.04,
-    z: 80,
-    duration: 0.8,
-    ease: "power3.out"
-  }, 0.25);
 
   document.body.insertAdjacentHTML('beforeend', `
     <div class="cursor-ring" id="cursorRing">ENTER ↗</div>
@@ -419,27 +459,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const rect = glassBox.getBoundingClientRect();
     const x = e.clientX - rect.left - rect.width / 2;
     const y = e.clientY - rect.top - rect.height / 2;
-    gsap.to(glassBox, {
-      x: x * 0.08,
-      y: y * 0.08,
-      duration: 0.5,
-      ease: 'power2.out'
-    });
+    gsap.to(glassBox, { x: x * 0.08, y: y * 0.08, duration: 0.5, ease: 'power2.out' });
   });
 
   glassBox.addEventListener('mouseleave', () => {
-    gsap.to(glassBox, {
-      x: 0, y: 0,
-      duration: 0.8,
-      ease: 'elastic.out(1, 0.4)'
-    });
+    gsap.to(glassBox, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)' });
   });
 
-  ScrollTrigger.create({
-    trigger: newsSection,
-    start: "top top",
-    end: "+=1000",
-    pin: true,
-    pinSpacing: true,
-  });
 });

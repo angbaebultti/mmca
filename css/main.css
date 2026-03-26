@@ -42,9 +42,11 @@
 
 .ticket {
   position: absolute;
-  right: 60px; /* 🔥 화면 안으로 */
+  right: 60px;
+  /* 🔥 화면 안으로 */
   bottom: 120px;
-  width: 600px; /* 🔥 기준 박스 만들어줘야 함 */
+  width: 600px;
+  /* 🔥 기준 박스 만들어줘야 함 */
   height: 300px;
 }
 
@@ -60,7 +62,7 @@
 
 .ticket_right {
   position: absolute;
-  left: 180px; 
+  left: 180px;
   bottom: 0px;
   width: 430px;
   z-index: 1;
@@ -332,7 +334,7 @@
   height: 400vh;
   background: var(--main_black);
   overflow: visible;
-  padding-bottom: 120px;
+  padding-bottom: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -344,16 +346,8 @@
   left: 120px;
   z-index: 10;
   padding-left: 76px;
-  text-align: center;
 }
 
-.title_main {
-  font-family: var(--cabinetgrotesk);
-  font-size: 200px;
-  font-weight: 600;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--main_white);
-}
 
 .line {
   display: flex;
@@ -386,30 +380,35 @@
   margin-left: 600px;
 }
 
-.title_sub {
-  margin-top: 174px;
-  font-size: 72px;
-  color: var(--main_white);
-  font-weight: 500;
-  position: static;
-  will-change: transform, opacity;
-}
+
 
 .card_zone {
   position: relative;
   width: 100%;
-  height: 4000px;
+  height: 3000px;
 }
 
 .card {
   position: absolute;
-  width: 500px;
+  width: 600px;
   color: #fff;
   cursor: pointer;
   transition: transform 0.4s ease;
   background: var(--main_black);
   box-shadow: 0 4px 15.6px rgba(255, 255, 255, 0.08);
   padding: 18px;
+  transform-style: preserve-3d;
+}
+
+.shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 10;
+  transition: opacity 0.3s ease;
 }
 
 .card .top {
@@ -426,7 +425,7 @@
 
 .txt_box {
   position: relative;
-  margin: 40px;
+  margin: 20px;
   text-align: center;
 }
 
@@ -444,7 +443,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px;
 }
 
 .logo img {
@@ -464,8 +462,8 @@
 }
 
 .card_2025 {
-  width: 640px;
-  top: 1200px;
+  width: 550px;
+   top: 750px;
   right: 150px;
   z-index: 6;
   background: var(--main_white);
@@ -477,9 +475,9 @@
 }
 
 .card_2024 {
-  width: 500px;
-  top: 1400px;
-  left: 100px;
+  width: 480px;
+  top: 800px;
+  left: 400px;
   z-index: 4;
 }
 
@@ -488,9 +486,9 @@
 }
 
 .card_2023 {
-  width: 500px;
-  top: 2500px;
-  left: 100px;
+  width: 480px;
+  top: 2000px;
+  left: 200px;
   z-index: 3;
 }
 
@@ -499,9 +497,9 @@
 }
 
 .card_2022 {
-  width: 500px;
+  width: 480px;
   top: 1800px;
-  left: 700px;
+  left: 800px;
   z-index: 6;
 }
 
@@ -510,9 +508,9 @@
 }
 
 .card_2021 {
-  width: 500px;
-  top: 2500px;
-  right: 140px;
+  width: 480px;
+  top: 1800px;
+  right: 180px;
   z-index: 5;
 }
 
@@ -542,16 +540,14 @@
 .icon {
   position: absolute;
   right: 100px;
-  bottom: 280px;
+  bottom: 20px;
 }
 
 .view_btn {
   position: absolute;
-  bottom: 280px;
+  bottom: 120px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 20;
-
 }
 
 .view_btn a {
