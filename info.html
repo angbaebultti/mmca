@@ -24,17 +24,17 @@
 
 <body>
     <div class="wrap">
+        <div class="top_btn">
+            <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
+        </div>
         <header class="header">
             <div class="inner">
                 <div class="header_top">
-                    <h1><a href="#"><img src="img/logo_icon.png">MMCA</a></h1>
+                    <h1>
+                        <a href="main.html"><img src="img/logo_icon.png" />MMCA</a>
+                    </h1>
                 </div>
                 <div class="nav">
-                    <div class="nav_top">
-                        <a href="#"><iconify-icon icon="radix-icons:magnifying-glass"></iconify-icon></a>
-                        <a href="#"><iconify-icon icon="lets-icons:globe-light"></iconify-icon></a>
-                        <a href="#"><span>Sign in</span></a>
-                    </div><!-- //.nav_top -->
                     <div class="nav_bottom">
                         <ul class="gnb_l">
                             <li><a href="#">VISIT</a></li>
@@ -42,14 +42,125 @@
                             <li><a href="#">EXPLORE</a></li>
                             <li><a href="#">PROGRAM</a></li>
                             <li><a href="#">ABOUT</a></li>
-                        </ul><!-- //.gnb_l -->
+                            <li><a href="#">TICKETS</a></li>
+                        </ul>
+                        <!-- //.gnb_l -->
                         <div class="gnb_r">
-                            <a href="#"><span>TICKETS</span></a>
+                            <a href="#"><span>Sign in</span></a>
                             <a href="#"><i class="fa-solid fa-bars" id="menu_btn"></i></a>
-                        </div><!-- //.gnb_r -->
-                    </div><!-- //.nav_bottom -->
-                </div><!-- //.nav -->
+                        </div>
+                        <!-- //.gnb_r -->
+                    </div>
+                    <!-- //.nav_bottom -->
+                </div>
+                <!-- //.nav -->
+                <div class="museum_nav">
+                    <div class="row_top">
+                        <a href="museum.html">
+                            <div class="item seoul">
+                                <span class="text">SEOUL</span>
+                                <div class="bg"></div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="item deoksugung">
+                                <span class="text">DEOKSUGUNG</span>
+                                <div class="bg"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- //.row_top -->
+                    <div class="row_bottom">
+                        <a href="#">
+                            <div class="item gwacheon">
+                                <span class="text">GWACHEON</span>
+                                <div class="bg"></div>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="item cheongju">
+                                <span class="text">CHEONGJU</span>
+                                <div class="bg"></div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- //.row_bottom -->
+                </div>
+                <!-- //.museum_nav -->
+            </div>
         </header>
+        <div class="menu_overlay" id="menu">
+            <div class="menu_top">
+                <h1>
+                    <a href="#"><img src="img/logo_icon.png" />MMCA</a>
+                </h1>
+                <span class="close_btn" id="close_btn">✕</span>
+            </div>
+            <div class="menu_top_row">
+                <div class="menu_col">
+                    <h3><a href="#">VISIT</a></h3>
+                    <ul>
+                        <li><a href="#">Location</a></li>
+                        <li class="active"><a href="#">Seoul</a></li>
+                        <li class="active"><a href="#">Gwacheon</a></li>
+                        <li class="active"><a href="#">Deoksugung</a></li>
+                        <li class="active"><a href="#">Cheongju</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3><a href="#">PROGRAM</a></h3>
+                    <ul>
+                        <li><a href="#">Event</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Tour</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3><a href="#">EXPLORE</a></h3>
+                    <ul>
+                        <li class="active"><a href="#">Collection</a></li>
+                        <li><a href="#">Research</a></li>
+                        <li><a href="#">Archive</a></li>
+                        <li><a href="#">Digital Museum</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3><a href="#">ARTIST</a></h3>
+                    <ul>
+                        <li><a href="#">Prize</a></li>
+                        <li><a href="#">Residency</a></li>
+                        <li><a href="#">Art Bank</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3><a href="#">ABOUT</a></h3>
+                    <ul>
+                        <li><a href="#">About MMCA</a></li>
+                        <li class="active"><a href="#">History</a></li>
+                        <li><a href="#">Mission</a></li>
+                        <li><a href="#">Organization</a></li>
+                        <li><a href="#">News</a></li>
+                    </ul>
+                </div>
+                <div class="menu_col">
+                    <h3 class="tickets"><a href="#">TICKET</a></h3>
+                    <ul>
+                        <li class="active"><a href="#">Purchase</a></li>
+                        <li><a href="#">Reservation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="menu_bottom_row">
+                <div class="menu_col">
+                    <h3><a href="#">MEMBERSHIP</a></h3>
+                    <ul>
+                        <li><a href="">Membership</a></li>
+                        <li><a href="">Benefits</a></li>
+                        <li><a href="">Program</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
         <!--  햄버거 -->
         <section class="plan">
             <h1 class="heading">Plan your<br />visit</h1>
@@ -58,9 +169,7 @@
                 <div class="address">
                     <div class="tit">
                         <h3>Address</h3>
-                        <button class="plus" aria-expanded="false" aria-controls="address_container">
-                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
-                        </button>
+                        <button class="plus" aria-expanded="false" aria-controls="address_container"></button>
                     </div><!-- //.address_tit -->
                     <div class="container" id="address_container" role="region" aria-hidden="true">
                         <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
@@ -74,9 +183,7 @@
                 <div class="opening">
                     <div class="tit">
                         <h3>Opening</h3>
-                        <button class="plus" aria-expanded="false" aria-controls="opening_container">
-                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
-                        </button>
+                        <button class="plus" aria-expanded="false" aria-controls="address_container"></button>
                     </div><!-- //.opening_tit -->
                     <div class="container" id="opening_container" role="region" aria-hidden="true">
                         <div class="icon"><i class="fa-regular fa-clock"></i></div>
@@ -91,9 +198,7 @@
                 <div class="charges">
                     <div class="tit">
                         <h3>Charges</h3>
-                        <button class="plus" aria-expanded="false" aria-controls="charges_container">
-                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
-                        </button>
+                        <button class="plus" aria-expanded="false" aria-controls="address_container"></button>
                     </div><!-- //.charges_tit -->
                     <div class="container" id="charges_container" role="region" aria-hidden="true">
                         <div class="icon"><i class="fa-solid fa-money-bill-wave"></i></div>
@@ -109,9 +214,7 @@
                 <div class="parking">
                     <div class="tit">
                         <h3>Parking</h3>
-                        <button class="plus" aria-expanded="false" aria-controls="parking_container">
-                            <i class="fa-solid fa-plus" aria-hidden="true"></i>
-                        </button>
+                        <button class="plus" aria-expanded="false" aria-controls="address_container"></button>
                     </div><!-- //.charges_tit -->
                     <div class="container" id="parking_container" role="region" aria-hidden="true">
                         <div class="icon"><i class="fa-solid fa-p"></i></div>
@@ -251,7 +354,7 @@
                     <div class="shuttle_panel" id="shuttle_panel" hidden>
                         <div class="sh_top">
                             <div class="station">
-                                <div class="line_badge suttle">MMCA Art Shuttle provides free service between Gwacheon,
+                                <div class="line_badge shuttle">MMCA Art Shuttle provides free service between Gwacheon,
                                     Seoul and Deoksugung four times a day.</div>
                                 <div class="sd">
                                     <div class="way"><span>Service day</span></div>
