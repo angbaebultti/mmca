@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/common_media.css">
     <link rel="stylesheet" href="css/info.css">
+    <script src="https://kit.fontawesome.com/b43057b3ba.js" crossorigin="anonymous"></script>
     <script src="js/common.js" defer></script>
     <script src="js/info.js"></script>
 </head>
@@ -48,29 +49,10 @@
                         </div><!-- //.gnb_r -->
                     </div><!-- //.nav_bottom -->
                 </div><!-- //.nav -->
-                <div class="museum_nav">
-                    <div class="row_top">
-                        <a href="#">
-                            <div class="item seoul">SEOUL</div>
-                        </a>
-                        <a href="#">
-                            <div class="item deoksugung">DEOKSUGUNG</div>
-                        </a>
-                    </div><!-- //.row_top -->
-                    <div class="row_bottom">
-                        <a href="#">
-                            <div class="item gwacheon">GWACHEON</div>
-                        </a>
-                        <a href="#">
-                            <div class="item cheongju">CHEONGJU</div>
-                        </a>
-                    </div><!-- //.row_bottom -->
-                </div><!-- //.museum_nav -->
-            </div><!-- //.inner -->
         </header>
         <!--  햄버거 -->
         <section class="plan">
-            <h1 class="plan_heading">Plan your<br />visit</h1>
+            <h1 class="heading">Plan your<br />visit</h1>
             <!-- Address -->
             <div class="inner">
                 <div class="address">
@@ -144,6 +126,159 @@
                 </div><!-- //.parking -->
             </div><!-- //.inner -->
         </section><!-- //.plan -->
+        <section class="getting">
+            <h1 class="heading">Getting Here</h1>
+            <div class="inner">
+                <div class="btn_box">
+                    <button type="button" class="sub is_active" data-target="subway_panel"><i
+                            class="fa-solid fa-train-subway"></i>Subway</button>
+                    <button type="button" class="bus" data-target="bus_panel"><i
+                            class="fa-solid fa-bus-simple"></i>Bus</button>
+                    <button type="button" class="sut" data-target="shuttle_panel"><i
+                            class="fa-solid fa-arrows-down-to-people"></i>Shuttle</button>
+                </div><!-- //.btn_box -->
+                <div class="info_box">
+                    <div class="subway_panel" id="subway_panel">
+                        <div class="left">
+                            <div class="s_top">
+                                <div class="station">
+                                    <div class="line_badge line3">Line 3</div>
+                                    <p>Anguk Station</p>
+                                </div><!-- //.station -->
+                                <ul class="container">
+                                    <li class="exit">Exit 1</li>
+                                    <li class="walk">
+                                        <i class="ri-walk-line" aria-hidden="true"></i>
+                                        10 min
+                                    </li>
+                                </ul>
+                            </div><!-- //.s_top -->
+                            <div class="s_bottom">
+                                <div class="seq">
+                                    <div class="way"><span>Wayfinding Sequence</span></div>
+                                    <div class="txt">
+                                        <p>Walk straight on Insadong street toward Samcheong-dong</p>
+                                    </div>
+                                </div><!-- //.seq -->
+                                <button class="viewmap_btn">
+                                    View Map
+                                    <i class="ri-external-link-line" aria-hidden="true"></i>
+                                </button>
+                            </div><!-- //.s_bottom -->
+                        </div><!-- //.left -->
+                        <div class="right">
+                            <div class="s_top">
+                                <div class="station">
+                                    <div class="line_badge line5">Line 5</div>
+                                    <p>Gwanghwamun Station</p>
+                                </div><!-- //.station -->
+                                <ul class="container">
+                                    <li class="exit">Exit 2</li>
+                                    <li class="walk">
+                                        <i class="ri-walk-line" aria-hidden="true"></i>
+                                        15 min
+                                    </li>
+                                </ul>
+                            </div><!-- //.s_top -->
+                            <div class="s_bottom">
+                                <div class="seq">
+                                    <div class="way"><span>Wayfinding Sequence</span></div>
+                                    <div class="txt">
+                                        <p>Head east toward Gyeongbokgung Palace, turn right</p>
+                                    </div>
+                                </div><!-- //.seq -->
+                                <button class="viewmap_btn">
+                                    View Map
+                                    <i class="ri-external-link-line" aria-hidden="true"></i>
+                                </button>
+                            </div><!-- //.s_bottom -->
+                        </div><!-- //.right -->
+                    </div><!-- //.subway_panel -->
+                    <div class="bus_panel" id="bus_panel" hidden>
+                        <div class="left">
+                            <div class="b_top">
+                                <div class="station">
+                                    <div class="line_badge bus11">Jongno 11</div>
+                                    <p>Jeongdok Public Library</p>
+                                </div><!-- //.station -->
+                                <ul class="container">
+                                    <li class="walk">
+                                        <i class="fa-solid fa-person-walking"></i>
+                                        3 min
+                                    </li>
+                                </ul>
+                            </div><!-- //.s_top -->
+                            <div class="b_bottom">
+                                <div class="seq">
+                                    <div class="way"><span>Wayfinding Sequence</span></div>
+                                    <div class="txt">
+                                        <p>Direction of Samcheong Police Station</p>
+                                    </div>
+                                </div><!-- //.seq -->
+                                <button class="viewmap_btn">
+                                    View Map
+                                    <i class="ri-external-link-line" aria-hidden="true"></i>
+                                </button>
+                            </div><!-- //.s_bottom -->
+                        </div><!-- //.left -->
+                        <div class="right">
+                            <div class="b_top">
+                                <div class="station">
+                                    <div class="line_badge bus01">Tour 01</div>
+                                    <p>National Folk Museum of Korea, Gyeongbokgung Palace</p>
+                                </div><!-- //.station -->
+                                <ul class="container">
+                                    <li class="walk">
+                                        <i class="fa-solid fa-person-walking"></i>
+                                        5 min
+                                    </li>
+                                </ul>
+                            </div><!-- //.s_top -->
+                            <div class="b_bottom">
+                                <div class="seq">
+                                    <div class="way"><span>Wayfinding Sequence</span></div>
+                                    <div class="txt">
+                                        <p>the direction of Gwanghwamun</p>
+                                    </div>
+                                </div><!-- //.seq -->
+                                <button class="viewmap_btn">
+                                    View Map
+                                    <i class="ri-external-link-line" aria-hidden="true"></i>
+                                </button>
+                            </div><!-- //.s_bottom -->
+                        </div><!-- //.left -->
+                    </div><!-- //.bus_panel -->
+                    <div class="shuttle_panel" id="shuttle_panel" hidden>
+                        <div class="sh_top">
+                            <div class="station">
+                                <div class="line_badge suttle">MMCA Art Shuttle provides free service between Gwacheon,
+                                    Seoul and Deoksugung four times a day.</div>
+                                <div class="sd">
+                                    <div class="way"><span>Service day</span></div>
+                                    <div class="txt">
+                                        <p>Tuesday to Friday (No service is available on Monday, Saturday, Sunday and
+                                            public holidays)</p>
+                                    </div>
+                                </div><!-- //.sd -->
+                                <div class="route">
+                                    <div class="way"><span>Route</span></div>
+                                    <div class="txt">
+                                        <p>Tuesday to Friday (No service is available on Monday, Saturday, Sunday and
+                                            public holidays)</p>
+                                    </div>
+                                </div><!-- //.route -->
+                                <div class="dt">
+                                    <div class="way"><span>Departure time</span></div>
+                                    <div class="txt">
+                                        <p>10:00, 12:00, 14:00, 16:00</p>
+                                    </div>
+                                </div><!-- //.route -->
+                            </div><!-- //.station -->
+                        </div><!-- //.sh_top -->
+                    </div><!-- //.shuttle_panel -->
+                </div><!-- //.info_box -->
+            </div><!-- //.inner -->
+        </section><!-- //.getting -->
         <footer>
             <div class="banner" aria-label="museum locations">
                 <ul class="banner_track">

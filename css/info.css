@@ -6,7 +6,7 @@
   padding: 170px 120px;
 }
 
-.plan_heading{
+.heading{
  font-size: var(--h1);
  font-style: normal;
  font-weight: 600;
@@ -191,4 +191,289 @@ color: #929292;
 font-size: 22px;
 font-weight: 400;
 letter-spacing: -1.1px;
+}
+
+
+
+/* getting */
+.getting{
+    padding: 170px 120px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.getting .inner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.getting .inner .info_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+/* ── btn_box ── */
+.getting .btn_box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 0;
+  gap: 48px;
+}
+
+.getting .btn_box button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 32px;
+  font-weight: 400;
+  padding: 0 0 12px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.getting .btn_box button.is_active {
+  color: #fff;
+  border-bottom: 2px solid #fff;
+}
+
+/* 변경 후 */
+.getting .info_box .subway_panel,
+.getting .info_box .bus_panel,
+.getting .info_box .shuttle_panel {
+  display: none;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.getting .info_box .subway_panel.is_active,
+.getting .info_box .bus_panel.is_active,
+.getting .info_box .shuttle_panel.is_active {
+  display: flex;
+}
+
+.getting .inner .info_box .left{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 34px;
+flex: 1 0 0;
+}
+
+.getting .inner .info_box .station{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    font-size: 32px;
+    font-weight: 600;
+    gap: 16px;
+}
+
+.getting .inner .info_box .s_top, .getting .inner .info_box .b_top{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.getting .inner .info_box .line_badge {
+    color: #FFF;
+    letter-spacing: -1.6px;
+}
+
+.getting .inner .info_box .line3 {
+  display: inline-flex;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background: #D87E2F;
+  width: fit-content;
+  font-weight: 600;
+  color: #fff;
+}
+
+
+.getting .inner .info_box .container{
+    display: flex;
+    gap: 24px;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.getting .inner .info_box .container .exit{
+display: flex;
+width: 142px;
+padding: 8px 24px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 15px;
+background: #2F2F2F;
+}
+
+.getting .inner .info_box .container .walk{
+display: flex;
+/* width: 142px; */
+padding: 8px 24px;
+justify-content: center;
+align-items: center;
+gap: 10px;
+border-radius: 15px;
+background: #2F2F2F;
+}
+
+.getting .inner .info_box .s_bottom{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.getting .inner .info_box .s_bottom .seq{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.getting .inner .info_box .s_bottom .way {
+    display: flex;
+    width: fit-content;
+    padding: 8px 10px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--main_white);
+}
+
+.getting .inner .info_box .s_bottom .txt{
+    color: #F5F5F5;
+    font-size: 24px;
+    font-weight: 500;
+    letter-spacing: -1.2px;
+}
+
+.getting .inner .info_box .s_bottom .viewmap_btn{
+    background: none;
+    cursor: pointer;
+    color: #A2A2A2;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -1.2px;
+    align-self: flex-start;
+    border: none;
+    width: fit-content;
+}
+
+
+
+/* right */
+
+.getting .inner .info_box .right{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 34px;
+flex: 1 0 0;
+}
+
+
+.getting .inner .info_box .line5 {
+  display: inline-flex;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background: #A24CC8;
+  width: fit-content;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* bus */
+
+.getting .inner .info_box .bus11 {
+  display: inline-flex;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background: #5EB937;
+  width: fit-content;
+  font-weight: 600;
+  color: #fff;
+}
+
+.getting .inner .info_box .bus01 {
+    width: fit-content;
+  display: inline-flex;
+  padding: 8px 10px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background: #FF461F;
+  font-weight: 600;
+  color: #fff;
+}
+
+.getting .inner .info_box p{
+color: #FFF;
+font-size: 28px;
+font-weight: 600;
+letter-spacing: -1.4px;
+}
+
+.getting .inner .info_box .b_bottom {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 16px;
+}
+
+.getting .inner .info_box .b_bottom .seq {
+    display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 16px;
+}
+
+.getting .inner .info_box .b_bottom .seq .way{
+        display: flex;
+    width: fit-content;
+    padding: 8px 10px;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--main_white);
+}
+
+.getting .inner .info_box .b_bottom .viewmap_btn{
+    background: none;
+    cursor: pointer;
+    color: #A2A2A2;
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: -1.2px;
+    align-self: flex-start;
+    border: none;
+    width: fit-content;
+}
+
+
+/* shuttle */
+
+.sh_top{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.sh_top .station{
+    display: flex;
+    flex-direction: column;
 }
