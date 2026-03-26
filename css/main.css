@@ -1,11 +1,15 @@
 @charset "utf-8";
 
+
 .main_visual {
   padding: 170px 72px;
   background-image: url(../img/main_bg.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   width: 100%;
-  height: 130vh;
+  height: 220vh;
   overflow: hidden;
 }
 
@@ -30,30 +34,37 @@
   color: #fff;
   position: absolute;
   left: 55px;
-  top: 0;
-  z-index: 2;
+  top: 200px;
+  z-index: 2000;
   mix-blend-mode: difference;
+  padding-top: 200px;
 }
 
 .ticket {
   position: absolute;
-  right: -660px;
-  bottom: 20px;
-  display: flex;
-  align-items: center;
-  z-index: 3;
+  right: 60px; /* 🔥 화면 안으로 */
+  bottom: 120px;
+  width: 600px; /* 🔥 기준 박스 만들어줘야 함 */
+  height: 300px;
 }
 
 .ticket_left {
+  position: absolute;
+  left: -90px;
+  bottom: -25px;
   width: 200px;
-  flex-shrink: 0;
-  transform-origin: right center;
+  transform: none;
+  z-index: 2;
 }
 
+
 .ticket_right {
+  position: absolute;
+  left: 180px; /* 🔥 여기 중요 (붙는 위치) */
+  bottom: 0px;
   width: 430px;
-  flex-shrink: 0;
-  transform-origin: left center;
+  z-index: 1;
+  transform: none;
 }
 
 .info_wrap {
@@ -135,7 +146,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .ticket_bg {
@@ -220,7 +230,6 @@
   font-size: 72px;
   letter-spacing: var(--letter-spacing-base);
   font-weight: 500;
-
 }
 
 .about_title {
@@ -236,11 +245,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 60px;
+  gap: 20px;
   opacity: 0;
   transform: translateY(40px);
   will-change: opacity, transform;
-
 }
 
 .stats_wrap {
@@ -260,7 +268,6 @@
   background: var(--main_white);
   opacity: 1;
 }
-
 
 .line_right {
   position: absolute;
@@ -319,7 +326,6 @@
 
 /* artist prize */
 .artist_prize {
-
   position: relative;
   width: 100%;
   height: 400vh;
@@ -351,14 +357,11 @@
 
 .title_main span {
   display: inline-block;
-
   font-family: var(--cabinetgrotesk);
   font-size: 200px;
   font-weight: 600;
-
   color: transparent;
   -webkit-text-stroke: 1px var(--main_white);
-
   transition: all 0.4s ease;
 }
 
@@ -366,7 +369,6 @@
   color: var(--main_white);
 }
 
-/* hover */
 .title_main span:hover {
   background-position: left;
 }
@@ -386,7 +388,6 @@
   font-weight: 500;
 }
 
-
 .card_zone {
   position: relative;
   width: 100%;
@@ -404,7 +405,6 @@
   padding: 18px;
 }
 
-
 .card .top {
   position: relative;
   border-radius: 12px;
@@ -416,7 +416,6 @@
   object-fit: cover;
   display: block;
 }
-
 
 .txt_box {
   position: relative;
@@ -457,7 +456,6 @@
   font-size: 21px;
 }
 
-
 .card_2025 {
   width: 640px;
   top: 1200px;
@@ -470,7 +468,6 @@
   color: var(--main_white);
   -webkit-text-stroke: 1px var(--main_black);
 }
-
 
 .card_2024 {
   width: 500px;
@@ -541,7 +538,6 @@
   bottom: 280px;
 }
 
-
 .view_btn {
   position: absolute;
   bottom: 280px;
@@ -551,6 +547,8 @@
 }
 
 .view_btn a {
+  --hover: #FF4B24;
+  display: inline-block;
   padding: 28px 100px;
   border-radius: 999px;
   background: #fff;
@@ -558,15 +556,38 @@
   font-size: 32px;
   font-weight: 600;
   letter-spacing: -0.04em;
-  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.view_btn a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 100%;
+  background: var(--hover);
+  transition: width 0.4s ease;
+  z-index: 0;
+}
+
+.view_btn a span {
+  position: relative;
+  z-index: 1;
+}
+
+.view_btn a:hover::before {
+  width: 120%;
 }
 
 .view_btn a:hover {
-  background: #FF4B24;
   color: #fff;
 }
 
-/* news */
+/* ===================== NEWS ===================== */
 
 .news {
   width: 100%;
@@ -580,22 +601,18 @@
   position: relative;
 }
 
-
+/* 서류철 겹치기 — sticky 기본 구조 유지 */
 .news_group {
   position: sticky;
-  top: 0;
   padding-top: 120px;
   z-index: 10;
-  background: #f5f5f5;
-  clip-path: polygon(0 0,
-      260px 0,
-      320px 60px,
-      100% 60px,
-      100% 100%,
-      0 100%);
+  clip-path: polygon(0 0, 260px 0, 320px 60px, 100% 60px, 100% 100%, 0 100%);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
   border-top: 1px solid rgba(0, 0, 0, 0.05);
+
+  /* 핵심: transition을 transform 하나만 담당 */
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .news_group:nth-child(1) {
@@ -613,6 +630,19 @@
   z-index: 30;
 }
 
+/* 호버된 그룹: 위로 확 올라옴 */
+.news_group.is-active {
+  transform: translateY(-100px);
+  z-index: 9999 !important;
+}
+
+/* 호버 안 된 나머지 그룹: 아래로 살짝 눌림 */
+.news_group.is-dimmed {
+  transform: translateY(24px);
+  opacity: 0.75;
+}
+
+/* 헤더 영역 */
 .news_head {
   position: absolute;
   top: 20px;
@@ -630,6 +660,44 @@
   font-size: 60px;
   font-weight: 600;
   letter-spacing: var(--letter-spacing-base);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* 헤더 왼쪽 액센트 바 */
+.news_head h2::before {
+  content: "";
+  display: block;
+  width: 0px;
+  height: 50px;
+  border-radius: 3px;
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  flex-shrink: 0;
+}
+
+.news_group.events .news_head h2::before {
+  background: #111;
+}
+
+.news_group.press .news_head h2::before {
+  background: #111;
+}
+
+.news_group.notice .news_head h2::before {
+  background: #fff;
+}
+
+/* 호버 시 액센트 바 등장 */
+.news_group.is-active .news_head h2::before {
+  width: 6px;
+}
+
+/* 호버 시 헤더 텍스트 살짝 오른쪽으로 */
+.news_group.is-active .news_head h2 {
+  transform: translateX(4px);
 }
 
 .news_head a {
@@ -644,8 +712,18 @@
   position: absolute;
   right: 50px;
   top: 70px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* 호버 시 View More 선명하게 */
+.news_group.is-active .news_more {
+  opacity: 1;
+  transform: translateX(4px);
+}
 
 .news_group.notice>.news_more {
   color: var(--main_white);
@@ -667,7 +745,7 @@
 }
 
 .news_card {
-  background: #fff;
+  background: transparent;
   overflow: hidden;
   transition: 0.3s;
   display: flex;
@@ -675,10 +753,15 @@
   height: 100%;
 }
 
+.news_card a {
+  display: block;
+}
+
 .news_thumb {
   width: 100%;
   height: 400px;
   background: #ccc;
+  overflow: hidden;
 }
 
 .news_thumb img {
@@ -686,90 +769,21 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* 카드 호버 시 이미지 줌 */
+.news_card:hover .news_thumb img {
+  transform: scale(1.05);
+}
 
 .news_txt {
-  flex: 1;
-}
-
-.news_txt h3 {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.news_txt p {
-  font-size: 13px;
-  opacity: 0.7;
-  margin-bottom: 10px;
-}
-
-.news_date {
-  font-size: 12px;
-  opacity: 0.5;
-}
-
-.news_cate {
-  display: inline-block;
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: #ff4b24;
-}
-
-.events {
-  background: var(--gray_06);
-}
-
-.events .news_head {
-  color: #111;
-}
-
-.press {
-  background: #AFAFAF;
-}
-
-.press .news_head {
-  color: #111;
-}
-
-.notice {
-  background: #1e1e1e;
-}
-
-.notice .news_head {
-  background: #1e1e1e;
-  color: #fff;
-}
-
-.notice .news_txt h3,
-.notice .news_txt p,
-.notice .news_date {
-  color: #fff;
-}
-
-.news_group h3{
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-/* 공통 카드 텍스트 영역 */
-.news_card{
-  background: transparent;
-}
-
-.news_card a{
-  display: block;
-}
-
-.news_txt{
   flex: 1;
   margin-top: 30px;
 }
 
 /* 공통 제목 */
-.news_group .news_txt h3{
+.news_group .news_txt h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -784,7 +798,7 @@
 }
 
 /* 공통 내용 */
-.news_group .news_txt p{
+.news_group .news_txt p {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -797,7 +811,7 @@
 }
 
 /* 공통 날짜 */
-.news_group .news_date{
+.news_group .news_date {
   display: block;
   font-family: Pretendard;
   font-size: 18px;
@@ -806,28 +820,76 @@
   letter-spacing: -0.72px;
 }
 
-/* PRESS */
-.news_group.press .news_txt h3,
-.news_group.events .news_txt h3{
+.news_cate {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #ff4b24;
+}
+
+/* EVENTS */
+.events {
+  background: var(--gray_06);
+}
+
+.events .news_head {
+  color: #111;
+}
+
+.news_group.events .news_txt h3,
+.news_group.events .news_txt p {
   color: #000;
 }
 
-.news_group.press .news_txt p,
-.news_group.events .news_txt p{
-  color: rgba(0,0,0,0.5);
+.news_group.events .news_txt p {
+  color: rgba(0, 0, 0, 0.5);
 }
 
-.news_group.press .news_date,
-.news_group.events .news_date{
+.news_group.events .news_date {
+  color: #666;
+}
+
+/* PRESS */
+.press {
+  background: #AFAFAF;
+}
+
+.press .news_head {
+  color: #111;
+}
+
+.news_group.press .news_txt h3 {
+  color: #000;
+}
+
+.news_group.press .news_txt p {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.news_group.press .news_date {
   color: #666;
 }
 
 /* NOTICE */
-.news_group.notice .news_txt{
+.notice {
+  background: #1e1e1e;
+}
+
+.notice .news_head {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.notice .news_head a {
+  color: #fff;
+}
+
+.news_group.notice .news_txt {
   margin-top: 26px;
 }
 
-.news_group.notice .news_cate{
+.news_group.notice .news_cate {
   display: block;
   margin-bottom: 10px;
   font-family: Pretendard;
@@ -837,26 +899,35 @@
   letter-spacing: -0.72px;
 }
 
-.news_group.notice .news_txt h3{
+.news_group.notice .news_txt h3 {
   color: #fff;
 }
 
-.news_group.notice .news_txt p{
-  color: rgba(255,255,255,0.65);
+.news_group.notice .news_txt p {
+  color: rgba(255, 255, 255, 0.65);
 }
 
-.news_group.notice .news_date{
-  color: rgba(255,255,255,0.6);
+.news_group.notice .news_date {
+  color: rgba(255, 255, 255, 0.6);
 }
 
-/* NOTICE 카테고리 컬러 */
-.news_group.notice .news_cate.gwacheon{ color:#00C389; }
-.news_group.notice .news_cate.seoul{ color:#FF5A36; }
-.news_group.notice .news_cate.recruit{ color:#F4E85A; }
-.news_group.notice .news_cate.tour{ color:#B8A07A; }
+.news_group.notice .news_cate.gwacheon {
+  color: #00C389;
+}
 
+.news_group.notice .news_cate.seoul {
+  color: #FF5A36;
+}
 
-/* shop */
+.news_group.notice .news_cate.recruit {
+  color: #F4E85A;
+}
+
+.news_group.notice .news_cate.tour {
+  color: #B8A07A;
+}
+
+/* ===================== SHOP ===================== */
 
 .shop {
   height: 300vh;
@@ -966,4 +1037,77 @@
 .p8,
 .p9 {
   width: 400px;
+}
+
+/* ===================== CURSOR ===================== */
+
+* {
+  cursor: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99999;
+  transition: opacity 0.2s;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0px;
+  font-weight: 700;
+  font-family: var(--pretendard);
+  color: #000;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  transition:
+    width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    background 0.4s,
+    border-color 0.4s,
+    font-size 0.3s;
+}
+
+.cursor-ring.shop-hover {
+  width: 130px;
+  height: 130px;
+  background: #fff;
+  border-color: transparent;
+  font-size: 14px;
+}
+
+/* MUSEUM SHOP 텍스트 호버 효과 */
+.shop_title {
+  transition: letter-spacing 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.shop_title:hover {
+  letter-spacing: 0.06em;
+}
+
+.shop_title span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+/* glass_front 호버 시 살짝 투명해짐 */
+.glass_box:hover .glass_front {
+  background: rgba(30, 30, 30, 0.45);
+  transition: background 0.4s ease;
 }
