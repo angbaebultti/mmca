@@ -13,7 +13,7 @@
   /* 이거 추가해 뒀어요! 헤더에 가려져서 */
   margin-top: 161px;
 }
- 
+
 .page_title {
   /* font-size: clamp(32px, 5vw, var(--h1)); */
   font-size: var(--h2);
@@ -21,12 +21,12 @@
   letter-spacing: -0.02em;
   color: var(--main_white);
 }
- 
+
 .page_sub_nav {
   display: flex;
   gap: 28px;
 }
- 
+
 .page_sub_nav a {
   color: var(--main_white);
   text-decoration: none;
@@ -34,12 +34,11 @@
   opacity: 0.7;
   transition: opacity 0.2s;
 }
- 
+
 .page_sub_nav a:hover {
   /* opacity: 1; */
 }
- 
- 
+
 /* =============================================
    1번+6번: 가로 스크롤 섹션
 ============================================= */
@@ -55,40 +54,22 @@
   top: 0;
   height: 100vh;
   overflow: hidden;
-}
-
-.horizontal_track {
   display: flex;
-  width: 400%;
-  height: 100%;
-  will-change: transform;
-  transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-}
-
-.artist_slide {
-  width: 25%;
-  height: 100vh;
-  flex-shrink: 0;
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 0 136px;
+  flex-direction: column;
 }
 
 .slide_layout {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   max-width: 1448px;
   margin: 0 auto;
-  padding: 50px 100px 100px;
-  padding-top: 60px;
-  /* display: grid; */
-  grid-template-columns: minmax(0, 1fr) 176px 84px;
+  padding: 60px 100px 100px;
   display: flex;
-  /* gap: 10px; */
-  /* column-gap: 36px; */
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 1;
 }
 
 .artist_left_col {
@@ -106,7 +87,6 @@
   width: 100%;
   aspect-ratio: 870 / 730;
   overflow: hidden;
-  background: var(--gray_01);
 }
 
 .artist_photo {
@@ -181,17 +161,16 @@
 .skip_btn {
   background: none;
   border: none;
+  border-bottom: 1px solid var(--main_white);
   color: var(--main_white);
   font-size: 18px;
   font-family: "Inter", sans-serif;
   font-weight: 300;
   cursor: pointer;
-  padding: 0;
+  padding-bottom: 1px;
   opacity: 0.72;
-  letter-spacing: -0.005em;
   transition: opacity 0.2s ease;
 }
-
 
 .skip_btn:hover {
   opacity: 1;
@@ -220,14 +199,39 @@
   background: var(--main_white);
 }
 
+.artist_photo,
+.slide_artworks,
+.artist_name,
+.artist_desc {
+  transition: opacity 0.5s ease;
+}
+
+.wave_canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
 
 /* scroll down */
-#section05 a {
-  position: absolute;
-  padding-top: 80px;
+#section05 {
+  position: fixed;
   bottom: 40px;
   left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
 }
+
+#section05 a {
+  position: relative;
+  padding-top: 0;
+  bottom: auto;
+  left: auto;
+}
+
 #section05 a span {
   position: absolute;
   bottom: 70px;
@@ -269,8 +273,7 @@
     opacity: 0;
   }
 }
- 
- 
+
 /* =============================================
    2번: History 섹션
 ============================================= */
@@ -280,9 +283,9 @@
   padding: 170px 136px 150px;
   background: var(--main_black);
   gap: 65px;
-  overflow: hidden;  /* 2025배경쉐도우애니 안잘리게 */
+  overflow: hidden; /* 2025배경쉐도우애니 안잘리게 */
 }
- 
+
 .history_title {
   /* font-size: clamp(32px, 5vw, var(--h4)); */
   font-size: var(--h2);
@@ -292,7 +295,7 @@
   border-block: 1px solid var(--gray_06);
   padding: 20px 136px;
 }
- 
+
 /* 포스터 트랙 컨테이너 - overflow hidden으로 잘라냄 */
 .history_slider_wrap {
   /* overflow: hidden; */
@@ -300,7 +303,7 @@
   width: 100%;
   margin-bottom: 36px;
 }
- 
+
 .history_track {
   display: flex;
   gap: 20px;
@@ -308,7 +311,7 @@
   will-change: transform;
   overflow: visible; /* 2025배경쉐도우애니 안잘리게 */
 }
- 
+
 .poster_item {
   flex-shrink: 0;
   display: flex;
@@ -319,7 +322,6 @@
   overflow: visible; /* 2025배경쉐도우애니 안잘리게 */
 }
 
-
 .poster_item img {
   width: 220px;
   height: 300px;
@@ -327,31 +329,19 @@
   display: block;
   transition: opacity 0.2s;
 }
- 
+
 .poster_item:hover img {
   opacity: 0.75;
 }
- 
+
 .poster_year {
-font-size: 25px;
-font-weight: 400;
-line-height: normal;
-letter-spacing: -1.2px;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -1.2px;
   color: var(--gray_05);
 }
 
-/* 2025포스터 박스쉐도우 애니메이션 */
-@keyframes glowPulse {
-  0%   { box-shadow: 0 0 8px 2px rgba(255, 75, 36, 0); }
-  50%  { box-shadow: 0 0 24px 6px rgba(255, 255, 255, 0.7); }
-  100% { box-shadow: 0 0 8px 2px rgba(255, 75, 36, 0); }
-}
-
-.poster_item:first-child img {
-  animation: glowPulse 2.5s ease-in-out infinite;
-}
-
- 
 /* 슬라이더 레버 바 */
 .history_slider_control {
   display: flex;
@@ -359,7 +349,7 @@ letter-spacing: -1.2px;
   gap: 30px;
   padding-inline: 220px;
 }
- 
+
 .slider_label {
   font-size: 23px;
   font-weight: 400;
@@ -368,16 +358,19 @@ letter-spacing: -1.2px;
   color: var(--gray_03);
   flex-shrink: 0;
 }
- 
+
 .slider_track_wrap {
   position: relative;
   flex: 1;
-  height: 20px;       /* 클릭 영역 확보 */
+  height: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
 }
- 
+
 .slider_bar {
   position: absolute;
   left: 0;
@@ -399,12 +392,11 @@ letter-spacing: -1.2px;
   z-index: 2;
   touch-action: none;
 }
- 
+
 .slider_thumb:active {
   cursor: grabbing;
 }
- 
- 
+
 /* =============================================
    3번: 모달
 ============================================= */
@@ -418,12 +410,12 @@ letter-spacing: -1.2px;
   transition: opacity 0.35s;
   cursor: pointer;
 }
- 
+
 .modal_overlay.active {
   opacity: 1;
   pointer-events: all;
 }
- 
+
 /* 패널: 왼쪽에서 슬라이드인, 너비 2/3, 내부 세로 스크롤 */
 .modal_panel {
   position: absolute;
@@ -439,7 +431,7 @@ letter-spacing: -1.2px;
   transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
   cursor: default;
 }
- 
+
 .modal_overlay.active .modal_panel {
   transform: translateX(0);
 }
@@ -452,7 +444,7 @@ letter-spacing: -1.2px;
 .modal_panel::-webkit-scrollbar {
   display: none;
 }
- 
+
 .modal_close_btn {
   /* position: sticky; */
   top: 0;
@@ -467,20 +459,19 @@ letter-spacing: -1.2px;
   padding: 4px;
   margin-bottom: 24px;
 }
- 
+
 .modal_close_btn:hover {
   opacity: 1;
 }
- 
+
 .modal_essay_title {
   font-size: 46px;
   font-weight: 500;
-  line-height: 1.2;
-  margin-bottom: 3px;
+  line-height: 1.3;
   color: var(--main_white);
   clear: both;
 }
- 
+
 .modal_essay_author {
   font-size: 38px;
   color: var(--gray_02);
@@ -489,7 +480,7 @@ letter-spacing: -1.2px;
   font-weight: 300;
   letter-spacing: -1.8px;
 }
- 
+
 .modal_essay_body p {
   font-size: 20px;
   line-height: 1.9;
@@ -498,8 +489,7 @@ letter-spacing: -1.2px;
   letter-spacing: 0.6px;
   font-weight: 200;
 }
- 
- 
+
 /* =============================================
    4번: Video 섹션
 ============================================= */
@@ -508,7 +498,7 @@ letter-spacing: -1.2px;
   background: var(--main_black);
   text-align: center;
 }
- 
+
 .video_section_title {
   font-size: var(--h3);
   font-weight: 600;
@@ -516,7 +506,7 @@ letter-spacing: -1.2px;
   margin-bottom: 90px;
   color: var(--main_white);
 }
- 
+
 .video_grid {
   display: flex;
   justify-content: center;
@@ -524,31 +514,26 @@ letter-spacing: -1.2px;
   flex-wrap: wrap;
   margin-bottom: 80px;
 }
- 
+
 .video_thumb {
   width: 420px;
   text-align: left;
-  transition: filter 0.2s ;
-}
-
-.video_thumb:hover {
-  filter: brightness(0.6)
+  transition: filter 0.2s;
 }
 
 .video_thumb iframe {
   width: 100%;
-  height: 236px;  /* 16:9 비율 420 × 9/16 */
+  height: 236px; /* 16:9 비율 420 × 9/16 */
   display: block;
   border: none;
 }
- 
- 
+
 .video_label {
   font-size: 13px;
   color: var(--gray_03);
   margin-top: 10px;
 }
- 
+
 .view_more_btn {
   display: inline-block;
   color: var(--main_white);
@@ -559,11 +544,10 @@ letter-spacing: -1.2px;
   padding-bottom: 3px;
   transition: border-color 0.2s;
 }
- 
+
 .view_more_btn:hover {
   border-color: var(--main_white);
 }
-
 
 /* 탑버튼 */
 .top_btn {

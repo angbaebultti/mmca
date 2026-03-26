@@ -31,7 +31,7 @@
   <!-- 햄버거 밑부터 개인별 작업 -->
   <body>
     <div class="wrap">
-    <header class="header">
+      <header class="header">
         <div class="inner">
           <div class="header_top">
             <h1>
@@ -60,39 +60,6 @@
             <!-- //.nav_bottom -->
           </div>
           <!-- //.nav -->
-          <div class="museum_nav">
-            <div class="row_top">
-              <a href="museum.html">
-                <div class="item seoul">
-                  <span class="text">SEOUL</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-              <a href="#">
-                <div class="item deoksugung">
-                  <span class="text">DEOKSUGUNG</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-            </div>
-            <!-- //.row_top -->
-            <div class="row_bottom">
-              <a href="#">
-                <div class="item gwacheon">
-                  <span class="text">GWACHEON</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-              <a href="#">
-                <div class="item cheongju">
-                  <span class="text">CHEONGJU</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-            </div>
-            <!-- //.row_bottom -->
-          </div>
-          <!-- //.museum_nav -->
         </div>
       </header>
       <div class="menu_overlay" id="menu">
@@ -172,239 +139,84 @@
       <!-- ===================== PAGE TITLE BAR ===================== -->
       <section class="page_title_bar">
         <h1 class="page_title">Korea Artist Prize</h1>
-        <nav class="page_sub_nav">
+        <!--         <nav class="page_sub_nav">
           <a href="#">Exhibition</a>
           <a href="#">Artist</a>
           <a href="#">Documentary</a>
-        </nav>
+        </nav> -->
       </section>
 
       <!-- =====================
-    1번 + 6번: 가로 스크롤 섹션
-    wrapper 높이 = 100vh × 슬라이드 수(4) → sticky로 가로 전환
-  ===================== -->
+  1번 + 6번: 가로 스크롤 섹션
+  고정 레이아웃 + 내용만 교체
+===================== -->
       <div class="horizontal_scroll_wrapper" id="artist_section">
         <div class="horizontal_scroll_sticky">
-          <div class="horizontal_track" id="horizontalTrack">
-            <!-- Slide 1: Yuna Park -->
-            <div class="artist_slide">
-              <div class="slide_layout">
-                <div class="artist_left_col">
-                  <div class="artist_photo_wrap">
-                    <img
-                      src="img/Yuna Park_01.jpg"
-                      alt="Yuna Park"
-                      class="artist_photo"
-                    />
-                  </div>
+          <canvas class="wave_canvas" id="waveCanvas"></canvas>
 
-                  <div class="slide_info">
-                    <h2 class="artist_name">Yuna Park</h2>
-                    <p class="artist_desc">
-                      Yuna Park explores sound and listening as social and
-                      cultural constructs shaped through time. Her recent works
-                      focus on how listening practices emerge within specific
-                      contexts, how auditory perception evolves, and how sound
-                      can function as a medium for alternative narratives,
-                      collective memory, and new forms of knowledge.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="slide_dots" aria-hidden="true">
-                  <span class="dot active"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                </div>
-
-                <div class="slide_artworks">
-                  <img src="img/yuna_1.png" alt="작품 1" />
-                  <img src="img/yuna_2.png" alt="작품 2" />
-                  <img src="img/yuna_3.png" alt="작품 3" />
-                  <img src="img/yuna_4.png" alt="작품 4" />
-                </div>
-
-                <div class="slide_meta_col">
-                  <div class="slide_year" aria-hidden="true">2025</div>
-                  <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
-                    skip<i class="fa-solid fa-chevron-down"></i>
-                  </button>
-                </div>
+          <!-- 고정 레이아웃 (항상 보임) -->
+          <div class="slide_layout">
+            <div class="artist_left_col">
+              <div class="artist_photo_wrap">
+                <img
+                  src="img/Yuna Park_01.jpg"
+                  alt=""
+                  class="artist_photo"
+                  id="slidePhoto"
+                />
               </div>
-              <!-- //.slide_layout -->
-
-              <section id="section05" class="demo">
-                <!-- <h1>Scroll Down Button #5</h1> -->
-                <a href="#section06"><span></span>Scroll</a>
-              </section>
-            </div>
-            <!-- //.artist_slide -->
-
-            <!-- Slide 2: Seo Rin -->
-            <div class="artist_slide">
-              <div class="slide_layout">
-                <div class="artist_left_col">
-                  <div class="artist_photo_wrap">
-                    <img
-                      src="img/Seo Rin_02.jpg"
-                      alt="Seo Rin"
-                      class="artist_photo"
-                    />
-                  </div>
-
-                  <div class="slide_info">
-                    <h2 class="artist_name">Seo Rin</h2>
-                    <p class="artist_desc">
-                      Seo Rin reinterprets visual traditions inspired by East
-                      Asian aesthetics to reflect on identity, the human body,
-                      and the relationship between nature and society. The
-                      artist reconstructs traditional formats such as panels and
-                      scroll-based compositions into contemporary expressions,
-                      while uncovering overlooked perspectives and imaginative
-                      possibilities.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="slide_artworks">
-                  <img src="img/rin_1.png" alt="작품 1" />
-                  <img src="img/rin_2.png" alt="작품 2" />
-                  <img src="img/rin_3.png" alt="작품 3" />
-                  <img src="img/rin_4.png" alt="작품 4" />
-                </div>
-
-                <div class="slide_meta_col">
-                  <div class="slide_year" aria-hidden="true">2025</div>
-                  <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
-                    skip<i class="fa-solid fa-chevron-down"></i>
-                  </button>
-                </div>
-                <div class="slide_dots" aria-hidden="true">
-                  <span class="dot"></span>
-                  <span class="dot active"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                </div>
+              <div class="slide_info">
+                <h2 class="artist_name" id="slideName">Yuna Park</h2>
+                <p class="artist_desc" id="slideDesc">
+                  Yuna Park explores sound and listening as social and cultural
+                  constructs shaped through time. Her recent works focus on how
+                  listening practices emerge within specific contexts, how
+                  auditory perception evolves, and how sound can function as a
+                  medium for alternative narratives, collective memory, and new
+                  forms of knowledge.
+                </p>
               </div>
-              <!-- //.slide_layout -->
-              <section id="section05" class="demo">
-                <!-- <h1>Scroll Down Button #5</h1> -->
-                <a href="#section06"><span></span>Scroll</a>
-              </section>
             </div>
-            <!-- //.artist_slide -->
 
-            <!-- Slide 3: Null Frame Collective -->
-            <div class="artist_slide">
-              <div class="slide_layout">
-                <div class="artist_left_col">
-                  <div class="artist_photo_wrap">
-                    <img
-                      src="img/Null Frame Collective_03.jpg"
-                      alt="Null Frame Collective"
-                      class="artist_photo"
-                    />
-                  </div>
+            <div class="slide_dots" aria-hidden="true">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
 
-                  <div class="slide_info">
-                    <h2 class="artist_name">Null Frame Collective</h2>
-                    <p class="artist_desc">
-                      Null Frame Collective investigates how machines perceive
-                      and reconstruct reality. By combining datasets, computer
-                      vision, and generative systems, the group creates works
-                      that expose the hidden logic of algorithms. Their projects
-                      often reinterpret technological processes with irony and
-                      narrative, questioning how digital systems reshape memory
-                      and history.
-                    </p>
-                  </div>
-                </div>
+            <div class="slide_artworks" id="slideArtworks">
+              <img src="img/yuna_1.png" alt="작품 1" />
+              <img src="img/yuna_2.png" alt="작품 2" />
+              <img src="img/yuna_3.png" alt="작품 3" />
+              <img src="img/yuna_4.png" alt="작품 4" />
+            </div>
 
-                <div class="slide_artworks">
-                  <img src="img/null_1.png" alt="작품 1" />
-                  <img src="img/null_2.png" alt="작품 2" />
-                  <img src="img/null_3.png" alt="작품 3" />
-                  <img src="img/null_4.png" alt="작품 4" />
-                </div>
-
-                <div class="slide_meta_col">
-                  <div class="slide_year" aria-hidden="true">2025</div>
-                  <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
-                    skip<i class="fa-solid fa-chevron-down"></i>
-                  </button>
-                </div>
-                <div class="slide_dots" aria-hidden="true">
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                  <span class="dot active"></span>
-                  <span class="dot"></span>
-                </div>
+            <div class="slide_meta_col">
+              <div class="slide_year" id="slideYear" aria-hidden="true">
+                2025
               </div>
-              <!-- //.slide_layout -->
-              <section id="section05" class="demo">
-                <!-- <h1>Scroll Down Button #5</h1> -->
-                <a href="#section06"><span></span>Scroll</a>
-              </section>
+              <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
+                skip
+              </button>
             </div>
-            <!-- //.artist_slide -->
+          </div>
 
-            <!-- Slide 4: Jin Ah Lim -->
-            <div class="artist_slide">
-              <div class="slide_layout">
-                <div class="artist_left_col">
-                  <div class="artist_photo_wrap">
-                    <img
-                      src="img/Jin Ah Lim_04.jpg"
-                      alt="Jin Ah Lim"
-                      class="artist_photo"
-                    />
-                  </div>
-
-                  <div class="slide_info">
-                    <h2 class="artist_name">Jin Ah Lim</h2>
-                    <p class="artist_desc">
-                      Jin Ah Lim explores belief systems and cultural narratives
-                      through video, installation, and interactive media. By
-                      placing scientific perspectives alongside myth and
-                      superstition, the artist reveals their coexistence in
-                      contemporary life. Her works unfold as narrative
-                      environments that blur the boundaries between reality,
-                      imagination, and speculative futures.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="slide_artworks">
-                  <img src="img/gina_1.png" alt="작품 1" />
-                  <img src="img/gina_2.png" alt="작품 2" />
-                  <img src="img/gina_3.png" alt="작품 3" />
-                  <img src="img/gina_4.png" alt="작품 4" />
-                </div>
-
-                <div class="slide_meta_col">
-                  <div class="slide_year" aria-hidden="true">2025</div>
-                  <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
-                    skip<i class="fa-solid fa-chevron-down"></i>
-                  </button>
-                </div>
-                <div class="slide_dots" aria-hidden="true">
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                  <span class="dot"></span>
-                  <span class="dot active"></span>
-                </div>
-              </div>
-              <!-- //.slide_layout -->
-              <section id="section05" class="demo">
-                <!-- <h1>Scroll Down Button #5</h1> -->
-                <a href="#section06"><span></span>Scroll</a>
-              </section>
-            </div>
-            <!-- //.artist_slide -->
+          <!-- 인디케이터 dots -->
+          <div class="slide_dots_wrap">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
           </div>
         </div>
+
+        <!-- //horizontal_scroll_sticky -->
       </div>
+      <!-- //.horizontal_scroll_wrapper -->
+      <section id="section05" class="demo">
+        <a href="#section06"><span></span>Scroll</a>
+      </section>
 
       <!-- =====================
     2번: History 섹션
@@ -636,7 +448,7 @@
         <div class="video_grid">
           <div class="video_thumb">
             <iframe
-              src="https://www.youtube.com/embed/Y8zWL1FupD8?si=esIVoT_OL32_ZyqZ"
+              src="https://www.youtube.com/embed/Y8zWL1FupD8?si=esIVoT_OL32_ZyqZ&mute=1"
               title="YouTube video player"
               frameborder="0"
               allow="
@@ -656,7 +468,7 @@
 
           <div class="video_thumb">
             <iframe
-              src="https://www.youtube.com/embed/asestrMKq1I?si=yngSbw8J2vMV4N2u"
+              src="https://www.youtube.com/embed/asestrMKq1I?si=yngSbw8J2vMV4N2u&mute=1"
               title="YouTube video player"
               frameborder="0"
               allow="
@@ -676,7 +488,7 @@
 
           <div class="video_thumb">
             <iframe
-              src="https://www.youtube.com/embed/mQTU74dS5g0?si=l3FwO5-8ahawX2s5"
+              src="https://www.youtube.com/embed/mQTU74dS5g0?si=l3FwO5-8ahawX2s5&mute=1"
               title="YouTube video player"
               frameborder="0"
               allow="
