@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll('.skip_btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const historyEl = document.getElementById('history');
+        const historyEl = document.getElementById('history_skip');
         if (historyEl) historyEl.scrollIntoView({ behavior: 'smooth' });
       });
     });
