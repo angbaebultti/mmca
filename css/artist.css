@@ -10,14 +10,15 @@
   align-items: center;
   padding: 20px 136px;
   border-bottom: 1px solid var(--gray_06);
-  /* 이거 추가해 뒀어요! */
+  /* 이거 추가해 뒀어요! 헤더에 가려져서 */
   margin-top: 184px;
 }
  
 .page_title {
-  font-size: clamp(32px, 5vw, var(--h4));
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  /* font-size: clamp(32px, 5vw, var(--h1)); */
+  font-size: var(--h2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--main_white);
 }
  
@@ -35,7 +36,7 @@
 }
  
 .page_sub_nav a:hover {
-  opacity: 1;
+  /* opacity: 1; */
 }
  
  
@@ -78,7 +79,7 @@
   height: 100%;
   max-width: 1448px;
   margin: 0 auto;
-  padding: 50px 80px;
+  padding: 50px 100px;
   padding-top: 60px;
   /* display: grid; */
   grid-template-columns: minmax(0, 1fr) 176px 84px;
@@ -91,7 +92,7 @@
 
 .artist_left_col {
   min-width: 0;
-  width: 50%;
+  width: 45%;
   height: 100%;
   position: relative;
   display: flex;
@@ -121,18 +122,19 @@
 
 .artist_name {
   margin-bottom: 14px;
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.05;
+  font-size: 46px;
+  font-weight: 500;
+  line-height: normal;
   color: var(--main_white);
 }
 
 .artist_desc {
   max-width: 920px;
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.55;
+  font-weight: 300;
   color: var(--gray_04);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .slide_artworks {
@@ -270,15 +272,19 @@
    2번: History 섹션
 ============================================= */
 .history_section {
-  padding: 20px 136px;
+  display: flex;
+  flex-direction: column;
+  padding: 160px 136px;
   background: var(--main_black);
+  gap: 50px;
+  overflow: hidden;  /* 2025배경쉐도우애니 안잘리게 */
 }
  
 .history_title {
-  font-size: clamp(32px, 5vw, var(--h4));
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  margin-bottom: 48px;
+  /* font-size: clamp(32px, 5vw, var(--h4)); */
+  font-size: var(--h2);
+  font-weight: 600;
+  letter-spacing: -0.02em;
   color: var(--main_white);
   border-block: 1px solid var(--gray_06);
   padding: 20px 136px;
@@ -286,7 +292,8 @@
  
 /* 포스터 트랙 컨테이너 - overflow hidden으로 잘라냄 */
 .history_slider_wrap {
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow: visible; /* 2025배경쉐도우애니 안잘리게 */
   width: 100%;
   margin-bottom: 36px;
 }
@@ -296,20 +303,23 @@
   gap: 20px;
   transition: transform 0.35s ease;
   will-change: transform;
+  overflow: visible; /* 2025배경쉐도우애니 안잘리게 */
 }
  
 .poster_item {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  /* align-items: center; */
+  gap: 14px;
   cursor: pointer;
+  overflow: visible; /* 2025배경쉐도우애니 안잘리게 */
 }
- 
+
+
 .poster_item img {
-  width: 160px;
-  height: 220px;
+  width: 220px;
+  height: 300px;
   object-fit: cover;
   display: block;
   transition: opacity 0.2s;
@@ -320,19 +330,38 @@
 }
  
 .poster_year {
-  font-size: 13px;
-  color: var(--gray_03);
+font-size: 25px;
+font-weight: 400;
+line-height: normal;
+letter-spacing: -1.2px;
+  color: var(--gray_05);
 }
+
+/* 2025포스터 박스쉐도우 애니메이션 */
+@keyframes glowPulse {
+  0%   { box-shadow: 0 0 8px 2px rgba(255, 75, 36, 0); }
+  50%  { box-shadow: 0 0 24px 6px rgba(255, 255, 255, 0.5); }
+  100% { box-shadow: 0 0 8px 2px rgba(255, 75, 36, 0); }
+}
+
+.poster_item:first-child img {
+  animation: glowPulse 2.5s ease-in-out infinite;
+}
+
  
 /* 슬라이더 레버 바 */
 .history_slider_control {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 30px;
+  padding-inline: 220px;
 }
  
 .slider_label {
-  font-size: 13px;
+  font-size: 23px;
+font-weight: 400;
+line-height: normal;
+letter-spacing: -1px;
   color: var(--gray_03);
   flex-shrink: 0;
 }
@@ -353,10 +382,10 @@
   height: 1px;
   background: var(--gray_02);
 }
- 
+
 .slider_thumb {
-  width: 14px;
-  height: 14px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   background: var(--main_white);
   position: absolute;
@@ -379,11 +408,12 @@
 .modal_overlay {
   position: fixed;
   inset: 0;
-  z-index: 200;
+  z-index: 9999;
   background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s;
+  cursor: pointer;
 }
  
 .modal_overlay.active {
@@ -404,20 +434,30 @@
   padding: 64px 52px 80px;
   transform: translateX(-100%);
   transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+  cursor: default;
 }
  
 .modal_overlay.active .modal_panel {
   transform: translateX(0);
 }
+
+.modal_panel {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modal_panel::-webkit-scrollbar {
+  display: none;
+}
  
 .modal_close_btn {
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   float: right;
   background: none;
   border: none;
   color: var(--main_white);
-  font-size: 16px;
+  font-size: 26px;
   cursor: pointer;
   opacity: 0.55;
   transition: opacity 0.2s;
@@ -430,31 +470,30 @@
 }
  
 .modal_essay_title {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 8px;
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 3px;
   color: var(--main_white);
   clear: both;
 }
  
 .modal_essay_author {
-  font-size: 14px;
-  color: var(--gray_03);
+  font-size: 38px;
+  color: var(--gray_02);
   margin-bottom: 40px;
   line-height: 1.6;
-}
- 
-.modal_essay_author span {
-  font-size: 12px;
-  opacity: 0.7;
+  font-weight: 300;
+  letter-spacing: -1.8px;
 }
  
 .modal_essay_body p {
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.9;
-  color: var(--gray_04);
+  color: var(--gray_05);
   margin-bottom: 24px;
+  letter-spacing: 0.6px;
+  font-weight: 200;
 }
  
  
@@ -462,26 +501,25 @@
    4번: Video 섹션
 ============================================= */
 .video_section {
-  padding: 80px 40px 100px;
+  padding: 270px 40px 200px;
   background: var(--main_black);
   text-align: center;
-  border-top: 1px solid var(--gray_01);
 }
  
 .video_section_title {
-  font-size: var(--h7);
+  font-size: var(--h3);
   font-weight: 600;
-  letter-spacing: -0.02em;
-  margin-bottom: 40px;
+  letter-spacing: -1.4px;
+  margin-bottom: 70px;
   color: var(--main_white);
 }
  
 .video_grid {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 60px;
   flex-wrap: wrap;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
  
 .video_thumb {
@@ -542,4 +580,33 @@
  
 .view_more_btn:hover {
   border-color: var(--main_white);
+}
+
+
+/* 탑버튼 */
+.top_btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--gray_02);
+  background: var(--main_black);
+  color: var(--main_white);
+  font-size: 22px;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 100;
+}
+
+.top_btn.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.top_btn:hover {
+  background: var(--gray_01);
 }
