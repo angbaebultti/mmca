@@ -11,19 +11,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         menu.classList.add("active");
 
-        document.body.style.position = "fixed";
+        document.body.classList.add("menu_open");
+        /* document.body.style.position = "fixed";
         document.body.style.top = `-${scrollY}px`;
-        document.body.style.width = "100%"; 
+        document.body.style.width = "100%";  */
     });
 
     closeBtn.addEventListener("click", () => {
         menu.classList.remove("active");
+        document.body.classList.remove("menu_open");
+        window.scrollTo(0, scrollY);
+/*         menu.classList.remove("active");
 
         document.body.style.position = "";
         document.body.style.top = "";
         document.body.style.width = "";
 
-        window.scrollTo(0, scrollY);
+        window.scrollTo(0, scrollY); */
     });
 
 
