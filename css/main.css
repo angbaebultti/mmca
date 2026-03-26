@@ -10,13 +10,13 @@
   position: relative;
   width: 100%;
   height: 220vh;
-  overflow: hidden;
+  overflow: visible;
 }
 
-.visual_bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+.visual_inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
 }
 
 .visual_inner {
@@ -42,12 +42,12 @@
 
 .ticket {
   position: absolute;
-  right: 60px;
-  /* 🔥 화면 안으로 */
-  bottom: 120px;
+  top: 55%;
+  left: 60%;
+  transform: translate(-50%, -50%) scale(0.7);
   width: 600px;
-  /* 🔥 기준 박스 만들어줘야 함 */
   height: 300px;
+  opacity: 0;
 }
 
 .ticket_left {
@@ -67,6 +67,31 @@
   width: 430px;
   z-index: 1;
   transform: none;
+}
+
+
+.ticket_wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ticket_stack {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 200px;
+  pointer-events: none;
+}
+
+.ticket_piece {
+  position: absolute;
+  width: 400px;
+  left: 50%;
+  transform: translateX(-50%);
+  will-change: transform, opacity;
 }
 
 .info_wrap {
@@ -150,12 +175,6 @@
   justify-content: center;
 }
 
-.ticket_bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
 
 .t {
   position: absolute;
@@ -165,40 +184,6 @@
   pointer-events: none;
 }
 
-.t1 {
-  width: 220px;
-  left: 8%;
-  top: -280px;
-  transform: rotate(-15deg);
-}
-
-.t2 {
-  width: 380px;
-  left: 30%;
-  top: -320px;
-  transform: rotate(8deg);
-}
-
-.t3 {
-  width: 200px;
-  left: 58%;
-  top: -260px;
-  transform: rotate(-22deg);
-}
-
-.t4 {
-  width: 340px;
-  left: 72%;
-  top: -300px;
-  transform: rotate(12deg);
-}
-
-.t5 {
-  width: 180px;
-  left: 18%;
-  top: -200px;
-  transform: rotate(5deg);
-}
 
 .about_inner {
   position: relative;
@@ -331,7 +316,7 @@
 .artist_prize {
   position: relative;
   width: 100%;
-  height: 400vh;
+  height: 250vh;
   background: var(--main_black);
   overflow: visible;
   padding-bottom: 300px;
@@ -400,16 +385,6 @@
   transform-style: preserve-3d;
 }
 
-.shine {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
-  pointer-events: none;
-  opacity: 0;
-  z-index: 10;
-  transition: opacity 0.3s ease;
-}
 
 .card .top {
   position: relative;
@@ -463,7 +438,7 @@
 
 .card_2025 {
   width: 550px;
-   top: 750px;
+  top: 7px;
   right: 150px;
   z-index: 6;
   background: var(--main_white);
@@ -545,9 +520,10 @@
 
 .view_btn {
   position: absolute;
-  bottom: 120px;
+  top: 60%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  z-index: 100;
 }
 
 .view_btn a {
@@ -591,6 +567,60 @@
 .view_btn a:hover {
   color: #fff;
 }
+
+
+.artist_wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.artist_track {
+  display: flex;
+  align-items: center;
+  gap: 140px;
+  height: 100%;
+  padding-left: 15vw;
+  padding-right: 0;
+  will-change: transform;
+  width: max-content;
+}
+
+.artist_card {
+  width: 350px;
+  flex-shrink: 0;
+  transform: rotate(-6deg);
+  transition: transform 0.4s ease;
+  background: var(#1e1e1e);
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6);
+  margin: 16px;
+  padding: 16px;
+
+}
+
+.artist_card img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.artist_card p {
+  margin: 16px 0 16px 10px;
+  font-weight: 800;
+  font-size: 45px;
+  text-align: center;
+}
+
+
+
+.artist_card:nth-child(even) {
+  transform: rotate(6deg);
+}
+
 
 /* ===================== NEWS ===================== */
 
@@ -1116,3 +1146,4 @@
   background: rgba(30, 30, 30, 0.45);
   transition: background 0.4s ease;
 }
+

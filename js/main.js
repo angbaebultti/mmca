@@ -120,225 +120,69 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  /* ─── ARTIST PRIZE : 카드 인터랙션 ─── */
-  /* ─── ARTIST PRIZE : 카드 인터랙션 ─── */
 
-  const cards = gsap.utils.toArray(".card");
+const artist_cards = gsap.utils.toArray(".artist_card");
+const lines = gsap.utils.toArray(".line");
+const letters = gsap.utils.toArray(".title_main span");
 
-  // 카드별 parallax 강도
-  const depthMap = {
-    "card_2025": 0.025,
-    "card_2024": 0.018,
-    "card_2023": 0.012,
-    "card_2022": 0.020,
-    "card_2021": 0.015
-  };
+// 카드 초기 위치 세팅 — 오른쪽 밖에서 대기
+gsap.set(artist_cards, { opacity: 0, xPercent: 30 });
 
-  /* ================= FLOATING ================= */
+function getScrollAmount() {
+  const track = document.querySelector(".artist_track");
+  return -(track.scrollWidth - window.innerWidth);
+}
 
-  const floatTweens = new Map();
-
-  cards.forEach((card) => {
-    const tween = gsap.to(card, {
-      y: `+=${gsap.utils.random(8, 18)}`,
-      rotation: `+=${gsap.utils.random(0.5, 1.5)}`,
-      repeat: -1,
-      yoyo: true,
-      duration: gsap.utils.random(2.5, 4),
-      ease: "sine.inOut"
-    });
-
-    floatTweens.set(card, tween);
-  });
-
-  /* ================= 드래그 ================= */
-
-  cards.forEach((card) => {
-    let isDragging = false;
-    let targetX = 0;
-    let targetY = 0;
-
-    let currentX = 0;
-    let currentY = 0;
-
-    card.addEventListener("mousedown", (e) => {
-      isDragging = true;
-      card.dataset.dragging = "true";
-
-      floatTweens.get(card)?.pause();
-
-      gsap.to(card, {
-        scale: 1.08,
-        duration: 0.2
-      });
-
-      card.style.zIndex = 9999;
-    });
-
-    window.addEventListener("mousemove", (e) => {
-      if (!isDragging) return;
-
-      targetX += e.movementX;
-      targetY += e.movementY;
-    });
-
-    window.addEventListener("mouseup", () => {
-      if (!isDragging) return;
-
-      isDragging = false;
-      card.dataset.dragging = "false";
-
-      floatTweens.get(card)?.resume();
-
-      gsap.to(card, {
-        scale: 1,
-        duration: 0.3
-      });
-    });
-
-    // 🔥 핵심: ticker로 부드럽게 따라오게
-    gsap.ticker.add(() => {
-      if (!isDragging) return;
-
-      currentX += (targetX - currentX) * 0.2;
-      currentY += (targetY - currentY) * 0.2;
-
-      gsap.set(card, {
-        x: currentX,
-        y: currentY
-      });
-    });
-  });
-
-  /* ================= 진입 애니 ================= */
-
-  gsap.from(cards, {
-    y: 180,
-    opacity: 0,
-    scale: 0.88,
-    rotation: () => gsap.utils.random(-14, 14),
-    stagger: { each: 0.1, from: "random" },
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".artist_prize",
-      start: "top 70%",
-    }
-  });
-
-  /* ================= PARALLAX ================= */
-
-  let mouseX = 0, mouseY = 0;
-  let curX = 0, curY = 0;
-
-  document.addEventListener("mousemove", (e) => {
-    mouseX = e.clientX - window.innerWidth / 2;
-    mouseY = e.clientY - window.innerHeight / 2;
-  });
-
-  gsap.ticker.add(() => {
-    curX += (mouseX - curX) * 0.06;
-    curY += (mouseY - curY) * 0.06;
-
-    cards.forEach((card) => {
-      if (card.dataset.hovered === "true" || card.dataset.dragging === "true") return;
-
-      const key = [...card.classList].find(c => depthMap[c]);
-      const f = key ? depthMap[key] : 0.015;
-
-      gsap.set(card, {
-        x: curX * f,
-        y: curY * f,
-      });
-    });
-  });
-
-  /* ================= TILT + SHINE ================= */
-
-  cards.forEach((card) => {
-    const shine = card.querySelector(".shine");
-
-    card.addEventListener("mouseenter", () => {
-      card.dataset.hovered = "true";
-      if (shine) gsap.to(shine, { opacity: 1, duration: 0.3 });
-    });
-
-    card.addEventListener("mousemove", (e) => {
-      if (card.dataset.dragging === "true") return; // 🔥 드래그 중 tilt 막기
-
-      const rect = card.getBoundingClientRect();
-      const cx = e.clientX - rect.left;
-      const cy = e.clientY - rect.top;
-
-      const rotX = ((cy / rect.height) - 0.5) * -20;
-      const rotY = ((cx / rect.width) - 0.5) * 20;
-
-      gsap.to(card, {
-        rotationX: rotX,
-        rotationY: rotY,
-        scale: 1.04,
-        transformPerspective: 700,
-        ease: "power2.out",
-        duration: 0.3,
-      });
-
-      if (shine) {
-        gsap.to(shine, {
-          background: `radial-gradient(circle at ${(cx / rect.width) * 100}% ${(cy / rect.height) * 100}%, rgba(255,255,255,0.18) 0%, transparent 60%)`,
-          duration: 0.2,
-        });
-      }
-    });
-
-    card.addEventListener("mouseleave", () => {
-      card.dataset.hovered = "false";
-
-      gsap.to(card, {
-        rotationX: 0,
-        rotationY: 0,
-        scale: 1,
-        duration: 0.5,
-        ease: "power3.out",
-      });
-
-      if (shine) gsap.to(shine, { opacity: 0, duration: 0.4 });
-    });
-  });
+const masterTL = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".artist_prize",
+    start: "top top",
+    end: "+=4000", 
+    scrub: 1.2,
+    pin: true,
+    anticipatePin: 1,
+  }
+});
 
 
-  const lines = gsap.utils.toArray(".line");
-  const letters = gsap.utils.toArray(".title_main span");
+lines.forEach((line, i) => {
+  const spans = line.querySelectorAll("span");
+  masterTL.to(spans, {
+    color: "#fff",
+    stagger: 0.05,
+    ease: "none",
+    duration: 0.3,
+  }, i * 0.15);
+});
 
-  const masterTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".artist_prize",
-      start: "top top",
-      end: "+=2000",
-      scrub: 1,
-      pin: true,
-      anticipatePin: 1
-    }
-  });
+masterTL.to({}, { duration: 0.3 }); 
 
-  lines.forEach((line, i) => {
-    const spans = line.querySelectorAll("span");
-    masterTL.to(spans, {
-      color: "#fff",
-      stagger: 0.05,
-      ease: "none"
-    }, i * 0.15);
-  });
+masterTL.to(letters, {
+  x: () => gsap.utils.random(-200, 200),
+  y: () => gsap.utils.random(-200, 200),
+  rotation: () => gsap.utils.random(-60, 60),
+  opacity: 0,
+  filter: "blur(8px)",
+  stagger: { each: 0.02, from: "random" },
+  ease: "power2.out",
+  duration: 0.4,
+});
 
-  masterTL.to({}, { duration: 0.5 });
-  masterTL.to(letters, {
-    x: () => gsap.utils.random(-150, 150),
-    y: () => gsap.utils.random(-150, 150),
-    rotation: () => gsap.utils.random(-50, 50),
-    opacity: 0,
-    filter: "blur(6px)",
-    stagger: { each: 0.03, from: "random" },
-    ease: "power2.out"
-  });
+masterTL.to({}, { duration: 0.2 }); 
 
+masterTL.to(artist_cards, {
+  opacity: 1,
+  xPercent: 0,
+  stagger: 0.06,
+  ease: "power3.out",
+  duration: 0.4,
+});
+
+masterTL.to(".artist_track", {
+  x: getScrollAmount,
+  ease: "none",
+  duration: 1,      
+});
 
   /* ================= NEWS ================= */
 
