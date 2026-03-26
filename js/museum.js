@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+  /* =========================================================
+   * 1. 기본 DOM / 라이브러리 체크
+   * ========================================================= */
   const cube = document.getElementById("cube");
   const cubeStage = document.querySelector(".cube_stage");
   const introScene = document.querySelector(".intro_scene");
@@ -27,6 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   gsap.registerPlugin(ScrollTrigger);
 
+  /* =========================================================
+   * 2. Lenis 스크롤 세팅
+   * - 부드러운 스크롤과 ScrollTrigger 동기화
+   * ========================================================= */
   const lenis = new Lenis({
     lerp: 0.08,
     smoothWheel: true,
@@ -36,14 +43,20 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 
-  let isTransitioning = false;
-  let hasTriggeredExpand = false;
-  let isMuseumReady = false;
-  let horizontalRafId = null;
-  let cubeScrollTrigger = null;
+  /* =========================================================
+   * 3. 전역 상태값
+   * ========================================================= */
+  let isTransitioning = false; // 큐브 → 전시 전환 중인지
+  let hasTriggeredExpand = false; // 자동 확대가 이미 실행됐는지
+  let isMuseumReady = false; // 전시 섹션이 활성화되어 가로스크롤 준비가 끝났는지
+  let horizontalRafId = null; // 가로스크롤 RAF
+  let cubeScrollTrigger = null; // 큐브 ScrollTrigger 인스턴스
 
-  const currentX = new WeakMap();
+  const currentX = new WeakMap(); // 섹션별 현재 가로 이동값 저장
 
+  /* =========================================================
+   * 4. 공통 유틸
+   * ========================================================= */
   function lerp(a, b, t) {
     return a + (b - a) * t;
   }
@@ -63,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return el.getBoundingClientRect().top + window.scrollY;
   }
 
-  // 큐브 면별 정면 회전값
+  // 큐브 각 면이 정면을 보게 되는 회전값
   function getFaceRotation(targetId) {
     switch (targetId) {
       case "seoul":
@@ -79,6 +92,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  /* =========================================================
+   * 5. 가로 스크롤 초기화 / 리셋
+   * - 전시 섹션 진입 전후로 track 위치를 초기화
+   * ========================================================= */
   function resetHorizontalSection(section) {
     if (!section) return;
     const track = section.querySelector(".museum_h_track");
@@ -99,34 +116,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 가로 스크롤 이동값 계산
-  function getTargetX(section) {
-    const track = section.querySelector(".museum_h_track");
-    if (!track) return 0;
+/* =========================================================
+ * 6. 가로 스크롤 목표값 계산
+ * - 처음만 살짝 고정
+ * - 이후엔 자연스럽게 가로 이동
+ * ========================================================= */
+function getTargetX(section) {
+  const track = section.querySelector(".museum_h_track");
+  if (!track) return 0;
 
-    const sectionTop = getAbsoluteTop(section);
-    const rawProgress = Math.max(window.scrollY - sectionTop, 0);
+  const sectionTop = getAbsoluteTop(section);
+  const rawProgress = Math.max(window.scrollY - sectionTop, 0);
+  const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
 
-    const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
-    const cardWidth = window.innerWidth;
+  const startHold = 600; // 처음만 살짝 머무름
 
-    // 두 번째 카드쯤에서 살짝 머무는 느낌
-    const secondSlideEnd = cardWidth * 2;
-    const holdLength = 1500;
+  let targetX = 0;
 
-    let targetX;
-
-    if (rawProgress <= secondSlideEnd) {
-      targetX = rawProgress;
-    } else if (rawProgress <= secondSlideEnd + holdLength) {
-      targetX = secondSlideEnd;
-    } else {
-      targetX = rawProgress - holdLength;
-    }
-
-    return Math.max(0, Math.min(targetX, maxTranslate));
+  if (rawProgress <= startHold) {
+    targetX = 0;
+  } else {
+    targetX = rawProgress - startHold;
   }
 
+  return Math.max(0, Math.min(targetX, maxTranslate));
+}
+
+  /* =========================================================
+   * 7. 전시 헤더 압축 상태 제어
+   * - 가로 스크롤이 조금 진행되면 헤더를 compact 상태로 변경
+   * ========================================================= */
   function updateCompactHeader() {
     horizontalSections.forEach((section) => {
       if (!section.classList.contains("active")) {
@@ -145,6 +164,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* =========================================================
+   * 8. 가로 스크롤 애니메이션
+   * - 실제로 track을 부드럽게 이동시키는 부분
+   * ========================================================= */
   function animateHorizontal() {
     if (!isMuseumReady) {
       horizontalRafId = null;
@@ -174,29 +197,41 @@ document.addEventListener("DOMContentLoaded", () => {
     horizontalRafId = stillMoving ? requestAnimationFrame(animateHorizontal) : null;
   }
 
-  function setupHorizontalSections(callback) {
+/* =========================================================
+ * 9. 가로 스크롤 섹션 높이 세팅
+ * - 전체 스크롤 길이를 더 늘리고 싶을 때 여기서 조절
+ * ========================================================= */
+function setupHorizontalSections(callback) {
+  requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        horizontalSections.forEach((section) => {
-          if (!section.classList.contains("active")) return;
+      horizontalSections.forEach((section) => {
+        if (!section.classList.contains("active")) return;
 
-          const track = section.querySelector(".museum_h_track");
-          if (!track) return;
+        const track = section.querySelector(".museum_h_track");
+        if (!track) return;
 
-          resetHorizontalSection(section);
+        resetHorizontalSection(section);
 
-          const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
-          const holdLength = 1800;
+        const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
+        const startHold = 600;
+        const extraScroll = 1200; // 이 숫자 키우면 스크롤 길어짐
 
-          section.style.height = `${window.innerHeight + totalScrollX + holdLength}px`;
-        });
-
-        if (typeof callback === "function") callback();
+        section.style.height = `${
+          window.innerHeight + totalScrollX + startHold + extraScroll
+        }px`;
       });
-    });
-  }
 
-  // 전시 섹션으로 전환
+      if (typeof callback === "function") callback();
+    });
+  });
+}
+
+  /* =========================================================
+   * 10. 큐브 → 전시 섹션 전환
+   * - intro를 서서히 사라지게 하고
+   * - 선택된 전시 섹션만 활성화
+   * - 전환 직후 가로스크롤 시작
+   * ========================================================= */
   function switchToMuseum(targetSection) {
     isMuseumReady = false;
     cancelHorizontalAnimation();
@@ -253,47 +288,75 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 선택한 큐브 면 확대
-  function expandSelectedFace(face) {
-    const targetId = face.dataset.target;
-    const targetSection = document.getElementById(targetId);
-    if (!targetSection) return;
+  /* =========================================================
+   * 11. 선택한 큐브 면 확대
+   * - 클릭한 면만 남기고
+   * - 그 면이 정면에 오도록 회전
+   * - 큐브 전체가 아니라 "선택된 면이 중심인 상태"로 확대
+   * ========================================================= */
+function expandSelectedFace(face) {
+  const targetId = face.dataset.target;
+  const targetSection = document.getElementById(targetId);
 
-    const rotateY = getFaceRotation(targetId);
-
-    if (cubeScrollTrigger) {
-      cubeScrollTrigger.kill();
-      cubeScrollTrigger = null;
-    }
-
-    cubeFaces.forEach((item) => {
-      item.classList.remove("is_active", "is_hidden");
-    });
-
-    face.classList.add("is_active");
-
-    cubeFaces.forEach((item) => {
-      if (item !== face) item.classList.add("is_hidden");
-    });
-
-    gsap.to(cube, {
-      rotateY,
-      duration: 0.7,
-      ease: "power2.inOut",
-      onComplete() {
-        gsap.to(cubeStage, {
-          scale: 2,
-          duration: 1.3,
-          ease: "power2.out",
-          onComplete() {
-            switchToMuseum(targetSection);
-          },
-        });
-      },
-    });
+  // [BUG FIX] targetSection 없을 때 lenis/isTransitioning 복구
+  if (!targetSection) {
+    lenis.start();
+    isTransitioning = false;
+    return;
   }
 
-  // 자동 전환: 서울 면으로 진입
+  const rotateY = getFaceRotation(targetId);
+
+  if (cubeScrollTrigger) {
+    cubeScrollTrigger.kill();
+    cubeScrollTrigger = null;
+  }
+
+  cubeFaces.forEach((item) => {
+    item.classList.remove("is_active", "is_hidden");
+  });
+
+  face.classList.add("is_active");
+
+  cubeFaces.forEach((item) => {
+    if (item !== face) item.classList.add("is_hidden");
+  });
+
+  const tl = gsap.timeline();
+
+  tl.to(cube, {
+    rotateY,
+    duration: 1,
+    ease: "power2.inOut",
+  })
+    .to(
+      cubeStage,
+      {
+        scale: 2.15,
+        y: -20,
+        duration: 1.4,
+        ease: "power3.out",
+      },
+      "-=0.1"
+    )
+    .to(
+      introScene,
+      {
+        opacity: 0.35,
+        duration: 0.7,
+        ease: "power2.out",
+      },
+      "-=0.75"
+    )
+    .call(() => {
+      switchToMuseum(targetSection);
+    });
+}
+
+  /* =========================================================
+   * 12. 자동 진입
+   * - 큐브 스크롤 구간 마지막에서 자동으로 서울 면 확대
+   * ========================================================= */
   function triggerAutoExpand() {
     if (isTransitioning || hasTriggeredExpand) return;
 
@@ -308,7 +371,12 @@ document.addEventListener("DOMContentLoaded", () => {
     expandSelectedFace(seoulFace);
   }
 
-  // 큐브 스크롤 트리거
+  /* =========================================================
+   * 13. 큐브 스크롤 인터랙션
+   * - 스크롤에 따라 큐브가 회전
+   * - 마지막에는 서울 면이 정면에 오도록 정렬
+   * - 스크롤 중엔 큐브 크기 고정
+   * ========================================================= */
   function initCubeScrollTrigger() {
     if (cubeScrollTrigger) {
       cubeScrollTrigger.kill();
@@ -318,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cubeScrollTrigger = ScrollTrigger.create({
       trigger: introScene,
       start: "top top",
-      end: "+=300%",
+      end: "+=400%", // [BUG FIX] 300% → 400% (500vh 높이와 맞춤)
       scrub: 2,
       onUpdate(self) {
         if (isTransitioning) return;
@@ -326,16 +394,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const p = self.progress;
         let rotation;
 
-        // 초반엔 살짝만 돌고
+        // 초반엔 살짝 회전
         if (p < 0.8) {
           const spinProgress = p / 0.8;
           const easedSpin = 1 - Math.pow(1 - spinProgress, 3);
           rotation = easedSpin * 540; // 1.5바퀴
         } else {
-          // 마지막에 서울이 정면으로 오도록 정렬
+          // 후반엔 서울 면이 정면으로 오도록 정렬
           const settleProgress = (p - 0.8) / 0.2;
           const currentRotation = 540;
-          const targetRotation = 720; // 정면
+          const targetRotation = 720;
           rotation =
             currentRotation + (targetRotation - currentRotation) * settleProgress;
         }
@@ -354,7 +422,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 다시 큐브로 복귀
+  /* =========================================================
+   * 14. 전시 → 다시 큐브로 복귀
+   * - 전시 활성화 해제
+   * - 가로스크롤 상태 초기화
+   * - 큐브 초기 상태로 복구
+   * ========================================================= */
   function returnToCube() {
     isMuseumReady = false;
     cancelHorizontalAnimation();
@@ -386,8 +459,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     introScene.style.display = "";
-    introScene.style.opacity = "";
     introScene.classList.remove("is_leaving");
+    // [BUG FIX] introScene opacity 완전 복구 (expandSelectedFace에서 0.35로 낮춘 것 되돌리기)
+    gsap.set(introScene, { opacity: 1, clearProps: "opacity" });
 
     window.scrollTo(0, 0);
     lenis.scrollTo(0, { immediate: true });
@@ -401,8 +475,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* =========================================================
+   * 15. 초기 실행
+   * ========================================================= */
   initCubeScrollTrigger();
 
+  /* =========================================================
+   * 16. 전시 섹션 스크롤 이벤트
+   * - museum 상태일 때만 가로스크롤 애니메이션 실행
+   * ========================================================= */
   window.addEventListener(
     "scroll",
     () => {
@@ -417,6 +498,10 @@ document.addEventListener("DOMContentLoaded", () => {
     { passive: true }
   );
 
+  /* =========================================================
+   * 17. 리사이즈 대응
+   * - 화면 크기 변경 시 가로스크롤 거리 재계산
+   * ========================================================= */
   window.addEventListener("resize", () => {
     if (!museumWrap.classList.contains("active")) return;
 
@@ -437,6 +522,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  /* =========================================================
+   * 18. 탑 버튼 클릭 시 큐브로 복귀
+   * ========================================================= */
   if (topBtn) {
     topBtn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -444,7 +532,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 큐브 면 클릭 시 해당 전시로 이동
+  /* =========================================================
+   * 19. 큐브 면 클릭 시 해당 전시로 진입
+   * - 클릭한 면 기준으로 바로 확대 전환
+   * ========================================================= */
   cubeFaces.forEach((face) => {
     face.addEventListener("click", () => {
       if (isTransitioning) return;

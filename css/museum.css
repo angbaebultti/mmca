@@ -57,6 +57,8 @@ a {
   overflow: hidden;
 }
 
+/* [BUG FIX] transform: translate(-50%, -50%) 제거 → GSAP이 scale/y 건드릴 때 위치 날아가는 문제 수정
+   대신 margin으로 중앙 정렬 처리 */
 .cube_stage {
   position: absolute;
   top: 50%;
@@ -66,7 +68,8 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-50%, -50%);
+  margin-top: -280px;
+  margin-left: -500px;
   transform-style: preserve-3d;
   will-change: transform, opacity;
   z-index: 2;
@@ -140,15 +143,23 @@ a {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 2;
   color: var(--main_white);
-  font-size: clamp(56px, 6vw, 96px);
+  /* [BUG FIX] 확대 시 글씨 깨짐 방지
+     - 폰트를 3배 크게 렌더링 후 scale(0.333)으로 축소
+     - GPU가 고해상도 텍스트를 미리 확보해두므로 확대해도 선명하게 유지됨 */
+  font-size: clamp(168px, 18vw, 288px);
+  transform: translate(-50%, -50%) scale(0.333);
+  transform-origin: center center;
   font-weight: 700;
   letter-spacing: -0.05em;
   text-align: center;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
   pointer-events: none;
+  -webkit-font-smoothing: antialiased;
+  backface-visibility: hidden;
+  will-change: transform;
+  white-space: nowrap;
 }
 
 .face_seoul {
@@ -401,29 +412,61 @@ a {
 .museum_ticket {
   display: inline-flex;
   margin-top: 40px;
+  transition: transform 0.35s ease;
+  transform-origin: center;
 }
 
 .ticket_main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  border-radius: 5px;
+  padding: 5px 14px;
+  border-radius: 6px;
   border-right: 2px dashed var(--gray_01);
   background: var(--main_white);
   color: var(--main_black);
   font-size: 24px;
   font-weight: 600;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    transform 0.35s ease;
 }
 
 .ticket_stub {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px;
-  border-radius: 5px;
+  padding: 5px;
+  border-radius: 6px;
   background: var(--gray_06);
   color: var(--main_black);
+  transform-origin: left center;
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    transform 0.4s ease;
+  border-left: 2px dashed var(--gray_01);
+}
+
+/* 호버 */
+.museum_ticket:hover {
+  transform: rotate(-5deg);
+}
+
+.museum_ticket:hover .ticket_main,
+.museum_ticket:hover .ticket_stub {
+  color: var(--main_black);
+  /* background: #FF4B24; */
+}
+
+.museum_ticket:hover .ticket_main {
+  transform: translateX(1px);
+}
+
+.museum_ticket:hover .ticket_stub {
+  transform: rotate(12deg) translate(8px, 6px);
+  border-left: 2px dashed var(--gray_01);
 }
 
 /* ---------------- highlights ---------------- */
