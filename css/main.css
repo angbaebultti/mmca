@@ -11,6 +11,7 @@
   width: 100%;
   height: 220vh;
   overflow: visible;
+  z-index: 10;
 }
 
 .visual_inner {
@@ -19,12 +20,6 @@
   height: 100vh;
 }
 
-.visual_inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
 
 .main_title {
   font-size: var(--h1);
@@ -42,15 +37,33 @@
 
 .ticket {
   position: absolute;
-  top: 55%;
-  left: 60%;
-  transform: translate(-50%, -50%) scale(0.7);
+  top: 50%;
+  left: 50%;
+  /* translate를 JS에서 제어할 예정이라면 CSS에서는 위치만 잡아줍니다 */
+  transform: translate(-50%, -50%) scale(1); 
   width: 600px;
   height: 300px;
-  opacity: 0;
+  opacity: 1; /* 0에서 1로 변경하여 일단 보이게 설정 */
+  z-index: 30000;
+  /* background: red; <- 위치 확인용으로 켜두는 것 추천 */
+  pointer-events: none; /* 티켓 뒤 요소를 클릭해야 할 수도 있으므로 */
 }
 
-.ticket_left {
+.ticket_left, .ticket_right {
+  /* 이미지들이 부모(.ticket) 안에서 잘 보이는지 확인 */
+  display: block;
+  position: absolute;
+}
+
+.ticket_bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;   /* 혹시 없으면 추가 */
+  z-index: 0;
+}
+
+/* .ticket_left {
   position: absolute;
   left: -90px;
   bottom: -25px;
@@ -67,7 +80,7 @@
   width: 430px;
   z-index: 1;
   transform: none;
-}
+} */
 
 
 .ticket_wrap {
@@ -626,152 +639,118 @@
 
 .news {
   width: 100%;
-  padding: 120px 0;
   position: relative;
+  padding-top: 500px;
 }
 
 .news_inner {
   width: 1400px;
   margin: 0 auto;
   position: relative;
+  /* 탭 3개가 항상 보이도록 하단 padding */
+  padding-bottom: 180px;
 }
 
-/* 서류철 겹치기 — sticky 기본 구조 유지 */
+/* ── 폴더 기본 ── */
 .news_group {
-  position: sticky;
-  padding-top: 120px;
-  z-index: 10;
+  position: relative;
+  width: 100%;
   clip-path: polygon(0 0, 260px 0, 320px 60px, 100% 60px, 100% 100%, 0 100%);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-
-  /* 핵심: transition을 transform 하나만 담당 */
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: transform;
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
+  /* 기본: 탭만 보이도록 body 영역 숨김 */
+  overflow: hidden;
+  max-height: 80px; /* 탭 높이만 */
+  transition: max-height 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+  cursor: pointer;
 }
 
-.news_group:nth-child(1) {
-  top: 0;
-  z-index: 10;
+/* 활성화된 폴더: 전체 펼쳐짐 */
+.news_group.is-open {
+  max-height: 1000px;
+  cursor: default;
 }
 
-.news_group:nth-child(2) {
-  top: 80px;
-  z-index: 20;
-}
-
-.news_group:nth-child(3) {
-  top: 160px;
-  z-index: 30;
-}
-
-/* 호버된 그룹: 위로 확 올라옴 */
-.news_group.is-active {
-  transform: translateY(-100px);
-  z-index: 9999 !important;
-}
-
-/* 호버 안 된 나머지 그룹: 아래로 살짝 눌림 */
-.news_group.is-dimmed {
-  transform: translateY(24px);
-  opacity: 0.75;
-}
-
-/* 헤더 영역 */
+/* 탭 헤더 */
 .news_head {
-  position: absolute;
-  top: 20px;
-  left: -20px;
+  position: relative;
   width: 100%;
   height: 80px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 60px;
-  background: transparent;
+  align-items: flex-end;
+  padding: 0 60px 0 40px;
+  padding-top: 20px;
 }
 
 .news_head h2 {
   font-size: 60px;
   font-weight: 600;
   letter-spacing: var(--letter-spacing-base);
-  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  line-height: 1;
+  padding-bottom: 4px;
+  transition: opacity 0.3s ease;
 }
 
-/* 헤더 왼쪽 액센트 바 */
-.news_head h2::before {
-  content: "";
-  display: block;
-  width: 0px;
-  height: 50px;
-  border-radius: 3px;
-  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  flex-shrink: 0;
+/* 닫혀있을 때 살짝 흐리게 */
+.news_group:not(.is-open) .news_head h2 {
+  opacity: 0.45;
 }
 
-.news_group.events .news_head h2::before {
-  background: #111;
+/* 탭 호버 시 선명하게 */
+.news_group:not(.is-open):hover .news_head h2 {
+  opacity: 0.8;
 }
 
-.news_group.press .news_head h2::before {
-  background: #111;
+
+.news_group.is-open .news_head h2::before {
+  opacity: 1;
 }
 
-.news_group.notice .news_head h2::before {
-  background: #fff;
-}
+.news_group.events .news_head h2::before { background: #111; }
+.news_group.press  .news_head h2::before { background: #111; }
+.news_group.notice .news_head h2::before { background: #fff; }
 
-/* 호버 시 액센트 바 등장 */
-.news_group.is-active .news_head h2::before {
-  width: 6px;
-}
-
-/* 호버 시 헤더 텍스트 살짝 오른쪽으로 */
-.news_group.is-active .news_head h2 {
-  transform: translateX(4px);
-}
-
-.news_head a {
-  display: block;
-  color: #000;
-}
-
+/* View More — 열렸을 때만 보임 */
 .news_more {
   font-size: 22px;
-  color: var(--main_black);
   letter-spacing: var(--letter-spacing-base);
   position: absolute;
   right: 50px;
-  top: 70px;
+  top: 24px;
   display: flex;
   align-items: center;
   gap: 6px;
-  opacity: 0.5;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease 0.3s; /* 열린 후 딜레이 등장 */
 }
 
-/* 호버 시 View More 선명하게 */
-.news_group.is-active .news_more {
+.news_group.is-open .news_more {
   opacity: 1;
-  transform: translateX(4px);
+  pointer-events: auto;
 }
 
-.news_group.notice>.news_more {
-  color: var(--main_white);
-}
+.news_group.notice > .news_more { color: var(--main_white); }
 
+/* 바디 */
 .news_body {
-  padding: 100px 40px 60px;
+  padding: 40px 40px 80px;
   border-top: 1px solid #000;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s ease 0.2s,
+    transform 0.5s ease 0.2s;
 }
 
-.notice .news_body {
-  border-top: 1px solid var(--main_white);
+.news_group.is-open .news_body {
+  opacity: 1;
+  transform: translateY(0);
 }
+
+.notice .news_body { border-top: 1px solid var(--main_white); }
 
 .news_list {
   display: grid;
@@ -780,22 +759,17 @@
 }
 
 .news_card {
-  background: transparent;
   overflow: hidden;
-  transition: 0.3s;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-.news_card a {
-  display: block;
-}
+.news_card a { display: block; }
 
 .news_thumb {
   width: 100%;
   height: 400px;
-  background: #ccc;
   overflow: hidden;
 }
 
@@ -807,17 +781,13 @@
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* 카드 호버 시 이미지 줌 */
-.news_card:hover .news_thumb img {
-  transform: scale(1.05);
-}
+.news_card:hover .news_thumb img { transform: scale(1.05); }
 
 .news_txt {
   flex: 1;
   margin-top: 30px;
 }
 
-/* 공통 제목 */
 .news_group .news_txt h3 {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -832,7 +802,6 @@
   margin-bottom: 14px;
 }
 
-/* 공통 내용 */
 .news_group .news_txt p {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -845,10 +814,8 @@
   margin-bottom: 18px;
 }
 
-/* 공통 날짜 */
 .news_group .news_date {
   display: block;
-  font-family: Pretendard;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.4;
@@ -864,104 +831,39 @@
 }
 
 /* EVENTS */
-.events {
-  background: var(--gray_06);
-}
-
-.events .news_head {
-  color: #111;
-}
-
-.news_group.events .news_txt h3,
-.news_group.events .news_txt p {
-  color: #000;
-}
-
-.news_group.events .news_txt p {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.news_group.events .news_date {
-  color: #666;
-}
+.events { background: var(--gray_06); }
+.events .news_head { color: #111; }
+.news_group.events .news_txt h3 { color: #000; }
+.news_group.events .news_txt p  { color: rgba(0,0,0,0.5); }
+.news_group.events .news_date   { color: #666; }
 
 /* PRESS */
-.press {
-  background: #AFAFAF;
-}
-
-.press .news_head {
-  color: #111;
-}
-
-.news_group.press .news_txt h3 {
-  color: #000;
-}
-
-.news_group.press .news_txt p {
-  color: rgba(0, 0, 0, 0.5);
-}
-
-.news_group.press .news_date {
-  color: #666;
-}
+.press { background: #AFAFAF; }
+.press .news_head { color: #111; }
+.news_group.press .news_txt h3 { color: #000; }
+.news_group.press .news_txt p  { color: rgba(0,0,0,0.5); }
+.news_group.press .news_date   { color: #666; }
 
 /* NOTICE */
-.notice {
-  background: #1e1e1e;
-}
-
-.notice .news_head {
-  background: #1e1e1e;
-  color: #fff;
-}
-
-.notice .news_head a {
-  color: #fff;
-}
-
-.news_group.notice .news_txt {
-  margin-top: 26px;
-}
-
+.notice { background: #000000; }
+.notice .news_head     { color: #fff; }
+.notice .news_head a   { color: #fff; }
+.news_group.notice .news_txt  { margin-top: 26px; }
 .news_group.notice .news_cate {
   display: block;
-  margin-bottom: 10px;
-  font-family: Pretendard;
   font-size: 18px;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.72px;
+  margin-bottom: 10px;
 }
-
-.news_group.notice .news_txt h3 {
-  color: #fff;
-}
-
-.news_group.notice .news_txt p {
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.news_group.notice .news_date {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.news_group.notice .news_cate.gwacheon {
-  color: #00C389;
-}
-
-.news_group.notice .news_cate.seoul {
-  color: #FF5A36;
-}
-
-.news_group.notice .news_cate.recruit {
-  color: #F4E85A;
-}
-
-.news_group.notice .news_cate.tour {
-  color: #B8A07A;
-}
-
+.news_group.notice .news_txt h3 { color: #fff; }
+.news_group.notice .news_txt p  { color: rgba(255,255,255,0.65); }
+.news_group.notice .news_date   { color: rgba(255,255,255,0.6); }
+.news_group.notice .news_cate.gwacheon { color: #00C389; }
+.news_group.notice .news_cate.seoul    { color: #FF5A36; }
+.news_group.notice .news_cate.recruit  { color: #F4E85A; }
+.news_group.notice .news_cate.tour     { color: #B8A07A; }
 /* ===================== SHOP ===================== */
 
 .shop {
