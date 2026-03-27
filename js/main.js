@@ -162,253 +162,248 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1.4);
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          runStatAnimation();
-        }
-      });
-    }, { threshold: 0.4 });
-
-    observer.observe(aboutContent);
-  }
-
-
-  /* =========================================================
-   * 10. ARTIST PRIZE - 메인 가로 스크롤
-   * view_btn_card는 애니메이션 제외
-   * ========================================================= */
-  const artistCards = gsap.utils.toArray('.artist_card:not(.view_btn_card)');
-  const lines = gsap.utils.toArray('.artist_prize .line');
-  const letters = gsap.utils.toArray('.title_main span');
-
-  gsap.set(artistCards, { opacity: 0, xPercent: 30 });
-
-  function getScrollAmount() {
-    const track = document.querySelector('.artist_track');
-    if (!track) return 0;
-    return -(track.scrollWidth - window.innerWidth);
-  }
-
-  const masterTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.artist_prize', start: 'top top', end: '+=5500',
-      scrub: 1.2, pin: true, anticipatePin: 1
-    }
-  });
-
-  lines.forEach((line, i) => {
-    masterTL.to(line.querySelectorAll('span'), {
-      color: '#fff', stagger: 0.05, ease: 'none', duration: 0.3
-    }, i * 0.15);
-  });
-  masterTL.to({}, { duration: 0.3 });
-  masterTL.to(letters, {
-    x: () => gsap.utils.random(-200, 200),
-    y: () => gsap.utils.random(-200, 200),
-    rotation: () => gsap.utils.random(-60, 60),
-    opacity: 0, filter: 'blur(8px)',
-    stagger: { each: 0.02, from: 'random' }, ease: 'power2.out', duration: 0.4
-  });
-  masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.06, ease: 'power3.out', duration: 0.4 });
-  masterTL.to('.artist_track', { x: getScrollAmount, ease: 'none', duration: 1 });
-  masterTL.to({}, { duration: 0.4 });  // ← 이 줄 추가! view 버튼에서 잠깐 머무르기
-
-  /* =========================================================
- * 11. NEWS - 고급 탭 전환 + 커서 프리뷰
- * ========================================================= */
-  const groups = Array.from(document.querySelectorAll('.news_group'));
-
-  // 커서 프리뷰 엘리먼트 생성
-  const newsPreview = document.createElement('div');
-  newsPreview.id = 'newsPreview';
-  newsPreview.innerHTML = '<img id="previewImg" src="" alt="" />';
-  document.body.appendChild(newsPreview);
-  const previewImg = document.getElementById('previewImg');
-
-  let previewX = 0, previewY = 0;
-  let previewRX = 0, previewRY = 0;
-
-  (function lerpPreview() {
-    previewRX += (previewX - previewRX) * 0.1;
-    previewRY += (previewY - previewRY) * 0.1;
-    if (newsPreview) {
-      newsPreview.style.left = previewRX + 'px';
-      newsPreview.style.top = previewRY + 'px';
-    }
-    requestAnimationFrame(lerpPreview);
-  })();
-
-  document.addEventListener('mousemove', (e) => {
-    previewX = e.clientX;
-    previewY = e.clientY;
-  });
-
-  if (groups.length) {
-    groups[0].classList.add('is-open');
-
-    groups.forEach((group) => {
-      const head = group.querySelector('.news_head');
-      const body = group.querySelector('.news_body');
-      if (!head || !body) return;
-
-      // 탭 클릭
-      group.addEventListener('click', () => {
-        if (group.classList.contains('is-open')) {
-          const currentCards = group.querySelectorAll('.news_card');
-          gsap.to(currentCards, {
-            opacity: 0, y: -16,
-            stagger: 0.04, duration: 0.2, ease: 'power2.in',
-            onComplete: () => {
-              group.classList.remove('is-open');
-              gsap.set(currentCards, { opacity: 0, y: 24 });
-              group.style.cursor = 'pointer';
-            }
-          });
-          return;
-        }
-
-
-        const groupTop = group.getBoundingClientRect().top + window.scrollY;
-
-        const current = groups.find(g => g.classList.contains('is-open'));
-        if (current) {
-          const currentCards = current.querySelectorAll('.news_card');
-          gsap.to(currentCards, {
-            opacity: 0, y: -16,
-            stagger: 0.04, duration: 0.2, ease: 'power2.in',
-            onComplete: () => {
-              current.classList.remove('is-open');
-              gsap.set(currentCards, { opacity: 0, y: 24 });
-
-              group.classList.add('is-open');
-              const newCards = group.querySelectorAll('.news_card');
-              gsap.set(newCards, { opacity: 0, y: 24 });
-              gsap.to(newCards, {
-                opacity: 1, y: 0,
-                stagger: 0.08, duration: 0.5, ease: 'power3.out',
-                delay: 0.05
-              });
-            }
-          });
-        } else {
-          group.classList.add('is-open');
-          const newCards = group.querySelectorAll('.news_card');
-          gsap.set(newCards, { opacity: 0, y: 24 });
-          gsap.to(newCards, {
-            opacity: 1, y: 0,
-            stagger: 0.08, duration: 0.5, ease: 'power3.out'
-          });
-        }
-      });
-
-      // 카드 hover 시 커서 프리뷰
-      const cards = group.querySelectorAll('.news_card');
-      cards.forEach(card => {
-        const img = card.querySelector('.news_thumb img');
-        if (!img) return;
-        card.addEventListener('mouseenter', () => {
-          previewImg.src = img.src;
-          newsPreview.classList.add('is-visible');
-        });
-        card.addEventListener('mouseleave', () => {
-          newsPreview.classList.remove('is-visible');
-        });
-      });
-    });
-
-    // 초기 열린 탭 카드 애니메이션
-    const initCards = groups[0].querySelectorAll('.news_card');
-    gsap.set(initCards, { opacity: 0, y: 24 });
-    gsap.to(initCards, {
-      opacity: 1, y: 0,
-      stagger: 0.08, duration: 0.6, ease: 'power3.out',
-      delay: 0.3
+    ScrollTrigger.create({
+      trigger: about,
+      start: 'top+=60% top',
+      onEnter: () => runStatAnimation(),
+      onEnterBack: () => runStatAnimation(),
     });
   }
-  /* =========================================================
-   * 12. SHOP
+    /* =========================================================
+     * 10. ARTIST PRIZE - 메인 가로 스크롤
+     * view_btn_card는 애니메이션 제외
+     * ========================================================= */
+    const artistCards = gsap.utils.toArray('.artist_card:not(.view_btn_card)');
+    const lines = gsap.utils.toArray('.artist_prize .line');
+    const letters = gsap.utils.toArray('.title_main span');
+
+    gsap.set(artistCards, { opacity: 0, xPercent: 30 });
+
+    function getScrollAmount() {
+      const track = document.querySelector('.artist_track');
+      if (!track) return 0;
+      return -(track.scrollWidth - window.innerWidth);
+    }
+
+    const masterTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.artist_prize', start: 'top top', end: '+=5500',
+        scrub: 1.2, pin: true, anticipatePin: 1
+      }
+    });
+
+    lines.forEach((line, i) => {
+      masterTL.to(line.querySelectorAll('span'), {
+        color: '#fff', stagger: 0.05, ease: 'none', duration: 0.3
+      }, i * 0.15);
+    });
+    masterTL.to({}, { duration: 0.3 });
+    masterTL.to(letters, {
+      x: () => gsap.utils.random(-200, 200),
+      y: () => gsap.utils.random(-200, 200),
+      rotation: () => gsap.utils.random(-60, 60),
+      opacity: 0, filter: 'blur(8px)',
+      stagger: { each: 0.02, from: 'random' }, ease: 'power2.out', duration: 0.4
+    });
+    masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.06, ease: 'power3.out', duration: 0.4 });
+    masterTL.to('.artist_track', { x: getScrollAmount, ease: 'none', duration: 1 });
+    masterTL.to({}, { duration: 0.4 });  // ← 이 줄 추가! view 버튼에서 잠깐 머무르기
+
+    /* =========================================================
+   * 11. NEWS - 고급 탭 전환 + 커서 프리뷰
    * ========================================================= */
-  const positions = [
-    { x: -580, y: -280, r: -15 }, { x: 120, y: -320, r: 10 }, { x: 560, y: -200, r: 20 },
-    { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
-    { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 }
-  ];
+    const groups = Array.from(document.querySelectorAll('.news_group'));
 
-  gsap.set('.p', { x: 0, y: 0, scale: 0.5, opacity: 0, rotation: (i) => positions[i].r * 0.3 });
+    // 커서 프리뷰 엘리먼트 생성
+    const newsPreview = document.createElement('div');
+    newsPreview.id = 'newsPreview';
+    newsPreview.innerHTML = '<img id="previewImg" src="" alt="" />';
+    document.body.appendChild(newsPreview);
+    const previewImg = document.getElementById('previewImg');
 
-  const shopTL = gsap.timeline({
-    scrollTrigger: { trigger: '.shop', start: 'top top', end: 'bottom top', scrub: 1.2 }
-  });
+    let previewX = 0, previewY = 0;
+    let previewRX = 0, previewRY = 0;
 
-  shopTL.to('.p', { opacity: 0.7, scale: 0.6, duration: 0.25, ease: 'power1.out' }, 0);
-  document.querySelectorAll('.p').forEach((el, i) => {
-    shopTL.to(el, {
-      opacity: 1, scale: 1, x: positions[i].x, y: positions[i].y,
-      rotation: positions[i].r, ease: 'expo.out', duration: 0.7
+    (function lerpPreview() {
+      previewRX += (previewX - previewRX) * 0.1;
+      previewRY += (previewY - previewRY) * 0.1;
+      if (newsPreview) {
+        newsPreview.style.left = previewRX + 'px';
+        newsPreview.style.top = previewRY + 'px';
+      }
+      requestAnimationFrame(lerpPreview);
+    })();
+
+    document.addEventListener('mousemove', (e) => {
+      previewX = e.clientX;
+      previewY = e.clientY;
+    });
+
+    if (groups.length) {
+      groups[0].classList.add('is-open');
+
+      groups.forEach((group) => {
+        const head = group.querySelector('.news_head');
+        const body = group.querySelector('.news_body');
+        if (!head || !body) return;
+
+        // 탭 클릭
+        group.addEventListener('click', () => {
+          if (group.classList.contains('is-open')) {
+            const currentCards = group.querySelectorAll('.news_card');
+            gsap.to(currentCards, {
+              opacity: 0, y: -16,
+              stagger: 0.04, duration: 0.2, ease: 'power2.in',
+              onComplete: () => {
+                group.classList.remove('is-open');
+                gsap.set(currentCards, { opacity: 0, y: 24 });
+                group.style.cursor = 'pointer';
+              }
+            });
+            return;
+          }
+
+
+          const groupTop = group.getBoundingClientRect().top + window.scrollY;
+
+          const current = groups.find(g => g.classList.contains('is-open'));
+          if (current) {
+            const currentCards = current.querySelectorAll('.news_card');
+            gsap.to(currentCards, {
+              opacity: 0, y: -16,
+              stagger: 0.04, duration: 0.2, ease: 'power2.in',
+              onComplete: () => {
+                current.classList.remove('is-open');
+                gsap.set(currentCards, { opacity: 0, y: 24 });
+
+                group.classList.add('is-open');
+                const newCards = group.querySelectorAll('.news_card');
+                gsap.set(newCards, { opacity: 0, y: 24 });
+                gsap.to(newCards, {
+                  opacity: 1, y: 0,
+                  stagger: 0.08, duration: 0.5, ease: 'power3.out',
+                  delay: 0.05
+                });
+              }
+            });
+          } else {
+            group.classList.add('is-open');
+            const newCards = group.querySelectorAll('.news_card');
+            gsap.set(newCards, { opacity: 0, y: 24 });
+            gsap.to(newCards, {
+              opacity: 1, y: 0,
+              stagger: 0.08, duration: 0.5, ease: 'power3.out'
+            });
+          }
+        });
+
+        // 카드 hover 시 커서 프리뷰
+        const cards = group.querySelectorAll('.news_card');
+        cards.forEach(card => {
+          const img = card.querySelector('.news_thumb img');
+          if (!img) return;
+          card.addEventListener('mouseenter', () => {
+            previewImg.src = img.src;
+            newsPreview.classList.add('is-visible');
+          });
+          card.addEventListener('mouseleave', () => {
+            newsPreview.classList.remove('is-visible');
+          });
+        });
+      });
+
+      // 초기 열린 탭 카드 애니메이션
+      const initCards = groups[0].querySelectorAll('.news_card');
+      gsap.set(initCards, { opacity: 0, y: 24 });
+      gsap.to(initCards, {
+        opacity: 1, y: 0,
+        stagger: 0.08, duration: 0.6, ease: 'power3.out',
+        delay: 0.3
+      });
+    }
+    /* =========================================================
+     * 12. SHOP
+     * ========================================================= */
+    const positions = [
+      { x: -580, y: -280, r: -15 }, { x: 120, y: -320, r: 10 }, { x: 560, y: -200, r: 20 },
+      { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
+      { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 }
+    ];
+
+    gsap.set('.p', { x: 0, y: 0, scale: 0.5, opacity: 0, rotation: (i) => positions[i].r * 0.3 });
+
+    const shopTL = gsap.timeline({
+      scrollTrigger: { trigger: '.shop', start: 'top top', end: 'bottom top', scrub: 1.2 }
+    });
+
+    shopTL.to('.p', { opacity: 0.7, scale: 0.6, duration: 0.25, ease: 'power1.out' }, 0);
+    document.querySelectorAll('.p').forEach((el, i) => {
+      shopTL.to(el, {
+        opacity: 1, scale: 1, x: positions[i].x, y: positions[i].y,
+        rotation: positions[i].r, ease: 'expo.out', duration: 0.7
+      }, 0.25);
+    });
+    shopTL.to('.glass_front', {
+      background: 'rgba(255, 255, 255, 0.95)',
+      boxShadow: '0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)',
+      backdropFilter: 'blur(0px)', duration: 0.4
     }, 0.25);
-  });
-  shopTL.to('.glass_front', {
-    background: 'rgba(255, 255, 255, 0.95)',
-    boxShadow: '0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)',
-    backdropFilter: 'blur(0px)', duration: 0.4
-  }, 0.25);
-  shopTL.to('.glass_front h2', { color: '#000', duration: 0.3 }, 0.3);
-  shopTL.to('.glass_front p', { color: '#555', duration: 0.3 }, 0.3);
-  shopTL.to('.glow_bg', { opacity: 0.7, scale: 1.8, filter: 'blur(80px)', duration: 0.5 }, 0.25);
-  shopTL.to('.glass_box', { scale: 1.04, z: 80, duration: 0.8, ease: 'power3.out' }, 0.25);
+    shopTL.to('.glass_front h2', { color: '#000', duration: 0.3 }, 0.3);
+    shopTL.to('.glass_front p', { color: '#555', duration: 0.3 }, 0.3);
+    shopTL.to('.glow_bg', { opacity: 0.7, scale: 1.8, filter: 'blur(80px)', duration: 0.5 }, 0.25);
+    shopTL.to('.glass_box', { scale: 1.04, z: 80, duration: 0.8, ease: 'power3.out' }, 0.25);
 
-  /* =========================================================
-   * 13. 커서 UI
-   * ========================================================= */
-  document.body.insertAdjacentHTML('beforeend', `
+    /* =========================================================
+     * 13. 커서 UI
+     * ========================================================= */
+    document.body.insertAdjacentHTML('beforeend', `
     <div class="cursor-ring" id="cursorRing">ENTER ↗</div>
     <div class="cursor-dot" id="cursorDot"></div>
   `);
 
-  const ring = document.getElementById('cursorRing');
-  const dot = document.getElementById('cursorDot');
-  let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
+    const ring = document.getElementById('cursorRing');
+    const dot = document.getElementById('cursorDot');
+    let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
 
-  document.addEventListener('mousemove', (e) => {
-    mx = e.clientX; my = e.clientY;
-    if (dot) { dot.style.left = mx + 'px'; dot.style.top = my + 'px'; }
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (dot) { dot.style.left = mx + 'px'; dot.style.top = my + 'px'; }
+    });
+
+    (function lerpRing() {
+      rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+      if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+      requestAnimationFrame(lerpRing);
+    })();
+
+    const shopSection = document.querySelector('.shop');
+    const glassBox = document.querySelector('.glass_box');
+
+    if (glassBox && ring && dot) {
+      glassBox.addEventListener('mouseenter', () => {
+        ring.classList.add('shop-hover');
+        dot.style.opacity = '0';
+      });
+      glassBox.addEventListener('mouseleave', () => {
+        ring.classList.remove('shop-hover');
+        dot.style.opacity = '1';
+      });
+    }
+
+    if (glassBox) {
+      glassBox.addEventListener('mousemove', (e) => {
+        const rect = glassBox.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        gsap.to(glassBox, { x: x * 0.08, y: y * 0.08, duration: 0.5, ease: 'power2.out' });
+      });
+      glassBox.addEventListener('mouseleave', () => {
+        gsap.to(glassBox, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)' });
+      });
+    }
+
+    /* =========================================================
+     * 14. 리사이즈 갱신
+     * ========================================================= */
+    window.addEventListener('resize', () => ScrollTrigger.refresh());
   });
-
-  (function lerpRing() {
-    rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
-    if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
-    requestAnimationFrame(lerpRing);
-  })();
-
-  const shopSection = document.querySelector('.shop');
-  const glassBox = document.querySelector('.glass_box');
-
-  if (glassBox && ring && dot) {
-    glassBox.addEventListener('mouseenter', () => {
-      ring.classList.add('shop-hover');
-      dot.style.opacity = '0';
-    });
-    glassBox.addEventListener('mouseleave', () => {
-      ring.classList.remove('shop-hover');
-      dot.style.opacity = '1';
-    });
-  }
-
-  if (glassBox) {
-    glassBox.addEventListener('mousemove', (e) => {
-      const rect = glassBox.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      gsap.to(glassBox, { x: x * 0.08, y: y * 0.08, duration: 0.5, ease: 'power2.out' });
-    });
-    glassBox.addEventListener('mouseleave', () => {
-      gsap.to(glassBox, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)' });
-    });
-  }
-
-  /* =========================================================
-   * 14. 리사이즈 갱신
-   * ========================================================= */
-  window.addEventListener('resize', () => ScrollTrigger.refresh());
-});
