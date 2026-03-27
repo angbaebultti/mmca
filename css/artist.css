@@ -8,7 +8,6 @@
   padding: 20px 136px;
   border-bottom: 1px solid var(--gray_06);
   margin-top: 161px;
-  
 }
 
 .page_title {
@@ -124,6 +123,50 @@
   height: 100%;
 }
 
+.artwork_card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.artwork_card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.artwork_card::before {
+  content: "";
+  position: absolute;
+  inset: -30% 0 auto;
+  height: 60%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0.14) 78%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  transform: translateY(-135%) skewY(-4deg);
+}
+
+.artwork_card.glass-flow::before {
+  animation: artworkGlassFlow 0.95s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
 .slide_artworks img {
   display: block;
   width: 350px;
@@ -131,6 +174,23 @@
   object-fit: cover;
   background: var(--gray_01);
   flex: none;
+}
+
+@keyframes artworkGlassFlow {
+  0% {
+    opacity: 0;
+    transform: translateY(-135%) skewY(-4deg);
+  }
+  18% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 0.92;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(265%) skewY(-4deg);
+  }
 }
 
 .slide_meta_col {
@@ -324,11 +384,17 @@
   height: 300px;
   object-fit: cover;
   display: block;
-  transition: opacity 0.2s;
+  /* History poster hover: add a softer zoom without breaking the layout. */
+  transform: scale(1);
+  transform-origin: center center;
+  transition:
+    opacity 0.35s ease,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .poster_item:hover img {
-  opacity: 0.75;
+  opacity: 0.6;
+  transform: scale(1.06);
 }
 
 .poster_year {

@@ -63,10 +63,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const nameEl = document.getElementById("slideName");
     const descEl = document.getElementById("slideDesc");
     const artworksEl = document.getElementById("slideArtworks");
+    const artworkEffectTimers = [];
     // slide_dots 안의 dot 선택 (slide_dots_wrap 또는 slide_dots 모두 대응)
     const dots = document.querySelectorAll(
       ".slide_dots .dot, .slide_dots_wrap .dot",
     );
+
+    function ensureArtworkCards() {
+      const directImages = Array.from(artworksEl.children).filter(
+        (child) => child.tagName === "IMG",
+      );
+
+      directImages.forEach((img) => {
+        const card = document.createElement("div");
+        card.className = "artwork_card";
+        artworksEl.insertBefore(card, img);
+        card.appendChild(img);
+      });
+    }
+
+    function runArtworkGlassEffect() {
+      artworkEffectTimers.forEach((timerId) => clearTimeout(timerId));
+      artworkEffectTimers.length = 0;
+
+      const cards = artworksEl.querySelectorAll(".artwork_card");
+      cards.forEach((card, index) => {
+        card.classList.remove("glass-flow");
+
+        const timerId = window.setTimeout(() => {
+          card.classList.add("glass-flow");
+          const cleanupId = window.setTimeout(() => {
+            card.classList.remove("glass-flow");
+          }, 980);
+          artworkEffectTimers.push(cleanupId);
+        }, index * 80);
+
+        artworkEffectTimers.push(timerId);
+      });
+    }
+
+    ensureArtworkCards();
 
     function updateContent(index) {
       if (isAnimating) return;
@@ -84,9 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
         photoEl.src = s.photo;
         nameEl.textContent = s.name;
         descEl.textContent = s.desc;
-        const imgs = artworksEl.querySelectorAll("img");
-        imgs.forEach((img, i) => {
-          img.src = s.artworks[i];
+        const cards = artworksEl.querySelectorAll(".artwork_card");
+        cards.forEach((card, i) => {
+          const baseImg = card.querySelector("img");
+          if (baseImg) baseImg.src = s.artworks[i];
         });
 
         // 페이드 인
@@ -94,6 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         artworksEl.style.opacity = "1";
         nameEl.style.opacity = "1";
         descEl.style.opacity = "1";
+        runArtworkGlassEffect();
 
         isAnimating = false;
       }, 500); // 500ms로 늘려서 부드럽게
@@ -128,6 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       { passive: true },
     );
+
+    runArtworkGlassEffect();
 
     document.querySelectorAll(".skip_btn").forEach((btn) => {
       btn.addEventListener("click", () => {
