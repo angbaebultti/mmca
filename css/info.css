@@ -3,6 +3,7 @@
 body {
   background-color: #1e1e1e;
   position: relative;
+  overflow-y: scroll;
 }
 
 .wrap {
@@ -19,8 +20,21 @@ body {
  font-size: var(--h1);
  font-style: normal;
  font-weight: 600;
+ line-height: 0.9;
  display: flex;
  flex: 1;
+ animation: slide_in_up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes slide_in_up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .plan .inner{
@@ -84,10 +98,12 @@ body {
   width: 2px;
   height: 24px;
   background: #fff;
-  transition: opacity 0.3s;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              opacity  0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .plan .inner .plus[aria-expanded="true"]::after {
+  transform: rotate(90deg);
   opacity: 0;
 }
 
@@ -101,18 +117,36 @@ body {
 .plan .inner .container {
     display: grid;
     grid-template-columns: 20px 1fr;
+    grid-template-rows: 1fr;
     column-gap: 60px;
     align-items: center;
     margin: 26px 0 24px;
     padding: 20px;
+    overflow: hidden;
+    opacity: 1;
+    transition: grid-template-rows 0.45s ease,
+                opacity 0.35s ease,
+                margin 0.45s ease,
+                padding 0.45s ease;
 }
 
 .plan .inner .container[aria-hidden="true"] {
-    display: none;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .plan .inner .container[aria-hidden="false"] {
-    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin: 26px 0 24px;
+    padding: 20px;
+}
+
+.plan .inner .container > * {
+    min-height: 0;
 }
 
 .plan .inner .icon {
@@ -911,11 +945,10 @@ color:#333;
 
 /* =============================================
    MUSEUM MAP
-   getting 섹션 아래 / convenient 위에 위치
    ============================================= */
 
 .museum_map {
-  padding: 80px 120px;
+  padding: 200px 120px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -1090,6 +1123,7 @@ color:#333;
   color: #fff;
   padding-left: 6px;
 }
+
 
 /* 마우스 */
 * { cursor: none; }
