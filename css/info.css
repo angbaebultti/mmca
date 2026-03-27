@@ -92,7 +92,7 @@
 .plan .inner .container {
     display: grid;
     grid-template-columns: 20px 1fr;
-    column-gap: 24px;
+    column-gap: 60px;
     align-items: center;
     margin: 26px 0 24px;
     padding: 20px;
@@ -225,9 +225,13 @@ display:flex;
 flex-direction:column;
 }
 
-/* getting here 타이틀과 탭메뉴 사이 간격 */
+/* getting here 타이틀 */
 .getting h1.heading {
-    margin-bottom: 50px;
+    margin-bottom: 60px;
+    font-size: var(--h1);
+    font-weight: 600;
+    line-height: 1.1;
+
 }
 
 .getting .inner{
@@ -298,7 +302,7 @@ flex-direction:column;
 align-items:flex-start;
 gap:33px;
 width:601px;
-height:390px;
+height:380px;
 padding:46px;
 border-radius:15px;
 border:1px solid rgba(255,255,255,0.2);
@@ -308,6 +312,12 @@ flex-shrink:0;
 }
 
 /* station title */
+.station_group {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
 .station{
 display:flex;
 align-items:center;
@@ -323,7 +333,7 @@ color:#fff;
 display:flex;
 justify-content:center;
 align-items:center;
-padding:10px 25px;
+padding:5px 15px;
 border-radius:16px;
 font-size: 26px;
 font-weight:600;
@@ -349,7 +359,7 @@ gap:18px;
 display:flex;
 align-items:center;
 gap:10px;
-padding:10px 20px;
+padding:8px 16px;
 border-radius:16px;
 background:#383839;
 font-size:20px;
@@ -364,8 +374,10 @@ font-size:20px;
 /* description */
 .station_desc{
 color:#F5F5F5;
-font-size:20px;
+font-family:"Pretendard Variable", Pretendard, sans-serif;
+font-size: 21px;
 line-height:1.4;
+letter-spacing:-0.02em;
 max-width:420px;
 }
 
@@ -388,96 +400,390 @@ cursor:pointer;
 font-size:20px;
 }
 
-/* shuttle */
-
-.sh_top{
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.viewmap_btn:hover{
+background:#fff;
+color:#333;
+font-weight: 500;
+transition: .5s;
 }
 
-.shuttle_panel .sh_top .station{
-    display: flex;
-    flex-direction: column;
+.viewmap_btn:hover i{
+color:#333;
 }
 
-.shuttle_panel .sh_top .station .shuttle{
-    width: 100%;
-    display: flex;
-    font-size: 32px;
-    font-weight: 600;
+/* Bus */
+.bus11{
+background:#09ba0c;
 }
 
-.shuttle_panel .sh_top .station .sd {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+.bus01{
+background:#f2ce00;
 }
 
-.shuttle_panel .sh_top .station .sd .way{
-    display: flex;
-    width: fit-content;
-    padding: 8px 10px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--main_white);
+/* shuttle — 이미지4 스타일 */
 
+.shuttle_panel {
+  display: none;
+  gap: 25px;
+  align-items: stretch;
 }
 
-.bus_panel .sh_top .station .sd .way span {
-    font-size: 28px;
-    font-weight: 400;
+.shuttle_panel.is_active {
+  display: flex;
 }
 
-
-.sh_top .station .route {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+/* 공통 카드 */
+.sh_card {
+  display: flex;
+  flex-direction: column;
+  width: 601px;
+  padding: 46px;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(45, 45, 45, 0.6);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+  gap: 0;
 }
 
-.sh_top .station .route .way{
-    width: 145px;
-    display: flex;
-    width: fit-content;
-    padding: 8px 10px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--main_white);
+.sh_card_right {
+  height: fit-content;
 }
 
-.sh_top .station .dt {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 16px;
+/* label 행 (ICON + 라벨 텍스트) */
+.sh_label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.sh_top .station .dt .way{
-    width: 145px;
-    display: flex;
-    width: fit-content;
-    padding: 8px 10px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 10px;
-    border: 1px solid var(--main_white);
+.sh_label_text {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
+.sh_icon_green {
+  color: #4ade80;
+  font-size: 20px;
+}
 
-.sh_top .station .sd span,
-.sh_top .station .route span,
-.sh_top .station .dt span {
-  color: #FFF;
-  font-size: 24px;
+/* SERVICE DAY 텍스트 */
+.sh_service_day {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.sh_closed {
   font-weight: 400;
-  letter-spacing: -1.2px;
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
+/* 구분선 */
+.sh_divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 32px 0;
+}
+
+/* ROUTE */
+.sh_route_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 4px;
+}
+
+.sh_route_item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sh_dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.sh_dot_green {
+  background: #4ade80;
+}
+
+.sh_dot_yellow {
+  background: #facc15;
+}
+
+.sh_route_name {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.sh_route_line {
+  width: 2px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-left: 4px;
+}
+
+/* 오른쪽 카드 — DEPARTURE TIME */
+.sh_card_right {
+  gap: 0;
+}
+
+.sh_schedule_top {
+  margin-bottom: 32px;
+}
+
+.sh_title_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sh_schedule_title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.sh_clock_icon {
+  font-size: 28px;
+}
+
+/* 시간표 리스트 */
+.sh_schedule_list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sh_schedule_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sh_dep_label {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: -0.3px;
+}
+
+.sh_dep_time {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4ade80;
+  letter-spacing: 0.02em;
+}
+
+.sh_dot_blue {
+  background: #60a5fa;
+}
+
+/* 탑승 위치 설명 */
+.sh_boarding_desc {
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+  letter-spacing: -0.3px;
+  margin-top: 2px;
+}
+
+/* 방향 배지 (Outbound / Return) */
+.sh_route_direction {
+  display: flex;
+  align-items: center;
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+.sh_route_direction_return {
+  margin-top: 28px;
+}
+
+.sh_direction_badge {
+  display: inline-flex;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.03em;
+}
+
+/* 운행 중단 안내 */
+.sh_notice {
+  margin-top: 20px;
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.5;
+  letter-spacing: -0.2px;
+}
+
+/* 무료 배지 */
+.sh_free_badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: rgba(74, 222, 128, 0.08);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  font-size: 20px;
+  font-weight: 500;
+  color: #4ade80;
+  letter-spacing: -0.2px;
+}
+
+/* convenient 섹션 */
+.convenient h1.heading{
+font-size:var(--h1);
+font-weight:600;
+line-height:1.1;
+color:#fff;
+}
+.convenient{
+display:flex;
+padding:170px 120px;
+flex-direction:column;
+gap:130px;
+background:#1E1E1E;
+}
+
+.convenient_cards{
+display:grid;
+grid-template-columns:repeat(2, 700px);
+column-gap:120px;
+row-gap:120px;
+flex-wrap:wrap;
+justify-content:space-between;
+row-gap:120px;
+width:1677px;
+}
+
+/* 짝수 카드만 아래로 밀기 */
+.con_card:nth-child(even){
+margin-top:220px;
+}
+
+.title_row{
+display:flex;
+align-items:center;
+gap:13px;
+}
+
+.con_text{
+display:flex;
+flex-direction:column;
+margin-top: 50px;
+margin-left: 40px;
+margin-right: 40px;
+gap:29px;
+width:603px;
+height:277px;
+}
+
+.con_text h3{
+font-family:Inter;
+font-size:44px;
+font-weight:600;
+letter-spacing:-2px;
+color:#000;
+}
+
+.floor{
+color:#969696;
+font-family:Inter;
+font-size:27px;
+font-weight:500;
+line-height:150%;
+letter-spacing:-1px;
+}
+
+.con_text p{
+font-family:Inter;
+font-size:29px;
+font-weight:400;
+line-height:40px;
+letter-spacing:-0.8px;
+color:#000;
+}
+
+.con_img{
+width:100%;
+height:553px;
+background-size:cover;
+background-position:center;
+}
+
+.con_card{
+display:flex;
+flex-direction:column;
+align-items:center;
+width:700px;
+height:920px;
+border-radius:22px;
+background:#fff;
+overflow:hidden;
+transition:0.3s;
+}
+
+.con_card:hover{
+transform:translateY(-10px);
+box-shadow:0 30px 60px rgba(0,0,0,0.25);
+}
+
+/* 카드 안 이미지 */
+.img_shop{
+background-image:url(../img/info_convenient1.png);
+}
+
+.img_book{
+background-image:url(../img/info_convenient2.png);
+}
+
+.img_osulloc{
+background-image:url(../img/info_convenient3.png);
+}
+
+.img_terarosa{
+background-image:url(../img/info_convenient4.png);
+}
+
+.img_doore{
+background-image:url(../img/info_convenient5.png);
+}
+
+.con_img{
+overflow:hidden;
+}
+
+.con_img:hover{
+transform:scale(1.05);
+transition:0.4s;
+}
 
 /* accessibility 카드 */
 
@@ -486,6 +792,13 @@ padding:170px 120px;
 display:flex;
 flex-direction:column;
 gap:80px;
+}
+
+.accessibility h1.heading {
+    margin-bottom: 60px;
+    font-size: var(--h1);
+    font-weight: 600;
+    line-height: 1.1;
 }
 
 .accessibility .inner{
@@ -502,7 +815,7 @@ gap:24px;
 .acc_card{
 display:flex;
 width:600px;
-height:200px;
+height:220px;
 padding:20px 46px;
 flex-direction:column;
 justify-content:center;

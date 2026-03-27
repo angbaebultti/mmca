@@ -249,26 +249,81 @@
                     <button type="button" class="sut" data-target="shuttle_panel"><i
                             class="fa-solid fa-arrows-down-to-people"></i>Shuttle</button>
                 </div><!-- //.btn_box -->
+
+
                 <div class="info_box">
                     <div class="subway_panel" id="subway_panel">
-                        <div class="left">
+    <div class="left">
+        <div class="station_group">
+            <div class="station">
+                <span class="line_badge line_orange">Line 3</span>
+                <p>Anguk Station</p>
+            </div>
+            <div class="station_meta">
+                <span>Exit 1</span>
+                <span>
+                    <i class="fa-solid fa-person-walking"></i>
+                    10 min
+                </span>
+            </div>
+        </div>
+        <p class="station_desc">
+            Walk straight on Insadong street toward Samcheong-dong
+        </p>
+        <button class="viewmap_btn">
+            View Map
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+    </div>
+
+    <div class="right">
+        <div class="station_group">
+            <div class="station">
+                <span class="line_badge line_purple">Line 5</span>
+                <p>Gwanghwamun Station</p>
+            </div>
+            <div class="station_meta">
+                <span>Exit 2</span>
+                <span>
+                    <i class="fa-solid fa-person-walking"></i>
+                    15 min
+                </span>
+            </div>
+        </div>
+        <p class="station_desc">
+            Head east toward Gyeongbokgung Palace, and turn right
+        </p>
+        <button class="viewmap_btn">
+            View Map
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </button>
+    </div>
+</div>
+<div class="bus_panel" id="bus_panel" hidden>
+
+<div class="left">
+
+<div class="station_group">
 
 <div class="station">
-<span class="line_badge line_orange">Line 3</span>
-<p>Anguk Station</p>
+<span class="line_badge bus11">Jongno 11</span>
+<p>Jeongdok Public Library</p>
 </div>
 
 <div class="station_meta">
-<span>Exit 1</span>
-
 <span>
-<i class="fa-solid fa-person-walking"></i>
-10 min
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+<path d="M21.5 8H21V6c0-2.21-1.79-4-4-4H7C4.79 2 3 3.79 3 6v2h-.5c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5H3v6c0 .74.41 1.38 1 1.72v1.78c0 .28.22.5.5.5h2c.28 0 .5-.22.5-.5V20h10v1.5c0 .28.22.5.5.5h2c.28 0 .5-.22.5-.5v-1.78A2 2 0 0 0 21 18v-6h.5c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5M19 18H5v-5h14zM5 11V8h6v3zm8 0V8h6v3zM7 4h10c1.1 0 2 .9 2 2H5c0-1.1.9-2 2-2"></path>
+<path d="M7.5 14a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3m9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3"></path>
+</svg>
+5 min
 </span>
 </div>
 
+</div>
+
 <p class="station_desc">
-Walk straight on Insadong street toward Samcheong-dong
+Direction of Samcheong Police Station
 </p>
 
 <button class="viewmap_btn">
@@ -281,22 +336,29 @@ View Map
 
 <div class="right">
 
+<div class="station_group">
+
 <div class="station">
-<span class="line_badge line_purple">Line 5</span>
-<p>Gwanghwamun Station</p>
+<span class="line_badge bus01">A01</span>
+<p>National Folk Museum</p>
 </div>
 
 <div class="station_meta">
-<span>Exit 2</span>
 
 <span>
-<i class="fa-solid fa-person-walking"></i>
-15 min
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+<path d="M21.5 8H21V6c0-2.21-1.79-4-4-4H7C4.79 2 3 3.79 3 6v2h-.5c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5H3v6c0 .74.41 1.38 1 1.72v1.78c0 .28.22.5.5.5h2c.28 0 .5-.22.5-.5V20h10v1.5c0 .28.22.5.5.5h2c.28 0 .5-.22.5-.5v-1.78A2 2 0 0 0 21 18v-6h.5c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5M19 18H5v-5h14zM5 11V8h6v3zm8 0V8h6v3zM7 4h10c1.1 0 2 .9 2 2H5c0-1.1.9-2 2-2"></path>
+<path d="M7.5 14a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3m9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3"></path>
+</svg>
+3 min
 </span>
+
+</div>
+
 </div>
 
 <p class="station_desc">
-Head east toward Gyeongbokgung Palace, and turn right
+the direction of Gwanghwamun
 </p>
 
 <button class="viewmap_btn">
@@ -305,92 +367,206 @@ View Map
 </button>
 
 </div>
-                    </div><!-- //.subway_panel -->
-                    <div class="bus_panel" id="bus_panel" hidden>
-                        <div class="left">
-                            <div class="b_top">
-                                <div class="station">
-                                    <div class="line_badge bus11">Jongno 11</div>
-                                    <p>Jeongdok Public Library</p>
-                                </div><!-- //.station -->
-                                <ul class="container">
-                                    <li class="walk">
-                                        <i class="fa-solid fa-person-walking"></i>
-                                        3 min
-                                    </li>
-                                </ul>
-                            </div><!-- //.s_top -->
-                            <div class="b_bottom">
-                                <div class="seq">
-                                    <div class="way"><span>Wayfinding Sequence</span></div>
-                                    <div class="txt">
-                                        <p>Direction of Samcheong Police Station</p>
-                                    </div>
-                                </div><!-- //.seq -->
-                                <button class="viewmap_btn">
-                                    View Map
-                                    <i class="ri-external-link-line" aria-hidden="true"></i>
-                                </button>
-                            </div><!-- //.s_bottom -->
-                        </div><!-- //.left -->
-                        <div class="right">
-                            <div class="b_top">
-                                <div class="station">
-                                    <div class="line_badge bus01">Tour 01</div>
-                                    <p>National Folk Museum of Korea, Gyeongbokgung Palace</p>
-                                </div><!-- //.station -->
-                                <ul class="container">
-                                    <li class="walk">
-                                        <i class="fa-solid fa-person-walking"></i>
-                                        5 min
-                                    </li>
-                                </ul>
-                            </div><!-- //.s_top -->
-                            <div class="b_bottom">
-                                <div class="seq">
-                                    <div class="way"><span>Wayfinding Sequence</span></div>
-                                    <div class="txt">
-                                        <p>the direction of Gwanghwamun</p>
-                                    </div>
-                                </div><!-- //.seq -->
-                                <button class="viewmap_btn">
-                                    View Map
-                                    <i class="ri-external-link-line" aria-hidden="true"></i>
-                                </button>
-                            </div><!-- //.s_bottom -->
-                        </div><!-- //.left -->
-                    </div><!-- //.bus_panel -->
-                    <div class="shuttle_panel" id="shuttle_panel" hidden>
-                        <div class="sh_top">
-                            <div class="station">
-                                <div class="line_badge shuttle">MMCA Art Shuttle provides free service between Gwacheon,
-                                    Seoul and Deoksugung four times a day.</div>
-                                <div class="sd">
-                                    <div class="way"><span>Service day</span></div>
-                                    <div class="txt">
-                                        <p>Tuesday to Friday (No service is available on Monday, Saturday, Sunday and
-                                            public holidays)</p>
-                                    </div>
-                                </div><!-- //.sd -->
-                                <div class="route">
-                                    <div class="way"><span>Route</span></div>
-                                    <div class="txt">
-                                        <p>Tuesday to Friday (No service is available on Monday, Saturday, Sunday and
-                                            public holidays)</p>
-                                    </div>
-                                </div><!-- //.route -->
-                                <div class="dt">
-                                    <div class="way"><span>Departure time</span></div>
-                                    <div class="txt">
-                                        <p>10:00, 12:00, 14:00, 16:00</p>
-                                    </div>
-                                </div><!-- //.route -->
-                            </div><!-- //.station -->
-                        </div><!-- //.sh_top -->
-                    </div><!-- //.shuttle_panel -->
+
+</div>
+
+                    <div class="shuttle_panel" id="shuttle_panel">
+
+  <!-- 왼쪽 카드: 운행일 / 탑승위치 / 경로 -->
+  <div class="sh_card sh_card_left">
+
+    <div class="sh_label">
+      <i class="fa-regular fa-calendar sh_icon_green"></i>
+      <span class="sh_label_text">SERVICE DAY</span>
+    </div>
+    <p class="sh_service_day">Tues — Fri <span class="sh_closed">(Closed Mon, Weekends)</span></p>
+
+    <div class="sh_divider"></div>
+
+    <div class="sh_label">
+      <i class="fa-solid fa-location-dot sh_icon_green"></i>
+      <span class="sh_label_text">BOARDING POINT</span>
+    </div>
+    <p class="sh_boarding_desc">MMCA Seoul — Ground parking lot next to the administration building</p>
+
+    <div class="sh_divider"></div>
+
+    <div class="sh_label">
+      <i class="fa-solid fa-route sh_icon_green"></i>
+      <span class="sh_label_text">ROUTE</span>
+    </div>
+
+    <!-- 순방향 -->
+    <div class="sh_route_direction">
+      <span class="sh_direction_badge">Outbound</span>
+    </div>
+    <div class="sh_route_list">
+      <div class="sh_route_item">
+        <span class="sh_dot sh_dot_green"></span>
+        <span class="sh_route_name">MMCA Seoul</span>
+      </div>
+      <div class="sh_route_line"></div>
+      <div class="sh_route_item">
+        <span class="sh_dot sh_dot_blue"></span>
+        <span class="sh_route_name">MMCA Deoksugung</span>
+      </div>
+      <div class="sh_route_line"></div>
+      <div class="sh_route_item">
+        <span class="sh_dot sh_dot_yellow"></span>
+        <span class="sh_route_name">MMCA Gwacheon</span>
+      </div>
+    </div>
+
+    <!-- 역방향 -->
+    <div class="sh_route_direction sh_route_direction_return">
+      <span class="sh_direction_badge">Return</span>
+    </div>
+    <div class="sh_route_list">
+      <div class="sh_route_item">
+        <span class="sh_dot sh_dot_yellow"></span>
+        <span class="sh_route_name">MMCA Gwacheon</span>
+      </div>
+      <div class="sh_route_line"></div>
+      <div class="sh_route_item">
+        <span class="sh_dot sh_dot_blue"></span>
+        <span class="sh_route_name">MMCA Deoksugung</span>
+      </div>
+      <div class="sh_route_line"></div>
+      <div class="sh_route_item">
+        <span class="sh_dot sh_dot_green"></span>
+        <span class="sh_route_name">MMCA Seoul</span>
+      </div>
+    </div>
+
+    <p class="sh_notice">* Service suspended on days when Seoul or Gwacheon is closed.</p>
+
+  </div>
+
+  <!-- 오른쪽 카드: 출발 시각 -->
+  <div class="sh_card sh_card_right">
+    <div class="sh_schedule_top">
+      <div class="sh_label">
+        <span class="sh_label_text">DEPARTURE TIME</span>
+      </div>
+      <div class="sh_title_row">
+        <p class="sh_schedule_title">Today's Schedule</p>
+        <i class="fa-regular fa-clock sh_icon_green sh_clock_icon"></i>
+      </div>
+    </div>
+
+    <div class="sh_schedule_list">
+      <div class="sh_schedule_row">
+        <span class="sh_dep_label">1st Departure</span>
+        <span class="sh_dep_time">10:00 AM</span>
+      </div>
+      <div class="sh_schedule_row">
+        <span class="sh_dep_label">2nd Departure</span>
+        <span class="sh_dep_time">12:00 PM</span>
+      </div>
+      <div class="sh_schedule_row">
+        <span class="sh_dep_label">3rd Departure</span>
+        <span class="sh_dep_time">02:00 PM</span>
+      </div>
+      <div class="sh_schedule_row">
+        <span class="sh_dep_label">Last Departure</span>
+        <span class="sh_dep_time">04:00 PM</span>
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- shuttle -->
                 </div><!-- //.info_box -->
             </div><!-- //.inner -->
         </section><!-- //.getting -->
+
+<section class="convenient">
+  <h1 class="heading">Convenient</h1>
+
+  <div class="convenient_cards">
+
+    <!-- 카드1 -->
+    <div class="con_card">
+      <div class="con_img img_shop"></div>
+
+      <div class="con_text">
+        <div class="title_row">
+          <h3>MMCA SHOP</h3>
+          <span class="floor">| 1F lobby</span>
+        </div>
+
+        <p>
+          Showcasing the identity of MMCA Shop Seoul through curated merchandise inspired by art, exhibitions, and education.
+        </p>
+      </div>
+    </div>
+
+    <!-- 카드2 -->
+    <div class="con_card">
+      <div class="con_img img_book"></div>
+
+      <div class="con_text">
+        <div class="title_row">
+          <h3>MMCA art book shop</h3>
+          <span class="floor">| 1F lobby</span>
+        </div>
+
+        <p>
+          MMCA art book shop offers not only the publications of MMCA, including various exhibition catalogues but also a wide selection of art books.
+        </p>
+      </div>
+    </div>
+
+    <!-- 카드3 -->
+    <div class="con_card">
+      <div class="con_img img_osulloc"></div>
+
+      <div class="con_text">
+        <div class="title_row">
+          <h3>Osulloc</h3>
+          <span class="floor">| 1F lobby</span>
+        </div>
+
+        <p>
+          Tea House Osulloc is a complex tea culture space located in MMCA Seoul, boasting a panoramic view of the museum's outer yard and beautiful Samcheong-dong.
+        </p>
+      </div>
+    </div>
+
+    <!-- 카드4 -->
+    <div class="con_card">
+      <div class="con_img img_terarosa"></div>
+
+      <div class="con_text">
+        <div class="title_row">
+          <h3>TERAROSA</h3>
+          <span class="floor">| 1F lobby</span>
+        </div>
+
+        <p>
+          TERAROSA COFFEE offers guests cozy and relaxed ambience. Besides house beverages and bakeries, the store serves espresso and drip coffee from different countries.
+        </p>
+      </div>
+    </div>
+
+    <!-- 카드5 -->
+    <div class="con_card">
+      <div class="con_img img_doore"></div>
+
+      <div class="con_text">
+        <div class="title_row">
+          <h3>DOORE</h3>
+          <span class="floor">| 1F Lecture Hall</span>
+        </div>
+
+        <p>
+          DOORE is a Korean restaurant of Korean tasty and tradition, offering from snacks and one-dish meals to full course meals.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section><!-- convenient -->
 
         <!-- accessibility -->
          <section class="accessibility">
