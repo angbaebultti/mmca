@@ -164,7 +164,7 @@
 }
 
 .artwork_card.glass-flow::before {
-  animation: artworkGlassFlow 0.95s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  animation: artworkGlassFlow 1.15s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
 .slide_artworks img {

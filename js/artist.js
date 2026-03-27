@@ -9,7 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const TOTAL_SLIDES = 4;
     const horizontalAnimationEnd = 0.82;
     let currentIndex = 0;
+    let renderedIndex = 0;
     let isAnimating = false;
+    let contentSwapTimerId = null;
 
     const slides = [
       {
@@ -95,9 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
           card.classList.add("glass-flow");
           const cleanupId = window.setTimeout(() => {
             card.classList.remove("glass-flow");
-          }, 980);
+          }, 1180);
           artworkEffectTimers.push(cleanupId);
-        }, index * 80);
+        }, index * 110);
 
         artworkEffectTimers.push(timerId);
       });
@@ -105,8 +107,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ensureArtworkCards();
 
-    function updateContent(index) {
-      if (isAnimating) return;
+    function updateContent(index, { immediate = false } = {}) {
+      if (contentSwapTimerId) {
+        window.clearTimeout(contentSwapTimerId);
+        contentSwapTimerId = null;
+      }
+
+      if (!immediate && renderedIndex === index && !isAnimating) return;
+
+      currentIndex = index;
       isAnimating = true;
 
       const s = slides[index];
@@ -117,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
       nameEl.style.opacity = "0";
       descEl.style.opacity = "0";
 
-      setTimeout(() => {
+      const commitContent = () => {
         photoEl.src = s.photo;
         nameEl.textContent = s.name;
         descEl.textContent = s.desc;
@@ -134,8 +143,16 @@ document.addEventListener("DOMContentLoaded", () => {
         descEl.style.opacity = "1";
         runArtworkGlassEffect();
 
+        renderedIndex = index;
         isAnimating = false;
-      }, 500); // 500ms로 늘려서 부드럽게
+        contentSwapTimerId = null;
+      };
+
+      if (immediate) {
+        commitContent();
+      } else {
+        contentSwapTimerId = window.setTimeout(commitContent, 500);
+      }
 
       // dots 업데이트
       dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
@@ -148,15 +165,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return Math.min(Math.max(scrolled / scrollableH, 0), 1);
     }
 
-    function applySlide(progress) {
-      const rawIndex = progress * (TOTAL_SLIDES - 1);
-      const newIndex = Math.round(rawIndex);
-      if (newIndex !== currentIndex) {
-        currentIndex = newIndex;
-        updateContent(currentIndex);
+    function applySlide(progress, rawProgress = progress) {
+      // 가로 슬라이드: 각 슬라이드 구간을 동일한 폭으로 나눠 전환 시점을 고르게 맞춥니다.
+      const newIndex = Math.min(
+        Math.floor(progress * TOTAL_SLIDES),
+        TOTAL_SLIDES - 1,
+      );
+      if (newIndex !== currentIndex || renderedIndex !== newIndex) {
+        updateContent(newIndex, { immediate: progress === 0 });
       }
       if (scrollBtn) {
-        scrollBtn.style.opacity = progress > 0 && progress < 1 ? "1" : "0";
+        // 스크롤 안내는 애니메이션이 끝나도 섹션이 끝날 때까지 유지합니다.
+        scrollBtn.style.opacity =
+          rawProgress > 0 && rawProgress < 1 ? "1" : "0";
       }
     }
 
@@ -171,12 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
           1,
         );
 
-        applySlide(animationProgress);
+        applySlide(animationProgress, rawProgress);
       },
       { passive: true },
     );
 
-    runArtworkGlassEffect();
+    updateContent(0, { immediate: true });
 
     document.querySelectorAll(".skip_btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -460,15 +481,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     /* 스크롤로 포스터 슬라이드 연동 */
-    const historyWrapper = document.getElementById("historyWrapper");
     window.addEventListener(
       "scroll",
       () => {
         if (!historyWrapper) return;
         const wrapperTop = historyWrapper.getBoundingClientRect().top;
         const scrolled = -wrapperTop;
-        const scrollableH =
-          historyWrapper.getBoundingClientRect().height - window.innerHeight;
+        const scrollableH = historyWrapper.offsetHeight - window.innerHeight;
         if (scrollableH <= 0) return;
         const rawProgress = Math.min(Math.max(scrolled / scrollableH, 0), 1);
 
