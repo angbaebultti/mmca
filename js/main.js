@@ -33,74 +33,74 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0 });
   gsap.set(ticketRight, { rotation: 0, x: 0, y: 0 });
 
-gsap.set(ticketWrap, {
-  opacity: 1
-});
+  gsap.set(ticketWrap, { opacity: 0, x: 150, y: 0 });
 
-const mainTL = gsap.timeline({
-  scrollTrigger: {
-    trigger: '.main_visual', // visual_inner 대신 부모 trigger 권장
-    start: 'top top',
-    end: '+=1200',
-    scrub: 1.2
-  }
-});
+  const mainTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.visual_inner',   // main_visual → visual_inner 로 변경
+      start: 'top top',
+      end: '+=1200',               // 찢어지는 구간만큼만
+      scrub: 1.2,
+      // pin: true  ← 이 줄 제거!
+    }
+  });
+  mainTL.to(ticketWrap, { opacity: 1, x: 0, ease: 'power2.out', duration: 0.4 }, 0);
+  mainTL.to(mainTitle, { opacity: 0, y:-30, ease: 'power1.out', duration: 0.3 }, 0.3);
+  mainTL.to(ticketLeft, { rotation: -25, x: -150, y: 100, opacity: 0, ease: 'none', duration: 0.4 }, 0.35);
+  mainTL.to(ticketRight, { rotation: 25, x: 150, y: 100, opacity: 0, ease: 'none', duration: 0.4 }, 0.35);
 
-mainTL.to(mainTitle, { opacity: 0, y: -50, ease: 'power1.out' }, 0);
-// 티켓이 찢어지면서 서서히 사라지도록 opacity 추가
-mainTL.to(ticketLeft, { rotation: -25, x: -150, y: 100, opacity: 0, ease: 'none' }, 0);
-mainTL.to(ticketRight, { rotation: 25, x: 150, y: 100, opacity: 0, ease: 'none' }, 0);
-const aboutScene = qs('.about_scene');
-const ticketBg = qs('.ticket_bg');
+  const aboutScene = qs('.about_scene');
+  const ticketBg = qs('.ticket_bg');
+  aboutScene.prepend(ticketBg);
 
-// ticket_bg를 about_scene 바로 안으로 이동 (JS로 DOM 이동)
+  // ticket_bg를 about_scene 바로 안으로 이동 (JS로 DOM 이동)
 
-const aboutTL = gsap.timeline({
-  scrollTrigger: {
-    trigger: about,
-    start: 'top 80%',       // about이 뷰포트 top에 닿는 순간부터
-    end: '+=2500',
-    scrub: 1.2,
-  }
-});
-
-// 1. 먼저 hero 텍스트 fade out
-aboutTL.to(aboutHero, { opacity: 0, scale: 0.92, ease: 'none', duration: 0.3 }, 0);
-
-// 2. 티켓들이 about_scene(sticky) 안에서 아래로 흘러내려 바닥에 쌓임
-tickets.forEach((t, i) => {
-  gsap.set(t, {
-    left: Math.random() * 80 + 10 + '%',  // 퍼센트로 재설정
-    top: '-20%',
-    position: 'absolute',
+  const aboutTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: about,
+      start: 'top 80%',
+      end: '+=2500',
+      scrub: 1.2,
+    }
   });
 
-  aboutTL.to(t, {
-    opacity: 0.15,
-    // about_scene 높이(100vh) 기준 하단 80% 지점에 쌓임
-    y: () => window.innerHeight * (0.65 + Math.random() * 0.15),
-    x: () => gsap.utils.random(-120, 120),
-    rotation: () => gsap.utils.random(-35, 35),
-    scale: () => gsap.utils.random(0.5, 0.85),
-    ease: 'power2.out',
-    duration: 0.5,
-  }, 0.1 + i * 0.06);  // stagger 간격 줄여서 한꺼번에 우르르
-});
+  // 1. 먼저 hero 텍스트 fade out
+  aboutTL.to(aboutHero, { opacity: 0, scale: 0.92, ease: 'none', duration: 0.3 }, 0);
 
-// 3. 티켓 다 쌓인 후 about_content 등장
-aboutTL.to(aboutContent, { opacity: 1, y: 0, ease: 'none', duration: 0.3 }, 0.5);
+  // 2. 티켓들이 about_scene(sticky) 안에서 아래로 흘러내려 바닥에 쌓임
+  tickets.forEach((t, i) => {
+    gsap.set(t, {
+      left: Math.random() * 80 + 10 + '%',  // 퍼센트로 재설정
+      top: '-20%',
+      position: 'absolute',
+    });
 
-tickets.forEach((t, i) => {
-  aboutTL.to(t, {
-    opacity: 0.15,
-    y: () => window.innerHeight * 0.8, // 화면 하단부에 쌓이도록
-    x: () => (Math.random() - 0.5) * 400,
-    rotation: () => gsap.utils.random(-40, 40),
-    duration: 1,
-  }, i * 0.05); // 순차적으로 낙하
-});
+    aboutTL.to(t, {
+      opacity: 0.15,
+      // about_scene 높이(100vh) 기준 하단 80% 지점에 쌓임
+      y: () => window.innerHeight * (0.65 + Math.random() * 0.15),
+      x: () => gsap.utils.random(-120, 120),
+      rotation: () => gsap.utils.random(-35, 35),
+      scale: () => gsap.utils.random(0.5, 0.85),
+      ease: 'power2.out',
+      duration: 0.5,
+    }, 0.1 + i * 0.06);  // stagger 간격 줄여서 한꺼번에 우르르
+  });
 
-aboutTL.to(aboutContent, { opacity: 1, y: 0 }, "-=0.5"); // 낙하 도중 등장
+  // 3. 티켓 다 쌓인 후 about_content 등장
+  aboutTL.to(aboutContent, { opacity: 1, y: 0, ease: 'none', duration: 0.3 }, 0.5);
+
+  tickets.forEach((t, i) => {
+    aboutTL.to(t, {
+      opacity: 0.15,
+      y: () => window.innerHeight * 0.8, // 화면 하단부에 쌓이도록
+      x: () => (Math.random() - 0.5) * 400,
+      rotation: () => gsap.utils.random(-40, 40),
+      duration: 1,
+    }, i * 0.05); // 순차적으로 낙하
+  });
+
+  aboutTL.to(aboutContent, { opacity: 1, y: 0 }, "-=0.5"); // 낙하 도중 등장
 
   stats.forEach((stat, i) => {
     gsap.to(stat, {
@@ -144,95 +144,95 @@ aboutTL.to(aboutContent, { opacity: 1, y: 0 }, "-=0.5"); // 낙하 도중 등장
 
 
 
-const artist_cards = gsap.utils.toArray(".artist_card");
-const lines = gsap.utils.toArray(".line");
-const letters = gsap.utils.toArray(".title_main span");
+  const artist_cards = gsap.utils.toArray(".artist_card");
+  const lines = gsap.utils.toArray(".line");
+  const letters = gsap.utils.toArray(".title_main span");
 
-// 카드 초기 위치 세팅 — 오른쪽 밖에서 대기
-gsap.set(artist_cards, { opacity: 0, xPercent: 30 });
+  // 카드 초기 위치 세팅 — 오른쪽 밖에서 대기
+  gsap.set(artist_cards, { opacity: 0, xPercent: 30 });
 
-function getScrollAmount() {
-  const track = document.querySelector(".artist_track");
-  return -(track.scrollWidth - window.innerWidth);
-}
-
-const masterTL = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".artist_prize",
-    start: "top top",
-    end: "+=4000", 
-    scrub: 1.2,
-    pin: true,
-    anticipatePin: 1,
+  function getScrollAmount() {
+    const track = document.querySelector(".artist_track");
+    return -(track.scrollWidth - window.innerWidth);
   }
-});
+
+  const masterTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".artist_prize",
+      start: "top top",
+      end: "+=4000",
+      scrub: 1.2,
+      pin: true,
+      anticipatePin: 1,
+    }
+  });
 
 
-lines.forEach((line, i) => {
-  const spans = line.querySelectorAll("span");
-  masterTL.to(spans, {
-    color: "#fff",
-    stagger: 0.05,
+  lines.forEach((line, i) => {
+    const spans = line.querySelectorAll("span");
+    masterTL.to(spans, {
+      color: "#fff",
+      stagger: 0.05,
+      ease: "none",
+      duration: 0.3,
+    }, i * 0.15);
+  });
+
+  masterTL.to({}, { duration: 0.3 });
+
+  masterTL.to(letters, {
+    x: () => gsap.utils.random(-200, 200),
+    y: () => gsap.utils.random(-200, 200),
+    rotation: () => gsap.utils.random(-60, 60),
+    opacity: 0,
+    filter: "blur(8px)",
+    stagger: { each: 0.02, from: "random" },
+    ease: "power2.out",
+    duration: 0.4,
+  });
+
+  masterTL.to({}, { duration: 0.2 });
+
+  masterTL.to(artist_cards, {
+    opacity: 1,
+    xPercent: 0,
+    stagger: 0.06,
+    ease: "power3.out",
+    duration: 0.4,
+  });
+
+  masterTL.to(".artist_track", {
+    x: getScrollAmount,
     ease: "none",
-    duration: 0.3,
-  }, i * 0.15);
-});
-
-masterTL.to({}, { duration: 0.3 }); 
-
-masterTL.to(letters, {
-  x: () => gsap.utils.random(-200, 200),
-  y: () => gsap.utils.random(-200, 200),
-  rotation: () => gsap.utils.random(-60, 60),
-  opacity: 0,
-  filter: "blur(8px)",
-  stagger: { each: 0.02, from: "random" },
-  ease: "power2.out",
-  duration: 0.4,
-});
-
-masterTL.to({}, { duration: 0.2 }); 
-
-masterTL.to(artist_cards, {
-  opacity: 1,
-  xPercent: 0,
-  stagger: 0.06,
-  ease: "power3.out",
-  duration: 0.4,
-});
-
-masterTL.to(".artist_track", {
-  x: getScrollAmount,
-  ease: "none",
-  duration: 1,      
-});
+    duration: 1,
+  });
 
   /* ================= NEWS — Scroll Stack Open ================= */
 
 
-const groups = Array.from(document.querySelectorAll('.news_group'));
+  const groups = Array.from(document.querySelectorAll('.news_group'));
 
-// 처음엔 EVENTS만 열려있음
-groups[0].classList.add('is-open');
+  // 처음엔 EVENTS만 열려있음
+  groups[0].classList.add('is-open');
 
-groups.forEach((group) => {
-  // news_head(탭)만 클릭 감지 — 열려있는 폴더 탭 클릭해도 닫히지 않음
-  const head = group.querySelector('.news_head');
+  groups.forEach((group) => {
+    // news_head(탭)만 클릭 감지 — 열려있는 폴더 탭 클릭해도 닫히지 않음
+    const head = group.querySelector('.news_head');
 
-  head.addEventListener('click', () => {
-    // 이미 열려있으면 무시
-    if (group.classList.contains('is-open')) return;
+    head.addEventListener('click', () => {
+      // 이미 열려있으면 무시
+      if (group.classList.contains('is-open')) return;
 
-    // 나머지 닫기
-    groups.forEach((g) => g.classList.remove('is-open'));
+      // 나머지 닫기
+      groups.forEach((g) => g.classList.remove('is-open'));
 
-    // 클릭한 폴더 열기
-    group.classList.add('is-open');
+      // 클릭한 폴더 열기
+      group.classList.add('is-open');
 
-    // 열린 폴더 상단으로 스크롤 (부드럽게)
-    group.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // 열린 폴더 상단으로 스크롤 (부드럽게)
+      group.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   });
-});
   /* ================= SHOP ================= */
 
   const positions = [
