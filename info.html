@@ -63,39 +63,7 @@
             <!-- //.nav_bottom -->
           </div>
           <!-- //.nav -->
-          <div class="museum_nav">
-            <div class="row_top">
-              <a href="museum.html">
-                <div class="item seoul">
-                  <span class="text">SEOUL</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-              <a href="#">
-                <div class="item deoksugung">
-                  <span class="text">DEOKSUGUNG</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-            </div>
-            <!-- //.row_top -->
-            <div class="row_bottom">
-              <a href="#">
-                <div class="item gwacheon">
-                  <span class="text">GWACHEON</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-              <a href="#">
-                <div class="item cheongju">
-                  <span class="text">CHEONGJU</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-            </div>
-            <!-- //.row_bottom -->
-          </div>
-          <!-- //.museum_nav -->
+
         </div>
       </header>
       <div class="menu_overlay" id="menu">
@@ -230,7 +198,7 @@
                         <div class="txt">
                             <p>Minimum charge: KRW 4,200 for 1 hour<br />Service hours: 08:00 ~ 23:00
                             </p>
-                            <p>(KRW 700 for every additional 10 minutes, KRW 30,000 per day)</p>
+                            <p>(KRW 700 for every addititional 10 minutes, KRW 30,000 per day)</p>
                             <p>Parking capacity: 384 (Ground level 2 & 3)</p>
                         </div><!-- //.parking_txt_box -->
                     </div><!-- //.parking_container-->
@@ -247,13 +215,12 @@
                     <button type="button" class="bus" data-target="bus_panel"><i
                             class="fa-solid fa-bus-simple"></i>Bus</button>
                     <button type="button" class="sut" data-target="shuttle_panel"><i
-                            class="fa-solid fa-arrows-down-to-people"></i>Shuttle</button>
+                            class="fa-solid fa-route"></i>Shuttle</button>
                 </div><!-- //.btn_box -->
 
 
                 <div class="info_box">
                     <div class="subway_panel" id="subway_panel">
-<<<<<<< HEAD
     <div class="left">
         <div class="station_group">
             <div class="station">
@@ -481,6 +448,95 @@ View Map
             </div><!-- //.inner -->
         </section><!-- //.getting -->
 
+        <!-- ===== MUSEUM MAP ===== -->
+        <section class="museum_map">
+            <h1 class="heading">Museum Map</h1>
+
+            <div class="map_inner">
+
+                <!-- 층 탭 (세로) -->
+                <div class="floor_tabs" role="tablist" aria-label="Floor selection">
+                    <button class="floor_tab"           role="tab" aria-selected="false" data-floor="3f"  aria-controls="floor_3f">3F</button>
+                    <button class="floor_tab"           role="tab" aria-selected="false" data-floor="2f"  aria-controls="floor_2f">2F</button>
+                    <button class="floor_tab is_active" role="tab" aria-selected="true"  data-floor="1f"  aria-controls="floor_1f">1F</button>
+                    <button class="floor_tab"           role="tab" aria-selected="false" data-floor="b1"  aria-controls="floor_b1">B1</button>
+                </div>
+
+                <!-- 도면 이미지 -->
+                <div class="floor_map_wrap">
+                    <div class="floor_panel" id="floor_b1" role="tabpanel">
+                        <img src="img/B1.png" alt="B1 floor plan" />
+                    </div>
+                    <div class="floor_panel is_active" id="floor_1f" role="tabpanel">
+                        <img src="img/1F.png" alt="1F floor plan" />
+                    </div>
+                    <div class="floor_panel" id="floor_2f" role="tabpanel">
+                        <img src="img/2F.png" alt="2F floor plan" />
+                    </div>
+                    <div class="floor_panel" id="floor_3f" role="tabpanel">
+                        <img src="img/3F.png" alt="3F floor plan" />
+                    </div>
+                </div>
+
+                <!-- 공간 리스트 -->
+                <div class="floor_legend">
+
+                    <div class="legend_panel" data-legend="b1" style="--label:'B1F'">
+                        <span class="legend_floor_label">B1</span>
+                        <ul>
+                            <li>Multi-Project Hall</li>
+                            <li>Media Lab</li>
+                            <li>Seoul Box</li>
+                            <li>MMCA Film &amp; Video</li>
+                            <li>Lounge</li>
+                            <li>Gallery 2 ~ 7</li>
+                        </ul>
+                    </div>
+
+                    <div class="legend_panel is_active" data-legend="1f" style="--label:'1F'">
+                        <span class="legend_floor_label">1F</span>
+                        <ul>
+                            <li>Seoul Box</li>
+                            <li>Gallery 1</li>
+                            <li>Cafe</li>
+                            <li>Lobby</li>
+                            <li>Garden</li>
+                            <li>Doore</li>
+                            <li>Open Ground</li>
+                            <li>Art Zone</li>
+                        </ul>
+                    </div>
+
+                    <div class="legend_panel" data-legend="2f" style="--label:'2F'">
+                        <span class="legend_floor_label">2F</span>
+                        <ul>
+                            <li>ArtLibrary</li>
+                            <li>Classroom 1</li>
+                            <li>Classroom 2</li>
+                            <li>Learning Studio</li>
+                            <li>Lecture Hall Lobby</li>
+                            <li>MMCA Space Kids</li>
+                            <li>MMCA Studio</li>
+                            <li>Royal Family Association Office</li>
+                        </ul>
+                    </div>
+
+                    <div class="legend_panel" data-legend="3f" style="--label:'3F'">
+                        <span class="legend_floor_label">3F</span>
+                        <ul>
+                            <li>Office Room</li>
+                            <li>Art Research Center</li>
+                            <li>Membership Lounge</li>
+                            <li>Workspace 2</li>
+                            <li>Mountain-view Rooftop</li>
+                        </ul>
+                    </div>
+
+                </div><!-- //.floor_legend -->
+
+            </div><!-- //.map_inner -->
+        </section><!-- //.museum_map -->
+
 <section class="convenient">
   <h1 class="heading">Convenient</h1>
 
@@ -621,155 +677,6 @@ View Map
 
   </div>
 </section>
-=======
-                        <div class="left">
-                            <div class="s_top">
-                                <div class="station">
-                                    <div class="line_badge line3">Line 3</div>
-                                    <p>Anguk Station</p>
-                                </div><!-- //.station -->
-                                <ul class="container">
-                                    <li class="exit">Exit 1</li>
-                                    <li class="walk">
-                                        <i class="ri-walk-line" aria-hidden="true"></i>
-                                        10 min
-                                    </li>
-                                </ul>
-                            </div><!-- //.s_top -->
-                            <div class="s_bottom">
-                                <div class="seq">
-                                    <div class="way"><span>Wayfinding Sequence</span></div>
-                                    <div class="txt">
-                                        <p>Walk straight on Insadong street toward Samcheong-dong</p>
-                                    </div>
-                                </div><!-- //.seq -->
-                                <button class="viewmap_btn">
-                                    <span>View Map</span>
-                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                </button>
-                            </div><!-- //.s_bottom -->
-                        </div><!-- //.left -->
-                        <div class="right">
-                            <div class="s_top">
-                                <div class="station">
-                                    <div class="line_badge line5">Line 5</div>
-                                    <p>Gwanghwamun Station</p>
-                                </div><!-- //.station -->
-                                <ul class="container">
-                                    <li class="exit">Exit 2</li>
-                                    <li class="walk">
-                                        <i class="ri-walk-line" aria-hidden="true"></i>
-                                        15 min
-                                    </li>
-                                </ul>
-                            </div><!-- //.s_top -->
-                            <div class="s_bottom">
-                                <div class="seq">
-                                    <div class="way"><span>Wayfinding Sequence</span></div>
-                                    <div class="txt">
-                                        <p>Head east toward Gyeongbokgung Palace, turn right</p>
-                                    </div>
-                                </div><!-- //.seq -->
-                                <button class="viewmap_btn">
-                                    View Map
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
-                                        <path d="M12.71 12.71 19 6.41V11h2V3h-8v2h4.59l-6.3 6.29z"></path>
-                                        <path
-                                            d="M11 5V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6h-2v6H5V5z">
-                                        </path>
-                                    </svg>
-                                </button>
-                            </div><!-- //.s_bottom -->
-                        </div><!-- //.right -->
-                    </div><!-- //.subway_panel -->
-                    <div class="bus_panel" id="bus_panel" hidden>
-                        <div class="left">
-                            <div class="b_top">
-                                <div class="station">
-                                    <div class="line_badge bus11">Jongno 11</div>
-                                    <p>Jeongdok Public Library</p>
-                                </div><!-- //.station -->
-                                <ul class="container">
-                                    <li class="walk">
-                                        <i class="fa-solid fa-person-walking"></i>
-                                        3 min
-                                    </li>
-                                </ul>
-                            </div><!-- //.s_top -->
-                            <div class="b_bottom">
-                                <div class="seq">
-                                    <div class="way"><span>Wayfinding Sequence</span></div>
-                                    <div class="txt">
-                                        <p>Direction of Samcheong Police Station</p>
-                                    </div>
-                                </div><!-- //.seq -->
-                                <button class="viewmap_btn">
-                                    View Map
-                                    <i class="ri-external-link-line" aria-hidden="true"></i>
-                                </button>
-                            </div><!-- //.s_bottom -->
-                        </div><!-- //.left -->
-                        <div class="right">
-                            <div class="b_top">
-                                <div class="station">
-                                    <div class="line_badge bus01">Tour 01</div>
-                                    <p>National Folk Museum of Korea, Gyeongbokgung Palace</p>
-                                </div><!-- //.station -->
-                                <ul class="container">
-                                    <li class="walk">
-                                        <i class="fa-solid fa-person-walking"></i>
-                                        5 min
-                                    </li>
-                                </ul>
-                            </div><!-- //.s_top -->
-                            <div class="b_bottom">
-                                <div class="seq">
-                                    <div class="way"><span>Wayfinding Sequence</span></div>
-                                    <div class="txt">
-                                        <p>the direction of Gwanghwamun</p>
-                                    </div>
-                                </div><!-- //.seq -->
-                                <button class="viewmap_btn">
-                                    View Map
-                                    <i class="ri-external-link-line" aria-hidden="true"></i>
-                                </button>
-                            </div><!-- //.s_bottom -->
-                        </div><!-- //.left -->
-                    </div><!-- //.bus_panel -->
-                    <div class="shuttle_panel" id="shuttle_panel" hidden>
-                        <div class="sh_top">
-                            <div class="station">
-                                <div class="line_badge shuttle">MMCA Art Shuttle provides free service between Gwacheon,
-                                    Seoul and Deoksugung four times a day.</div>
-                                <div class="sd">
-                                    <div class="way"><span>Service day</span></div>
-                                    <div class="txt">
-                                        <p>Tuesday to Friday (No service is available on Monday, Saturday, Sunday and
-                                            public holidays)</p>
-                                    </div>
-                                </div><!-- //.sd -->
-                                <div class="route">
-                                    <div class="way"><span>Route</span></div>
-                                    <div class="txt">
-                                        <p>Tuesday to Friday (No service is available on Monday, Saturday, Sunday and
-                                            public holidays)</p>
-                                    </div>
-                                </div><!-- //.route -->
-                                <div class="dt">
-                                    <div class="way"><span>Departure time</span></div>
-                                    <div class="txt">
-                                        <p>10:00, 12:00, 14:00, 16:00</p>
-                                    </div>
-                                </div><!-- //.route -->
-                            </div><!-- //.station -->
-                        </div><!-- //.sh_top -->
-                    </div><!-- //.shuttle_panel -->
-                </div><!-- //.info_box -->
-            </div><!-- //.inner -->
-        </section><!-- //.getting -->
->>>>>>> d90acb12773326010e8f63173de80db6be1cda4e
         <footer>
             <div class="banner" aria-label="museum locations">
                 <ul class="banner_track">
