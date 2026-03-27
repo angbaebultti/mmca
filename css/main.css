@@ -2,22 +2,23 @@
 
 
 .main_visual {
-  padding: 170px 72px;
   background-image: url(../img/main_bg.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
   width: 100%;
-  height: 200vh;
+  height: 100vh;
+  /* ← 200vh → 100vh */
   overflow: visible;
   z-index: 10;
 }
 
 .visual_inner {
-  position: sticky;
-  top: 0;
+  position: relative;
+  width: 100%;
   height: 100vh;
+  overflow: visible;
 }
 
 .main_title {
@@ -28,23 +29,22 @@
   color: #fff;
   position: absolute;
   left: 55px;
-  top: 5%;
+  bottom: 50%;
   z-index: 2000;
-  mix-blend-mode: difference;
-  padding-top: 200px;
+  padding-top: 0;
 }
 
 .ticket {
   position: absolute;
-  top: auto;
   bottom: 5%;
-  left: auto;
   right: -80px;
   width: 600px;
   height: 300px;
   opacity: 1;
   z-index: 30000;
   pointer-events: none;
+  overflow: visible;
+  /* ← 추가 */
 }
 
 .ticket_bg {
@@ -99,7 +99,7 @@
 
 .info_wrap {
   position: absolute;
-  bottom: 0;
+  bottom: 10%;
   left: 80px;
   right: 80px;
   display: flex;
@@ -158,11 +158,11 @@
 
 /* ===================== ABOUT ===================== */
 .about {
-  height: 350vh;
+  height: 800vh;
   position: relative;
   background: var(--bg_about);
   width: 100%;
-  padding: 200px 0 300px;
+  padding: 200px 0 600px;
 }
 
 .about_scene {
@@ -205,15 +205,18 @@
 }
 
 .about_hero {
-  z-index: 2;
-  gap: 24px;
-  text-align: center;
+  justify-content: flex-start;
+  padding-top: 12vh;
+  margin-top: 0;
+  /* -140px 제거 */
+  gap: 16px;
 }
 
 .about_desc_large {
   font-size: 130px;
   letter-spacing: var(--letter-spacing-base);
   font-weight: 500;
+  text-align: center;
 }
 
 .about_sub {
@@ -229,16 +232,19 @@
   color: var(--main_white);
   letter-spacing: -0.04em;
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
 }
 
 .about_content {
+  justify-content: center;
+  padding-bottom: 0;
+  padding-top: 0;
   z-index: 3;
   gap: 0;
   opacity: 0;
   transform: translateY(40px);
   will-change: opacity, transform;
-  padding: 0 0 40px;
+  margin-top: -300px;
 }
 
 /* ── stats 래퍼 ── */
@@ -284,7 +290,7 @@
 
 .stats_bg {
   position: absolute;
-  transform: translateX(1%) translateY(40%);
+  transform: translateX(1%) translateY(-10%);
   width: 120%;
   display: flex;
   justify-content: center;
@@ -344,7 +350,7 @@
 .artist_prize {
   position: relative;
   width: 100%;
-  height: 250vh;
+  height: 100vh;
   background: var(--main_black);
   overflow: visible;
   padding-bottom: 300px;
@@ -380,8 +386,13 @@
   color: var(--main_white);
 }
 
-.artist_prize .line:nth-child(2) { margin-left: 300px; }
-.artist_prize .line:nth-child(3) { margin-left: 600px; }
+.artist_prize .line:nth-child(2) {
+  margin-left: 300px;
+}
+
+.artist_prize .line:nth-child(3) {
+  margin-left: 600px;
+}
 
 .artist_wrap {
   position: absolute;
@@ -493,7 +504,8 @@
   height: 100%;
   background: var(--hover);
   transform: scaleX(0);
-  transform-origin: center;   /* 가운데에서 퍼짐 */
+  transform-origin: center;
+  /* 가운데에서 퍼짐 */
   transition: transform 0.4s ease;
   z-index: 0;
 }
@@ -504,8 +516,14 @@
   z-index: 1;
 }
 
-.view_btn_inline:hover::before { transform: scaleX(1); }
-.view_btn_inline:hover i { background: #fff; color: var(--hover); }
+.view_btn_inline:hover::before {
+  transform: scaleX(1);
+}
+
+.view_btn_inline:hover i {
+  background: #fff;
+  color: var(--hover);
+}
 
 
 /* ===================== NEWS ===================== */
@@ -516,7 +534,7 @@
 }
 
 .news_inner {
-  width: 1400px;
+  width: 1500px;
   margin: 0 auto;
   position: relative;
   padding-bottom: 180px;
@@ -525,7 +543,7 @@
 .news_group {
   position: relative;
   width: 100%;
-  clip-path: polygon(0 0, 260px 0, 320px 60px, 100% 60px, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 340px 0, 400px 60px, 100% 60px, 100% 100%, 0 100%);
   box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
   overflow: hidden;
   max-height: 80px;
@@ -541,11 +559,10 @@
 .news_head {
   position: relative;
   width: 100%;
-  height: 80px;
+  height: 90px;
   display: flex;
   align-items: flex-end;
-  padding: 0 60px 0 40px;
-  padding-top: 20px;
+  padding: 80px 60px 20px 60px;
 }
 
 .news_head h2 {
@@ -560,13 +577,29 @@
   transition: opacity 0.3s ease;
 }
 
-.news_group:not(.is-open) .news_head h2 { opacity: 0.45; }
-.news_group:not(.is-open):hover .news_head h2 { opacity: 0.8; }
+.news_group:not(.is-open) .news_head h2 {
+  opacity: 0.45;
+}
 
-.news_group.is-open .news_head h2::before { opacity: 1; }
-.news_group.events .news_head h2::before { background: #111; }
-.news_group.press  .news_head h2::before { background: #111; }
-.news_group.notice .news_head h2::before { background: #fff; }
+.news_group:not(.is-open):hover .news_head h2 {
+  opacity: 0.8;
+}
+
+.news_group.is-open .news_head h2::before {
+  opacity: 1;
+}
+
+.news_group.events .news_head h2::before {
+  background: #111;
+}
+
+.news_group.press .news_head h2::before {
+  background: #111;
+}
+
+.news_group.notice .news_head h2::before {
+  background: #fff;
+}
 
 .news_more {
   font-size: 22px;
@@ -587,7 +620,9 @@
   pointer-events: auto;
 }
 
-.news_group.notice > .news_more { color: var(--main_white); }
+.news_group.notice>.news_more {
+  color: var(--main_white);
+}
 
 .news_body {
   padding: 40px 40px 80px;
@@ -604,7 +639,9 @@
   transform: translateY(0);
 }
 
-.notice .news_body { border-top: 1px solid var(--main_white); }
+.notice .news_body {
+  border-top: 1px solid var(--main_white);
+}
 
 .news_list {
   display: grid;
@@ -619,7 +656,9 @@
   height: 100%;
 }
 
-.news_card a { display: block; }
+.news_card a {
+  display: block;
+}
 
 .news_thumb {
   width: 100%;
@@ -635,7 +674,9 @@
   transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.news_card:hover .news_thumb img { transform: scale(1.05); }
+.news_card:hover .news_thumb img {
+  transform: scale(1.05);
+}
 
 .news_txt {
   flex: 1;
@@ -685,24 +726,64 @@
 }
 
 /* EVENTS */
-.events { background: var(--gray_06); }
-.events .news_head { color: #111; }
-.news_group.events .news_txt h3 { color: #000; }
-.news_group.events .news_txt p  { color: rgba(0,0,0,0.5); }
-.news_group.events .news_date   { color: #666; }
+.events {
+  background: var(--gray_06);
+}
+
+.events .news_head {
+  color: #111;
+}
+
+.news_group.events .news_txt h3 {
+  color: #000;
+}
+
+.news_group.events .news_txt p {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.news_group.events .news_date {
+  color: #666;
+}
 
 /* PRESS */
-.press { background: #AFAFAF; }
-.press .news_head { color: #111; }
-.news_group.press .news_txt h3 { color: #000; }
-.news_group.press .news_txt p  { color: rgba(0,0,0,0.5); }
-.news_group.press .news_date   { color: #666; }
+.press {
+  background: #AFAFAF;
+}
+
+.press .news_head {
+  color: #111;
+}
+
+.news_group.press .news_txt h3 {
+  color: #000;
+}
+
+.news_group.press .news_txt p {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.news_group.press .news_date {
+  color: #666;
+}
 
 /* NOTICE */
-.notice { background: #000000; }
-.notice .news_head     { color: #fff; }
-.notice .news_head a   { color: #fff; }
-.news_group.notice .news_txt  { margin-top: 26px; }
+.notice {
+  background: #000000;
+}
+
+.notice .news_head {
+  color: #fff;
+}
+
+.notice .news_head a {
+  color: #fff;
+}
+
+.news_group.notice .news_txt {
+  margin-top: 26px;
+}
+
 .news_group.notice .news_cate {
   display: block;
   font-size: 18px;
@@ -711,13 +792,104 @@
   letter-spacing: -0.72px;
   margin-bottom: 10px;
 }
-.news_group.notice .news_txt h3 { color: #fff; }
-.news_group.notice .news_txt p  { color: rgba(255,255,255,0.65); }
-.news_group.notice .news_date   { color: rgba(255,255,255,0.6); }
-.news_group.notice .news_cate.gwacheon { color: #00C389; }
-.news_group.notice .news_cate.seoul    { color: #FF5A36; }
-.news_group.notice .news_cate.recruit  { color: #F4E85A; }
-.news_group.notice .news_cate.tour     { color: #B8A07A; }
+
+.news_group.notice .news_txt h3 {
+  color: #fff;
+}
+
+.news_group.notice .news_txt p {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.news_group.notice .news_date {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.news_group.notice .news_cate.gwacheon {
+  color: #00C389;
+}
+
+.news_group.notice .news_cate.seoul {
+  color: #FF5A36;
+}
+
+.news_group.notice .news_cate.recruit {
+  color: #F4E85A;
+}
+
+.news_group.notice .news_cate.tour {
+  color: #B8A07A;
+}
+
+/* 탭 헤더 hover 라인 */
+.news_head h2 {
+  position: relative;
+}
+
+.news_head h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.news_group:not(.is-open):hover .news_head h2::after {
+  width: 100%;
+}
+
+.news_group.is-open .news_head h2 {
+  opacity: 1 !important;
+}
+
+/* news_body — max-height transition 제거하고 visibility로 */
+.news_body {
+  transition: none;
+  /* 기존 transition 덮어씌우기 */
+}
+
+/* 커서 프리뷰 */
+#newsPreview {
+  position: fixed;
+  width: 260px;
+  height: 170px;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
+  transform: translate(-50%, calc(-100% - 20px)) scale(0.88) rotate(-2deg);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity, left, top;
+}
+
+#newsPreview.is-visible {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 20px)) scale(1) rotate(-1deg);
+}
+
+#newsPreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 카드 hover — 이미지 scale */
+.news_card:hover .news_thumb img {
+  transform: scale(1.07);
+}
+
+/* 열린 탭 카드들 초기 opacity 0 방지 */
+.news_group:not(.is-open) .news_card {
+  opacity: 0;
+}
 
 /* ===================== SHOP ===================== */
 .shop {
@@ -804,7 +976,9 @@
   line-height: 1.1;
 }
 
-.glass_front span { font-weight: 500; }
+.glass_front span {
+  font-weight: 500;
+}
 
 .p {
   position: absolute;
@@ -816,13 +990,22 @@
   z-index: 6;
 }
 
-.p1, .p2, .p3, .p4, .p5,
-.p6, .p7, .p8, .p9 {
+.p1,
+.p2,
+.p3,
+.p4,
+.p5,
+.p6,
+.p7,
+.p8,
+.p9 {
   width: 400px;
 }
 
 /* ===================== CURSOR ===================== */
-* { cursor: none; }
+* {
+  cursor: none;
+}
 
 .cursor-dot {
   position: fixed;
@@ -866,18 +1049,26 @@
 .cursor-ring.shop-hover {
   width: 130px;
   height: 130px;
-  background: #fff;
+  background: #FF4B24;
+  /* #fff → 주황색 */
   border-color: transparent;
   font-size: 14px;
+  color: #fff;
+  /* 텍스트도 흰색으로 */
 }
 
 .shop_title {
   transition: letter-spacing 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.shop_title:hover { letter-spacing: 0.06em; }
+.shop_title:hover {
+  letter-spacing: 0.06em;
+}
 
-.shop_title span { display: inline-block; transition: transform 0.3s ease; }
+.shop_title span {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
 
 .glass_box:hover .glass_front {
   background: rgba(30, 30, 30, 0.45);
