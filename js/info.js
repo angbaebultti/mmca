@@ -103,4 +103,66 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 })();
 
+(function initWave() {
+  const canvas = document.getElementById("waveCanvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let width, height, animId;
+  let offset = 0;
+
+  function resize() {
+    width = canvas.offsetWidth;
+    height = canvas.offsetHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.beginPath();
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+    ctx.lineWidth = 1.5;
+
+    const amplitude = 40;
+    const frequency = 0.004;
+    const speed = 0.005;
+
+    for (let x = 0; x <= width; x++) {
+      const y = height / 2 + Math.sin(x * frequency + offset) * amplitude;
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+
+    ctx.stroke();
+    offset += speed;
+    animId = requestAnimationFrame(draw);
+  }
+
+  // 스크롤 감지해서 타이틀 지나면 fade in
+  const convenientSection = document.querySelector(".convenient");
+  const heading = document.querySelector(".convenient .heading");
+  const accessibilitySection = document.querySelector(".accessibility");
+
+  window.addEventListener("scroll", () => {
+    if (!convenientSection || !heading) return;
+
+    const headingBottom = heading.getBoundingClientRect().bottom;
+    const accTop = accessibilitySection?.getBoundingClientRect().top ?? Infinity;
+
+    if (headingBottom < 0 && accTop > 500) {
+      canvas.style.opacity = "1";
+    } else {
+      canvas.style.opacity = "0";
+    }
+  });
+
+  resize();
+  draw();
+  window.addEventListener("resize", () => {
+    resize();
+  });
+})();
+
+
 }); //end
