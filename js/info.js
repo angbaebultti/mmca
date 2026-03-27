@@ -60,6 +60,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
+      // shuttle 탭 클릭 시 패널 상단이 뷰포트에 맞게 스크롤
+      if (target === 'shuttle_panel') {
+        setTimeout(function () {
+          const shuttle = document.querySelector('#shuttle_panel');
+          if (shuttle) {
+            shuttle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 50);
+      }
+
     });
   });
 
@@ -192,5 +202,27 @@ document.body.insertAdjacentHTML('beforeend', `
     if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
     requestAnimationFrame(lerpRing);
   })();
+
+/* convenient 카드 순차 flip */
+(function () {
+  const cards = document.querySelectorAll('.convenient .con_card');
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        const card = entry.target;
+        const idx = Array.from(cards).indexOf(card);
+        setTimeout(function () {
+          card.classList.add('flip_animate');
+        }, idx * 120);
+        observer.unobserve(card);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  cards.forEach(function (card) {
+    observer.observe(card);
+  });
+})();
 
 }); //end
