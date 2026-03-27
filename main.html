@@ -28,7 +28,6 @@
     <script src="js/common.js" defer></script>
     <script src="js/main.js" defer></script>
   </head>
-  <!-- 햄버거 밑부터 개인별 작업 -->
   <body>
     <div class="wrap">
       <div class="top_btn">
@@ -51,18 +50,14 @@
                 <li><a href="#">ABOUT</a></li>
                 <li><a href="#">TICKETS</a></li>
               </ul>
-              <!-- //.gnb_l -->
               <div class="gnb_r">
                 <a href="#"><span>Sign in</span></a>
                 <a href="#"
                   ><img src="img/ham_w.svg" alt="ham menu button" id="menu_btn"
                 /></a>
               </div>
-              <!-- //.gnb_r -->
             </div>
-            <!-- //.nav_bottom -->
           </div>
-          <!-- //.nav -->
           <div class="museum_nav">
             <div class="row_top">
               <a href="museum.html#seoul">
@@ -78,7 +73,6 @@
                 </div>
               </a>
             </div>
-            <!-- //.row_top -->
             <div class="row_bottom">
               <a href="#gwacheon">
                 <div class="item gwacheon">
@@ -93,11 +87,10 @@
                 </div>
               </a>
             </div>
-            <!-- //.row_bottom -->
           </div>
-          <!-- //.museum_nav -->
         </div>
       </header>
+
       <div class="menu_overlay" id="menu">
         <div class="menu_top">
           <h1>
@@ -170,6 +163,8 @@
           </div>
         </div>
       </div>
+
+      <!-- ========== MAIN VISUAL ========== -->
       <section class="main_visual">
         <div class="visual_bg"></div>
         <div class="visual_inner">
@@ -206,6 +201,8 @@
           </div>
         </div>
       </section>
+
+      <!-- ========== ABOUT ========== -->
       <section class="about">
         <div class="ticket_bg"></div>
         <div class="about_scene">
@@ -220,37 +217,38 @@
                 through collections, spaces, and everyday experiences
               </h2>
               <div class="stats_wrap">
-                <div class="line line_left"></div>
+                <div class="stat_line line_left"></div>
+                <!-- 원 뒤 티켓 배경 이미지 -->
+                <div class="stats_bg">
+                  <img src="img/ticket_full.png" alt="" />
+                </div>
                 <div class="stats">
                   <div class="stat">
                     <span class="label_small">FOUNDED</span>
                     <strong>1969</strong>
                   </div>
-
                   <div class="stat">
                     <span class="label_small">COLLECTION</span>
                     <strong>9,600+</strong>
                   </div>
-
                   <div class="stat">
                     <span class="label_small">VENUES</span>
                     <strong>4</strong>
                   </div>
-
                   <div class="stat">
                     <span class="label_small">VISITORS / YEAR</span>
                     <strong>3M+</strong>
                   </div>
                 </div>
-                <div class="line line_right"></div>
+                <div class="stat_line line_right"></div>
               </div>
             </div>
-            <!-- //.about_content -->
           </div>
         </div>
       </section>
+
+      <!-- ========== ARTIST PRIZE ========== -->
       <section class="artist_prize">
-        <!-- 타이틀 -->
         <div class="title">
           <h2 class="title_main">
             <div class="line">
@@ -268,39 +266,60 @@
           </h2>
         </div>
 
-        <!-- 가로 카드 -->
         <div class="artist_wrap">
           <div class="artist_track">
             <div class="artist_card">
               <img src="img/2025_nologo.png" />
               <p>2025</p>
             </div>
-
             <div class="artist_card">
               <img src="img/2024_nologo.png" />
               <p>2024</p>
             </div>
-
             <div class="artist_card">
               <img src="img/2023_nologo.png" />
               <p>2023</p>
             </div>
-
             <div class="artist_card">
               <img src="img/2022_nologo.png" />
               <p>2022</p>
             </div>
-
             <div class="artist_card">
               <img src="img/2021_nologo.png" />
               <p>2021</p>
             </div>
+            <div class="artist_card">
+              <img src="img/2020_nologo.png" />
+              <p>2020</p>
+            </div>
+            <div class="artist_card">
+              <img src="img/2019_nologo.png" />
+              <p>2019</p>
+            </div>
+            <div class="artist_card">
+              <img src="img/2018_nologo.png" />
+              <p>2018</p>
+            </div>
+            <div class="artist_card">
+              <img src="img/2017_nologo.png" />
+              <p>2017</p>
+            </div>
+            <div class="artist_card">
+              <img src="img/2016_nologo.png" />
+              <p>2016</p>
+            </div>
+            <!-- view_btn을 track 안 마지막 카드 옆에 나란히 배치 -->
+            <div class="artist_card view_btn_card">
+              <a href="#" class="view_btn_inline"
+                ><span>VIEW ALL<br />NOMINEES</span
+                ><i class="fa-solid fa-arrow-right"></i
+              ></a>
+            </div>
           </div>
         </div>
-        <div class="view_btn">
-          <a href="#"><span>VIEW ALL NOMINEES</span></a>
-        </div>
       </section>
+
+      <!-- ========== SHOP ========== -->
       <section class="shop">
         <div class="shop_sticky">
           <div class="glow_bg"></div>
@@ -325,9 +344,11 @@
           </div>
         </div>
       </section>
+
+      <!-- ========== NEWS ========== -->
       <section class="news">
         <div class="news_inner">
-          <div class="news_group events">
+          <div class="news_group events" data-tab="events">
             <div class="news_head">
               <h2>EVENTS</h2>
             </div>
@@ -343,168 +364,7 @@
                     </div>
                     <div class="news_txt">
                       <h3>MMCA Performing Arts 2026: Deep Time</h3>
-                      <p>Ryoji Ikeda / Ensemble Modern, Music for Strings</p>
-                      <span class="news_date">2026-04-01 - 2026-04-02</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/event02.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Sak-da: Artist Talk</h3>
-                      <p>Participating artists share their practices</p>
-                      <span class="news_date">2026-01-30</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/event03.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>HWI-PAN Performance</h3>
-                      <p>Tickets open Jan 9 at 2PM</p>
-                      <span class="news_date">2026-01-23 - 2026-01-25</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/event04.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Korea Artist Prize Talk</h3>
-                      <p>Artists & jury discussion</p>
-                      <span class="news_date">2026-01-13</span>
-                    </div>
-                  </a>
-                </article>
-              </div>
-            </div>
-          </div>
-          <div class="news_group press">
-            <div class="news_head">
-              <h2>PRESS</h2>
-            </div>
-            <a href="#" class="news_more"
-              >View More <i class="fa-solid fa-angle-right"></i
-            ></a>
-            <div class="news_body">
-              <div class="news_list">
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/press01.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Lecture by Alexander Alberro</h3>
-                      <p>March 25 at MMCA Seoul</p>
-                      <span class="news_date">2026-03-16</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/press02.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Damien Hirst Early Tickets</h3>
-                      <p>Available from Feb 23</p>
-                      <span class="news_date">2026-02-23</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/press03.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Christine Sun Kim Selected</h3>
-                      <p>MMCA X LG OLED Series 2026</p>
-                      <span class="news_date">2026-02-11</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/press04.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Collection Exhibition Guide</h3>
-                      <p>Lee Kun-hee Collection Tour</p>
-                      <span class="news_date">2026-02-03</span>
-                    </div>
-                  </a>
-                </article>
-              </div>
-            </div>
-          </div>
-          <div class="news_group notice">
-            <div class="news_head">
-              <h2>NOTICE</h2>
-            </div>
-            <a href="#" class="news_more"
-              >View More <i class="fa-solid fa-angle-right"></i
-            ></a>
-            <div class="news_body">
-              <div class="news_list">
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/notice01.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <strong class="news_cate">Gwacheon</strong>
-                      <h3>Temporary Closure Notice</h3>
-                      <p>Closed March 3 - April 21</p>
-                      <span class="news_date">2026-02-27</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/notice02.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <strong class="news_cate">Seoul</strong>
-                      <h3>Early Bird Ticket Release</h3>
-                      <p>Damien Hirst Exhibition</p>
-                      <span class="news_date">2026-02-11</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/notice03.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <strong class="news_cate">Recruit</strong>
-                      <h3>#helloMMCA Supporters</h3>
-                      <p>Recruiting 20 participants</p>
-                      <span class="news_date">2026-01-16</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/notice04.png" alt="" />
-                    </div>
-                    <div class="news_txt">
-                      <strong class="news_cate">Tour</strong>
-                      <h3>Collection Viewing Guide</h3>
-                      <p>Chicago exhibition info</p>
-                      <span class="news_date">2026-02-03</span>
+                      <p>Ryoji Ikeda / Ensemble Modern, Musi</p>
                     </div>
                   </a>
                 </article>
@@ -513,133 +373,6 @@
           </div>
         </div>
       </section>
-      <footer>
-        <div class="banner" aria-label="museum locations">
-          <ul class="banner_track">
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-          </ul>
-          <!-- //.banner_track -->
-        </div>
-        <!-- //.banner -->
-        <div class="f_top">
-          <!-- f_left -->
-          <ul class="f_left">
-            <li class="branch">
-              <span class="branch_name seoul">Seoul</span>
-              <p class="tel">02-3701-9500</p>
-              <p>30 Samcheong-ro,<br />Jongno-gu,<br />Seoul</p>
-            </li>
-            <li class="branch">
-              <span class="branch_name deoksugung">Deoksugung</span>
-              <p class="tel">02-2022-0600</p>
-              <p>
-                99 Sejong-daero,<br />Jung-gu, Seoul<br />Inside Deoksugung
-                Palace
-              </p>
-            </li>
-            <li class="branch">
-              <span class="branch_name gwacheon">Gwacheon</span>
-              <p class="tel">02-2188-6000</p>
-              <p>313 Gwangmyeong-ro,<br />Gwacheon-si,<br />Gyeonggi-do</p>
-            </li>
-            <li class="branch">
-              <span class="branch_name cheongju">Cheongju</span>
-              <p class="tel">043-261-1400</p>
-              <p>314 Sangdang-ro,<br />Cheongwon-si,<br />Chungcheongbuk-do</p>
-            </li>
-          </ul>
-          <!-- f_right -->
-          <div class="f_right">
-            <div class="f_right_col">
-              <h4>SNS</h4>
-              <ul>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon icon="mdi:instagram"></iconify-icon></span
-                    >Instagram</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon
-                        icon="mingcute:facebook-fill"
-                      ></iconify-icon
-                    ></span>
-                    Facebook</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon icon="mdi:youtube"></iconify-icon
-                    ></span>
-                    YouTube</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><img src="img/blog_icon.svg" alt="Naver Blog" /> Naver
-                    Blog</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon
-                        icon="fa6-brands:square-x-twitter"
-                      ></iconify-icon
-                    ></span>
-                    X</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <!-- //.f_right_col -->
-            <div class="f_right_col">
-              <h4>Legal</h4>
-              <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Copyright</a></li>
-                <li><a href="#">Complaints</a></li>
-                <li><a href="#">Information Disclosure</a></li>
-                <li><a href="#">Integrity Report</a></li>
-              </ul>
-            </div>
-            <!-- //.f_right_col -->
-          </div>
-          <!-- //.f_right -->
-        </div>
-        <!-- //.f_top -->
-        <div class="f_bottom">
-          <div class="f_logo">
-            <span>MMCA</span>
-          </div>
-          <!-- //.f_logo -->
-          <p class="copyright">
-            © 2026 IZoa Team. MMCA Website Redesign Concept.
-          </p>
-        </div>
-        <!-- //.f_bottom -->
-      </footer>
     </div>
-    <!--//.wrap -->
   </body>
 </html>
