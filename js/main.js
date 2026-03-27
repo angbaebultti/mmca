@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   mainTL.to(ticketWrap, { opacity: 1, x: 0, ease: 'power2.out', duration: 0.4 }, 0);
-  mainTL.to(mainTitle, { opacity: 0, y:-30, ease: 'power1.out', duration: 0.3 }, 0.3);
+  mainTL.to(mainTitle, { opacity: 0, y: -30, ease: 'power1.out', duration: 0.3 }, 0.3);
   mainTL.to(ticketLeft, { rotation: -25, x: -150, y: 100, opacity: 0, ease: 'none', duration: 0.4 }, 0.35);
   mainTL.to(ticketRight, { rotation: 25, x: 150, y: 100, opacity: 0, ease: 'none', duration: 0.4 }, 0.35);
 
