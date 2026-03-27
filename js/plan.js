@@ -50,19 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
           if (cell.day === selectedDay) el.classList.add('selected');
 
           el.addEventListener('click', () => {
-            gsap.fromTo(el,
-              { scale: 0.98 },
-              {
-                scale: 1.02,
-                duration: 0.2,
-                ease: "power1.out",
-                onComplete: () => {
-                  state.selectedDay = cell.day;
-                  renderCalendar();
-                  updateSummary();
-                }
-              }
-            );
+            state.selectedDay = cell.day;
+            renderCalendar();
+            updateSummary();
           });
         }
         row.appendChild(el);
@@ -125,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
       ticketEl.textContent = parts.join(' / ') || '—';
     }
   }
-
   function initSummaryAnimation() {
     const card = document.getElementById('summary_card');
     const trigger = document.getElementById('date_section');
@@ -135,35 +124,20 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.fromTo(card,
+      { opacity: 0, y: 40 },
       {
-        opacity: 0,
-        y: 40,
-      },
-      {
-        opacity: 0.4, 
+        opacity: 1,
         y: 0,
-        ease: 'power3.out',
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: trigger,
           start: 'top 80%',
-          end: 'top 60%',
+          end: 'bottom 20%',
           scrub: true,
         }
       }
     );
-
-    gsap.to(card, {
-      opacity: 1,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: trigger,
-        start: 'top 60%',
-        end: 'bottom 20%',
-        scrub: true,
-      }
-    });
   }
-
 
   function initPaymentButton() {
     const btn = document.querySelector('.btn_payment');
