@@ -1,12 +1,14 @@
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700&display=swap');
-/* font-family: "Red Hat Mono", monospace; */
 
+/* font-family: "Red Hat Mono", monospace; */
 
 .checkout {
     background: #111;
     color: #fff;
     padding: 120px 0;
+    position: relative;
+    z-index: 10;
 }
 
 .checkout .inner {
@@ -29,8 +31,9 @@
 
 .checkout_wrap {
     display: grid;
-    grid-template-columns: 680px 300px;
+    grid-template-columns: 1fr 420px;
     gap: 60px;
+    align-items: start;
 }
 
 .checkout_left {
@@ -253,25 +256,31 @@
 }
 
 .purchase_btn {
-    width: 100%;
-    padding: 16px;
+    width: fit-content;
+    padding: 14px 287px;
     margin-top: 40px;
     border: 1px solid #fff;
     background: transparent;
     color: #fff;
     cursor: pointer;
     font-weight: 300;
-    font-size: 28px;
+    font-size: 20px;
+}
+
+.purchase_btn.active {
+    background: #F47A38;
+    border-color: #F47A38;
 }
 
 .checkout_right {
-    width: 340px;
-    position: relative;
-}
+    width: 380px;
 
-.ticket_preview {
-    position: sticky;
+    margin-right: 0;
+    margin-left: 0;
+    transform: translateX(40px);
+     position: sticky;
     top: 120px;
+    align-self: start;
 }
 
 .ticket {
@@ -279,11 +288,19 @@
     padding: 40px 24px 30px;
     margin-top: 0;
     position: relative;
-    overflow: hidden;
-    transform-origin: top center;
+    overflow: visible;
     will-change: transform;
-    transform: translateY(-20px);
 }
+
+.ticket_preview {
+    position: sticky;
+    top: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+
 
 
 .ticket::after {
@@ -364,7 +381,6 @@
     display: block;
 }
 
-/* 로고 + 텍스트 */
 .museum {
     display: flex;
     align-items: center;
@@ -406,16 +422,12 @@
     color: #585858;
     font-weight: 500;
 }
-
-/* 점선 */
 .meta::after {
     content: "";
     display: block;
     border-top: 1px dashed #bbb;
     margin: 18px 0;
 }
-
-/* QR */
 .qr {
     display: flex;
     justify-content: center;
@@ -428,7 +440,15 @@
 
 .awards_line {
     position: relative;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% + 200px);
+    height: 20px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+    margin-left: -40px;
+    transform: translateX(-77px);
 }
 
 
@@ -437,19 +457,19 @@
     top: 50%;
     left: 0;
     width: 100%;
-    /* 🔥 이게 핵심 */
     height: 1px;
     background: #fff;
     transform: translateY(-50%);
+    z-index: 0;
 }
 
 .label {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
     font-size: 14px;
     background: #111;
     z-index: 2;
+    padding: 0 4px;
+    transform: none;
 }
 
 .label.left {
@@ -459,10 +479,23 @@
 .label.right {
     right: 0;
 }
+
 .ticket_mask {
     overflow: hidden;
-    height: 0;
-    /* scaleY(0) 대신 height: 0 */
+    margin-top: 0;
+    padding-top: 0;
     position: relative;
-    /* transform, transform-origin 줄 전부 삭제 */
+}
+
+.ticket_mask::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 16px;
+    background: radial-gradient(circle at 50% 100%, #111 11px, transparent 11px);
+    background-size: 30px 22px;
+    background-repeat: repeat-x;
+    z-index: 10;
 }
