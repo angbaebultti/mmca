@@ -244,12 +244,12 @@
     font-size: 18px;
     line-height: 1.8;
     font-family: var(--pretendard);
-    border-left: 6px solid #F47A38;
+    border-left: 6px solid #FF6624;
 }
 
 .notice strong {
     display: block;
-    color: #F47A38;
+    color: #FF6624;
     margin-bottom: 12px;
     font-size: 16px;
     letter-spacing: 0.05em;
@@ -268,8 +268,8 @@
 }
 
 .purchase_btn.active {
-    background: #F47A38;
-    border-color: #F47A38;
+    background: #FF6624;
+    border-color: #FF6624;
 }
 
 .checkout_right {
