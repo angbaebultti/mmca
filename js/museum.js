@@ -214,7 +214,7 @@ function setupHorizontalSections(callback) {
 
         const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
         const startHold = 600;
-        const extraScroll = window.innerWidth <= 1440 ? 400 : 1600; // 1440 이하면 800
+        const extraScroll = window.innerWidth <= 1440 ? 80 : 1600; // 1440 이하면 800
 
         section.style.height = `${
           window.innerHeight + totalScrollX + startHold + extraScroll
