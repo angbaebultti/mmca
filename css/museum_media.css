@@ -1,0 +1,334 @@
+@charset "utf-8";
+
+/* =========================================================
+ * museum_media.css
+ * 1920~1440px : 큐브 풀사이즈
+ * 1440~1280px : 큐브 약간 축소
+ * 1280~1024px : 큐브 더 축소
+ * 1024px 미만 : 슬라이드 전환
+ * ========================================================= */
+
+
+@media (max-width: 1440px) {
+
+  .cube {
+    --face-w: 860px;
+    --face-h: 480px;
+    --depth: 430px;
+  }
+
+  .cube_stage {
+    width: 860px;
+    height: 480px;
+    margin-top: -240px;
+    margin-left: -430px;
+  }
+
+  .museum_wrap {
+    padding-top: 60px;
+  }
+
+  .museum_exhibit_section .museum_inner {
+    width: 100%;
+    padding: 30px 80px;
+    box-sizing: border-box;
+  }
+
+  .museum_exhibit_section.is_horizontal .museum_head {
+    width: 100%;
+    padding: 0 80px;
+    box-sizing: border-box;
+    margin: 0 auto 16px;
+  }
+
+  .museum_exhibit_card {
+    gap: 60px;
+    margin-top: 20px;
+  }
+
+  .museum_exhibit_section.is_horizontal .museum_exhibit_card {
+  height: auto;
+  margin-top: 0;
+  padding: 60px 80px 20px;
+}
+
+  .museum_exhibit_section.is_horizontal .museum_exhibit_card > .museum_poster {
+    margin-left: 0;
+  }
+
+  .museum_h_scroll {
+  height: auto;
+}
+
+.museum_h_sticky {
+ height: 80vh;
+}
+}
+
+
+/* ==========================================================
+ * 1024px 이하 — 슬라이드 모드 전환
+ * ========================================================== */
+@media (max-width: 1024px) {
+
+  /* ── intro 높이 ── */
+  .intro_scene {
+    height: 100vh;
+  }
+
+  /* ── cube_pin : perspective 제거 ── */
+  .cube_pin {
+    perspective: none;
+  }
+
+  /* ── cube_stage : 3D 끄고 전체 너비 ── */
+  .cube_stage {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    transform-style: flat;
+    display: block;
+    overflow: hidden;
+  }
+
+  /* ── cube : 슬라이드 트랙 ── */
+  .cube {
+    --face-w: 100vw;
+    --face-h: 100vh;
+    --depth: 0px;
+    position: relative;
+    width: 400vw;
+    height: 100vh;
+    transform-style: flat !important;
+    display: flex;
+    transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* ── 각 face : 슬라이드 아이템 ── */
+  .cube_face {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100vw;
+    min-width: 100vw;
+    height: 100vh;
+    transform: none !important;
+    backface-visibility: visible;
+    flex-shrink: 0;
+  }
+
+  .cube_face_label {
+    font-size: clamp(48px, 12vw, 100px);
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+
+  .slide_prev { left: 16px; }
+  .slide_next { right: 16px; }
+
+  .slide_prev:hover,
+  .slide_next:hover {
+    background: rgba(255, 255, 255, 0.28);
+  }
+
+  /* ── museum wrap ── */
+  .museum_wrap {
+    padding-top: 80px;
+    margin-bottom: 80px;
+  }
+
+  .museum_exhibit_section .museum_inner {
+    width: 100%;
+    padding: 60px 40px;
+    box-sizing: border-box;
+  }
+
+  .museum_label { font-size: 20px; }
+  .museum_name  { font-size: 48px; }
+  .museum_tabs  { gap: 28px; margin-top: 20px; }
+  .museum_tabs button { font-size: 20px; }
+
+  .museum_exhibit_section.is_horizontal .museum_head {
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+
+  .museum_exhibit_section.is_horizontal .museum_exhibit_card {
+    gap: 60px;
+    padding: 0 40px 60px;
+  }
+
+  .museum_exhibit_section.is_horizontal .museum_exhibit_card > .museum_poster {
+    margin-left: 0;
+  }
+
+  .museum_exhibit_section.is_horizontal .museum_content {
+    flex: 1;
+    max-width: unset;
+  }
+
+  .museum_poster { width: 260px; }
+  .museum_title  { font-size: 44px; }
+  .museum_meta li { font-size: 16px; }
+  .museum_desc   { font-size: 15px; }
+
+  .highlight_item { width: 200px; height: 120px; }
+  .museum_highlights strong { font-size: 22px; }
+
+  .museum_empty h3 { font-size: 48px; }
+  .museum_empty p  { font-size: 20px; }
+
+  .top_btn { right: 24px; bottom: 24px; }
+}
+
+
+/* ==========================================================
+ * 768px 이하 — 모바일
+ * ========================================================== */
+@media (max-width: 768px) {
+
+  .museum_wrap {
+    padding-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .museum_exhibit_section .museum_inner {
+    padding: 40px 24px;
+  }
+
+  .museum_label { font-size: 15px; }
+  .museum_name  { font-size: 36px; }
+  .museum_tabs  { gap: 18px; margin-top: 14px; }
+  .museum_tabs button { font-size: 16px; }
+
+  .museum_exhibit_section.is_horizontal .museum_head {
+    padding: 0 24px;
+  }
+
+  .museum_exhibit_section.is_horizontal .museum_exhibit_card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 0 24px 40px;
+    height: auto;
+    min-height: calc(100vh - 180px);
+    margin-top: 20px;
+  }
+
+  .museum_exhibit_section.is_horizontal .museum_content {
+    flex: unset;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .museum_poster {
+    width: 100%;
+    max-width: 300px;
+    height: 190px;
+  }
+
+  .museum_poster img { height: 100%; object-fit: cover; }
+
+  .museum_title  { font-size: 28px; margin-bottom: 14px; }
+  .museum_meta li { font-size: 14px; gap: 10px; }
+  .museum_desc   { font-size: 14px; margin-top: 14px; }
+
+  .museum_highlights { margin-top: 24px; }
+  .museum_highlights strong { font-size: 18px; margin-bottom: 12px; }
+  .highlight_item { width: 150px; height: 90px; }
+
+  .museum_ticket { margin-top: 20px; }
+  .ticket_main   { font-size: 18px; padding: 6px 12px; }
+
+  .museum_empty { padding: 80px 0; }
+  .museum_empty h3 { font-size: 34px; margin-bottom: 20px; }
+  .museum_empty p  { font-size: 16px; }
+
+  .top_btn { right: 16px; bottom: 16px; }
+  .top_btn a { width: 50px; height: 50px; }
+
+  .slide_prev { left: 12px; }
+  .slide_next { right: 12px; }
+
+  .cube_face_label {
+    font-size: clamp(36px, 10vw, 72px);
+  }
+}
+
+
+/* ==========================================================
+ * 480px 이하 — 소형 모바일
+ * ========================================================== */
+@media (max-width: 480px) {
+
+  .museum_wrap {
+    padding-top: 48px;
+    margin-bottom: 48px;
+  }
+
+  .museum_exhibit_section .museum_inner {
+    padding: 32px 16px;
+  }
+
+  .museum_label { font-size: 13px; }
+  .museum_name  { font-size: 26px; }
+  .museum_tabs  { gap: 14px; flex-wrap: wrap; }
+  .museum_tabs button { font-size: 14px; padding-bottom: 8px; }
+
+  .museum_exhibit_section.is_horizontal .museum_head {
+    padding: 0 16px;
+  }
+
+  .museum_exhibit_section.is_horizontal .museum_exhibit_card {
+    padding: 0 16px 32px;
+    gap: 18px;
+  }
+
+  .museum_poster { max-width: 100%; height: 160px; }
+
+  .museum_title  { font-size: 22px; }
+  .museum_meta li { font-size: 13px; }
+  .museum_desc   { font-size: 13px; }
+
+  .highlight_list { gap: 10px; }
+  .highlight_item { width: 120px; height: 76px; }
+  .museum_highlights strong { font-size: 15px; }
+
+  .museum_empty h3 { font-size: 26px; }
+  .museum_empty p  { font-size: 14px; }
+
+  .top_btn a { width: 44px; height: 44px; font-size: 14px; }
+
+  .slide_prev,
+  .slide_next {
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
+  }
+
+  .cube_face_label {
+    font-size: clamp(30px, 9vw, 60px);
+  }
+}
+
+
+/* ==========================================================
+ * 360px — 최소 기준
+ * ========================================================== */
+@media (max-width: 360px) {
+
+  .museum_name  { font-size: 22px; }
+  .museum_title { font-size: 18px; }
+  .museum_tabs button { font-size: 13px; }
+
+  .highlight_item { width: 100px; height: 64px; }
+
+  .museum_empty h3 { font-size: 22px; }
+  .museum_empty p  { font-size: 13px; }
+
+  .cube_face_label { font-size: 28px; }
+}
