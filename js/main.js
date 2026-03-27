@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const qsa = (s) => document.querySelectorAll(s);
 
   const ticketWrap = qs('.ticket');
-  const ticketLeft = qs('.ticket_left');
-  const ticketRight = qs('.ticket_right');
+  const ticketLeft = qs('.ticket_left img');
+  const ticketRight = qs('.ticket_right img');
   const mainTitle = qs('.main_title');
 
   const about = qs('.about');
@@ -40,32 +40,57 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================================================
    * 2. 초기 세팅
    * ========================================================= */
-  gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0, opacity: 1 });
-  gsap.set(ticketRight, { rotation: 0, x: 0, y: 0, opacity: 1 });
+  gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center' });
+  gsap.set(ticketRight, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center' });
   gsap.set(ticketWrap, { opacity: 0, x: 220, y: 120 });
-  gsap.set(aboutContent, { opacity: 0, y: 80 });
+  gsap.set(aboutContent, { opacity: 0, y: 60 });  // y: 120 → y: 60
+
 
   /* =========================================================
-   * 3. 메인 비주얼 - 티켓 등장 + 찢어짐
+   * 3. 메인 비주얼 - 티켓 등장 + 찢어짐 + 고정 + 떨어짐
    * ========================================================= */
   const mainTL = gsap.timeline({
-    scrollTrigger: { trigger: '.visual_inner', start: 'top top', end: '+=1200', scrub: 1.2 }
+    scrollTrigger: {
+      trigger: '.main_visual',
+      start: 'top top',
+      end: '+=1800',
+      scrub: 1.2,
+      pin: true,
+      pinSpacing: true,
+      anticipatePin: 1,
+    }
   });
-  mainTL.to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: 'power2.out', duration: 0.4 }, 0);
-  mainTL.to(mainTitle, { opacity: 0, y: -30, ease: 'power1.out', duration: 0.3 }, 0.3);
-  mainTL.to(ticketLeft, { rotation: -25, x: -150, y: 100, opacity: 1, ease: 'none', duration: 0.4 }, 0.35);
-  mainTL.to(ticketRight, { rotation: 25, x: 150, y: 100, opacity: 0, ease: 'none', duration: 0.4 }, 0.35);
 
-  /* =========================================================
-   * 4. ticket_bg 이동 — 배경은 CSS 이미지로 처리하므로 스킵
-   * ========================================================= */
-  // if (aboutScene && ticketBg) aboutScene.prepend(ticketBg);
 
-  /* =========================================================
-   * 5. ABOUT 섹션 타임라인
-   * ========================================================= */
+  mainTL
+    .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: 'power2.out', duration: 0.4 }, 0)
+
+    .to('.info_wrap', { opacity: 0, y: -20, ease: 'power1.out', duration: 0.3 }, 0.3)
+    .to(mainTitle, { opacity: 0, y: -30, ease: 'power1.out', duration: 0.3 }, 0.3)
+
+    .to(ticketLeft, { rotation: -25, x: -150, y: 100, ease: 'none', duration: 0.4 }, 0.35)
+    .to(ticketRight, { rotation: 25, x: 150, y: 100, ease: 'none', duration: 0.4 }, 0.35)
+
+    // ❌ .to({}, { duration: 0.5 })  ← 이거 삭제
+
+    // 찢어진 후 바로 자연스럽게 낙하
+    .to(ticketLeft, { y: 1800, x: -400, rotationZ: -55, ease: 'power2.in', duration: 1.4 }, 0.75)
+    .to(ticketRight, { y: 1800, x: 400, rotationZ: 55, ease: 'power2.in', duration: 1.4 }, 0.75)
+    // opacity는 거의 다 떨어졌을 때 서서히
+    .to(ticketLeft, { opacity: 0, duration: 0.3 }, 1.8)
+    .to(ticketRight, { opacity: 0, duration: 0.3 }, 1.8)
+
+  //about 타임라인
   const aboutTL = gsap.timeline({
-    scrollTrigger: { trigger: about, start: 'top 80%', end: '+=3000', scrub: 1.4 }
+    scrollTrigger: {
+      trigger: about,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1.4,
+      pin: '.about_scene',
+      pinSpacing: true,
+      anticipatePin: 1,
+    }
   });
   aboutTL.to(aboutHero, { opacity: 0, scale: 0.95, y: -20, ease: 'none', duration: 0.5 }, 0);
   tickets.forEach((t, i) => {
@@ -79,112 +104,66 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power1.out', duration: 0.5
     }, 0.5 + i * 0.06);
   });
-  aboutTL.to(aboutContent, { opacity: 1, y: 0, ease: 'power2.out', duration: 0.8 }, 0.55);
+  aboutTL.to(aboutContent, {
+    opacity: 1,
+    y: 0,
+    ease: 'power4.out',   // power2.out → power4.out (더 화끈하게)
+    duration: 1.0          // 0.8 → 1.0 (여운 있게)
+  }, 0.2);  // 0.3 → 0.2 (더 일찍 시작)
 
   /* =========================================================
-   * 6. 왼쪽 티켓 - 스크롤할수록 아래로 계속 떨어짐
-   * ========================================================= */
-  if (ticketLeft && about) {
-    gsap.to(ticketLeft, {
-      y: window.innerHeight * 3, x: -220, rotation: -55, opacity: 0, ease: 'none',
-      scrollTrigger: { trigger: about, start: 'top 70%', end: 'bottom bottom', scrub: 1 }
-    });
-  }
-
-  /* =========================================================
-   * 7. ABOUT 통계 등장 + 숫자 카운팅
-   * 순서: 배경 → 왼쪽 선 → 원1→2→3→4(숫자 카운팅) → 오른쪽 선
-   * ========================================================= */
+ * 7. ABOUT 통계 등장 + 숫자 카운팅
+ * ========================================================= */
   if (aboutContent && stats.length) {
     const statArray = Array.from(stats);
-    const lineLeft  = document.querySelector('.line_left');
+    const lineLeft = document.querySelector('.line_left');
     const lineRight = document.querySelector('.line_right');
-    const statsBg   = document.querySelector('.stats_bg');
+    const statsBg = document.querySelector('.stats_bg');
 
-    // 각 stat의 목표 숫자 파싱
     const statData = statArray.map(stat => {
       const strong = stat.querySelector('strong');
       const raw = strong ? strong.textContent.trim() : '0';
       const match = raw.replace(/,/g, '').match(/^(\d+)(.*)$/);
-      return {
-        el: strong,
-        target: match ? parseInt(match[1]) : 0,
-        suffix: match ? match[2] : '',
-        original: raw
-      };
+      return { el: strong, target: match ? parseInt(match[1]) : 0, suffix: match ? match[2] : '', original: raw };
     });
 
-    // 초기: 숫자 0으로, opacity + x만 초기화 (scale 건드리지 않음)
-    statData.forEach(d => {
-      if (d.el) d.el.textContent = '0' + d.suffix;
-    });
+    statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
     gsap.set(statArray, { opacity: 0, x: -60 });
     if (statsBg) gsap.set(statsBg, { opacity: 0 });
-    if (lineLeft)  lineLeft.style.setProperty('--line-scale', 0);
+    if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
     if (lineRight) lineRight.style.setProperty('--line-scale', 0);
 
     const statTL = gsap.timeline({
       scrollTrigger: {
-        trigger: aboutContent,
-        start: 'top 65%',
+        trigger: about,
+        start: 'top+=60% top',  // ← px 대신 % 사용, about 60% 지점에서 발동
         toggleActions: 'play none none none'
       }
     });
 
-    // ① 배경 이미지
-    if (statsBg) {
-      statTL.to(statsBg, { opacity: 0.25, ease: 'power2.out', duration: 0.8 }, 0);
-    }
+    if (statsBg) statTL.to(statsBg, { opacity: 0.25, ease: 'power2.out', duration: 0.8 }, 0);
 
-    // ② 왼쪽 선 펼쳐짐
     statTL.to({}, {
       duration: 0.6,
       onUpdate() { if (lineLeft) lineLeft.style.setProperty('--line-scale', this.progress()); }
     }, 0);
 
-    // ③ 원 등장 + 숫자 카운팅 — 4개 모두 독립 counter
     statData.forEach((d, i) => {
       const counter = { val: 0 };
-
-      statTL.to(statArray[i], {
-        opacity: 1, x: 0, ease: 'power3.out', duration: 0.6
-      }, 0.4 + i * 0.18);
-
+      statTL.to(statArray[i], { opacity: 1, x: 0, ease: 'power3.out', duration: 0.6 }, 0.4 + i * 0.18);
       statTL.to(counter, {
-        val: d.target,
-        ease: 'power2.out',
-        duration: 1.2,
-        onUpdate() {
-          if (!d.el) return;
-          d.el.textContent = Math.round(counter.val).toLocaleString('en-US') + d.suffix;
-        },
-        onComplete() {
-          if (d.el) d.el.textContent = d.original;
-        }
+        val: d.target, ease: 'power2.out', duration: 1.2,
+        onUpdate() { if (d.el) d.el.textContent = Math.round(counter.val).toLocaleString('en-US') + d.suffix; },
+        onComplete() { if (d.el) d.el.textContent = d.original; }
       }, 0.4 + i * 0.18);
     });
 
-    // ④ 오른쪽 선 펼쳐짐
     statTL.to({}, {
       duration: 0.6,
       onUpdate() { if (lineRight) lineRight.style.setProperty('--line-scale', this.progress()); }
     }, 1.4);
   }
 
-  /* =========================================================
-   * 9. ARTIST PRIZE - 라인 span 컬러 변화
-   * ========================================================= */
-  gsap.utils.toArray('.artist_prize .line').forEach((line, i) => {
-    gsap.to(line.querySelectorAll('span'), {
-      scrollTrigger: {
-        trigger: '.artist_prize',
-        start: `top+=${i * 150} 60%`,
-        end: `top+=${i * 150} 30%`,
-        scrub: true
-      },
-      color: '#fff', stagger: 0.08, ease: 'none'
-    });
-  });
 
   /* =========================================================
    * 10. ARTIST PRIZE - 메인 가로 스크롤
@@ -204,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const masterTL = gsap.timeline({
     scrollTrigger: {
-      trigger: '.artist_prize', start: 'top top', end: '+=4000',
+      trigger: '.artist_prize', start: 'top top', end: '+=5500',
       scrub: 1.2, pin: true, anticipatePin: 1
     }
   });
@@ -222,35 +201,114 @@ document.addEventListener('DOMContentLoaded', () => {
     opacity: 0, filter: 'blur(8px)',
     stagger: { each: 0.02, from: 'random' }, ease: 'power2.out', duration: 0.4
   });
-  masterTL.to({}, { duration: 0.2 });
   masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.06, ease: 'power3.out', duration: 0.4 });
   masterTL.to('.artist_track', { x: getScrollAmount, ease: 'none', duration: 1 });
+  masterTL.to({}, { duration: 0.4 });  // ← 이 줄 추가! view 버튼에서 잠깐 머무르기
 
   /* =========================================================
-   * 11. NEWS - Scroll Stack Open
-   * ========================================================= */
+ * 11. NEWS - 고급 탭 전환 + 커서 프리뷰
+ * ========================================================= */
   const groups = Array.from(document.querySelectorAll('.news_group'));
+
+  // 커서 프리뷰 엘리먼트 생성
+  const newsPreview = document.createElement('div');
+  newsPreview.id = 'newsPreview';
+  newsPreview.innerHTML = '<img id="previewImg" src="" alt="" />';
+  document.body.appendChild(newsPreview);
+  const previewImg = document.getElementById('previewImg');
+
+  let previewX = 0, previewY = 0;
+  let previewRX = 0, previewRY = 0;
+
+  (function lerpPreview() {
+    previewRX += (previewX - previewRX) * 0.1;
+    previewRY += (previewY - previewRY) * 0.1;
+    if (newsPreview) {
+      newsPreview.style.left = previewRX + 'px';
+      newsPreview.style.top = previewRY + 'px';
+    }
+    requestAnimationFrame(lerpPreview);
+  })();
+
+  document.addEventListener('mousemove', (e) => {
+    previewX = e.clientX;
+    previewY = e.clientY;
+  });
+
   if (groups.length) {
     groups[0].classList.add('is-open');
+
     groups.forEach((group) => {
       const head = group.querySelector('.news_head');
-      if (!head) return;
+      const body = group.querySelector('.news_body');
+      if (!head || !body) return;
+
+      // 탭 클릭
       head.addEventListener('click', () => {
         if (group.classList.contains('is-open')) return;
-        groups.forEach((g) => g.classList.remove('is-open'));
-        group.classList.add('is-open');
-        group.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        const current = groups.find(g => g.classList.contains('is-open'));
+        if (current) {
+          const currentCards = current.querySelectorAll('.news_card');
+          gsap.to(currentCards, {
+            opacity: 0, y: -16,
+            stagger: 0.04, duration: 0.2, ease: 'power2.in',
+            onComplete: () => {
+              current.classList.remove('is-open');
+              gsap.set(currentCards, { opacity: 0, y: 24 });
+
+              group.classList.add('is-open');
+              const newCards = group.querySelectorAll('.news_card');
+              gsap.set(newCards, { opacity: 0, y: 24 });
+              gsap.to(newCards, {
+                opacity: 1, y: 0,
+                stagger: 0.08, duration: 0.5, ease: 'power3.out',
+                delay: 0.05
+              });
+            }
+          });
+        } else {
+          group.classList.add('is-open');
+          const newCards = group.querySelectorAll('.news_card');
+          gsap.set(newCards, { opacity: 0, y: 24 });
+          gsap.to(newCards, {
+            opacity: 1, y: 0,
+            stagger: 0.08, duration: 0.5, ease: 'power3.out'
+          });
+        }
+      });
+
+      // 카드 hover 시 커서 프리뷰
+      const cards = group.querySelectorAll('.news_card');
+      cards.forEach(card => {
+        const img = card.querySelector('.news_thumb img');
+        if (!img) return;
+        card.addEventListener('mouseenter', () => {
+          previewImg.src = img.src;
+          newsPreview.classList.add('is-visible');
+        });
+        card.addEventListener('mouseleave', () => {
+          newsPreview.classList.remove('is-visible');
+        });
       });
     });
-  }
 
+    // 초기 열린 탭 카드 애니메이션
+    const initCards = groups[0].querySelectorAll('.news_card');
+    gsap.set(initCards, { opacity: 0, y: 24 });
+    gsap.to(initCards, {
+      opacity: 1, y: 0,
+      stagger: 0.08, duration: 0.6, ease: 'power3.out',
+      delay: 0.3
+    });
+  }
   /* =========================================================
    * 12. SHOP
    * ========================================================= */
   const positions = [
     { x: -580, y: -280, r: -15 }, { x: 120, y: -320, r: 10 }, { x: 560, y: -200, r: 20 },
-    { x: -620, y: 20, r: 8 },     { x: 600, y: 60, r: -12 },  { x: -480, y: 280, r: -20 },
-    { x: -80, y: 340, r: 5 },     { x: 380, y: 300, r: 18 },  { x: 620, y: 260, r: -10 }
+    { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
+    { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 }
   ];
 
   gsap.set('.p', { x: 0, y: 0, scale: 0.5, opacity: 0, rotation: (i) => positions[i].r * 0.3 });
@@ -285,7 +343,7 @@ document.addEventListener('DOMContentLoaded', () => {
   `);
 
   const ring = document.getElementById('cursorRing');
-  const dot  = document.getElementById('cursorDot');
+  const dot = document.getElementById('cursorDot');
   let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
 
   document.addEventListener('mousemove', (e) => {
@@ -300,11 +358,17 @@ document.addEventListener('DOMContentLoaded', () => {
   })();
 
   const shopSection = document.querySelector('.shop');
-  const glassBox    = document.querySelector('.glass_box');
+  const glassBox = document.querySelector('.glass_box');
 
-  if (shopSection && ring && dot) {
-    shopSection.addEventListener('mouseenter', () => { ring.classList.add('shop-hover'); dot.style.opacity = '0'; });
-    shopSection.addEventListener('mouseleave', () => { ring.classList.remove('shop-hover'); dot.style.opacity = '1'; });
+  if (glassBox && ring && dot) {
+    glassBox.addEventListener('mouseenter', () => {
+      ring.classList.add('shop-hover');
+      dot.style.opacity = '0';
+    });
+    glassBox.addEventListener('mouseleave', () => {
+      ring.classList.remove('shop-hover');
+      dot.style.opacity = '1';
+    });
   }
 
   if (glassBox) {
