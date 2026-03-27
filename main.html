@@ -33,6 +33,7 @@
       <div class="top_btn">
         <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
       </div>
+
       <header class="header">
         <div class="inner">
           <div class="header_top">
@@ -216,7 +217,8 @@
                 through collections, spaces, and everyday experiences
               </h2>
               <div class="stats_wrap">
-                <div class="stat_line line_left"></div>
+                <!-- line_left/right: JS가 --line-scale CSS변수로 제어 -->
+                <div class="line_left"></div>
                 <!-- 원 뒤 티켓 배경 이미지 -->
                 <div class="stats_bg">
                   <img src="img/ticket.png" alt="티켓더미" />
@@ -239,7 +241,7 @@
                     <strong>3M+</strong>
                   </div>
                 </div>
-                <div class="stat_line line_right"></div>
+                <div class="line_right"></div>
               </div>
             </div>
           </div>
@@ -307,12 +309,12 @@
               <img src="img/2016_nologo.png" />
               <p>2016</p>
             </div>
-            <!-- view_btn을 track 안 마지막 카드 옆에 나란히 배치 -->
+            <!-- view_btn: track 안 마지막 카드 옆에 나란히 배치 -->
             <div class="artist_card view_btn_card">
-              <a href="#" class="view_btn_inline"
-                ><span>VIEW ALL<br />NOMINEES</span
-                ><i class="fa-solid fa-arrow-right"></i
-              ></a>
+              <a href="#" class="view_btn_inline">
+                <span>VIEW ALL<br />NOMINEES</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
           </div>
         </div>
