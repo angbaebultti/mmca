@@ -55,4 +55,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+
+/* museum map */
+
+(function () {
+  const tabs      = document.querySelectorAll('.floor_tab');
+  const panels    = document.querySelectorAll('.floor_panel');
+  const legends   = document.querySelectorAll('.legend_panel');
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      const target = this.dataset.floor;   // 'b1' | '1f' | '2f' | '3f'
+
+      // 탭 상태 갱신
+      tabs.forEach(function (t) {
+        t.classList.remove('is_active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      this.classList.add('is_active');
+      this.setAttribute('aria-selected', 'true');
+
+      // 도면 패널 전환
+      panels.forEach(function (p) {
+        p.classList.remove('is_active');
+      });
+      var activePanel = document.getElementById('floor_' + target);
+      if (activePanel) {
+        activePanel.classList.add('is_active');
+        // 이미지 재애니메이션: src 유지하면서 fade 효과 재실행
+        var img = activePanel.querySelector('img');
+        if (img) {
+          img.style.animation = 'none';
+          img.offsetHeight; // reflow 강제
+          img.style.animation = '';
+        }
+      }
+
+      // 공간 리스트 전환
+      legends.forEach(function (l) {
+        l.classList.remove('is_active');
+      });
+      var activeLegend = document.querySelector('.legend_panel[data-legend="' + target + '"]');
+      if (activeLegend) {
+        activeLegend.classList.add('is_active');
+      }
+    });
+  });
+})();
+
 }); //end

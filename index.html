@@ -5,214 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MMCA Intro</title>
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
 
-        html {
-            scrollbar-width: none;
-        }
-
-        html::-webkit-scrollbar {
-            display: none;
-        }
-
-        body {
-            background: #1E1E1E;
-            width: 100vw;
-            height: 100vh;
-            overflow-x: hidden;
-            font-family: 'Inter', 'Arial Black', sans-serif;
-            visibility: hidden;
-        }
-
-        body.is_ready {
-            visibility: visible;
-        }
-
-        #intro_wrapper {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            z-index: 10;
-        }
-
-        .columns_layer {
-            position: absolute;
-            inset: 0;
-            display: flex;
-        }
-
-        .letter-cell {
-            flex: 1;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .letter-cell:not(:last-child) {
-            border-right: 2px solid rgba(255, 255, 255, 0);
-        }
-
-        .letter-cell svg {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        .draw-path {
-            fill: none;
-            stroke: #ffffff;
-            stroke-width: 2;
-            stroke-linecap: butt;
-            stroke-linejoin: miter;
-            stroke-dasharray: 20000 20000;
-            stroke-dashoffset: 20000;
-        }
-
-        .divider {
-            display: none;
-        }
-
-        .text_layer {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            z-index: 2;
-        }
-
-        .text_mmca {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            white-space: nowrap;
-        }
-
-        .text_part {
-            font-size: 18vw;
-            font-weight: 900;
-            color: #1a1a1a;
-            line-height: 1;
-            letter-spacing: -0.02em;
-            display: block;
-            will-change: transform;
-        }
-
-        #part_mm {
-            transform: translateX(-50%) translateY(50%);
-        }
-
-        #part_ca {
-            transform: translateX(65%) translateY(-48%);
-            scale: 1.03;
-        }
-
-        .shapes_layer {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            z-index: 2;
-        }
-
-        .logo_img {
-            width: 25vw;
-            max-width: 350px;
-            height: auto;
-        }
-
-        .bg_layer {
-            position: absolute;
-            inset: 0;
-            background: #ffffff;
-            opacity: 0;
-            z-index: 1;
-        }
-
-        .scroll_hint {
-            position: fixed;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 200;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            opacity: 0.6;
-        }
-
-        .scroll_hint span {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.5);
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
-
-        .scroll_hint .arrow {
-            width: 1px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.3);
-            animation: scroll_arrow 1.5s ease-in-out infinite;
-        }
-
-        .scroll_hint .arrow::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) rotate(45deg);
-            width: 6px;
-            height: 6px;
-            border-right: 1px solid rgba(255, 255, 255, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-        }
-
-        @keyframes scroll_arrow {
-
-            0%,
-            100% {
-                opacity: 0.3;
-                transform: translateY(0);
-            }
-
-            50% {
-                opacity: 1;
-                transform: translateY(8px);
-            }
-        }
-
-        .scroll_spacer {
-            height: 700vh;
-            pointer-events: none;
-        }
-    </style>
 </head>
 
 <body>
-
     <div id="intro_wrapper">
         <div class="bg_layer"></div>
-
         <div class="columns_layer" id="columns_layer">
             <!-- M1 -->
             <div class="letter-cell">
@@ -273,14 +79,22 @@
                         <mask id="water-a">
                             <rect id="wr-a" x="-500" y="1200" width="2000" height="1400" fill="white" />
                         </mask>
+                        <clipPath id="clip-a">
+                            <path
+                                d="M37.7955 726H-175.273L64.7841 -1.27275H334.67L574.727 726H361.659L202.568 199.011H196.886L37.7955 726Z" />
+                            <path d="M-1.97727 439.068H398.591V586.795H-1.97727V439.068Z" />
+                        </clipPath>
                     </defs>
-                    <path
-                        d="M37.7955 726H-175.273L64.7841 -1.27275H334.67L574.727 726H361.659L202.568 199.011H196.886L37.7955 726Z"
-                        fill="#ffffff" mask="url(#water-a)" />
-                    <path d="M-1.97727 439.068H398.591V586.795H-1.97727V439.068Z" fill="#ffffff" mask="url(#water-a)" />
                     <path class="draw-path"
                         d="M37.7955 726H-175.273L64.7841 -1.27275H334.67L574.727 726H361.659L202.568 199.011H196.886L37.7955 726Z" />
-                    <path class="draw-path" d="M-1.97727 439.068H398.591V586.795H-1.97727V439.068Z" />
+                    <path class="draw-path a-crossbar" d="M-1.97727 439.068H398.591V586.795H-1.97727V439.068Z" />
+                    <g clip-path="url(#clip-a)">
+                        <path
+                            d="M37.7955 726H-175.273L64.7841 -1.27275H334.67L574.727 726H361.659L202.568 199.011H196.886L37.7955 726Z"
+                            fill="#ffffff" mask="url(#water-a)" />
+                        <path d="M-1.97727 439.068H398.591V586.795H-1.97727V439.068Z" fill="#ffffff"
+                            mask="url(#water-a)" />
+                    </g>
                 </svg>
             </div>
         </div>
@@ -289,13 +103,17 @@
         <div class="text_layer" id="text_layer">
             <div class="text_mmca" id="text_mmca">
                 <span class="text_part" id="part_mm">MM</span>
-                <span class="text_part" id="part_ca">CA</span>
+                <span class="text_part" id="part_c">C</span>
+                <span class="text_part" id="part_a">A</span>
             </div>
         </div>
 
-        <!-- Stage 6: 로고 이미지 -->
+        <!-- Stage 6: 로고 이미지 (번갈아 전환) -->
         <div class="shapes_layer" id="shapes_layer">
-            <img class="logo_img" src="img/(영은)mmca로고-(1).png">
+            <div class="logo_wrap">
+                <img class="logo_img logo_default" src="img/logo.png">
+                <img class="logo_img logo_orange" src="img/logo_o.png">
+            </div>
         </div>
 
     </div>
@@ -307,85 +125,10 @@
 
     <div class="scroll_spacer"></div>
 
-    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
-    <script>
-        history.scrollRestoration = 'manual';
-        window.scrollTo(0, 0);
-
-        const lenis = new Lenis({
-            duration: 1.4,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        });
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-        gsap.ticker.lagSmoothing(0);
-        gsap.registerPlugin(ScrollTrigger);
-
-        const drawPaths = document.querySelectorAll('.draw-path');
-        const waterRects = ['wr-m1', 'wr-m2', 'wr-c', 'wr-a'].map(id => document.getElementById(id));
-        const dropM2 = document.getElementById('drop-m2');
-        const dropA = document.getElementById('drop-a');
-        const bgLayer = document.querySelector('.bg_layer');
-        const columnsLayer = document.getElementById('columns_layer');
-        const textLayer = document.getElementById('text_layer');
-        const textMmca = document.getElementById('text_mmca');
-        const shapesLayer = document.getElementById('shapes_layer');
-        const scrollHint = document.getElementById('scroll_hint');
-        const borders = document.querySelectorAll('.letter-cell:not(:last-child)');
-
-        function clamp01(v) { return Math.min(Math.max(v, 0), 1); }
-        function range(p, s, e) { return clamp01((p - s) / (e - s)); }
-        function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
-
-        function onScroll() {
-            const p = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-            const s1 = easeOutExpo(range(p, 0, 2));
-            drawPaths.forEach(path => { path.style.strokeDashoffset = 20000 * (1 - s1); });
-            const sd = easeOutExpo(range(p, 0.05, 0.25));
-            borders.forEach(b => { b.style.borderRightColor = `rgba(255,255,255,${sd})`; });
-            const s2 = easeOutExpo(range(p, 0.05, 0.60));
-            const waterY = 1200 + (-200 - 1200) * s2;
-            waterRects.forEach(r => { if (r) r.setAttribute('y', waterY); });
-            scrollHint.style.opacity = Math.max(0, 0.6 - range(p, 0, 0.03) * 3);
-        }
-
-        window.addEventListener('scroll', onScroll, { passive: true });
-        onScroll();
-
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: '.scroll_spacer',
-                start: '10% top',
-                end: 'bottom bottom',
-                scrub: 1,
-            }
-        });
-
-        tl.to([dropM2, dropA], { y: '33vh', duration: 2.5, ease: 'power4.in' }, 0);
-        tl.to(bgLayer, { opacity: 1, duration: 5, ease: 'power2.inOut' }, 0);
-        tl.to(drawPaths, { stroke: '#1a1a1a', duration: 1.5, ease: 'power2.inOut' }, 0.5);
-        tl.to(borders, { borderColor: 'rgba(0,0,0,0.1)', duration: 1, ease: 'power2.inOut' }, 0.5);
-
-        tl.to(columnsLayer, { opacity: 0, scale: 0.5, duration: 1, ease: 'power2.inOut' }, 3);
-        tl.to(textLayer, { opacity: 1, duration: 0.8, ease: 'power2.inOut' }, 3.8);
-
-        tl.to('#part_mm', { x: 300, y: 50, duration: 1, ease: 'power3.inOut' }, 5);
-        tl.to('#part_ca', { x: -30, y: 10, duration: 1, ease: 'power3.inOut' }, 5);
-
-        /* Stage 6: MM/CA 축소+페이드 아웃, 로고 opacity만 변경 */
-        tl.to(textLayer, { opacity: 0, scale: 0.6, duration: 1, ease: 'power2.inOut' }, 8);
-        tl.to(shapesLayer, { opacity: 1, duration: 1, ease: 'power2.inOut' }, 8.5);
-
-        document.fonts.ready.then(() => {
-            ScrollTrigger.refresh();
-            document.body.classList.add('is_ready');
-        });
-
-        window.addEventListener('resize', () => { ScrollTrigger.refresh(); });
-    </script>
+    <!-- 메인페이지 -->
+    <div id="main_page">
+        <!-- 메인페이지 내용을 여기에 추가하세요 -->
+    </div>
 </body>
 
 </html>
