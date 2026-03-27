@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // plan 섹션 - Address 초기 열림
+  const address_btn = document.querySelector('.address .plus');
+  const address_container = document.querySelector('#address_container');
+  if (address_btn && address_container) {
+    address_btn.setAttribute('aria-expanded', 'true');
+    address_container.setAttribute('aria-hidden', 'false');
+  }
+
   // plan 섹션
   const tit_list = document.querySelectorAll('.plan .inner .tit');
 
