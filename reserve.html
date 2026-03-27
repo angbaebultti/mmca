@@ -12,6 +12,8 @@
     />
     <meta name="author" content="TEAM 아이조아" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script
       src="https://kit.fontawesome.com/b43057b3ba.js"
@@ -24,6 +26,7 @@
     <link rel="stylesheet" href="css/common_media.css" />
     <link rel="stylesheet" href="css/reserve.css" />
     <script src="js/common.js" defer></script>
+    <script src="js/reserve.js" defer></script>
   </head>
   <!-- 햄버거 밑부터 개인별 작업 -->
   <body>
@@ -57,7 +60,7 @@
             <!-- //.nav_bottom -->
           </div>
           <!-- //.nav -->
-          <div class="museum_nav">
+          <!-- <div class="museum_nav">
             <div class="row_top">
               <a href="museum.html">
                 <div class="item seoul">
@@ -72,7 +75,6 @@
                 </div>
               </a>
             </div>
-            <!-- //.row_top -->
             <div class="row_bottom">
               <a href="#">
                 <div class="item gwacheon">
@@ -87,9 +89,7 @@
                 </div>
               </a>
             </div>
-            <!-- //.row_bottom -->
-          </div>
-          <!-- //.museum_nav -->
+          </div> -->
         </div>
       </header>
       <div class="menu_overlay" id="menu">
@@ -194,7 +194,13 @@
                   <label>EMAIL ADDRESS</label>
                   <div class="input_row">
                     <input type="text" placeholder="YOU@EXAMPLE.COM" />
-                    <button class="send_btn">Send Code</button>
+                    <div class="send_code">
+                      <input type="checkbox" id="send_code_btn" />
+                      <label for="send_code_btn">
+                        <span class="box"></span>
+                        <span class="text">Send Code</span>
+                      </label>
+                    </div>
                   </div>
                   <span class="helper"
                     >We will send a 6-digit verification code</span
@@ -203,7 +209,10 @@
 
                 <div class="form_group">
                   <label>USER VERIFICATION</label>
-                  <input type="text" placeholder="[ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ] [ 6 ]" />
+                  <input
+                    type="text"
+                    placeholder="[ 1 ] [ 2 ] [ 3 ] [ 4 ] [ 5 ] [ 6 ]"
+                  />
                 </div>
               </div>
 
@@ -215,8 +224,12 @@
                 </div>
 
                 <div class="card_box">
-                  <p class="card_title">CREDIT / DEBIT CARD</p>
-
+                  <div class="title">
+                    <div class="card_icon">
+                      <i class="fa-regular fa-credit-card"></i>
+                    </div>
+                    <p class="card_title">CREDIT / DEBIT CARD</p>
+                  </div>
                   <div class="form_group">
                     <label>CARD NUMBER</label>
                     <input type="text" placeholder="0000 0000 0000 0000" />
@@ -245,6 +258,7 @@
 
                 <label class="agree">
                   <input type="checkbox" />
+                  <span class="checkmark"></span>
                   I agree to the Terms of Service and confirm that I have
                   reviewed the exhibition guidelines.
                 </label>
@@ -262,19 +276,48 @@
             </div>
 
             <!-- RIGHT -->
-            <div class="checkout_right">
-              <div class="ticket_preview">
-                <span class="label left">(RESERVATION)</span>
-                <span class="label right">(TICKET)</span>
-
-                <div class="ticket">
-                  <img
-                    src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=MMCA"
-                    alt=""
-                  />
-                </div>
-              </div>
+          <div class="checkout_right">
+<div class="ticket_preview">
+  <div class="awards_line">
+    <span class="label left">(RESERVATION)</span>
+    <div class="line"></div>
+    <span class="label right">(TICKET)</span>
+  </div>
+  <div class="ticket_mask">
+   
+ <div class="ticket">
+        <span class="hole_right"></span>
+        <div class="ticket_inner">
+          <div class="ticket_top">
+            <div class="left">
+              <img src="img/small_logo.png" alt="" class="small_logo">
+              <span class="brand">MMCA</span>
             </div>
+            <span class="ticket_link">ticket ↗</span>
+          </div>
+          <div class="poster">
+            <img src="img/seoulposter2.png" alt="">
+          </div>
+          <div class="ticket_info">
+            <div class="museum">
+              <div class="logo_box">
+                <img src="img/small_logo.png" alt="">
+              </div>
+              <p>national museum of<br>modern and contemporary art</p>
+            </div>
+            <div class="meta">
+              <p><span>date:</span> <em>26.01.30 - 26.05.03</em></p>
+              <p><span>venue:</span> <em>seoul bl gallery 6, gallery 7, gallery mdang</em></p>
+              <p><span>admission:</span> <em>2,000krw</em></p>
+            </div>
+          </div>
+          <div class="qr">
+            <img src="img/qr.png">
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
           </div>
         </div>
       </section>
