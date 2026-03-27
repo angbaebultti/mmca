@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+
         history.scrollRestoration = 'manual';
         window.scrollTo(0, 0);
 
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             ScrollTrigger.create({
                 trigger: '.scroll_spacer',
-                start: '65% top',
+                start: '85% top',
                 onEnter: () => {
                     const orange = document.querySelector('.logo_orange');
                     let isOrange = false;
@@ -100,6 +101,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         window.addEventListener('resize', () => { ScrollTrigger.refresh(); });
-
-
 });
