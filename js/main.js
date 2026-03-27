@@ -71,12 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .to(ticketLeft, { rotation: -25, x: -150, y: 100, ease: 'none', duration: 0.4 }, 0.35)
     .to(ticketRight, { rotation: 25, x: 150, y: 100, ease: 'none', duration: 0.4 }, 0.35)
 
-    // ❌ .to({}, { duration: 0.5 })  ← 이거 삭제
 
-    // 찢어진 후 바로 자연스럽게 낙하
     .to(ticketLeft, { y: 1800, x: -400, rotationZ: -55, ease: 'power2.in', duration: 1.4 }, 0.75)
     .to(ticketRight, { y: 1800, x: 400, rotationZ: 55, ease: 'power2.in', duration: 1.4 }, 0.75)
-    // opacity는 거의 다 떨어졌을 때 서서히
     .to(ticketLeft, { opacity: 0, duration: 0.3 }, 1.8)
     .to(ticketRight, { opacity: 0, duration: 0.3 }, 1.8)
 
@@ -133,35 +130,47 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
     if (lineRight) lineRight.style.setProperty('--line-scale', 0);
 
-    const statTL = gsap.timeline({
-      scrollTrigger: {
-        trigger: about,
-        start: 'top+=60% top',  // ← px 대신 % 사용, about 60% 지점에서 발동
-        toggleActions: 'play none none none'
-      }
-    });
+    function runStatAnimation() {
+      statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
+      gsap.set(statArray, { opacity: 0, x: -60 });
+      if (statsBg) gsap.set(statsBg, { opacity: 0 });
+      if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
+      if (lineRight) lineRight.style.setProperty('--line-scale', 0);
 
-    if (statsBg) statTL.to(statsBg, { opacity: 0.25, ease: 'power2.out', duration: 0.8 }, 0);
+      const statTL = gsap.timeline();
 
-    statTL.to({}, {
-      duration: 0.6,
-      onUpdate() { if (lineLeft) lineLeft.style.setProperty('--line-scale', this.progress()); }
-    }, 0);
+      if (statsBg) statTL.to(statsBg, { opacity: 0.25, ease: 'power2.out', duration: 0.8 }, 0);
 
-    statData.forEach((d, i) => {
-      const counter = { val: 0 };
-      statTL.to(statArray[i], { opacity: 1, x: 0, ease: 'power3.out', duration: 0.6 }, 0.4 + i * 0.18);
-      statTL.to(counter, {
-        val: d.target, ease: 'power2.out', duration: 1.2,
-        onUpdate() { if (d.el) d.el.textContent = Math.round(counter.val).toLocaleString('en-US') + d.suffix; },
-        onComplete() { if (d.el) d.el.textContent = d.original; }
-      }, 0.4 + i * 0.18);
-    });
+      statTL.to({}, {
+        duration: 0.6,
+        onUpdate() { if (lineLeft) lineLeft.style.setProperty('--line-scale', this.progress()); }
+      }, 0);
 
-    statTL.to({}, {
-      duration: 0.6,
-      onUpdate() { if (lineRight) lineRight.style.setProperty('--line-scale', this.progress()); }
-    }, 1.4);
+      statData.forEach((d, i) => {
+        const counter = { val: 0 };
+        statTL.to(statArray[i], { opacity: 1, x: 0, ease: 'power3.out', duration: 0.6 }, 0.4 + i * 0.18);
+        statTL.to(counter, {
+          val: d.target, ease: 'power2.out', duration: 1.2,
+          onUpdate() { if (d.el) d.el.textContent = Math.round(counter.val).toLocaleString('en-US') + d.suffix; },
+          onComplete() { if (d.el) d.el.textContent = d.original; }
+        }, 0.4 + i * 0.18);
+      });
+
+      statTL.to({}, {
+        duration: 0.6,
+        onUpdate() { if (lineRight) lineRight.style.setProperty('--line-scale', this.progress()); }
+      }, 1.4);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          runStatAnimation();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    observer.observe(aboutContent);
   }
 
 
@@ -244,8 +253,23 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!head || !body) return;
 
       // 탭 클릭
-      head.addEventListener('click', () => {
-        if (group.classList.contains('is-open')) return;
+      group.addEventListener('click', () => {
+        if (group.classList.contains('is-open')) {
+          const currentCards = group.querySelectorAll('.news_card');
+          gsap.to(currentCards, {
+            opacity: 0, y: -16,
+            stagger: 0.04, duration: 0.2, ease: 'power2.in',
+            onComplete: () => {
+              group.classList.remove('is-open');
+              gsap.set(currentCards, { opacity: 0, y: 24 });
+              group.style.cursor = 'pointer';
+            }
+          });
+          return;
+        }
+
+
+        const groupTop = group.getBoundingClientRect().top + window.scrollY;
 
         const current = groups.find(g => g.classList.contains('is-open'));
         if (current) {

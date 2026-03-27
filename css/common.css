@@ -534,18 +534,17 @@ footer {
 
 .f_left {
   display: flex;
-  gap: 28px;
+  gap: 60px;
+  /* 28px → 원하는 값으로 */
+  align-items: flex-start;
 }
 
 .branch {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 215px;
-  height: 130px;
-  position: relative;
-  width: 215px;
-  height: 130px;
+  width: auto;
+  height: auto;
 }
 
 
@@ -588,7 +587,7 @@ footer {
 
 .f_right {
   display: flex;
-  gap: 60px;
+  gap: 0;
   align-items: flex-start;
   justify-content: flex-start;
 }
@@ -611,7 +610,7 @@ footer {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   align-items: flex-start;
 }
 
