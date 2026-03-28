@@ -175,9 +175,9 @@ section {}
   transition:
     padding 0.5s ease,
     border 0.3s ease;
-    width: 100%;
-    max-width: 1920px;
-    margin: 0 auto;
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 
 .header.shrink .nav {
@@ -227,7 +227,6 @@ section {}
   cursor: pointer;
 }
 
-/* ham_햄버거 버튼 */
 .gnb_r img#menu_btn {
   width: 32px;
   height: 32px;
@@ -297,6 +296,7 @@ section {}
   top: 0;
   left: 0;
   width: 0%;
+  /* 그대로 유지 */
   height: 100%;
   z-index: -1;
   transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
@@ -349,8 +349,8 @@ section {}
   visibility: hidden;
   transform: translateY(-30px);
   transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              visibility 0s linear 0.45s;
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.45s;
   pointer-events: none;
 }
 
@@ -359,8 +359,8 @@ section {}
   visibility: visible;
   transform: translateY(0);
   transition: opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              visibility 0s linear 0s;
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0s;
   pointer-events: auto;
 }
 
@@ -535,18 +535,17 @@ footer {
 
 .f_left {
   display: flex;
-  gap: 28px;
+  gap: 60px;
+  /* 28px → 원하는 값으로 */
+  align-items: flex-start;
 }
 
 .branch {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 215px;
-  height: 130px;
-  position: relative;
-  width: 215px;
-  height: 130px;
+  width: auto;
+  height: auto;
 }
 
 
@@ -589,7 +588,7 @@ footer {
 
 .f_right {
   display: flex;
-  gap: 60px;
+  gap: 0;
   align-items: flex-start;
   justify-content: flex-start;
 }
@@ -612,7 +611,7 @@ footer {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   align-items: flex-start;
 }
 
@@ -694,6 +693,7 @@ footer {
   font-family: 'Inter', sans-serif;
 }
 
+<<<<<<< HEAD
 .nav li {
   position: relative;
 }
@@ -734,4 +734,55 @@ footer {
 
 .nav li:nth-child(4) a::before {
   display: none;
+=======
+* {
+  cursor: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99999;
+  transition: opacity 0.2s;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0px;
+  font-weight: 700;
+  font-family: var(--pretendard);
+  color: #000;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  transition:
+    width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    background 0.4s,
+    border-color 0.4s,
+    font-size 0.3s;
+}
+
+.cursor-ring.shop-hover {
+  width: 130px;
+  height: 130px;
+  background: #fff;
+  border-color: transparent;
+  font-size: 14px;
+>>>>>>> a95548621a189984493313f310a5d94479d5ae3d
 }

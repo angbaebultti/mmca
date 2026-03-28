@@ -8,7 +8,6 @@
   padding: 20px 136px;
   border-bottom: 1px solid var(--gray_06);
   margin-top: 161px;
-  
 }
 
 .page_title {
@@ -124,6 +123,50 @@
   height: 100%;
 }
 
+.artwork_card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.artwork_card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.artwork_card::before {
+  content: "";
+  position: absolute;
+  inset: -30% 0 auto;
+  height: 60%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.1) 20%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0.14) 78%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(10px) saturate(130%);
+  -webkit-backdrop-filter: blur(10px) saturate(130%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  transform: translateY(-135%) skewY(-4deg);
+}
+
+.artwork_card.glass-flow::before {
+  animation: artworkGlassFlow 1.15s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
 .slide_artworks img {
   display: block;
   width: 350px;
@@ -131,6 +174,23 @@
   object-fit: cover;
   background: var(--gray_01);
   flex: none;
+}
+
+@keyframes artworkGlassFlow {
+  0% {
+    opacity: 0;
+    transform: translateY(-135%) skewY(-4deg);
+  }
+  18% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 0.92;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(265%) skewY(-4deg);
+  }
 }
 
 .slide_meta_col {
@@ -146,12 +206,13 @@
   font-size: 96px;
   font-weight: 500;
   line-height: 0.82;
-  color: rgba(140, 59, 45, 0.7);
+  /* color: rgba(140, 59, 45, 0.7); */
+  color: rgba(255, 102, 36, 0.4);
   /* writing-mode: vertical-rl; */
   writing-mode: vertical-rl;
   writing-mode: sideways-lr;
   text-orientation: mixed;
-  letter-spacing: -0.08em;
+  letter-spacing: -0.06em;
   user-select: none;
 }
 
@@ -171,6 +232,8 @@
 
 .skip_btn:hover {
   opacity: 1;
+  color: rgba(255, 102, 36);
+  border-bottom: 1px solid rgba(255, 102, 36);
 }
 
 .slide_dots {
@@ -193,7 +256,7 @@
 }
 
 .dot.active {
-  background: var(--main_white);
+  background: rgba(255, 102, 36, 0.7);
 }
 
 .artist_photo,
@@ -227,6 +290,8 @@
   padding-top: 0;
   bottom: auto;
   left: auto;
+  color: rgba(255, 102, 36, 0.6); /* 포인트컬러 */
+  text-decoration: none;
 }
 
 #section05 a span {
@@ -236,14 +301,19 @@
   width: 24px;
   height: 24px;
   margin-left: -12px;
-  border-left: 1px solid #fff;
-  border-bottom: 1px solid #fff;
-  -webkit-transform: rotate(-45deg);
+  border-left: 1px solid rgba(255, 102, 36, 0.6); /* 포인트컬러 */
+  border-bottom: 1px solid rgba(255, 102, 36, 0.6); /* 포인트컬러 */
   transform: rotate(-45deg);
-  -webkit-animation: sdb05 1.5s infinite;
   animation: sdb05 1.5s infinite;
   box-sizing: border-box;
 }
+
+/* 두 번째 span: 첫 번째보다 위에 위치, 딜레이 줘서 순차적으로 흐르게 */
+#section05 a span:nth-of-type(2) {
+  bottom: 55px;
+  animation-delay: 0.09s;
+}
+
 @-webkit-keyframes sdb05 {
   0% {
     -webkit-transform: rotate(-45deg) translate(0, 0);
@@ -274,13 +344,30 @@
 /* =============================================
    2번: History 섹션
 ============================================= */
+/* history 섹션 스크롤 고정 래퍼 */
+.history_wrapper {
+  position: relative;
+  height: 300vh; /* 스크롤 구간 길이 조절 */
+}
+
+.history_sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: clip;
+  display: flex;
+  flex-direction: column;
+}
+
 .history_section {
   display: flex;
   flex-direction: column;
-  padding: 170px 136px 150px;
+  padding: 40px 136px 60px; /* sticky라서 위 패딩 줄임 */
   background: var(--main_black);
   gap: 65px;
-  overflow: hidden; /* 2025배경쉐도우애니 안잘리게 */
+  overflow: hidden;
+  flex: 1;
+  min-height: 0;
 }
 
 .history_title {
@@ -291,12 +378,13 @@
   color: var(--main_white);
   border-block: 1px solid var(--gray_06);
   padding: 20px 136px;
+  margin-bottom: 130px; /* 추가 */
 }
 
 /* 포스터 트랙 컨테이너 - overflow hidden으로 잘라냄 */
 .history_slider_wrap {
   /* overflow: hidden; */
-  overflow: visible; /* 2025배경쉐도우애니 안잘리게 */
+  overflow: visible;
   width: 100%;
   margin-bottom: 36px;
 }
@@ -324,11 +412,17 @@
   height: 300px;
   object-fit: cover;
   display: block;
-  transition: opacity 0.2s;
+  /* 히스토리 포스터 호버: 레이아웃은 유지하고 확대만 부드럽게 적용합니다. */
+  transform: scale(1);
+  transform-origin: center center;
+  transition:
+    opacity 0.35s ease,
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .poster_item:hover img {
-  opacity: 0.75;
+  opacity: 0.6;
+  transform: scale(1.06);
 }
 
 .poster_year {
@@ -376,6 +470,16 @@
   background: var(--gray_03);
 }
 
+/* 레버 지나간 자리 포인트컬러로 채움 */
+.slider_fill {
+  position: absolute;
+  left: 0;
+  height: 1px;
+  background: rgba(255, 102, 36, 0.9);
+  width: 0%;
+  z-index: 1;
+}
+
 .slider_thumb {
   width: 17px;
   height: 17px;
@@ -401,7 +505,7 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(102, 43, 17, 0.8); /* 포인트컬러로 교체 */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s;
@@ -490,60 +594,96 @@
 /* =============================================
    4번: Video 섹션
 ============================================= */
-.video_section {
-  padding: 260px 40px 200px;
+.video_wrapper {
+  position: relative;
+  height: 500vh;
   background: var(--main_black);
-  text-align: center;
+}
+
+.video_sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--main_black);
 }
 
 .video_section_title {
-  font-size: var(--h3);
+  font-size: var(--h2);
   font-weight: 600;
-  letter-spacing: -1.4px;
-  margin-bottom: 90px;
+  letter-spacing: -0.02em;
   color: var(--main_white);
+  border-block: 1px solid var(--gray_06);
+  padding: 20px 136px;
+  flex-shrink: 0;
 }
 
 .video_grid {
+  flex: 1;
   display: flex;
+  align-items: center;
   justify-content: center;
   gap: 60px;
-  flex-wrap: wrap;
-  margin-bottom: 80px;
+  padding: 0 60px;
 }
 
-.video_thumb {
-  width: 420px;
+.video_item {
+  /* 비디오 카드: iframe과 라벨을 하나의 박스로 묶어 네 모서리 라운드를 모두 보이게 합니다. */
+  width: 500px;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(88px);
   text-align: left;
-  transition: filter 0.2s;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
 }
 
-.video_thumb iframe {
+.video_item iframe {
   width: 100%;
-  height: 236px; /* 16:9 비율 420 × 9/16 */
+  height: 281px;
   display: block;
   border: none;
+  opacity: 0.75;
+  transition: opacity 0.3s ease;
+}
+
+.video_item:hover iframe {
+  opacity: 1;
 }
 
 .video_label {
   font-size: 13px;
-  color: var(--gray_03);
-  margin-top: 10px;
+  color: var(--gray_04);
+  margin-top: 0;
+  padding: 10px 12px 14px;
 }
 
-.view_more_btn {
-  display: inline-block;
-  color: var(--main_white);
-  text-decoration: none;
-  font-size: 22px;
-  font-weight: 300;
-  border-bottom: 1px solid var(--gray_02);
-  padding-bottom: 3px;
-  transition: border-color 0.2s;
+@keyframes floatAnim {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
-.view_more_btn:hover {
-  border-color: var(--main_white);
+.video_item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.video_item.float_active {
+  animation: floatAnim 2.5s ease-in-out infinite; /* 속도 조절 */
+}
+
+.video_item.float_active:hover {
+  animation-play-state: paused;
 }
 
 /* 탑버튼 */
@@ -572,4 +712,55 @@
 
 .top_btn:hover {
   background: var(--gray_01);
+}
+
+* {
+  cursor: none;
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99999;
+  transition: opacity 0.2s;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 44px;
+  height: 44px;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0px;
+  font-weight: 700;
+  font-family: var(--pretendard);
+  color: #000;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  transition:
+    width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    background 0.4s,
+    border-color 0.4s,
+    font-size 0.3s;
+}
+
+.cursor-ring.shop-hover {
+  width: 130px;
+  height: 130px;
+  background: #fff;
+  border-color: transparent;
+  font-size: 14px;
 }

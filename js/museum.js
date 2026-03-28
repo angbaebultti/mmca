@@ -214,7 +214,7 @@ function setupHorizontalSections(callback) {
 
         const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
         const startHold = 600;
-        const extraScroll = 1600; // 이 숫자 키우면 스크롤 길어짐
+        const extraScroll = window.innerWidth <= 1440 ? 80 : 1600; // 1440 이하면 800
 
         section.style.height = `${
           window.innerHeight + totalScrollX + startHold + extraScroll
@@ -289,23 +289,17 @@ function setupHorizontalSections(callback) {
   }
 
   /* =========================================================
-   * 11. 선택한 큐브 면 확대
-   * - 클릭한 면만 남기고
-   * - 그 면이 정면에 오도록 회전
-   * - 큐브 전체가 아니라 "선택된 면이 중심인 상태"로 확대
-   * ========================================================= */
+ * 11. 선택한 큐브 면 확대
+ * ========================================================= */
 function expandSelectedFace(face) {
   const targetId = face.dataset.target;
   const targetSection = document.getElementById(targetId);
 
-  // [BUG FIX] targetSection 없을 때 lenis/isTransitioning 복구
   if (!targetSection) {
     lenis.start();
     isTransitioning = false;
     return;
   }
-
-  const rotateY = getFaceRotation(targetId);
 
   if (cubeScrollTrigger) {
     cubeScrollTrigger.kill();
@@ -322,6 +316,22 @@ function expandSelectedFace(face) {
     if (item !== face) item.classList.add("is_hidden");
   });
 
+// 1440px 이하 : 페이드 아웃 후 전시로
+  if (window.innerWidth <= 1440) {
+    gsap.to(introScene, {
+      opacity: 0,
+      duration: 0.4,
+      ease: "power2.out",
+      onComplete() {
+        switchToMuseum(targetSection);
+      }
+    });
+    return;
+  }
+
+  // 1440px 초과 : 기존 큐브 확대 애니메이션
+  const rotateY = getFaceRotation(targetId);
+
   const tl = gsap.timeline();
 
   tl.to(cube, {
@@ -329,25 +339,17 @@ function expandSelectedFace(face) {
     duration: 0.9,
     ease: "power2.inOut",
   })
-    .to(
-      cubeStage,
-      {
-        scale: 2.15,
-        y: -20,
-        duration: 1.5,
-        ease: "power3.out",
-      },
-      "-=0.1"
-    )
-    .to(
-      introScene,
-      {
-        opacity: 0.35,
-        duration: 0.7,
-        ease: "power2.out",
-      },
-      "-=0.75"
-    )
+    .to(cubeStage, {
+      scale: Math.max(window.innerWidth / 1000, window.innerHeight / 560) * 1.1,
+      y: -20,
+      duration: 1.5,
+      ease: "power3.out",
+    }, "-=0.1")
+    .to(introScene, {
+      opacity: 0.35,
+      duration: 0.7,
+      ease: "power2.out",
+    }, "-=0.75")
     .call(() => {
       switchToMuseum(targetSection);
     });
@@ -577,4 +579,93 @@ function expandSelectedFace(face) {
       lastScrollY = scroll;
     });
   }
+/* =========================================================
+ * 21. 큐브 커서 호버 효과
+ * ========================================================= */
+cubeFaces.forEach((face) => {
+  face.addEventListener('mouseenter', () => {
+    const cursorRing = document.getElementById('cursorRing');
+    if (cursorRing) {
+      cursorRing.classList.add('cube-hover');
+      cursorRing.textContent = 'CLICK HERE !';
+    }
+  });
+  face.addEventListener('mouseleave', () => {
+    const cursorRing = document.getElementById('cursorRing');
+    if (cursorRing) {
+      cursorRing.classList.remove('cube-hover');
+      cursorRing.textContent = '';
+    }
+  });
+});
+
+/* =========================================================
+ * 22. 모바일 슬라이드 모드 (1024px 이하)
+ * ========================================================= */
+function initMobileSlide() {
+  if (window.innerWidth > 1024) return;
+
+  const cubeEl = document.getElementById('cube');
+  const cubePinEl = document.querySelector('.cube_pin');
+  if (!cubeEl || !cubePinEl) return;
+
+  cubeEl.classList.add('is_slide_mode');
+
+  let currentIndex = 0;
+  const faces = Array.from(cubeFaces);
+  const total = faces.length;
+
+  // 도트 생성
+  const dots = document.createElement('div');
+  dots.className = 'slide_dots';
+  faces.forEach((_, i) => {
+    const dot = document.createElement('span');
+    if (i === 0) dot.classList.add('is_active');
+    dot.addEventListener('click', () => goTo(i));
+    dots.appendChild(dot);
+  });
+  cubePinEl.appendChild(dots);
+
+  // 화살표 생성
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'slide_prev';
+  prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
+
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'slide_next';
+  nextBtn.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
+
+  cubePinEl.appendChild(prevBtn);
+  cubePinEl.appendChild(nextBtn);
+
+  function goTo(index) {
+    currentIndex = (index + total) % total;
+    cubeEl.style.transform = `translateX(-${currentIndex * 100}vw)`;
+    document.querySelectorAll('.slide_dots span').forEach((d, i) => {
+      d.classList.toggle('is_active', i === currentIndex);
+    });
+  }
+
+  prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
+  nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
+
+  // 터치 스와이프
+  let startX = 0;
+  cubeEl.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  cubeEl.addEventListener('touchend', (e) => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      goTo(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+    }
+  }, { passive: true });
+}
+
+// 1024px 이하일 때만 실행
+if (window.innerWidth <= 1024) {
+  initMobileSlide();
+}
+
 });
