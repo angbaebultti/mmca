@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="국립현대미술관 영문 웹사이트 리디자인 프로젝트"
+    />
+    <meta
+      name="keywords"
+      content="MMCA, 국립현대미술관, 미술관, 전시, 웹디자인"
+    />
+    <meta name="author" content="TEAM 아이조아" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/b43057b3ba.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <title>National Museum of Modern and Contemporary Art, Korea</title>
+    <link
+      href="https://cdn.boxicons.com/3.0.8/fonts/basic/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/common_media.css" />
+    <link rel="stylesheet" href="css/museum.css" />
+    <link rel="stylesheet" href="css/museum_media.css" />
+
+    <script src="js/common.js" defer></script>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header class="header">
+        <div class="inner">
+          <div class="header_top">
+            <h1>
+              <a href="main.html"><img src="img/logo_icon.png" />MMCA</a>
+            </h1>
+          </div>
+          <div class="nav">
+            <div class="nav_bottom">
+              <ul class="gnb_l">
+                <li><a href="#">VISIT</a></li>
+                <li><a href="#">ARTIST</a></li>
+                <li><a href="#">EXPLORE</a></li>
+                <li><a href="#">PROGRAM</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">TICKETS</a></li>
+              </ul>
+              <!-- //.gnb_l -->
+              <div class="gnb_r">
+                <a href="#"><span>Sign in</span></a>
+                <a href="#"
+                  ><img src="img/ham_w.svg" alt="ham menu button" id="menu_btn"
+                /></a>
+              </div>
+              <!-- //.gnb_r -->
+            </div>
+            <!-- //.nav_bottom -->
+          </div>
+          <!-- //.nav -->
+        </div>
+      </header>
+      <div class="menu_overlay" id="menu">
+        <div class="menu_top">
+          <h1>
+            <a href="#"><img src="img/logo_icon.png" />MMCA</a>
+          </h1>
+          <span class="close_btn" id="close_btn">✕</span>
+        </div>
+        <div class="menu_top_row">
+          <div class="menu_col">
+            <h3><a href="#">VISIT</a></h3>
+            <ul>
+              <li><a href="#">Location</a></li>
+              <li class="active"><a href="#">Seoul</a></li>
+              <li class="active"><a href="#">Gwacheon</a></li>
+              <li class="active"><a href="#">Deoksugung</a></li>
+              <li class="active"><a href="#">Cheongju</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">PROGRAM</a></h3>
+            <ul>
+              <li><a href="#">Event</a></li>
+              <li><a href="#">Education</a></li>
+              <li><a href="#">Tour</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">EXPLORE</a></h3>
+            <ul>
+              <li class="active"><a href="#">Collection</a></li>
+              <li><a href="#">Research</a></li>
+              <li><a href="#">Archive</a></li>
+              <li><a href="#">Digital Museum</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">ARTIST</a></h3>
+            <ul>
+              <li><a href="#">Prize</a></li>
+              <li><a href="#">Residency</a></li>
+              <li><a href="#">Art Bank</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">ABOUT</a></h3>
+            <ul>
+              <li><a href="#">About MMCA</a></li>
+              <li class="active"><a href="#">History</a></li>
+              <li><a href="#">Mission</a></li>
+              <li><a href="#">Organization</a></li>
+              <li><a href="#">News</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3 class="tickets"><a href="#">TICKET</a></h3>
+            <ul>
+              <li class="active"><a href="#">Purchase</a></li>
+              <li><a href="#">Reservation</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="menu_bottom_row">
+          <div class="menu_col">
+            <h3><a href="#">MEMBERSHIP</a></h3>
+            <ul>
+              <li><a href="">Membership</a></li>
+              <li><a href="">Benefits</a></li>
+              <li><a href="">Program</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTRO / CUBE -->
+      <section class="intro_scene" id="introScene">
+        <div class="cube_pin">
+          <div class="cube_stage">
+            <div class="cube" id="cube">
+              <div
+                class="cube_face face_seoul"
+                data-target="seoul"
+                role="button"
+                tabindex="0"
+                aria-label="서울 전시로 이동"
+              >
+                <span class="cube_face_label">Seoul</span>
+                <span class="cube_face_img">
+                  <img src="img/seoul.png" alt="Seoul preview" />
+                </span>
+              </div>
+
+              <div
+                class="cube_face face_deoksugung"
+                data-target="deoksugung"
+                role="button"
+                tabindex="0"
+                aria-label="덕수궁 전시로 이동"
+              >
+                <span class="cube_face_label">Deoksugung</span>
+                <span class="cube_face_img">
+                  <img src="img/deoksugung.png" alt="Deoksugung preview" />
+                </span>
+              </div>
+
+              <div
+                class="cube_face face_gwacheon"
+                data-target="gwacheon"
+                role="button"
+                tabindex="0"
+                aria-label="과천 전시로 이동"
+              >
+                <span class="cube_face_label">Gwacheon</span>
+                <span class="cube_face_img">
+                  <img src="img/gwacheon.png" alt="Gwacheon preview" />
+                </span>
+              </div>
+
+              <div
+                class="cube_face face_cheongju"
+                data-target="cheongju"
+                role="button"
+                tabindex="0"
+                aria-label="청주 전시로 이동"
+              >
+                <span class="cube_face_label">Cheongju</span>
+                <span class="cube_face_img">
+                  <img src="img/cheongju.png" alt="Cheongju preview" />
+                </span>
+              </div>
+            </div>
+            <!-- /.cube -->
+          </div>
+          <!-- /.cube_stage -->
+        </div>
+        <!-- /.cube_pin -->
+      </section>
+      <!-- //.intro_scene -->
+
+      <!-- EXHIBITIONS -->
+      <div class="museum_wrap" id="museumWrap">
+        <!-- ── 1. SEOUL ── -->
+        <section id="seoul" class="museum_exhibit_section is_horizontal">
+          <div class="museum_inner">
+            <div class="museum_h_sticky">
+              <div class="museum_head">
+                <div class="museum_head_left">
+                  <p class="museum_label">On View at MMCA,</p>
+                  <h2 class="museum_name">Seoul</h2>
+                </div>
+                <div class="museum_tabs">
+                  <button type="button" class="is_active">Current</button>
+                  <button type="button">Upcoming</button>
+                  <button type="button">Past</button>
+                </div>
+              </div>
+
+              <div class="museum_h_scroll">
+                <div class="museum_h_track">
+                  <!-- Card 1 -->
+                  <article class="museum_exhibit_card">
+                    <div class="museum_poster">
+                      <img
+                        src="img/seoulposter1.png"
+                        alt="Seoul exhibition poster 1"
+                      />
+                    </div>
+                    <div class="museum_content">
+                      <div class="museum_info">
+                        <h3 class="museum_title">UNSTABLE REALITIES</h3>
+                        <ul class="museum_meta">
+                          <li>
+                            <i class="bx bx-calendar"></i>
+                            <span>Jan 30 – May 3, 2026</span>
+                          </li>
+                          <li>
+                            <i class="bx bx-location"></i>
+                            <span>Seoul B1 G6, G7, Gallery Madang</span>
+                          </li>
+                        </ul>
+                        <p class="museum_desc">
+                          A sensory-driven exhibition that invites visitors to
+                          engage with art beyond the visual.
+                        </p>
+                        <a href="#" class="museum_ticket">
+                          <span class="ticket_main">TICKETS</span>
+                          <span class="ticket_stub">
+                            <i class="bx bx-arrow-up-right-stroke"></i>
+                          </span>
+                        </a>
+                      </div>
+                      <div class="museum_highlights">
+                        <strong>Exhibition Highlights</strong>
+                        <div class="highlight_list">
+                          <div class="highlight_item">
+                            <img src="img/highlights1.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights2.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights3.png" alt="highlight" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- Card 2 -->
+                  <article class="museum_exhibit_card">
+                    <div class="museum_poster">
+                      <img
+                        src="img/seoulposter2.png"
+                        alt="Seoul exhibition poster 2"
+                      />
+                    </div>
+                    <div class="museum_content">
+                      <div class="museum_info">
+                        <h3 class="museum_title">SHIFTING MATTER</h3>
+                        <ul class="museum_meta">
+                          <li>
+                            <i class="bx bx-calendar"></i>
+                            <span>May 01, 2025 – May 31, 2026</span>
+                          </li>
+                          <li>
+                            <i class="bx bx-location"></i>
+                            <span>Seoul 1F Gallery1 / B1 Gallery2</span>
+                          </li>
+                        </ul>
+                        <p class="museum_desc">
+                          Highlights from the MMCA Collection: 1960s – 2010s.
+                        </p>
+                        <a href="#" class="museum_ticket">
+                          <span class="ticket_main">TICKETS</span>
+                          <span class="ticket_stub">
+                            <i class="bx bx-arrow-up-right-stroke"></i>
+                          </span>
+                        </a>
+                      </div>
+                      <div class="museum_highlights">
+                        <strong>Exhibition Highlights</strong>
+                        <div class="highlight_list">
+                          <div class="highlight_item">
+                            <img src="img/highlights3.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights2.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights1.png" alt="highlight" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+                <!-- /.museum_h_track -->
+              </div>
+              <!-- /.museum_h_scroll -->
+            </div>
+            <!-- /.museum_h_sticky -->
+          </div>
+          <!-- /.museum_inner -->
+        </section>
+
+        <!-- ── 2. DEOKSUGUNG ── -->
+        <section id="deoksugung" class="museum_exhibit_section">
+          <div class="museum_inner">
+            <div class="museum_head">
+              <div class="museum_head_left">
+                <p class="museum_label">On View at MMCA,</p>
+                <h2 class="museum_name">Deoksugung</h2>
+              </div>
+              <div class="museum_tabs">
+                <button type="button" class="is_active">Current</button>
+                <button type="button">Upcoming</button>
+                <button type="button">Past</button>
+              </div>
+            </div>
+            <div class="museum_empty">
+              <h3>Currently between exhibitions</h3>
+              <p>
+                This space is preparing for the next exhibition.<br />
+                Explore upcoming shows or revisit past exhibitions.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── 3. GWACHEON ── -->
+        <section id="gwacheon" class="museum_exhibit_section is_horizontal">
+          <div class="museum_inner">
+            <div class="museum_h_sticky">
+              <div class="museum_head">
+                <div class="museum_head_left">
+                  <p class="museum_label">On View at MMCA,</p>
+                  <h2 class="museum_name">Gwacheon</h2>
+                </div>
+                <div class="museum_tabs">
+                  <button type="button" class="is_active">Current</button>
+                  <button type="button">Upcoming</button>
+                  <button type="button">Past</button>
+                </div>
+              </div>
+
+              <div class="museum_h_scroll">
+                <div class="museum_h_track">
+                  <!-- Card 1 -->
+                  <article class="museum_exhibit_card">
+                    <div class="museum_poster">
+                      <img
+                        src="img/gwaposter1.png"
+                        alt="Gwacheon exhibition poster 1"
+                      />
+                    </div>
+                    <div class="museum_content">
+                      <div class="museum_info">
+                        <h3 class="museum_title">WEIGHT OF SILENCE</h3>
+                        <ul class="museum_meta">
+                          <li>
+                            <i class="bx bx-calendar"></i>
+                            <span>Nov 27, 2025 – May 29, 2026</span>
+                          </li>
+                          <li>
+                            <i class="bx bx-location"></i>
+                            <span>Gwacheon 1F, Gallery 1, 3 and Main Hall</span>
+                          </li>
+                        </ul>
+                        <p class="museum_desc">
+                          A journey of transformation in Korean ceramics by Shin
+                          Sang Ho.
+                        </p>
+                        <a href="#" class="museum_ticket">
+                          <span class="ticket_main">TICKETS</span>
+                          <span class="ticket_stub">
+                            <i class="bx bx-arrow-up-right-stroke"></i>
+                          </span>
+                        </a>
+                      </div>
+                      <div class="museum_highlights">
+                        <strong>Exhibition Highlights</strong>
+                        <div class="highlight_list">
+                          <div class="highlight_item">
+                            <img src="img/highlights1.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights2.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights3.png" alt="highlight" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- Card 2 -->
+                  <article class="museum_exhibit_card">
+                    <div class="museum_poster">
+                      <img
+                        src="img/gwaposter2.png"
+                        alt="Gwacheon exhibition poster 2"
+                      />
+                    </div>
+                    <div class="museum_content">
+                      <div class="museum_info">
+                        <h3 class="museum_title">BOUNDLESS FORM</h3>
+                        <ul class="museum_meta">
+                          <li>
+                            <i class="bx bx-calendar"></i>
+                            <span>Oct 02, 2025 – Jan 03, 2027</span>
+                          </li>
+                          <li>
+                            <i class="bx bx-location"></i>
+                            <span>Gwacheon 1F, Circular Gallery 1</span>
+                          </li>
+                        </ul>
+                        <p class="museum_desc">
+                          A dialogue across time, connecting global art and
+                          perspectives.
+                        </p>
+                        <a href="#" class="museum_ticket">
+                          <span class="ticket_main">TICKETS</span>
+                          <span class="ticket_stub">
+                            <i class="bx bx-arrow-up-right-stroke"></i>
+                          </span>
+                        </a>
+                      </div>
+                      <div class="museum_highlights">
+                        <strong>Exhibition Highlights</strong>
+                        <div class="highlight_list">
+                          <div class="highlight_item">
+                            <img src="img/highlights1.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights2.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights3.png" alt="highlight" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+                <!-- /.museum_h_track -->
+              </div>
+              <!-- /.museum_h_scroll -->
+            </div>
+            <!-- /.museum_h_sticky -->
+          </div>
+          <!-- /.museum_inner -->
+        </section>
+
+        <!-- ── 4. CHEONGJU ── -->
+        <section id="cheongju" class="museum_exhibit_section is_horizontal">
+          <div class="museum_inner">
+            <div class="museum_h_sticky">
+              <div class="museum_head">
+                <div class="museum_head_left">
+                  <p class="museum_label">On View at MMCA,</p>
+                  <h2 class="museum_name">Cheongju</h2>
+                </div>
+                <div class="museum_tabs">
+                  <button type="button" class="is_active">Current</button>
+                  <button type="button">Upcoming</button>
+                  <button type="button">Past</button>
+                </div>
+              </div>
+
+              <div class="museum_h_scroll">
+                <div class="museum_h_track">
+                  <!-- Card 1 -->
+                  <article class="museum_exhibit_card">
+                    <div class="museum_poster">
+                      <img
+                        src="img/cheongposter1.png"
+                        alt="Cheongju exhibition poster 1"
+                      />
+                    </div>
+                    <div class="museum_content">
+                      <div class="museum_info">
+                        <h3 class="museum_title">ARCHIVE IN MOTION</h3>
+                        <ul class="museum_meta">
+                          <li>
+                            <i class="bx bx-calendar"></i>
+                            <span>Aug 8, 2025 – Jul 31, 2026</span>
+                          </li>
+                          <li>
+                            <i class="bx bx-location"></i>
+                            <span>Cheongju 3F, Open Storage</span>
+                          </li>
+                        </ul>
+                        <p class="museum_desc">
+                          Revisiting 20 years of Korean contemporary art and
+                          envisioning its future.
+                        </p>
+                        <a href="#" class="museum_ticket">
+                          <span class="ticket_main">TICKETS</span>
+                          <span class="ticket_stub">
+                            <i class="bx bx-arrow-up-right-stroke"></i>
+                          </span>
+                        </a>
+                      </div>
+                      <div class="museum_highlights">
+                        <strong>Exhibition Highlights</strong>
+                        <div class="highlight_list">
+                          <div class="highlight_item">
+                            <img src="img/highlights1.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights2.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights3.png" alt="highlight" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  <!-- Card 2 -->
+                  <article class="museum_exhibit_card">
+                    <div class="museum_poster">
+                      <img
+                        src="img/cheongposter2.png"
+                        alt="Cheongju exhibition poster 2"
+                      />
+                    </div>
+                    <div class="museum_content">
+                      <div class="museum_info">
+                        <h3 class="museum_title">EDGE OF VANISHING</h3>
+                        <ul class="museum_meta">
+                          <li>
+                            <i class="bx bx-calendar"></i>
+                            <span>Jul 22, 2025 – Dec 31, 2026</span>
+                          </li>
+                          <li>
+                            <i class="bx bx-location"></i>
+                            <span>Cheongju 4F, Special Storage</span>
+                          </li>
+                        </ul>
+                        <p class="museum_desc">
+                          Exploring experimental Japanese printmaking alongside
+                          Korean drawings.
+                        </p>
+                        <a href="#" class="museum_ticket">
+                          <span class="ticket_main">TICKETS</span>
+                          <span class="ticket_stub">
+                            <i class="bx bx-arrow-up-right-stroke"></i>
+                          </span>
+                        </a>
+                      </div>
+                      <div class="museum_highlights">
+                        <strong>Exhibition Highlights</strong>
+                        <div class="highlight_list">
+                          <div class="highlight_item">
+                            <img src="img/highlights1.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights2.png" alt="highlight" />
+                          </div>
+                          <div class="highlight_item">
+                            <img src="img/highlights3.png" alt="highlight" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+                <!-- /.museum_h_track -->
+              </div>
+              <!-- /.museum_h_scroll -->
+            </div>
+            <!-- /.museum_h_sticky -->
+          </div>
+          <!-- /.museum_inner -->
+        </section>
+      </div>
+      <!-- //.museumWrap -->
+
+      <!-- 상단으로 / 큐브로 돌아가기 버튼 -->
+      <div class="top_btn">
+        <a href="#" aria-label="큐브로 돌아가기">
+          <i class="fa-solid fa-arrow-up"></i>
+        </a>
+      </div>
+      <!-- //.top_btn -->
+
+      <footer>
+        <div class="banner" aria-label="museum locations">
+          <ul class="banner_track">
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+          </ul>
+          <!-- //.banner_track -->
+        </div>
+        <!-- //.banner -->
+        <div class="f_top">
+          <!-- f_left -->
+          <ul class="f_left">
+            <li class="branch">
+              <span class="branch_name seoul">Seoul</span>
+              <p class="tel">02-3701-9500</p>
+              <p>30 Samcheong-ro,<br />Jongno-gu,<br />Seoul</p>
+            </li>
+            <li class="branch">
+              <span class="branch_name deoksugung">Deoksugung</span>
+              <p class="tel">02-2022-0600</p>
+              <p>
+                99 Sejong-daero,<br />Jung-gu, Seoul<br />Inside Deoksugung
+                Palace
+              </p>
+            </li>
+            <li class="branch">
+              <span class="branch_name gwacheon">Gwacheon</span>
+              <p class="tel">02-2188-6000</p>
+              <p>313 Gwangmyeong-ro,<br />Gwacheon-si,<br />Gyeonggi-do</p>
+            </li>
+            <li class="branch">
+              <span class="branch_name cheongju">Cheongju</span>
+              <p class="tel">043-261-1400</p>
+              <p>314 Sangdang-ro,<br />Cheongwon-si,<br />Chungcheongbuk-do</p>
+            </li>
+          </ul>
+          <!-- f_right -->
+          <div class="f_right">
+            <div class="f_right_col">
+              <h4>SNS</h4>
+              <ul>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon icon="mdi:instagram"></iconify-icon></span
+                    >Instagram</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon
+                        icon="mingcute:facebook-fill"
+                      ></iconify-icon
+                    ></span>
+                    Facebook</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon icon="mdi:youtube"></iconify-icon
+                    ></span>
+                    YouTube</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><img src="img/blog_icon.svg" alt="Naver Blog" /> Naver
+                    Blog</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon
+                        icon="fa6-brands:square-x-twitter"
+                      ></iconify-icon
+                    ></span>
+                    X</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <!-- //.f_right_col -->
+            <div class="f_right_col">
+              <h4>Legal</h4>
+              <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Copyright</a></li>
+                <li><a href="#">Complaints</a></li>
+                <li><a href="#">Information Disclosure</a></li>
+                <li><a href="#">Integrity Report</a></li>
+              </ul>
+            </div>
+            <!-- //.f_right_col -->
+          </div>
+          <!-- //.f_right -->
+        </div>
+        <!-- //.f_top -->
+        <div class="f_bottom">
+          <div class="f_logo">
+            <span>MMCA</span>
+          </div>
+          <!-- //.f_logo -->
+          <p class="copyright">
+            © 2021 National Museum of Modern and Contemporary Art, Korea
+          </p>
+        </div>
+        <!-- //.f_bottom -->
+      </footer>
+    </div>
+    <!--//.wrap -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.19/dist/lenis.min.js"></script>
+    <script src="js/museum.js"></script>
+  </body>
+</html>
