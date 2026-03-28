@@ -1,0 +1,395 @@
+@charset "utf-8";
+
+/* PC에서 태블릿 전용 요소 숨기기 */
+.map_tablet_wrap,
+.map_modal {
+  display: none;
+}
+
+/* ════════════════════════════════════════
+   1024px
+════════════════════════════════════════ */
+@media (max-width: 1024px) {
+
+  /* ── plan ── */
+  .plan {
+    flex-direction: column;
+    padding: 160px 60px 100px;
+    gap: 40px;
+  }
+
+  .plan .heading {
+    font-size: 70px;
+  }
+
+  .plan .heading br {
+    display: none;
+  }
+
+  .plan .inner {
+    width: 100%;
+    gap: 28px;
+  }
+
+  .plan .inner .tit h3 {
+    font-size: 50px;
+    letter-spacing: -0.04em;
+  }
+
+  .plan .inner .plus {
+    width: 36px;
+    height: 36px;
+  }
+
+  .plan .inner .plus::before {
+    width: 18px;
+  }
+
+  .plan .inner .plus::after {
+    height: 18px;
+  }
+
+  .plan .inner .txt p {
+    font-size: 22px;
+  }
+
+  .address .container .txt p:last-child,
+  .opening .container .txt p:last-child,
+  .charges .container .txt p:nth-child(3),
+  .charges .container .txt p:last-child,
+  .parking .container .txt p:nth-child(2),
+  .parking .container .txt p:last-child {
+    font-size: 18px;
+  }
+
+  /* ── getting ── */
+  .getting {
+    padding: 120px 64px;
+  }
+
+  .getting h1.heading {
+    font-size: 70px;
+  }
+
+  .getting .inner {
+    gap: 60px;
+  }
+
+  .getting .btn_box button {
+    font-size: 24px;
+    gap: 12px;
+  }
+
+  .subway_panel,
+  .bus_panel,
+  .shuttle_panel {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    height: auto;
+    padding: 36px;
+    gap: 24px;
+  }
+
+  .station {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .station p {
+    font-size: 28px;
+  }
+
+  .line_badge {
+    font-size: 20px;
+    padding: 4px 12px;
+  }
+
+  .station_meta {
+    gap: 12px;
+  }
+
+  .station_meta span {
+    font-size: 17px;
+  }
+
+  .station_desc {
+    font-size: 18px;
+    max-width: 100%;
+  }
+
+  .viewmap_btn {
+    font-size: 17px;
+  }
+
+  .sh_card {
+    width: 100%;
+    padding: 36px;
+  }
+
+  .sh_service_day {
+    font-size: 26px;
+  }
+
+  .sh_closed {
+    font-size: 22px;
+  }
+
+  .sh_schedule_title {
+    font-size: 26px;
+  }
+
+  .sh_dep_label {
+    font-size: 16px;
+  }
+
+  .sh_dep_time {
+    font-size: 18px;
+  }
+
+  /* ── museum map ── */
+  .museum_map {
+    padding: 120px 64px;
+  }
+
+  .museum_map h1.heading {
+    font-size: 70px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 48px;
+  }
+
+  .museum_map .map_inner {
+    display: none;
+  }
+
+  .map_tablet_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .map_floor_list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .map_floor_item {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    padding: 28px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: background 0.2s, padding-left 0.2s;
+  }
+
+  .map_floor_item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    padding-left: 8px;
+  }
+
+  .map_floor_label {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    width: 48px;
+    flex-shrink: 0;
+    letter-spacing: -0.5px;
+  }
+
+  .map_floor_content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .map_floor_primary {
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.5;
+  }
+
+  .map_floor_secondary {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.5;
+  }
+
+  /* 모달 */
+  .map_modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    background: rgba(0, 0, 0, 0.85);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map_modal.is_open {
+    display: flex;
+  }
+
+  .map_modal_inner {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    background: #1e1e1e;
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .map_modal_close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+  .map_modal_inner .floor_map_wrap {
+    width: 100%;
+    height: 480px;
+  }
+
+  /* ── convenient ── */
+  .convenient {
+    padding: 100px 60px;
+    gap: 48px;
+  }
+
+  .convenient h1.heading {
+    font-size: 70px;
+  }
+
+  .convenient_cards {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 24px !important;
+    padding-bottom: 16px;
+    scrollbar-width: none;
+    align-items: flex-start;
+    grid-template-columns: unset;
+    column-gap: unset;
+    row-gap: unset;
+    justify-content: unset;
+    width: 100%;
+  }
+
+  .convenient_cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .con_card {
+    flex: 0 0 260px !important;
+    width: 260px !important;
+    height: auto !important;
+    scroll-snap-align: start;
+    margin-top: 0 !important;
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .con_card:nth-child(even) {
+    margin-top: 0 !important;
+  }
+
+  .con_card.flip_animate {
+    animation: none;
+  }
+
+  .con_img {
+    width: 100%;
+    height: 200px !important;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .con_text {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 20px !important;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .con_text h3 {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    line-height: 1.3;
+  }
+
+  .title_row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .floor {
+    font-size: 13px;
+  }
+
+  .con_text > p {
+    display: none;
+  }
+
+  /* ── accessibility ── */
+  .accessibility {
+    padding: 100px 60px 200px;
+    gap: 60px;
+  }
+
+  .accessibility h1.heading {
+    font-size: 70px;
+  }
+
+  .acc_cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .acc_card {
+    width: 100%;
+    height: auto;
+    min-height: 180px;
+    padding: 28px 36px;
+  }
+
+  .acc_card h3 {
+    font-size: 26px;
+  }
+
+  .acc_card p {
+    font-size: 16px;
+  }
+
+  .acc_icon {
+    font-size: 48px;
+    right: 28px;
+    top: 24px;
+  }
+
+} /* @media 끝 */
