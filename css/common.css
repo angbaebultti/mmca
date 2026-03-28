@@ -675,7 +675,7 @@ footer {
 .f_logo span {
   display: block;
   font-family: 'Inter', sans-serif;
-  font-size: 500px;
+   font-size: clamp(180px, 20vw, 420px);
   font-weight: 700;
   letter-spacing: -0.06em;
   color: #ffffff;
@@ -693,7 +693,6 @@ footer {
   font-family: 'Inter', sans-serif;
 }
 
-<<<<<<< HEAD
 .nav li {
   position: relative;
 }
@@ -734,8 +733,6 @@ footer {
 
 .nav li:nth-child(4) a::before {
   display: none;
-=======
-* {
   cursor: none;
 }
 
@@ -784,5 +781,4 @@ footer {
   background: #fff;
   border-color: transparent;
   font-size: 14px;
->>>>>>> a95548621a189984493313f310a5d94479d5ae3d
 }

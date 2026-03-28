@@ -261,7 +261,7 @@
   margin-right: 590px;
   transform: translateY(-50%) scaleX(var(--line-scale, 0));
   transform-origin: right center;
-  width: 18vw;
+  width: calc(50vw - 590px);  /* 18vw → 이걸로 */
   height: 1px;
   background: var(--main_white);
 }
@@ -273,7 +273,7 @@
   margin-left: 590px;
   transform: translateY(-50%) scaleX(var(--line-scale, 0));
   transform-origin: left center;
-  width: 18vw;
+  width: calc(50vw - 590px);  /* 18vw → 이걸로 */
   height: 1px;
   background: var(--main_white);
 }
@@ -359,7 +359,7 @@
 
 .artist_prize .title {
   position: absolute;
-  top: 80px;
+  top: 70px;
   left: 120px;
   z-index: 10;
   padding-left: 76px;

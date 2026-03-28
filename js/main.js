@@ -162,12 +162,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 1.4);
     }
 
-    ScrollTrigger.create({
-      trigger: about,
-      start: 'top+=60% top',
-      onEnter: () => runStatAnimation(),
-      onEnterBack: () => runStatAnimation(),
-    });
+ ScrollTrigger.create({
+  trigger: about,
+  start: 'top+=20% top',  // 더 일찍 트리거
+  onEnter: () => runStatAnimation(),
+  onEnterBack: () => runStatAnimation(),
+});
   }
     /* =========================================================
      * 10. ARTIST PRIZE - 메인 가로 스크롤
