@@ -693,3 +693,45 @@ footer {
   letter-spacing: 0.04em;
   font-family: 'Inter', sans-serif;
 }
+
+.nav li {
+  position: relative;
+}
+
+.nav li a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 12px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav li a::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  
+  width: 6px;
+  height: 6px;
+  background: #ff4b24;
+  border-radius: 50%;
+
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.nav li a:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav li.active a::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav li:nth-child(4) a::before {
+  display: none;
+}
