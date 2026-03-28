@@ -225,12 +225,14 @@ section {}
   gap: 16px;
   font-size: 27px;
   cursor: pointer;
+  align-items: center; /* 추가 */
 }
 
 .gnb_r img#menu_btn {
   width: 32px;
   height: 32px;
-  margin-top: 3px;
+  margin-top: 0; /* 3px → 0 */
+  display: block; /* 추가 */
 }
 
 .museum_nav {

@@ -74,21 +74,24 @@
     margin-bottom: 10px;
   }
 
-  .gnb_l {
-    font-size: 14.4px;
-    gap: 18px;
+.gnb_l {
+    font-size: 18px;
+    gap: 20px;
   }
 
   .gnb_r {
-    font-size: 14.4px;
-    gap: 11px;
+    font-size: 18px;
+    gap: 12px;
   }
 
-  .gnb_r img#menu_btn {
-    width: 15px;
-    height: 10px;
-    margin-top: 2px;}
+   .gnb_r span{
+    font-size: 18px;
+   }
 
+  .gnb_r img#menu_btn {
+    width: 20px;
+    height: 20px;
+  }
   .museum_nav {
     border-bottom: none;
   }
@@ -193,15 +196,6 @@
     position: relative;
   }
 
-  .branch:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 10%;
-    height: 60%;
-    width: 1px;
-    background: rgba(255, 255, 255, 0.3);
-  }
 
   .branch_name {
     font-size: 14.4px;
@@ -258,10 +252,7 @@
     padding-bottom: 20px;    
   }
 
-  .f_logo span {
-    font-size: 320px;
-    letter-spacing: -0.06em;
-  }
+ 
 
   .copyright {
     font-size: 7.5px;
@@ -318,16 +309,15 @@
   
   .f_top {
     flex-direction: column;
-    gap: 32px;
-    padding: 32px 24px 0;
+    padding: 60px 24px 0;
+    gap: 48px;
   }
+
 
   .f_left {
-    flex-wrap: wrap;
-    gap: 0;
-    width: 100%;
+    flex-direction: column;
+    gap: 32px;
   }
-
   .branch {
     width: 50%;
   }
@@ -343,9 +333,13 @@
     margin-bottom: 16px;
   }
 
-  .f_right {
-    width: 100%;
+.f_right {
+    flex-wrap: wrap;
     gap: 40px;
+  }
+
+    .f_right_col {
+    width: calc(50% - 20px);
   }
 
   .f_logo span {
