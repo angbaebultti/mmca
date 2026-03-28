@@ -261,7 +261,7 @@
   margin-right: 590px;
   transform: translateY(-50%) scaleX(var(--line-scale, 0));
   transform-origin: right center;
-  width: calc(50vw - 590px);  /* 18vw → 이걸로 */
+  width: max(0px, calc(50vw - 590px));  /* 음수 방지 */
   height: 1px;
   background: var(--main_white);
 }
@@ -273,11 +273,10 @@
   margin-left: 590px;
   transform: translateY(-50%) scaleX(var(--line-scale, 0));
   transform-origin: left center;
-  width: calc(50vw - 590px);  /* 18vw → 이걸로 */
+  width: max(0px, calc(50vw - 590px));  /* 음수 방지 */
   height: 1px;
   background: var(--main_white);
 }
-
 .stats {
   display: flex;
   justify-content: center;
