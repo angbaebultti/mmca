@@ -351,6 +351,11 @@
     font-size: 13px;
   }
 
+  /* 1024px 이하에서 | 제거 */
+  .floor::before {
+    content: '';
+  }
+
   .con_text > p {
     display: none;
   }
@@ -393,3 +398,317 @@
   }
 
 } /* @media 끝 */
+
+/* ════════════════════════════════════════
+   480px
+════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  /* ── plan ── */
+  .plan {
+    flex-direction: column;
+    padding: 120px 24px 80px;
+    gap: 24px;
+  }
+
+  .plan .heading {
+    font-size: 48px;
+  }
+
+  .plan .heading br {
+    display: none;
+  }
+
+  .plan .inner {
+    width: 100%;
+    gap: 20px;
+  }
+
+  .plan .inner .tit h3 {
+    font-size: 32px;
+    letter-spacing: -0.03em;
+  }
+
+  .plan .inner .plus {
+    width: 28px;
+    height: 28px;
+  }
+
+  .plan .inner .plus::before {
+    width: 14px;
+  }
+
+  .plan .inner .plus::after {
+    height: 14px;
+  }
+
+  .plan .inner .container {
+    column-gap: 20px;
+  }
+
+  .plan .inner .icon i {
+    font-size: 28px;
+  }
+
+  .plan .inner .txt p {
+    font-size: 15px;
+  }
+
+  .address .container .txt p:last-child,
+  .opening .container .txt p:last-child,
+  .charges .container .txt p:nth-child(3),
+  .charges .container .txt p:last-child,
+  .parking .container .txt p:nth-child(2),
+  .parking .container .txt p:last-child {
+    font-size: 13px;
+  }
+
+  /* ── getting ── */
+  .getting {
+    padding: 80px 24px;
+  }
+
+  .getting h1.heading {
+    font-size: 48px;
+  }
+
+  .getting .inner {
+    gap: 40px;
+  }
+
+  .getting .btn_box {
+    gap: 24px;
+    padding: 16px 0;
+  }
+
+  .getting .btn_box button {
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  .subway_panel,
+  .bus_panel,
+  .shuttle_panel {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .left,
+  .right {
+    width: 100%;
+    height: auto;
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .station {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .station p {
+    font-size: 20px;
+  }
+
+  .line_badge {
+    font-size: 13px;
+    padding: 3px 10px;
+  }
+
+  .station_meta {
+    gap: 8px;
+  }
+
+  .station_meta span {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .station_desc {
+    font-size: 13px;
+    max-width: 100%;
+  }
+
+  .viewmap_btn {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  /* shuttle */
+  .sh_card {
+    width: 100%;
+    padding: 24px;
+  }
+
+  .sh_service_day {
+    font-size: 18px;
+  }
+
+  .sh_closed {
+    font-size: 15px;
+  }
+
+  .sh_label_text {
+    font-size: 12px;
+  }
+
+  .sh_boarding_desc {
+    font-size: 13px;
+  }
+
+  .sh_route_name {
+    font-size: 14px;
+  }
+
+  .sh_schedule_title {
+    font-size: 18px;
+  }
+
+  .sh_dep_label {
+    font-size: 13px;
+  }
+
+  .sh_dep_time {
+    font-size: 14px;
+  }
+
+  .sh_schedule_row {
+    padding: 14px 16px;
+  }
+
+  /* ── museum map ── */
+  .museum_map {
+    padding: 80px 24px;
+  }
+
+  .museum_map h1.heading {
+    font-size: 48px;
+    padding-bottom: 20px;
+    margin-bottom: 32px;
+  }
+
+  .map_floor_item {
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .map_floor_label {
+    font-size: 20px;
+    width: 32px;
+  }
+
+  .map_floor_primary {
+    font-size: 13px;
+  }
+
+  .map_floor_secondary {
+    font-size: 12px;
+  }
+
+  /* 모달 */
+  .map_modal_inner {
+    width: 95%;
+    padding: 24px;
+    border-radius: 12px;
+  }
+
+  .map_modal_close {
+    top: 14px;
+    right: 14px;
+    font-size: 20px;
+  }
+
+  .map_modal_inner .floor_map_wrap {
+    width: 100%;
+    height: 260px;
+  }
+
+  /* ── convenient ── */
+  .convenient {
+    padding: 80px 24px;
+    gap: 32px;
+  }
+
+  .convenient h1.heading {
+    font-size: 48px;
+  }
+
+  .convenient_cards {
+    gap: 16px !important;
+  }
+
+  .con_card {
+    flex: 0 0 200px !important;
+    width: 200px !important;
+    border-radius: 14px;
+  }
+
+  .con_img {
+    height: 150px !important;
+  }
+
+  .con_text {
+    padding: 14px !important;
+    gap: 4px;
+  }
+
+  .con_text h3 {
+    font-size: 14px;
+  }
+
+  .floor {
+    font-size: 11px;
+  }
+
+  /* 480px 이하에서 | 제거 */
+  .floor::before {
+    content: '';
+  }
+
+  /* ── accessibility ── */
+  .accessibility {
+    padding: 80px 24px 120px;
+    gap: 32px;
+  }
+
+  .accessibility h1.heading {
+    font-size: 48px;
+  }
+
+  .acc_cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .acc_card {
+    width: 100%;
+    height: auto;
+    min-height: 120px;
+    padding: 24px 24px;
+    gap: 12px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .acc_text {
+    gap: 8px;
+  }
+
+  .acc_card h3 {
+    font-size: 20px;
+  }
+
+  .acc_card p {
+    font-size: 13px;
+  }
+
+  .acc_icon {
+    position: static;
+    font-size: 36px;
+    flex-shrink: 0;
+  }
+
+}
