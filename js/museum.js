@@ -582,22 +582,25 @@ function expandSelectedFace(face) {
 /* =========================================================
  * 21. 큐브 커서 호버 효과
  * ========================================================= */
-cubeFaces.forEach((face) => {
-  face.addEventListener('mouseenter', () => {
-    const cursorRing = document.getElementById('cursorRing');
-    if (cursorRing) {
-      cursorRing.classList.add('cube-hover');
-      cursorRing.textContent = 'CLICK HERE !';
-    }
+if (window.innerWidth > 1024) {
+  cubeFaces.forEach((face) => {
+    face.addEventListener('mouseenter', () => {
+      const cursorRing = document.getElementById('cursorRing');
+      if (cursorRing) {
+        cursorRing.classList.add('cube-hover');
+        cursorRing.textContent = 'CLICK HERE !';
+      }
+    });
+
+    face.addEventListener('mouseleave', () => {
+      const cursorRing = document.getElementById('cursorRing');
+      if (cursorRing) {
+        cursorRing.classList.remove('cube-hover');
+        cursorRing.textContent = '';
+      }
+    });
   });
-  face.addEventListener('mouseleave', () => {
-    const cursorRing = document.getElementById('cursorRing');
-    if (cursorRing) {
-      cursorRing.classList.remove('cube-hover');
-      cursorRing.textContent = '';
-    }
-  });
-});
+}
 
 /* =========================================================
  * 22. 모바일 슬라이드 모드 (1024px 이하)
