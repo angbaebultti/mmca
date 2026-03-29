@@ -57,13 +57,14 @@
     }
  
     /* 설명 */
-    #ai-modal p {
+   #ai-modal p {
       font-size: 13px;
       color: #777;
       line-height: 1.75;
       margin: 0 0 1.5rem;
+      padding-top: 10px;
     }
- 
+
     /* 확인 버튼 */
     #ai-confirm {
       width: 100%;
