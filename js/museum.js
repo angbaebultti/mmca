@@ -621,6 +621,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const cubePinEl = document.querySelector(".cube_pin");
     if (!cubeEl || !cubePinEl) return;
 
+    
+
     cubeEl.classList.add("is_slide_mode");
 
     let currentIndex = 0;
