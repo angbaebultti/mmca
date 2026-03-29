@@ -70,15 +70,13 @@
   /* ---------------- card ---------------- */
 
   .museum_exhibit_section.is_horizontal .museum_exhibit_card {
-    height: calc(100vh - 180px);
-    margin-top: 24px;
-    padding: 0 0;
-    gap: 36px;
+    height: 70vh;
+    margin-top: 16px;
+    padding: 0 0 16px;
+    gap: 28px;
   }
 
   .museum_exhibit_card {
-    gap: 36px;
-    margin-top: 56px;
     padding-left: 30px;
   }
 
@@ -121,7 +119,7 @@
 
   .museum_desc {
     max-width: 100%;
-    margin-top: 20px;
+    margin-top: 26px;
     font-size: 15px;
     line-height: 1.55;
   }
@@ -129,7 +127,7 @@
   /* ---------------- ticket ---------------- */
 
   .museum_ticket {
-    margin-top: 28px;
+    margin-top: 20px;
   }
 
   .ticket_main {
@@ -148,7 +146,7 @@
   /* ---------------- highlights ---------------- */
 
   .museum_highlights {
-    margin-top: 24px;
+    margin-top: 18px;
   }
 
   .museum_highlights strong {
@@ -192,280 +190,295 @@
   }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
 
-  /* ---------------- intro / cube visible ---------------- */
-
-  .intro_scene.is_mobile_visible {
-    height: auto;
-    overflow: visible;
-    padding: 20px 0 12px;
-    opacity: 1 !important;
-    pointer-events: auto;
+  html,
+  body {
+    overflow-x: hidden;
   }
 
-  .intro_scene.is_mobile_visible .cube_pin {
+  /* ===== intro ===== */
+  .intro {
+    padding: 24px 0 16px;
+    min-height: auto;
+  }
+
+  .intro_scene {
     position: relative;
-    top: auto;
     height: auto;
+    min-height: auto;
     display: block;
+    padding: 0;
+  }
+
+  /* ===== cube -> slide ===== */
+  .cube_stage {
+    width: 112px;
+    margin: 0 auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
     perspective: none;
-    overflow: visible;
-    padding: 0 20px;
-    box-sizing: border-box;
   }
 
-  .intro_scene.is_mobile_visible .cube_stage {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    height: auto;
-    margin: 0;
-    transform: none !important;
+  .cube_stage::-webkit-scrollbar {
+    display: none;
   }
 
-  .intro_scene.is_mobile_visible .cube {
-    --face-w: 100%;
-    --face-h: auto;
-    --depth: 0px;
-    width: 100%;
+  .cube {
+    width: max-content;
     height: auto;
     display: flex;
-    transform: none !important;
-  }
-
-  .intro_scene.is_mobile_visible .cube_face {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    min-width: 100%;
-    height: 200px;
-    transform: none !important;
-    flex-shrink: 0;
-    border-radius: 14px;
-    box-shadow: none;
-  }
-
-  .intro_scene.is_mobile_visible .cube_face:hover .cube_face_img img {
-    transform: none;
-  }
-
-  .intro_scene.is_mobile_visible .cube_face_label {
-    font-size: 40px;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  /* ---------------- slide controls ---------------- */
-
-  .slide_prev,
-  .slide_next {
-    position: absolute;
-    top: 100px;
-    transform: translateY(-50%);
-    z-index: 5;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.92);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-  }
-
-  .slide_prev { left: 28px; }
-  .slide_next { right: 28px; }
-
-  .slide_prev i,
-  .slide_next i {
-    font-size: 14px;
-  }
-
-  .slide_dots {
-    display: flex;
-    justify-content: center;
     gap: 8px;
-    margin-top: 12px;
+    transform: none !important;
+    transform-style: flat !important;
   }
 
-  .slide_dots span {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #cfcfcf;
+  .cube_face {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    width: 112px;
+    height: 76px;
+    flex: 0 0 112px;
+    overflow: hidden;
+    scroll-snap-align: center;
+    cursor: pointer;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 
-  .slide_dots span.is_active {
-    background: #111;
+  .cube_face img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  /* ---------------- selected exhibit only ---------------- */
+  .cube_face::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.08));
+    pointer-events: none;
+  }
 
+  .cube_face .face_label,
+  .cube_face .face_title,
+  .cube_face h3,
+  .cube_face p,
+  .cube_face span,
+  .cube_face strong {
+    position: absolute;
+    z-index: 2;
+    color: #fff;
+  }
+
+  .cube_face .face_label {
+    left: 8px;
+    top: 8px;
+    font-size: 7px;
+    line-height: 1;
+  }
+
+  .cube_face .face_title {
+    left: 8px;
+    bottom: 8px;
+    font-size: 10px;
+    line-height: 1.1;
+  }
+
+  /* 혹시 기존 3D용 숨김/스타일 있으면 정리 */
+  .cube_face.face_front,
+  .cube_face.face_back,
+  .cube_face.face_left,
+  .cube_face.face_right {
+    transform: none !important;
+  }
+
+  /* ===== museum ===== */
   .museum_wrap {
-    padding-top: 12px;
-    margin-bottom: 72px;
+    width: 100%;
+    padding: 14px 0 40px;
+    margin-bottom: 0;
   }
 
   .museum_exhibit_section {
     display: none;
+    width: 100%;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
   }
 
-  .museum_exhibit_section.active {
+  .museum_exhibit_section.is_active {
     display: block;
   }
 
   .museum_exhibit_section .museum_inner {
     width: 100%;
-    padding: 0 20px 48px;
-    box-sizing: border-box;
+    max-width: 112px;
+    margin: 0 auto;
+    padding: 0;
   }
 
-  .museum_exhibit_section.is_horizontal {
+  .museum_exhibit_section.is_horizontal,
+  .museum_exhibit_section.is_horizontal .museum_track,
+  .museum_exhibit_section.is_horizontal .museum_list {
     height: auto !important;
-  }
-
-  .museum_h_sticky {
-    position: static;
-    top: auto;
-    height: auto;
-    overflow: visible;
-  }
-
-  .museum_h_scroll {
-    width: 100%;
-    height: auto;
-    overflow: visible;
-  }
-
-  .museum_h_track {
-    display: flex;
-    flex-direction: column;
-    height: auto;
     transform: none !important;
   }
 
-  /* ---------------- head ---------------- */
-
   .museum_exhibit_section.is_horizontal .museum_head {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
     width: 100%;
-    margin: 0 0 16px;
-    padding: 0 20px;
-    box-sizing: border-box;
+    margin: 0 0 12px;
+    padding: 0;
+  }
+
+  .museum_exhibit_section.is_horizontal .museum_track,
+  .museum_exhibit_section.is_horizontal .museum_list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+  }
+
+  .museum_head {
+    margin-bottom: 10px;
   }
 
   .museum_label {
-    font-size: 13px;
-    margin: 0 0 6px;
-  }
-
-  .museum_name {
-    font-size: 28px;
-    line-height: 1.1;
-  }
-
-  .museum_tabs {
-    gap: 16px;
-    margin-top: 14px;
-  }
-
-  .museum_tabs button {
-    font-size: 14px;
-    padding-bottom: 6px;
-  }
-
-  /* ---------------- card ---------------- */
-
-  .museum_exhibit_section.is_horizontal .museum_exhibit_card,
-  .museum_exhibit_card {
-    width: 100%;
-    min-width: 100%;
-    height: auto;
-    margin-top: 24px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .museum_poster {
-    width: 100%;
-    max-width: 210px;
-    margin: 0 auto;
-    flex-shrink: 0;
-  }
-
-  .museum_exhibit_section.is_horizontal .museum_exhibit_card > .museum_poster {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .museum_poster img {
-    aspect-ratio: 3 / 4;
-    object-fit: cover;
-    height: auto;
-  }
-
-  .museum_content,
-  .museum_exhibit_section.is_horizontal .museum_content {
-    flex: none;
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .museum_title {
-    font-size: 20px;
-    line-height: 1.35;
-    margin-bottom: 10px;
-  }
-
-  .museum_meta {
-    margin-bottom: 10px;
-  }
-
-  .museum_meta li {
-    gap: 8px;
-    font-size: 13px;
+    font-size: 7px;
+    line-height: 1.2;
     margin-bottom: 4px;
   }
 
-  .museum_meta i {
-    font-size: 14px;
+  .museum_name {
+    font-size: 18px;
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .museum_tabs {
+    gap: 10px;
+    margin-top: 0;
+  }
+
+  .museum_tab,
+  .museum_tabs button,
+  .museum_tabs a {
+    font-size: 5px;
+    line-height: 1;
+    padding-bottom: 4px;
+  }
+
+  .museum_exhibit_card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 0;
+    padding: 0 0 10px;
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  .museum_exhibit_poster {
+    width: 100%;
+  }
+
+  .museum_exhibit_poster img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .museum_exhibit_content {
+    width: 100%;
+  }
+
+  .museum_exhibit_title {
+    font-size: 15px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    word-break: keep-all;
+  }
+
+  .museum_meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 8px;
+  }
+
+  .museum_meta li {
+    font-size: 5px;
+    line-height: 1.5;
   }
 
   .museum_desc {
-    max-width: 100%;
-    margin-top: 10px;
-    font-size: 12px;
+    font-size: 5px;
     line-height: 1.6;
+    margin-bottom: 10px;
   }
 
-  /* ---------------- ticket ---------------- */
-
   .museum_ticket {
-    margin-top: 16px;
+    margin-top: 0;
   }
 
   .ticket_main {
-    font-size: 13px;
-    padding: 6px 9px;
-    border-radius: 4px;
+    min-height: 18px;
+    padding: 0 8px;
+    font-size: 8px;
+    border-radius: 2px;
+    border-right: 1px dashed var(--gray_01);
   }
 
   .ticket_stub {
-    padding: 6px 7px;
-    border-radius: 4px;
+    min-height: 18px;
+    padding: 0 5px;
+    font-size: 8px;
+    border-radius: 2px;
   }
-
-  .ticket_stub i {
-    font-size: 15px;
-  }
-
-  /* ---------------- highlights off ---------------- */
 
   .museum_highlights {
-    display: none;
+    margin-top: 12px;
+    gap: 8px;
+  }
+
+  .museum_highlights strong {
+    font-size: 5px;
+    margin-bottom: 6px;
+  }
+
+  .museum_highlights strong::after {
+    height: 1px;
+  }
+
+  .museum_highlights ul,
+  .museum_highlights li,
+  .museum_highlights p {
+    font-size: 5px;
+    line-height: 1.5;
+  }
+
+  .museum_highlights img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .top_btn {
+    right: 12px;
+    bottom: 12px;
+    transform: scale(0.8);
+    transform-origin: bottom right;
   }
 }
 

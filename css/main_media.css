@@ -18,11 +18,10 @@
   }
 
   .visual_inner {
-    width: 100%; /* 500vh → 100%로 변경 */
+    width: 100%; 
     overflow: hidden;
   }
 
-  /* 추가로 body, html에도 overflow 막기 */
   html, body {
     overflow-x: hidden;
     max-width: 100%;
@@ -318,7 +317,6 @@
     font-size: 12px;
   }
 }
-
 @media screen and (max-width: 480px) {
   /* ===== MAIN VISUAL ===== */
   .ticket {

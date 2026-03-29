@@ -1,661 +1,435 @@
-document.addEventListener("DOMContentLoaded", () => {
-  /* =========================================================
-   * 1. 기본 DOM / 라이브러리 체크
-   * ========================================================= */
-  const cube = document.getElementById("cube");
-  const cubeStage = document.querySelector(".cube_stage");
-  const introScene = document.querySelector(".intro_scene");
-  const museumWrap = document.getElementById("museumWrap");
-  const museumSections = document.querySelectorAll(".museum_exhibit_section");
-  const horizontalSections = document.querySelectorAll(
-    ".museum_exhibit_section.is_horizontal"
-  );
-  const cubeFaces = document.querySelectorAll(".cube_face");
-  const topBtn = document.querySelector(".top_btn a");
-  const topBtnWrap = document.querySelector(".top_btn");
-
-  if (
-    typeof Lenis === "undefined" ||
-    typeof gsap === "undefined" ||
-    typeof ScrollTrigger === "undefined"
-  ) {
-    console.error("[MMCA] Lenis / GSAP / ScrollTrigger 라이브러리를 먼저 로드해주세요.");
-    return;
-  }
-
-  if (!cube || !cubeStage || !introScene || !museumWrap || !museumSections.length) {
-    console.error("[MMCA] 필수 DOM 요소를 찾지 못했습니다.");
-    return;
-  }
-
+document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
+  const qs = (s) => document.querySelector(s);
+  const qsa = (s) => document.querySelectorAll(s);
+
+  const ticketWrap = qs('.ticket');
+  const ticketLeft = qs('.ticket_left img');
+  const ticketRight = qs('.ticket_right img');
+  const mainTitle = qs('.main_title');
+
+  const about = qs('.about');
+  const aboutHero = qs('.about_hero');
+  const aboutContent = qs('.about_content');
+  const aboutScene = qs('.about_scene');
+
+  const stats = qsa('.stat');
+  const ticketBg = qs('.ticket_bg');
+
   /* =========================================================
-   * 2. Lenis 스크롤 세팅
+   * 1. 배경 티켓 생성
    * ========================================================= */
-  const lenis = new Lenis({
-    lerp: 0.08,
-    smoothWheel: true,
+  if (ticketBg) {
+    for (let i = 0; i < 12; i++) {
+      const img = document.createElement('img');
+      img.src = 'img/ticket_full.png';
+      img.classList.add('t');
+      img.style.left = Math.random() * 100 + '%';
+      img.style.top = -100 - Math.random() * 300 + 'px';
+      img.style.width = 500 + Math.random() * 400 + 'px';
+      img.style.transform = `rotate(${gsap.utils.random(-30, 30)}deg)`;
+      img.style.opacity = 0;
+      img.style.filter = `blur(${2 + Math.random() * 3}px)`;
+      ticketBg.appendChild(img);
+    }
+  }
+
+  const tickets = qsa('.t');
+
+  /* =========================================================
+   * 2. 초기 세팅
+   * ========================================================= */
+  const isMobile = window.innerWidth <= 1024;
+
+  gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
+  gsap.set(ticketRight, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
+  gsap.set(ticketWrap, {
+    opacity: 0,
+    x: isMobile ? 20 : 220,
+    y: isMobile ? 20 : 120
+  });
+  gsap.set(aboutContent, { opacity: 0, y: 60 });
+
+
+  /* =========================================================
+   * 3. 메인 비주얼 - 티켓 등장 + 찢어짐 + 고정 + 떨어짐
+   * ========================================================= */
+  const mainTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.main_visual',
+      start: 'top top',
+      end: '+=1800',
+      scrub: 1.2,
+      pin: true,
+      pinSpacing: true,
+      anticipatePin: 1,
+    }
   });
 
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
+  mainTL
+    .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: 'power2.out', duration: 0.4 }, 0)
+    .to('.info_wrap', { opacity: 0, y: -20, ease: 'power1.out', duration: 0.3 }, 0.3)
+    .to(mainTitle, { opacity: 0, y: -30, ease: 'power1.out', duration: 0.3 }, 0.3)
+    .to(ticketLeft, { rotation: -25, x: isMobile ? -40 : -150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
+    .to(ticketRight, { rotation: 25, x: isMobile ? 40 : 150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
+    .to(ticketLeft, { y: 1800, x: isMobile ? -80 : -400, rotationZ: -55, ease: 'power2.in', duration: 1.4 }, 0.75)
+    .to(ticketRight, { y: 1800, x: isMobile ? 80 : 400, rotationZ: 55, ease: 'power2.in', duration: 1.4 }, 0.75)
+    .to(ticketLeft, { opacity: 0, duration: 0.3 }, 1.8)
+    .to(ticketRight, { opacity: 0, duration: 0.3 }, 1.8);
 
-  /* =========================================================
-   * 3. 전역 상태값
-   * ========================================================= */
-  let isTransitioning = false;
-  let hasTriggeredExpand = false;
-  let isMuseumReady = false;
-  let horizontalRafId = null;
-  let cubeScrollTrigger = null;
-
-  const currentX = new WeakMap();
-
-  // 태블릿 여부 체크
-  const isTablet = () => window.innerWidth <= 1024;
-
-  /* =========================================================
-   * 4. 공통 유틸
-   * ========================================================= */
-  function lerp(a, b, t) {
-    return a + (b - a) * t;
-  }
-
-  function hideAllMuseumSections() {
-    museumSections.forEach((section) => section.classList.remove("active"));
-  }
-
-  function cancelHorizontalAnimation() {
-    if (horizontalRafId) {
-      cancelAnimationFrame(horizontalRafId);
-      horizontalRafId = null;
+  //about 타임라인
+  const aboutTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: about,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1.4,
+      pin: '.about_scene',
+      pinSpacing: true,
+      anticipatePin: 1,
     }
-  }
-
-  function getAbsoluteTop(el) {
-    return el.getBoundingClientRect().top + window.scrollY;
-  }
-
-  function getFaceRotation(targetId) {
-    switch (targetId) {
-      case "seoul": return 0;
-      case "deoksugung": return -90;
-      case "gwacheon": return 180;
-      case "cheongju": return 90;
-      default: return 0;
-    }
-  }
+  });
+  aboutTL.to(aboutHero, { opacity: 0, scale: 0.95, y: -20, ease: 'none', duration: 0.5 }, 0);
+  tickets.forEach((t, i) => {
+    gsap.set(t, { left: Math.random() * 80 + 10 + '%', top: '-20%', position: 'absolute' });
+    aboutTL.to(t, {
+      opacity: 0.15,
+      y: () => window.innerHeight * (0.68 + Math.random() * 0.18),
+      x: () => gsap.utils.random(-140, 140),
+      rotation: () => gsap.utils.random(-32, 32),
+      scale: () => gsap.utils.random(0.55, 0.9),
+      ease: 'power1.out', duration: 0.5
+    }, 0.5 + i * 0.06);
+  });
+  aboutTL.to(aboutContent, {
+    opacity: 1,
+    y: 0,
+    ease: 'power4.out',
+    duration: 1.0
+  }, 0.2);
 
   /* =========================================================
-   * 5. 가로 스크롤 초기화 / 리셋
+   * 7. ABOUT 통계 등장 + 숫자 카운팅
    * ========================================================= */
-  function resetHorizontalSection(section) {
-    if (!section) return;
-    const track = section.querySelector(".museum_h_track");
-    if (!track) return;
-    track.style.transform = "translate3d(0, 0, 0)";
-    currentX.set(section, 0);
-  }
+  if (aboutContent && stats.length) {
+    const statArray = Array.from(stats);
+    const lineLeft = document.querySelector('.line_left');
+    const lineRight = document.querySelector('.line_right');
+    const statsBg = document.querySelector('.stats_bg');
 
-  function resetAllHorizontalSections() {
-    horizontalSections.forEach((section) => {
-      const track = section.querySelector(".museum_h_track");
-      if (!track) return;
-      track.style.transform = "translate3d(0, 0, 0)";
-      currentX.set(section, 0);
-      section.classList.remove("is_compact");
+    const statData = statArray.map(stat => {
+      const strong = stat.querySelector('strong');
+      const raw = strong ? strong.textContent.trim() : '0';
+      const match = raw.replace(/,/g, '').match(/^(\d+)(.*)$/);
+      return { el: strong, target: match ? parseInt(match[1]) : 0, suffix: match ? match[2] : '', original: raw };
+    });
+
+    statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
+    gsap.set(statArray, { opacity: 0, x: -60 });
+    if (statsBg) gsap.set(statsBg, { opacity: 0 });
+    if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
+    if (lineRight) lineRight.style.setProperty('--line-scale', 0);
+
+    function runStatAnimation() {
+      statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
+      gsap.set(statArray, { opacity: 0, x: -60 });
+      if (statsBg) gsap.set(statsBg, { opacity: 0 });
+      if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
+      if (lineRight) lineRight.style.setProperty('--line-scale', 0);
+
+      const statTL = gsap.timeline();
+
+      if (statsBg) statTL.to(statsBg, { opacity: 0.25, ease: 'power2.out', duration: 0.8 }, 0);
+
+      statTL.to({}, {
+        duration: 0.6,
+        onUpdate() { if (lineLeft) lineLeft.style.setProperty('--line-scale', this.progress()); }
+      }, 0);
+
+      statData.forEach((d, i) => {
+        const counter = { val: 0 };
+        statTL.to(statArray[i], { opacity: 1, x: 0, ease: 'power3.out', duration: 0.6 }, 0.4 + i * 0.18);
+        statTL.to(counter, {
+          val: d.target, ease: 'power2.out', duration: 1.2,
+          onUpdate() { if (d.el) d.el.textContent = Math.round(counter.val).toLocaleString('en-US') + d.suffix; },
+          onComplete() { if (d.el) d.el.textContent = d.original; }
+        }, 0.4 + i * 0.18);
+      });
+
+      statTL.to({}, {
+        duration: 0.6,
+        onUpdate() { if (lineRight) lineRight.style.setProperty('--line-scale', this.progress()); }
+      }, 1.4);
+    }
+
+    ScrollTrigger.create({
+      trigger: about,
+      start: 'top+=20% top',
+      onEnter: () => runStatAnimation(),
+      onEnterBack: () => runStatAnimation(),
     });
   }
 
   /* =========================================================
-   * 6. 가로 스크롤 목표값 계산 (데스크톱 전용)
+   * 10. ARTIST PRIZE - 메인 가로 스크롤
    * ========================================================= */
-  function getTargetX(section) {
-    if (isTablet()) return 0; // 태블릿에선 비활성화
+  const artistCards = gsap.utils.toArray('.artist_card:not(.view_btn_card)');
+  const lines = gsap.utils.toArray('.artist_prize .line');
+  const letters = gsap.utils.toArray('.title_main span');
 
-    const track = section.querySelector(".museum_h_track");
+  gsap.set(artistCards, { opacity: 0, xPercent: 30 });
+
+  function getScrollAmount() {
+    const track = document.querySelector('.artist_track');
     if (!track) return 0;
-
-    const sectionTop = getAbsoluteTop(section);
-    const rawProgress = Math.max(window.scrollY - sectionTop, 0);
-    const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
-    const startHold = 600;
-
-    let targetX = rawProgress <= startHold ? 0 : rawProgress - startHold;
-    return Math.max(0, Math.min(targetX, maxTranslate));
+    return -(track.scrollWidth - window.innerWidth);
   }
 
-  /* =========================================================
-   * 7. 전시 헤더 압축 상태 제어
-   * ========================================================= */
-  function updateCompactHeader() {
-    horizontalSections.forEach((section) => {
-      if (!section.classList.contains("active")) {
-        section.classList.remove("is_compact");
-        return;
-      }
-      const sectionTop = getAbsoluteTop(section);
-      const scrolled = window.scrollY - sectionTop;
-      if (scrolled > 40) {
-        section.classList.add("is_compact");
-      } else {
-        section.classList.remove("is_compact");
-      }
-    });
-  }
-
-  /* =========================================================
-   * 8. 가로 스크롤 애니메이션 (데스크톱 전용)
-   * ========================================================= */
-  function animateHorizontal() {
-    if (!isMuseumReady || isTablet()) {
-      horizontalRafId = null;
-      return;
+  const masterTL = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.artist_prize', start: 'top top', end: '+=5500',
+      scrub: 1.2, pin: true, anticipatePin: 1
     }
+  });
 
-    let stillMoving = false;
-
-    horizontalSections.forEach((section) => {
-      if (!section.classList.contains("active")) return;
-
-      const track = section.querySelector(".museum_h_track");
-      if (!track) return;
-
-      const target = getTargetX(section);
-      const current = currentX.has(section) ? currentX.get(section) : 0;
-      const next = lerp(current, target, 0.12);
-
-      currentX.set(section, next);
-      track.style.transform = `translate3d(${-next}px, 0, 0)`;
-
-      if (Math.abs(next - target) > 0.3) stillMoving = true;
-    });
-
-    updateCompactHeader();
-    horizontalRafId = stillMoving ? requestAnimationFrame(animateHorizontal) : null;
-  }
+  lines.forEach((line, i) => {
+    masterTL.to(line.querySelectorAll('span'), {
+      color: '#fff', stagger: 0.05, ease: 'none', duration: 0.3
+    }, i * 0.15);
+  });
+  masterTL.to({}, { duration: 0.3 });
+  masterTL.to(letters, {
+    x: () => gsap.utils.random(-200, 200),
+    y: () => gsap.utils.random(-200, 200),
+    rotation: () => gsap.utils.random(-60, 60),
+    opacity: 0, filter: 'blur(8px)',
+    stagger: { each: 0.02, from: 'random' }, ease: 'power2.out', duration: 0.4
+  });
+  masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.06, ease: 'power3.out', duration: 0.4 });
+  masterTL.to('.artist_track', { x: getScrollAmount, ease: 'none', duration: 1 });
+  masterTL.to({}, { duration: 0.4 });
 
   /* =========================================================
-   * 9. 섹션 높이 세팅
-   * - 태블릿: 100vh 고정 (스와이프 전용)
-   * - 데스크톱: 스크롤 길이만큼 높이 확보
+   * 11. NEWS - 고급 탭 전환 + 커서 프리뷰
    * ========================================================= */
-  function setupHorizontalSections(callback) {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        horizontalSections.forEach((section) => {
-          if (!section.classList.contains("active")) return;
+  const groups = Array.from(document.querySelectorAll('.news_group'));
 
-          const track = section.querySelector(".museum_h_track");
-          if (!track) return;
+  const newsPreview = document.createElement('div');
+  newsPreview.id = 'newsPreview';
+  newsPreview.innerHTML = '<img id="previewImg" src="" alt="" />';
+  document.body.appendChild(newsPreview);
+  const previewImg = document.getElementById('previewImg');
 
-          resetHorizontalSection(section);
+  let previewX = 0, previewY = 0;
+  let previewRX = 0, previewRY = 0;
 
-          if (isTablet()) {
-            // 태블릿: 높이 고정, 스크롤 기반 이동 없음
-            section.style.height = `100vh`;
-          } else {
-            const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
-            const startHold = 600;
-            const extraScroll = window.innerWidth <= 1440 ? 80 : 1600;
-            section.style.height = `${
-              window.innerHeight + totalScrollX + startHold + extraScroll
-            }px`;
-          }
-        });
-
-        if (typeof callback === "function") callback();
-      });
-    });
-  }
-
-  /* =========================================================
-   * 10. 큐브 → 전시 섹션 전환
-   * ========================================================= */
-  function switchToMuseum(targetSection) {
-    isMuseumReady = false;
-    cancelHorizontalAnimation();
-
-    if (cubeScrollTrigger) {
-      cubeScrollTrigger.kill();
-      cubeScrollTrigger = null;
+  (function lerpPreview() {
+    previewRX += (previewX - previewRX) * 0.1;
+    previewRY += (previewY - previewRY) * 0.1;
+    if (newsPreview) {
+      newsPreview.style.left = previewRX + 'px';
+      newsPreview.style.top = previewRY + 'px';
     }
+    requestAnimationFrame(lerpPreview);
+  })();
 
-    museumWrap.classList.add("active");
-    hideAllMuseumSections();
-    targetSection.classList.add("active");
-    targetSection.classList.remove("is_compact");
+  document.addEventListener('mousemove', (e) => {
+    previewX = e.clientX;
+    previewY = e.clientY;
+  });
 
-    if (topBtnWrap) topBtnWrap.classList.add("active");
+  if (groups.length) {
+    groups[0].classList.add('is-open');
 
-    setupHorizontalSections(() => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          resetAllHorizontalSections();
-          resetHorizontalSection(targetSection);
-          ScrollTrigger.refresh();
+    groups.forEach((group) => {
+      const head = group.querySelector('.news_head');
+      const body = group.querySelector('.news_body');
+      if (!head || !body) return;
 
-          const targetTop = getAbsoluteTop(targetSection);
-          window.scrollTo(0, targetTop);
-          lenis.scrollTo(targetTop, { immediate: true });
-
-          introScene.classList.add("is_leaving");
-
-          gsap.to(introScene, {
-            opacity: 0,
-            duration: 0.55,
-            ease: "power2.out",
-            onComplete() {
-              introScene.style.display = "none";
-              introScene.classList.remove("is_leaving");
-              introScene.style.opacity = "";
-
-              resetHorizontalSection(targetSection);
-              updateCompactHeader();
-
-              isMuseumReady = true;
-              isTransitioning = false;
-              lenis.start();
-
-              // 데스크톱만 가로 RAF 시작
-              if (!isTablet() && !horizontalRafId) {
-                horizontalRafId = requestAnimationFrame(animateHorizontal);
-              }
-            },
+      group.addEventListener('click', () => {
+        if (group.classList.contains('is-open')) {
+          const currentCards = group.querySelectorAll('.news_card');
+          gsap.to(currentCards, {
+            opacity: 0, y: -16,
+            stagger: 0.04, duration: 0.2, ease: 'power2.in',
+            onComplete: () => {
+              group.classList.remove('is-open');
+              gsap.set(currentCards, { opacity: 0, y: 24 });
+              group.style.cursor = 'pointer';
+            }
           });
+          return;
+        }
+
+        const current = groups.find(g => g.classList.contains('is-open'));
+        if (current) {
+          const currentCards = current.querySelectorAll('.news_card');
+          gsap.to(currentCards, {
+            opacity: 0, y: -16,
+            stagger: 0.04, duration: 0.2, ease: 'power2.in',
+            onComplete: () => {
+              current.classList.remove('is-open');
+              gsap.set(currentCards, { opacity: 0, y: 24 });
+              group.classList.add('is-open');
+              const newCards = group.querySelectorAll('.news_card');
+              gsap.set(newCards, { opacity: 0, y: 24 });
+              gsap.to(newCards, {
+                opacity: 1, y: 0,
+                stagger: 0.08, duration: 0.5, ease: 'power3.out',
+                delay: 0.05
+              });
+            }
+          });
+        } else {
+          group.classList.add('is-open');
+          const newCards = group.querySelectorAll('.news_card');
+          gsap.set(newCards, { opacity: 0, y: 24 });
+          gsap.to(newCards, {
+            opacity: 1, y: 0,
+            stagger: 0.08, duration: 0.5, ease: 'power3.out'
+          });
+        }
+      });
+
+      const cards = group.querySelectorAll('.news_card');
+      cards.forEach(card => {
+        const img = card.querySelector('.news_thumb img');
+        if (!img) return;
+        card.addEventListener('mouseenter', () => {
+          previewImg.src = img.src;
+          newsPreview.classList.add('is-visible');
+        });
+        card.addEventListener('mouseleave', () => {
+          newsPreview.classList.remove('is-visible');
         });
       });
     });
-  }
 
-  /* =========================================================
-   * 11. 선택한 큐브 면 확대
-   * ========================================================= */
-  function expandSelectedFace(face) {
-    const targetId = face.dataset.target;
-    const targetSection = document.getElementById(targetId);
-
-    if (!targetSection) {
-      lenis.start();
-      isTransitioning = false;
-      return;
-    }
-
-    if (cubeScrollTrigger) {
-      cubeScrollTrigger.kill();
-      cubeScrollTrigger = null;
-    }
-
-    cubeFaces.forEach((item) => item.classList.remove("is_active", "is_hidden"));
-    face.classList.add("is_active");
-    cubeFaces.forEach((item) => {
-      if (item !== face) item.classList.add("is_hidden");
-    });
-
-    if (window.innerWidth <= 1440) {
-      gsap.to(introScene, {
-        opacity: 0,
-        duration: 0.4,
-        ease: "power2.out",
-        onComplete() {
-          switchToMuseum(targetSection);
-        }
-      });
-      return;
-    }
-
-    const rotateY = getFaceRotation(targetId);
-    const tl = gsap.timeline();
-
-    tl.to(cube, { rotateY, duration: 0.9, ease: "power2.inOut" })
-      .to(cubeStage, {
-        scale: Math.max(window.innerWidth / 1000, window.innerHeight / 560) * 1.1,
-        y: -20,
-        duration: 1.5,
-        ease: "power3.out",
-      }, "-=0.1")
-      .to(introScene, { opacity: 0.35, duration: 0.7, ease: "power2.out" }, "-=0.75")
-      .call(() => switchToMuseum(targetSection));
-  }
-
-  /* =========================================================
-   * 12. 자동 진입
-   * ========================================================= */
-  function triggerAutoExpand() {
-    if (isTransitioning || hasTriggeredExpand) return;
-    hasTriggeredExpand = true;
-    isTransitioning = true;
-
-    const seoulFace = document.querySelector('[data-target="seoul"]');
-    if (!seoulFace) {
-      isTransitioning = false;
-      return;
-    }
-
-    lenis.stop();
-    expandSelectedFace(seoulFace);
-  }
-
-  /* =========================================================
-   * 13. 큐브 스크롤 인터랙션
-   * ========================================================= */
-  function initCubeScrollTrigger() {
-    if (cubeScrollTrigger) {
-      cubeScrollTrigger.kill();
-      cubeScrollTrigger = null;
-    }
-
-    cubeScrollTrigger = ScrollTrigger.create({
-      trigger: introScene,
-      start: "top top",
-      end: "+=400%",
-      scrub: 2,
-      onUpdate(self) {
-        if (isTransitioning) return;
-
-        const p = self.progress;
-        let rotation;
-
-        if (p < 0.8) {
-          const spinProgress = p / 0.8;
-          const easedSpin = 1 - Math.pow(1 - spinProgress, 3);
-          rotation = easedSpin * 540;
-        } else {
-          const settleProgress = (p - 0.8) / 0.2;
-          rotation = 540 + (720 - 540) * settleProgress;
-        }
-
-        gsap.set(cube, { rotateY: rotation });
-        gsap.set(cubeStage, { scale: 1, opacity: 1 });
-
-        if (p >= 0.95 && !hasTriggeredExpand) {
-          triggerAutoExpand();
-        }
-      },
+    const initCards = groups[0].querySelectorAll('.news_card');
+    gsap.set(initCards, { opacity: 0, y: 24 });
+    gsap.to(initCards, {
+      opacity: 1, y: 0,
+      stagger: 0.08, duration: 0.6, ease: 'power3.out',
+      delay: 0.3
     });
   }
 
   /* =========================================================
-   * 14. 전시 → 다시 큐브로 복귀
+   * 12. SHOP
    * ========================================================= */
-  function returnToCube() {
-    isMuseumReady = false;
-    cancelHorizontalAnimation();
+  const positionsDesktop = [
+    { x: -580, y: -280, r: -15 }, { x: 120, y: -320, r: 10 }, { x: 560, y: -200, r: 20 },
+    { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
+    { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 }
+  ];
 
-    museumWrap.classList.remove("active");
-    hideAllMuseumSections();
+const positionsMobile = [
+  { x: -280, y: -190, r: -15 },
+  { x: 80,  y: -220, r: 10 },
+  { x: 260, y: -140, r: 20 },
 
-    if (topBtnWrap) topBtnWrap.classList.remove("active");
+  { x: -300, y: 5,   r: 8 },
+  { x: 270, y: 40,  r: -12 },
+  { x: -220, y: 180, r: -20 },
 
-    horizontalSections.forEach((section) => {
-      resetHorizontalSection(section);
-      section.style.height = "";
-      section.classList.remove("is_compact");
-      currentX.delete(section);
-    });
+  { x: -40, y: 210, r: 5 },
+  { x: 200, y: 190, r: 18 },
+  { x: 290, y: 160, r: -10 }
+];
+  const positions = isMobile ? positionsMobile : positionsDesktop;
 
-    cubeFaces.forEach((face) => face.classList.remove("is_active", "is_hidden"));
+  gsap.set('.p', { x: 0, y: 0, scale: 0.5, opacity: 0, rotation: (i) => positions[i].r * 0.3 });
 
-    isTransitioning = false;
-    hasTriggeredExpand = false;
-
-    gsap.set(cube, { rotateY: 0 });
-    gsap.set(cubeStage, { scale: 1, opacity: 1, clearProps: "transform,opacity" });
-
-    introScene.style.display = "";
-    introScene.classList.remove("is_leaving");
-    gsap.set(introScene, { opacity: 1, clearProps: "opacity" });
-
-    window.scrollTo(0, 0);
-    lenis.scrollTo(0, { immediate: true });
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        ScrollTrigger.refresh();
-        initCubeScrollTrigger();
-        lenis.start();
-      });
-    });
+  const shopTL = gsap.timeline({
+  scrollTrigger: {
+    trigger: '.shop',
+    start: 'top top',
+    end: 'bottom bottom',
+    scrub: 1.8
   }
+});
 
+shopTL.to('.p', {
+  opacity: 0.7,
+  scale: 0.6,
+  duration: 0.4,
+  ease: 'power1.out'
+}, 0);
+
+document.querySelectorAll('.p').forEach((el, i) => {
+  shopTL.to(el, {
+    opacity: 1,
+    scale: 1,
+    x: positions[i].x,
+    y: positions[i].y,
+    rotation: positions[i].r,
+    ease: 'power2.out',
+    duration: 1.2
+  }, 0.25);
+});
+
+shopTL.to('.glass_front', {
+  background: 'rgba(255, 255, 255, 0.95)',
+  boxShadow: '0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)',
+  backdropFilter: 'blur(0px)',
+  duration: 0.6
+}, 0.25);
+
+shopTL.to('.glass_front h2', { color: '#000', duration: 0.5 }, 0.3);
+shopTL.to('.glass_front p', { color: '#555', duration: 0.5 }, 0.3);
+shopTL.to('.glow_bg', { opacity: 0.7, scale: 1.8, filter: 'blur(80px)', duration: 0.8 }, 0.25);
+shopTL.to('.glass_box', { scale: 1.04, z: 80, duration: 1.1, ease: 'power3.out' }, 0.25);
   /* =========================================================
-   * 15. 초기 실행
+   * 13. 커서 UI
    * ========================================================= */
-  initCubeScrollTrigger();
+  document.body.insertAdjacentHTML('beforeend', `
+    <div class="cursor-ring" id="cursorRing">ENTER ↗</div>
+    <div class="cursor-dot" id="cursorDot"></div>
+  `);
 
-  /* =========================================================
-   * 16. 전시 섹션 스크롤 이벤트 (데스크톱 전용)
-   * ========================================================= */
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!isMuseumReady || isTablet()) return;
-      if (!horizontalRafId) {
-        horizontalRafId = requestAnimationFrame(animateHorizontal);
-      }
-      updateCompactHeader();
-    },
-    { passive: true }
-  );
+  const ring = document.getElementById('cursorRing');
+  const dot = document.getElementById('cursorDot');
+  let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
 
-  /* =========================================================
-   * 17. 리사이즈 대응
-   * ========================================================= */
-  window.addEventListener("resize", () => {
-    if (!museumWrap.classList.contains("active")) return;
-
-    setupHorizontalSections(() => {
-      horizontalSections.forEach((section) => {
-        if (section.classList.contains("active")) {
-          resetHorizontalSection(section);
-        }
-      });
-
-      updateCompactHeader();
-
-      if (!isTablet() && isMuseumReady && !horizontalRafId) {
-        horizontalRafId = requestAnimationFrame(animateHorizontal);
-      }
-
-      ScrollTrigger.refresh();
-    });
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    if (dot) { dot.style.left = mx + 'px'; dot.style.top = my + 'px'; }
   });
 
-  /* =========================================================
-   * 18. 탑 버튼 클릭 시 큐브로 복귀
-   * ========================================================= */
-  if (topBtn) {
-    topBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      returnToCube();
+  (function lerpRing() {
+    rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+    if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+    requestAnimationFrame(lerpRing);
+  })();
+
+  const glassBox = document.querySelector('.glass_box');
+
+  if (glassBox && ring && dot) {
+    glassBox.addEventListener('mouseenter', () => {
+      ring.classList.add('shop-hover');
+      dot.style.opacity = '0';
+    });
+    glassBox.addEventListener('mouseleave', () => {
+      ring.classList.remove('shop-hover');
+      dot.style.opacity = '1';
+    });
+  }
+
+  if (glassBox) {
+    glassBox.addEventListener('mousemove', (e) => {
+      const rect = glassBox.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      gsap.to(glassBox, { x: x * 0.08, y: y * 0.08, duration: 0.5, ease: 'power2.out' });
+    });
+    glassBox.addEventListener('mouseleave', () => {
+      gsap.to(glassBox, { x: 0, y: 0, duration: 0.8, ease: 'elastic.out(1, 0.4)' });
     });
   }
 
   /* =========================================================
-   * 19. 큐브 면 클릭 시 해당 전시로 진입
+   * 14. 리사이즈 갱신
    * ========================================================= */
-  cubeFaces.forEach((face) => {
-    face.addEventListener("click", () => {
-      if (isTransitioning) return;
-      isTransitioning = true;
-      hasTriggeredExpand = true;
-      lenis.stop();
-      expandSelectedFace(face);
-    });
-  });
-
-  /* =========================================================
-   * 20. 헤더 스크롤 숨김
-   * ========================================================= */
-  const header = document.querySelector(".header");
-
-  if (header) {
-    header.style.transition = "transform 0.35s ease";
-    let lastScrollY = 0;
-
-    lenis.on("scroll", ({ scroll }) => {
-      if (isTransitioning) return;
-      if (scroll > lastScrollY && scroll > 80) {
-        header.style.transform = "translateY(-100%)";
-      } else {
-        header.style.transform = "translateY(0)";
-      }
-      lastScrollY = scroll;
-    });
-  }
-
-  /* =========================================================
-   * 21. 큐브 커서 호버 효과
-   * ========================================================= */
-  if (window.innerWidth > 1024) {
-    cubeFaces.forEach((face) => {
-      face.addEventListener('mouseenter', () => {
-        const cursorRing = document.getElementById('cursorRing');
-        if (cursorRing) {
-          cursorRing.classList.add('cube-hover');
-          cursorRing.textContent = 'CLICK HERE !';
-        }
-      });
-      face.addEventListener('mouseleave', () => {
-        const cursorRing = document.getElementById('cursorRing');
-        if (cursorRing) {
-          cursorRing.classList.remove('cube-hover');
-          cursorRing.textContent = '';
-        }
-      });
-    });
-  }
-
-  /* =========================================================
-   * 22. 모바일 슬라이드 모드 (1024px 이하)
-   * ========================================================= */
-  function initMobileSlide() {
-    if (window.innerWidth > 1024) return;
-
-    const cubeEl = document.getElementById('cube');
-    const cubePinEl = document.querySelector('.cube_pin');
-    if (!cubeEl || !cubePinEl) return;
-
-    cubeEl.classList.add('is_slide_mode');
-
-    let currentIndex = 0;
-    const faces = Array.from(cubeFaces);
-    const total = faces.length;
-
-    const dots = document.createElement('div');
-    dots.className = 'slide_dots';
-    faces.forEach((_, i) => {
-      const dot = document.createElement('span');
-      if (i === 0) dot.classList.add('is_active');
-      dot.addEventListener('click', () => goTo(i));
-      dots.appendChild(dot);
-    });
-    cubePinEl.appendChild(dots);
-
-    const prevBtn = document.createElement('button');
-    prevBtn.className = 'slide_prev';
-    prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
-
-    const nextBtn = document.createElement('button');
-    nextBtn.className = 'slide_next';
-    nextBtn.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
-
-    cubePinEl.appendChild(prevBtn);
-    cubePinEl.appendChild(nextBtn);
-
-    function goTo(index) {
-      currentIndex = (index + total) % total;
-      cubeEl.style.transform = `translateX(-${currentIndex * 100}vw)`;
-      document.querySelectorAll('.slide_dots span').forEach((d, i) => {
-        d.classList.toggle('is_active', i === currentIndex);
-      });
-    }
-
-    prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-    nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
-
-    let startX = 0;
-    cubeEl.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
-    }, { passive: true });
-
-    cubeEl.addEventListener('touchend', (e) => {
-      const diff = startX - e.changedTouches[0].clientX;
-      if (Math.abs(diff) > 50) {
-        goTo(diff > 0 ? currentIndex + 1 : currentIndex - 1);
-      }
-    }, { passive: true });
-  }
-
-  if (window.innerWidth <= 1024) {
-    initMobileSlide();
-  }
-
-  /* =========================================================
-   * 23. 태블릿 전시 카드 스와이프 (1024px 이하 전용)
-   * - 스크롤 기반 이동 완전 비활성화
-   * - 터치 스와이프로만 카드 이동
-   * ========================================================= */
-  function initCardSwipe() {
-    if (!isTablet()) return;
-
-    horizontalSections.forEach((section) => {
-      const track = section.querySelector('.museum_h_track');
-      if (!track) return;
-
-      let startX = 0;
-      let startTranslate = 0;
-      let isDragging = false;
-
-      track.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-        startTranslate = currentX.has(section) ? currentX.get(section) : 0;
-        isDragging = true;
-      }, { passive: true });
-
-      track.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        const diff = startX - e.touches[0].clientX;
-        const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
-        const next = Math.max(0, Math.min(startTranslate + diff, maxTranslate));
-        track.style.transform = `translate3d(${-next}px, 0, 0)`;
-      }, { passive: true });
-
-      track.addEventListener('touchend', (e) => {
-        if (!isDragging) return;
-        isDragging = false;
-
-        const diff = startX - e.changedTouches[0].clientX;
-        const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
-        const cardWidth = window.innerWidth;
-        const currentVal = currentX.has(section) ? currentX.get(section) : 0;
-
-        let newVal = currentVal;
-        if (Math.abs(diff) > 50) {
-          newVal = diff > 0
-            ? Math.min(currentVal + cardWidth, maxTranslate)
-            : Math.max(currentVal - cardWidth, 0);
-        } else {
-          // 조금 움직이다 손 뗀 경우 원래 위치로 스냅
-          newVal = currentVal;
-        }
-
-        currentX.set(section, newVal);
-
-        // 부드러운 스냅 애니메이션
-        gsap.to(track, {
-          x: -newVal,
-          duration: 0.35,
-          ease: "power2.out",
-        });
-      }, { passive: true });
-    });
-  }
-
-  if (isTablet()) {
-    initCardSwipe();
-  }
-
+  window.addEventListener('resize', () => ScrollTrigger.refresh());
 });
