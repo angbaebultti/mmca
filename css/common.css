@@ -733,6 +733,11 @@ footer {
   transform: translateX(-50%) translateY(0);
 }
 
+.nav li:nth-child(3) a::before {
+  display: none;
+  cursor: none;
+}
+
 .nav li:nth-child(4) a::before {
   display: none;
   cursor: none;
