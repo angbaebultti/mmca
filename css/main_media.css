@@ -12,6 +12,20 @@
     display: none !important;
   }
 
+  .visual_inner {
+    width: 100%; /* 500vh → 100%로 변경 */
+    overflow: hidden;
+  }
+
+  /* 추가로 body, html에도 overflow 막기 */
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  .main_visual {
+    overflow: hidden;
+  }
   .main_title {
     font-size: 52px;
     left: 32px;
@@ -75,11 +89,11 @@
   }
 
   .about_hero {
-    padding-top: 20vh;
+    padding-top: 25vh;
   }
 
   .about_desc_large {
-    font-size: 70px;
+    font-size: 80px;
   }
 
   .about_content {
@@ -123,8 +137,8 @@
   }
 
   .artist_prize .title {
-    top: 180px;
-    left: 230px;
+    top: 160px;
+    left: 275px;
     padding-left: 0;
   }
 
@@ -171,9 +185,8 @@
     font-size: 12px;
   }
 
-  /* ===== SHOP ===== */
-  .shop {
-    height: 200vh;
+ .shop {
+    height: 100vh;  
     padding: 60px 32px;
   }
 
@@ -201,7 +214,7 @@
     width: 220px;
   }
 
-  /* ===== NEWS ===== */
+
   .news_inner {
     width: 100%;
     padding-left: 0;

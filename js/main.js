@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.set('.p', { x: 0, y: 0, scale: 0.5, opacity: 0, rotation: (i) => positions[i].r * 0.3 });
 
   const shopTL = gsap.timeline({
-    scrollTrigger: { trigger: '.shop', start: 'top top', end: 'bottom top', scrub: 1.2 }
+    scrollTrigger: { trigger: '.shop', start: 'top top', end: 'bottom bottom', scrub: 0.8 }
   });
 
   shopTL.to('.p', { opacity: 0.7, scale: 0.6, duration: 0.25, ease: 'power1.out' }, 0);
