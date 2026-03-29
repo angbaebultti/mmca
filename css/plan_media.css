@@ -167,8 +167,8 @@
     color: #1e1e1e;
   }
 
-  ;
-}
+  
+
 
 .cal_days_grid {
   gap: 4px;
@@ -193,14 +193,14 @@
 }
 
 .inline_summary {
-  display: flex !important;
+  display: flex;
   flex-direction: column;
 }
 
 .plan_payment_bar {
   display: none;
 }
-
+}
 
 /* ═══════════════════════════════════════════════════════
    모바일 — 480px 이하

@@ -399,7 +399,6 @@
 
 .btn_payment:hover { background: #1e1e1e; color: #fff; }
 
-/* ── inline_summary: plan.css에서는 display:none만 (나머지는 plan_media.css에서) ── */
 .inline_summary {
   display: none;
 }

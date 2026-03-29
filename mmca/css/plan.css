@@ -557,3 +557,7 @@
   background: #1e1e1e;
   color: #fff;
 }
+
+.inline_summary {
+  display: none;
+}

@@ -4,7 +4,6 @@
    기본값 — 데스크톱에서 숨길 요소들
    ═══════════════════════════════════════════════════════ */
 
-/* inline_summary: 데스크톱에서 완전 숨김 */
 .inline_summary {
   display: none;
   flex-direction: column;
@@ -67,7 +66,6 @@
   margin-top: 0;
 }
 
-/* plan_payment_bar: 데스크톱에서 숨김 */
 .plan_payment_bar {
   display: none;
   position: fixed;
@@ -95,7 +93,6 @@
    ═══════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
 
-  /* ── 레이아웃 ── */
   .plan_main {
     padding: 80px 64px 80px;
   }
@@ -109,12 +106,10 @@
     display: none;
   }
 
-  /* ── summary card 숨기기 ── */
   .plan_right {
     display: none;
   }
 
-  /* ── hero ── */
   .hero_title h2 {
     font-size: 90px;
     padding-top: 100px;
@@ -139,7 +134,6 @@
     font-size: 17px;
   }
 
-  /* ── section label ── */
   .section_label {
     padding: 80px 0 24px;
   }
@@ -154,7 +148,6 @@
     font-size: 24px;
   }
 
-  /* ── 캘린더: 2열 유지, 크기 축소 ── */
   .cal_two {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
@@ -171,44 +164,43 @@
 
   .cal_day {
     font-size: 12px;
+    color: #1e1e1e;
   }
 
-  .cal_days_grid {
-    gap: 4px;
-  }
+  
 
-  .cal_dow_row span {
-    font-size: 11px;
-  }
 
-  /* ── 시간 버튼 ── */
-  .time_btn {
-    width: 240px;
-    font-size: 18px;
-    padding: 14px 40px;
-  }
-
-  /* ── visitor box ── */
-  .visitor_item {
-    padding: 20px 40px;
-  }
-
-  .visitor_info strong {
-    font-size: 17px;
-  }
-
-  /* ── 인라인 summary 보이기 ── */
-  .inline_summary {
-    display: flex !important;
-    flex-direction: column;
-  }
-
-  /* ── plan_payment_bar 숨김 유지 ── */
-  .plan_payment_bar {
-    display: none;
-  }
+.cal_days_grid {
+  gap: 4px;
 }
 
+.cal_dow_row span {
+  font-size: 11px;
+}
+
+.time_btn {
+  width: 240px;
+  font-size: 18px;
+  padding: 14px 40px;
+}
+
+.visitor_item {
+  padding: 20px 40px;
+}
+
+.visitor_info strong {
+  font-size: 17px;
+}
+
+.inline_summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.plan_payment_bar {
+  display: none;
+}
+}
 
 /* ═══════════════════════════════════════════════════════
    모바일 — 480px 이하
@@ -217,7 +209,7 @@
 
   /* ── 레이아웃 ── */
   .plan_main {
-    padding: 50px 48px 60px;
+    padding: 50px 24px 60px;
   }
 
   /* ── hero ── */
@@ -240,12 +232,12 @@
     width: 100%;
     height: 169px;
     min-height: unset;
-    gap: 24px;
+    gap: 0;
   }
 
   .hero_poster {
-    width: 119px;
-    min-width: 119px;
+    width: 134px;
+    min-width: 134px;
   }
 
   .hero_desc {
@@ -253,7 +245,7 @@
   }
 
   .hero_desc p {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.5;
     letter-spacing: -0.04em;
   }
@@ -276,99 +268,76 @@
     font-size: 16px;
   }
 
-  /* ── 캘린더: 1열 (한 달만 표시) ── */
+  /* ── 캘린더: 태블릿과 동일하게 유지 ── */
   .cal_two {
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding: 0;
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .cal_month_col:nth-child(2) {
-    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 14px;
   }
 
   .cal_month_col {
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-  }
-
-  .cal_mheader {
-    margin-bottom: 36px;
+    padding: 18px 14px;
   }
 
   .cal_mname {
-    font-size: 18px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.05em;
-  }
-
-  .cal_arrow_btn {
-    color: #fff;
-    font-size: 22px;
-  }
-
-  .cal_dow_row span {
-    font-size: 18px;
-    font-weight: 300;
-    color: #fff;
-    opacity: 0.8;
-  }
-
-  .cal_days_grid {
-    gap: 23px;
+    font-size: 15px;
+    color: #1e1e1e;
   }
 
   .cal_day {
-    font-size: 18px;
-    color: #fff;
+    font-size: 12px;
+  }
+
+  .cal_days_grid {
+    gap: 4px;
+  }
+
+  .cal_dow_row span {
+    font-size: 11px;
+    opacity: 1;
   }
 
   .cal_day.other-month {
-    opacity: 0.4;
-    color: #fff;
+    color: #ccc;
+    cursor: default;
   }
 
   .cal_day.disabled {
+    color: #1e1e1e;
     opacity: 0.25;
-    color: #fff;
-  }
-
-  .cal_day.today {
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
   }
 
   .cal_day:not(.other-month):not(.disabled):hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(0, 120, 215, 0.1);
+  }
+
+  .cal_day.today {
+    box-shadow: inset 0 0 0 1px #ccc;
+    color: #1e1e1e;
   }
 
   .cal_day.selected {
     background: #0078D7;
     color: #fff;
+    box-shadow: none;
   }
 
-  .sel_label {
-    font-size: 16px;
-    margin-top: 40px;
+  .cal_day.today.selected {
+    box-shadow: none;
   }
 
-  /* ── 시간 버튼 — pill 형태 ── */
+  /* ── 시간 버튼 ── */
   .time_select {
-    gap: 20px;
+    gap: 12px;
     margin: 50px 0 36px 0;
-    flex-wrap: wrap;
     justify-content: center;
   }
 
   .time_btn {
-    width: 185px;
+    width: auto;
     font-size: 16px;
     font-weight: 600;
-    padding: 10px 27px;
+    padding: 12px 60px;
     border-radius: 587px;
     border: 0.5px solid #1e1e1e;
     background: #f5f5f5;
@@ -384,109 +353,40 @@
 
   /* ── guide links ── */
   .guide_links a {
-    font-size: 8px;
-    padding: 4px 4px;
+    font-size: 12px;
+    font-weight: 300;
+    padding: 4px 8px;
     letter-spacing: 0;
   }
 
   /* ── visitor box ── */
   .visitor_item {
-    padding: 16px 30px;
+    padding: 14px 16px;
   }
 
   .visitor_info strong {
-    font-size: 15px;
+    font-size: 14px;
   }
 
   .visitor_info em {
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .count_num {
     font-size: 16px;
   }
 
-  /* ── 인라인 summary — 모바일 전용 ── */
   .inline_summary {
-    margin-top: 0;
-    padding: 60px 48px;
-    gap: 50px;
-    background: #1e1e1e;
-  }
-
-  /* 03 SUMMARY 라벨 */
-  .inline_summary_label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .inline_summary_num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: #fff;
-    color: #1e1e1e;
-    font-size: 16px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  .inline_summary_heading {
-    font-size: 30px;
-    font-weight: 500;
-    color: #fff;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
-  }
-
-  /* 포스터 + 정보 가로 배치 */
-  .inline_summary_body {
-    flex-direction: row;
-    gap: 24px;
-    align-items: center;
-    background: #fff;
-    height: 169px;
-  }
-
-  .inline_summary_poster {
-    display: block;
-    width: 119px;
-    min-width: 119px;
-    height: 169px;
-    overflow: hidden;
-  }
-
-  .inline_summary_poster img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .inline_summary_info {
-    flex: 1;
-    text-align: left;
-    gap: 8px;
-    padding: 16px 16px 16px 0;
+    padding: 20px;
   }
 
   .inline_summary_title {
-    font-size: 14px;
-    color: #1e1e1e;
-    line-height: 1.6;
+    font-size: 16px;
   }
 
-  .inline_summary_date,
-  .inline_summary_ticket {
-    font-size: 12px;
-  }
-
-  .inline_summary_note {
-    font-size: 9px;
-    color: #8c8c8c;
+  .inline_summary_ticket,
+  .inline_summary_date {
+    font-size: 15px;
   }
 
   /* ── CONTINUE TO PAYMENT 버튼 ── */
@@ -506,5 +406,9 @@
   .inline_btn:hover {
     background: #1e1e1e;
     color: #fff;
+  }
+
+  #cursorDot {
+    display: none;
   }
 }
