@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 👉 추가
     tl.call(() => {
-        window.location.href = "main.html";
+        window.location.href = "./main.html";
     }, null, 10.5);
 
     document.fonts.ready.then(() => {
