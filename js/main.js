@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================================================
    * 12. SHOP
    * ========================================================= */
-  // const isMobile = window.innerWidth <= 1024;
+  const isMobile = window.innerWidth <= 1024;
 
 /* ===== 위치 데이터 ===== */
 const positionsDesktop = [

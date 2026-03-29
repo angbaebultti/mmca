@@ -35,9 +35,9 @@
   }
 
   .main_title {
-    font-size: 62px;
+    font-size: 52px;
     left: 32px;
-    bottom: 45%;
+    bottom: 40%;
     line-height: 1.08;
     letter-spacing: 0.01em;
     font-weight: 500;
@@ -46,8 +46,8 @@
   .info_wrap {
     left: 32px;
     right: 32px;
-    bottom: 24%;
-    gap: 52px;
+    bottom: 14%;
+    gap: 40px;
     flex-direction: row;
     align-items: flex-start;
 
@@ -185,7 +185,6 @@
 
   .artist_prize .title {
     top: 160px;
-    left: 275px;
     padding-left: 0;
   }
 
@@ -198,11 +197,11 @@
   }
 
   .artist_prize .line:nth-child(2) {
-    margin-left: 60px;
+    margin-left: 150px;
   }
 
   .artist_prize .line:nth-child(3) {
-    margin-left: 120px;
+    margin-left: 370px;
   }
 
   .artist_card {
