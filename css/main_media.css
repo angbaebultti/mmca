@@ -1,6 +1,12 @@
 @charset "utf-8";
 
+/* 모바일 전용 요소 — 기본 숨김 */
+.shop_mobile {
+  display: none;
+}
+
 @media screen and (max-width: 1024px) {
+
   /* ===== CURSOR 복원 ===== */
   * {
     cursor: auto !important;
@@ -17,8 +23,7 @@
   }
 
   /* 추가로 body, html에도 overflow 막기 */
-  html,
-  body {
+  html, body {
     overflow-x: hidden;
     max-width: 100%;
   }
@@ -72,9 +77,9 @@
   }
 
   .ticket_left {
-    width: 48px;
-    left: -10px;
-    bottom: -12px;
+    width: 30px;
+    left: -80px;
+    bottom: -20px;
   }
 
   .ticket_right {
@@ -131,10 +136,44 @@
     font-size: 30px;
   }
 
+    .stats_wrap {
+    position: relative;
+  }
+
+  .line_left,
+  .line_right {
+    display: block;
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    background: var(--main_white);
+  }
+
+  .line_left {
+    right: 50%;
+    margin-right: 300px; /* 원 바깥쪽 시작 지점 */
+    width: calc(50vw - 300px);
+    transform: translateY(-50%) scaleX(var(--line-scale, 1));
+    transform-origin: right center;
+  }
+
+  .line_right {
+    left: 50%;
+    margin-left: 300px; /* 원 바깥쪽 시작 지점 */
+    width: calc(50vw - 300px);
+    transform: translateY(-50%) scaleX(var(--line-scale, 1));
+    transform-origin: left center;
+  }
+
   /* ===== ARTIST PRIZE ===== */
   .artist_prize {
+    height: 100vh;
     overflow: hidden;
   }
+
+  .artist_wrap {
+  height: 85vh;
+}
 
   .artist_prize .title {
     top: 160px;
@@ -159,8 +198,8 @@
   }
 
   .artist_card {
-    width: 160px;
-    padding: 8px;
+    width: 220px;
+    padding: 10px;
     margin: 6px;
   }
 
@@ -168,6 +207,7 @@
     font-size: 20px;
     margin: 6px 0 6px 4px;
   }
+  
 
   .view_btn_card {
     min-width: 140px;
@@ -185,14 +225,25 @@
     font-size: 12px;
   }
 
-  .shop {
-    height: 100vh;
-    padding: 60px 32px;
+ .shop {
+    --p-center-x: 48%;
+    --p-center-y: 48%;
+    --p-scale: 0.4;
+    height: 80vh;
+    padding: 20px 32px 20px; 
+    box-sizing: border-box;
+  }
+  
+  .shop_sticky {
+    height: 100%;
   }
 
-  .glass_box {
+   .glass_box {
     width: 420px;
     height: 270px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .glass_front h2 {
@@ -209,17 +260,18 @@
     height: 270px;
   }
 
-  .p1,
-  .p2,
-  .p3,
-  .p4,
-  .p5,
-  .p6,
-  .p7,
-  .p8,
-  .p9 {
-    width: 220px;
+  .p1, .p2, .p3, .p4, .p5,
+  .p6, .p7, .p8, .p9 {
+    width: 200px;
   }
+
+  .p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+}
 
   .news_inner {
     width: 100%;
@@ -246,7 +298,7 @@
   }
 
   .news_list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 28px;
   }
 
