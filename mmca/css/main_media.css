@@ -1,0 +1,249 @@
+@charset "utf-8";
+
+@media screen and (max-width: 1024px) {
+
+  /* ===== CURSOR 복원 ===== */
+  * {
+    cursor: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+
+  .main_title {
+    font-size: 52px;
+    left: 32px;
+    bottom: 45%;
+    line-height: 1.1;
+  }
+
+  .info_wrap {
+    left: 32px;
+    right: 32px;
+    bottom: 6%;
+    gap: 40px;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .label {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  .info_right .label {
+    margin-bottom: 16px;
+  }
+
+  .info_block .day {
+    font-size: 18px;
+  }
+
+  .info_block .time {
+    font-size: 15px;
+  }
+
+  .price {
+    font-size: 20px;
+  }
+
+  .ticket {
+    width: 260px;
+    height: 160px;
+    right: -20px;
+    bottom: 12%;
+    overflow: visible;
+  }
+
+  .ticket_left {
+    width: 48px;
+    left: -10px;
+    bottom: -12px;
+  }
+
+  .ticket_right {
+    width: 100px;
+    left: 50px;
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    height: 400vh;
+    padding: 60px 0 150px;
+  }
+
+  .about_hero {
+    padding-top: 20vh;
+  }
+
+  .about_desc_large {
+    font-size: 70px;
+  }
+
+  .about_content {
+    margin-top: -60px;
+  }
+
+  .about_sub {
+    font-size: 50px;
+    margin-bottom: 8px;
+  }
+
+  .about_title {
+    font-size: 20px;
+    padding: 0 24px;
+    margin-bottom: 24px;
+  }
+
+  .stat {
+    width: 175px;
+    height: 175px;
+    margin-left: -32px;
+  }
+
+  .stat:first-child {
+    margin-left: 0;
+  }
+
+  .label_small {
+    font-size: 14px;
+    margin-bottom: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  .stat strong {
+    font-size: 30px;
+  }
+
+  /* ===== ARTIST PRIZE ===== */
+  .artist_prize {
+    overflow: hidden;
+  }
+
+  .artist_prize .title {
+    top: 180px;
+    left: 230px;
+    padding-left: 0;
+  }
+
+  .title_main span {
+    font-size: 100px;
+  }
+
+  .artist_prize .line {
+    gap: 14px;
+  }
+
+  .artist_prize .line:nth-child(2) {
+    margin-left: 60px;
+  }
+
+  .artist_prize .line:nth-child(3) {
+    margin-left: 120px;
+  }
+
+  .artist_card {
+    width: 160px;
+    padding: 8px;
+    margin: 6px;
+  }
+
+  .artist_card p {
+    font-size: 20px;
+    margin: 6px 0 6px 4px;
+  }
+
+  .view_btn_card {
+    min-width: 140px;
+    height: 220px;
+  }
+
+  .view_btn_inline {
+    font-size: 14px;
+    gap: 10px;
+  }
+
+  .view_btn_inline i {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  /* ===== SHOP ===== */
+  .shop {
+    height: 200vh;
+    padding: 60px 32px;
+  }
+
+  .glass_box {
+    width: 420px;
+    height: 270px;
+  }
+
+  .glass_front h2 {
+    font-size: 54px;
+  }
+
+  .glass_front p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .glow_bg {
+    width: 420px;
+    height: 270px;
+  }
+
+  .p1, .p2, .p3, .p4, .p5,
+  .p6, .p7, .p8, .p9 {
+    width: 220px;
+  }
+
+  /* ===== NEWS ===== */
+  .news_inner {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 100px;
+  }
+
+  .news_head {
+    padding: 60px 28px 20px;
+  }
+
+  .news_head h2 {
+    font-size: 40px;
+  }
+
+  .news_more {
+    right: 28px;
+    font-size: 14px;
+  }
+
+  .news_body {
+    padding: 30px 28px 60px;
+  }
+
+  .news_list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .news_thumb {
+    height: 220px;
+  }
+
+  .news_group .news_txt h3 {
+    font-size: 15px;
+  }
+
+  .news_group .news_txt p {
+    font-size: 12px;
+  }
+
+  .news_group .news_date {
+    font-size: 12px;
+  }
+}
