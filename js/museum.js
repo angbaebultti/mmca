@@ -1,39 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-const isMobile480 = window.innerWidth <= 480;
+  const isMobile480 = window.innerWidth <= 480;
 
-if (isMobile480) {
-  const slides = document.querySelectorAll(".museum_mobile_slide");
-  const sections = document.querySelectorAll(".museum_wrap .museum_exhibit_section[data-museum-section]");
+  if (isMobile480) {
+    const slides = document.querySelectorAll(".museum_mobile_slide");
+    const sections = document.querySelectorAll(".museum_wrap .museum_exhibit_section[data-museum-section]");
 
-  function changeMuseum(targetMuseum) {
+    function changeMuseum(targetMuseum) {
+      slides.forEach((slide) => {
+        slide.classList.toggle("is_active", slide.dataset.museum === targetMuseum);
+      });
+
+      sections.forEach((section) => {
+        section.classList.toggle(
+          "is_mobile_active",
+          section.dataset.museumSection === targetMuseum
+        );
+      });
+    }
+
     slides.forEach((slide) => {
-      slide.classList.toggle("is_active", slide.dataset.museum === targetMuseum);
-    });
+      slide.addEventListener("click", () => {
+        changeMuseum(slide.dataset.museum);
 
-    sections.forEach((section) => {
-      section.classList.toggle(
-        "is_mobile_active",
-        section.dataset.museumSection === targetMuseum
-      );
-    });
-  }
-
-  slides.forEach((slide) => {
-    slide.addEventListener("click", () => {
-      changeMuseum(slide.dataset.museum);
-
-      slide.scrollIntoView({
-        behavior: "smooth",
-        inline: "center",
-        block: "nearest",
+        slide.scrollIntoView({
+          behavior: "smooth",
+          inline: "center",
+          block: "nearest",
+        });
       });
     });
-  });
 
-  changeMuseum("seoul");
-  return;
-}
+    changeMuseum("seoul");
+    return;
+  }
 
   /* =========================================================
    * 1. 기본 DOM / 라이브러리 체크
@@ -230,30 +230,29 @@ if (isMobile480) {
  * 9. 가로 스크롤 섹션 높이 세팅
  * - footer가 보이도록 필요한 높이만 최소한으로 계산
  * ========================================================= */
-function setupHorizontalSections(callback) {
-  requestAnimationFrame(() => {
+  function setupHorizontalSections(callback) {
     requestAnimationFrame(() => {
-      horizontalSections.forEach((section) => {
-        if (!section.classList.contains("active")) return;
+      requestAnimationFrame(() => {
+        horizontalSections.forEach((section) => {
+          if (!section.classList.contains("active")) return;
 
-        const track = section.querySelector(".museum_h_track");
-        if (!track) return;
+          const track = section.querySelector(".museum_h_track");
+          if (!track) return;
 
-        resetHorizontalSection(section);
+          resetHorizontalSection(section);
 
-        const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
-        const startHold = 600;
-        const endGap = 120; // footer 직전 아주 작은 여유만
+          const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
+          const startHold = 600;
+          const endGap = 120; // footer 직전 아주 작은 여유만
 
-        section.style.height = `${
-          window.innerHeight + totalScrollX + startHold + endGap
-        }px`;
+          section.style.height = `${window.innerHeight + totalScrollX + startHold + endGap
+            }px`;
+        });
+
+        if (typeof callback === "function") callback();
       });
-
-      if (typeof callback === "function") callback();
     });
-  });
-}
+  }
 
   /* =========================================================
    * 10. 큐브 → 전시 섹션 전환
@@ -687,5 +686,27 @@ function setupHorizontalSections(callback) {
 
   if (window.innerWidth <= 1024) {
     initMobileSlide();
+  }
+
+  /* =========================================================
+   * 23. 외부 해시 링크로 진입 시 해당 섹션으로 바로 이동
+   * ========================================================= */
+  const hashTarget = window.location.hash?.replace("#", "");
+  if (hashTarget) {
+    const targetSection = document.getElementById(hashTarget);
+    if (targetSection) {
+      // 큐브 애니메이션 스킵하고 바로 해당 전시로 진입
+      isTransitioning = true;
+      hasTriggeredExpand = true;
+      lenis.stop();
+
+      const targetFace = document.querySelector(`[data-target="${hashTarget}"]`);
+      if (targetFace) {
+        expandSelectedFace(targetFace);
+      } else {
+        // 큐브 face가 없는 경우 직접 섹션 전환
+        switchToMuseum(targetSection);
+      }
+    }
   }
 });
