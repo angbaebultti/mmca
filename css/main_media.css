@@ -27,40 +27,47 @@
     max-width: 100%;
   }
 
-  .main_visual {
+   .main_visual {
+    height: 80vh;
+    min-height: 700px;
     overflow: hidden;
+    gap: 32px;
   }
+
   .main_title {
-    font-size: 52px;
+    font-size: 62px;
     left: 32px;
     bottom: 45%;
-    line-height: 1.1;
+    line-height: 1.08;
+    letter-spacing: 0.01em;
+    font-weight: 500;
   }
 
   .info_wrap {
     left: 32px;
     right: 32px;
-    bottom: 6%;
-    gap: 40px;
+    bottom: 24%;
+    gap: 52px;
     flex-direction: row;
     align-items: flex-start;
+
   }
 
   .label {
-    font-size: 14px;
-    margin-bottom: 16px;
+    font-size: 24px;
+    margin-bottom: 17px;
   }
 
   .info_right .label {
-    margin-bottom: 16px;
+    margin-bottom: 25px;
   }
 
   .info_block .day {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .info_block .time {
-    font-size: 15px;
+    font-size: 18px;
   }
 
   .price {
@@ -73,6 +80,7 @@
     right: -20px;
     bottom: 12%;
     overflow: visible;
+    display: none;
   }
 
   .ticket_left {
@@ -88,8 +96,8 @@
 
   /* ===== ABOUT ===== */
   .about {
-    height: 400vh;
-    padding: 60px 0 150px;
+    height: 300vh;
+    padding: 40px 0 120px;
   }
 
   .about_hero {
@@ -105,14 +113,14 @@
   }
 
   .about_sub {
-    font-size: 50px;
-    margin-bottom: 8px;
+    font-size: 56px;
+    margin-bottom: 12px;
   }
 
   .about_title {
-    font-size: 20px;
-    padding: 0 24px;
-    margin-bottom: 24px;
+    font-size: 24px;
+    padding: 0 30px;
+
   }
 
   .stat {
@@ -168,7 +176,8 @@
   .artist_prize {
     height: 100vh;
     overflow: hidden;
-  }
+    padding-bottom: 80px;
+    }
 
   .artist_wrap {
     height: 85vh;
@@ -181,7 +190,7 @@
   }
 
   .title_main span {
-    font-size: 100px;
+    font-size: 140px;
   }
 
   .artist_prize .line {
@@ -197,7 +206,7 @@
   }
 
   .artist_card {
-    width: 220px;
+    width: 280px;
     padding: 10px;
     margin: 6px;
   }
@@ -228,7 +237,7 @@
     --p-center-y: 48%;
     --p-scale: 0.4;
     height: 80vh;
-    padding: 20px 32px 20px;
+    padding: 78px 70px;
     box-sizing: border-box;
   }
 
@@ -278,11 +287,16 @@
     opacity: 0;
   }
 
+
   .news_inner {
     width: 100%;
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 100px;
+  }
+
+  .news_group {
+   clip-path: polygon(0 0, 200px 0, 260px 60px, 100% 60px, 100% 100%, 0 100%);
   }
 
   .news_head {
