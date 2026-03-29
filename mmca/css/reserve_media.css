@@ -21,14 +21,13 @@
 }
 
 .inline_summary_body {
-  display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 100%;
+  height: auto;        /* 169px 제거 */
+  background: transparent;
 }
 
 .inline_summary_poster {
-  display: none;
+  display: none !important;   /* !important 추가 */
 }
 
 .inline_summary_info {
@@ -240,7 +239,7 @@
     width: 100%;
     height: 169px;
     min-height: unset;
-    gap: 24px;
+    gap: 0;
   }
 
   .hero_poster {
@@ -406,105 +405,54 @@
     font-size: 16px;
   }
 
-  /* ── 인라인 summary — 모바일 전용 ── */
   .inline_summary {
-    margin-top: 0;
-    padding: 60px 48px;
-    gap: 50px;
-    background: #1e1e1e;
-  }
+  margin-top: 0;
+  padding: 40px;
+  gap: 24px;
+  background: #fff;  /* 다크 배경 제거 */
+}
 
-  /* 03 SUMMARY 라벨 */
-  .inline_summary_label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+/* 03 SUMMARY 라벨 — 숨김 유지 */
+.inline_summary_label {
+  display: none;
+}
 
-  .inline_summary_num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background: #fff;
-    color: #1e1e1e;
-    font-size: 16px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
+/* body — 세로 배치 유지 */
+.inline_summary_body {
+  flex-direction: column;
+  height: auto;
+  background: transparent;
+}
 
-  .inline_summary_heading {
-    font-size: 30px;
-    font-weight: 500;
-    color: #fff;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
-  }
+/* 포스터 숨김 유지 */
+.inline_summary_poster {
+  display: none;
+}
 
-  /* 포스터 + 정보 가로 배치 */
-  .inline_summary_body {
-    flex-direction: row;
-    gap: 24px;
-    align-items: center;
-    background: #fff;
-    height: 169px;
-  }
+/* 정보 — 가운데 정렬 유지 */
+.inline_summary_info {
+  text-align: center;
+  padding: 0;
+}
 
-  .inline_summary_poster {
-    display: block;
-    width: 119px;
-    min-width: 119px;
-    height: 169px;
-    overflow: hidden;
-  }
+.inline_summary_title {
+  font-size: 20px;
+}
 
-  .inline_summary_poster img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+.inline_summary_date,
+.inline_summary_ticket {
+  font-size: 17px;
+}
 
-  .inline_summary_info {
-    flex: 1;
-    text-align: left;
-    gap: 8px;
-    padding: 16px 16px 16px 0;
-  }
+.inline_summary_note {
+  font-size: 13px;
+  color: #999;
+}
 
-  .inline_summary_title {
-    font-size: 14px;
-    color: #1e1e1e;
-    line-height: 1.6;
-  }
-
-  .inline_summary_date,
-  .inline_summary_ticket {
-    font-size: 12px;
-  }
-
-  .inline_summary_note {
-    font-size: 9px;
-    color: #8c8c8c;
-  }
-
-  /* ── CONTINUE TO PAYMENT 버튼 ── */
-  .inline_btn {
-    width: 100%;
-    max-width: 384px;
-    align-self: center;
-    font-size: 14px;
-    font-weight: 600;
-    padding: 12px 0;
-    background: #fff;
-    color: #1e1e1e;
-    border: 1px solid #1e1e1e;
-    letter-spacing: -0.04em;
-  }
-
-  .inline_btn:hover {
-    background: #1e1e1e;
-    color: #fff;
-  }
+/* 버튼 */
+.inline_btn {
+  background: #fff;
+  color: #1e1e1e;
+  border: 1px solid #1e1e1e;
+}
 }
