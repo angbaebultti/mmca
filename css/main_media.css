@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+/* 모바일 전용 요소 — 기본 숨김 */
+.shop_mobile {
+  display: none;
+}
+
 @media screen and (max-width: 1024px) {
 
   /* ===== CURSOR 복원 ===== */
@@ -311,5 +316,211 @@
 
   .news_group .news_date {
     font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* ===== MAIN VISUAL ===== */
+  .ticket {
+    display: none;
+  }
+
+  .main_title {
+    font-size: 52px;
+    left: 38px;
+    bottom: 65%;
+    line-height: 1.1;
+    font-weight: 500;
+    letter-spacing: -0.5%;
+  }
+
+  .info_wrap {
+    position: absolute;
+    bottom: 11%;
+    left: 40px;
+    right: 80px;
+    display: flex;
+    gap: 172px;
+    color: var(--gray_06);
+    z-index: 2;
+  }
+
+  .info_left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info_right {
+    display: none;
+  }
+
+  .label {
+    font-size: 24px;
+    margin-bottom: 16px;
+    font-weight: 400;
+  }
+
+  .info_block .day {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .info_block .time {
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  /* ===== ABOUT ===== */
+  .about {
+    height: auto;
+    padding: 0;
+  }
+
+  .about_scene {
+    position: relative;
+    height: auto;
+  }
+
+  .about_inner {
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 130px 40px 130px;
+    gap: 130px;
+  }
+
+  .about_hero {
+    position: relative;
+    inset: auto;
+    padding-top: 0;
+    opacity: 1;
+    transform: none;
+    text-align: left;
+  }
+
+  .about_desc_large {
+    font-size: 42px;
+    text-align: left;
+    line-height: auto;
+    font-weight: 600;
+    letter-spacing: -5%;
+  }
+
+  .about_content {
+    position: relative;
+    inset: auto;
+    opacity: 1;
+    transform: none;
+    margin-top: 0;
+    align-items: flex-start;
+    text-align: left;
+    width: 100%;
+  }
+
+  .about_sub {
+    font-size: 32px;
+    font-weight: 500;
+    margin-bottom: 24px;
+  }
+
+  .about_title {
+    font-size: 18px;
+    text-align: left;
+    font-weight: 300;
+    margin-bottom: 52px;
+    padding: 0;
+    line-height: 22px;
+    letter-spacing: -1%;
+  }
+
+  .stats_bg,
+  .line_left,
+  .line_right {
+    display: none;
+  }
+
+  .stats_wrap {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .stat {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    border: none;
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin-left: 0;
+    padding: 24px 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+
+  .stat:first-child {
+    margin-left: 0;
+  }
+
+  .label_small {
+    font-weight: 500;
+    font-size: 12px;
+    margin-bottom: 8px;
+    letter-spacing: 0.06em;
+    font-family: var(--pretendard);
+  }
+
+  .stat strong {
+    font-size: 40px;
+    font-family: var(--pretendard);
+  }
+
+  .artist_prize {
+    height: auto;
+    padding: 60px 0 40px;
+    overflow: hidden;
+  }
+
+  .artist_wrap {
+    position: relative;
+    height: auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .artist_track {
+    transform: none !important;
+    padding-left: 24px;
+    padding-right: 24px;
+    gap: 16px;
+  }
+
+  .title_main span {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--main_white);
+  }
+
+  .shop {
+    height: auto;
+    padding: 60px 24px;
+  }
+
+  .shop_sticky {
+    position: relative;
+    top: auto;
+    height: auto;
   }
 }
