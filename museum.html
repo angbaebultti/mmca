@@ -203,10 +203,36 @@
       </section>
       <!-- //.intro_scene -->
 
+<section class="museum_mobile">
+  <div class="museum_mobile_inner">
+    <div class="museum_mobile_track">
+      <button class="museum_mobile_slide is_active" type="button" data-museum="seoul">
+        <img src="img/seoul.png" alt="MMCA Seoul" />
+        <span class="museum_mobile_name">Seoul</span>
+      </button>
+
+      <button class="museum_mobile_slide" type="button" data-museum="deoksugung">
+        <img src="img/deoksugung.png" alt="MMCA Deoksugung" />
+        <span class="museum_mobile_name">Deoksugung</span>
+      </button>
+
+      <button class="museum_mobile_slide" type="button" data-museum="gwacheon">
+        <img src="img/gwacheon.png" alt="MMCA Gwacheon" />
+        <span class="museum_mobile_name">Gwacheon</span>
+      </button>
+
+      <button class="museum_mobile_slide" type="button" data-museum="cheongju">
+        <img src="img/cheongju.png" alt="MMCA Cheongju" />
+        <span class="museum_mobile_name">Cheongju</span>
+      </button>
+    </div>
+  </div>
+</section>
+
       <!-- EXHIBITIONS -->
       <div class="museum_wrap" id="museumWrap">
         <!-- ── 1. SEOUL ── -->
-        <section id="seoul" class="museum_exhibit_section is_horizontal">
+        <section id="seoul" class="museum_exhibit_section is_horizontal is_mobile_active" data-museum-section="seoul">
           <div class="museum_inner">
             <div class="museum_h_sticky">
               <div class="museum_head">
@@ -330,7 +356,7 @@
         </section>
 
         <!-- ── 2. DEOKSUGUNG ── -->
-        <section id="deoksugung" class="museum_exhibit_section">
+        <section id="deoksugung" class="museum_exhibit_section" data-museum-section="deoksugung">
           <div class="museum_inner">
             <div class="museum_head">
               <div class="museum_head_left">
@@ -354,7 +380,7 @@
         </section>
 
         <!-- ── 3. GWACHEON ── -->
-        <section id="gwacheon" class="museum_exhibit_section is_horizontal">
+        <section id="gwacheon" class="museum_exhibit_section is_horizontal" data-museum-section="gwacheon">
           <div class="museum_inner">
             <div class="museum_h_sticky">
               <div class="museum_head">
@@ -479,7 +505,7 @@
         </section>
 
         <!-- ── 4. CHEONGJU ── -->
-        <section id="cheongju" class="museum_exhibit_section is_horizontal">
+        <section id="cheongju" class="museum_exhibit_section is_horizontal" data-museum-section="cheongju">
           <div class="museum_inner">
             <div class="museum_h_sticky">
               <div class="museum_head">

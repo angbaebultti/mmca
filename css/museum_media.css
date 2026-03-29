@@ -190,295 +190,530 @@
   }
 }
 
+.museum_mobile {
+  display: none;
+}
+
+.museum_mobile {
+  display: none;
+}
+
 @media screen and (max-width: 480px) {
-
-  html,
-  body {
-    overflow-x: hidden;
+  /* ===== 큐브 숨김 ===== */
+  .intro_scene,
+  .cube_pin,
+  .cube_stage,
+  .cube,
+  .cube_face {
+    display: none !important;
   }
 
-  /* ===== intro ===== */
-  .intro {
-    padding: 24px 0 16px;
-    min-height: auto;
-  }
-
-  .intro_scene {
-    position: relative;
-    height: auto;
-    min-height: auto;
+  /* ===== 모바일 슬라이더 ===== */
+  .museum_mobile {
     display: block;
-    padding: 0;
+    width: calc(100% - 40px);
+    max-width: 360px;
+    margin: 20px auto 0;
+    background: #1f1f1f;
   }
 
-  /* ===== cube -> slide ===== */
-  .cube_stage {
-    width: 112px;
-    margin: 0 auto;
+  .museum_mobile_inner {
+    width: 100%;
+  }
+
+  .museum_mobile_track {
+    display: flex;
+    gap: 10px;
     overflow-x: auto;
-    overflow-y: hidden;
+    padding: 0;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    perspective: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
-  .cube_stage::-webkit-scrollbar {
+  .museum_mobile_track::-webkit-scrollbar {
     display: none;
   }
 
-  .cube {
-    width: max-content;
-    height: auto;
-    display: flex;
-    gap: 8px;
-    transform: none !important;
-    transform-style: flat !important;
-  }
-
-  .cube_face {
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-    transform: none !important;
-    width: 112px;
-    height: 76px;
-    flex: 0 0 112px;
+  .museum_mobile_slide {
+    flex: 0 0 100%;
+    position: relative;
+    aspect-ratio: 1.18 / 0.78;
+    border: 0;
+    padding: 0;
+    background: #1f1f1f;
     overflow: hidden;
-    scroll-snap-align: center;
     cursor: pointer;
-    opacity: 1 !important;
-    pointer-events: auto !important;
+    scroll-snap-align: center;
   }
 
-  .cube_face img {
+  .museum_mobile_slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
     display: block;
+    object-fit: cover;
   }
 
-  .cube_face::after {
-    content: "";
+  .museum_mobile_name {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.08));
-    pointer-events: none;
-  }
-
-  .cube_face .face_label,
-  .cube_face .face_title,
-  .cube_face h3,
-  .cube_face p,
-  .cube_face span,
-  .cube_face strong {
-    position: absolute;
-    z-index: 2;
+    left: 16px;
+    bottom: 16px;
     color: #fff;
-  }
-
-  .cube_face .face_label {
-    left: 8px;
-    top: 8px;
-    font-size: 7px;
+    font-size: 14px;
+    font-weight: 600;
     line-height: 1;
   }
 
-  .cube_face .face_title {
-    left: 8px;
-    bottom: 8px;
-    font-size: 10px;
-    line-height: 1.1;
+  .museum_mobile_slide.is_active {
+    outline: 1px solid rgba(255, 255, 255, 0.35);
   }
 
-  /* 혹시 기존 3D용 숨김/스타일 있으면 정리 */
-  .cube_face.face_front,
-  .cube_face.face_back,
-  .cube_face.face_left,
-  .cube_face.face_right {
-    transform: none !important;
-  }
-
-  /* ===== museum ===== */
+  /* ===== museum wrap ===== */
   .museum_wrap {
-    width: 100%;
-    padding: 14px 0 40px;
-    margin-bottom: 0;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    width: calc(100% - 40px) !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    padding: 0 0 28px !important;
+    background: #1f1f1f !important;
   }
 
-  .museum_exhibit_section {
-    display: none;
-    width: 100%;
+  /* ===== 선택된 section만 보이기 ===== */
+  .museum_wrap .museum_exhibit_section {
+    display: none !important;
+    width: 100% !important;
     height: auto !important;
     min-height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #1f1f1f !important;
+  }
+
+  .museum_wrap .museum_exhibit_section.is_mobile_active {
+    display: block !important;
+  }
+
+  /* ===== 데스크탑 가로스크롤 구조 해제 ===== */
+  .museum_wrap .museum_exhibit_section.is_horizontal,
+  .museum_wrap .museum_exhibit_section.is_horizontal .museum_inner,
+  .museum_wrap .museum_h_sticky,
+  .museum_wrap .museum_h_scroll {
+    position: relative !important;
+    height: auto !important;
     overflow: visible !important;
   }
 
-  .museum_exhibit_section.is_active {
-    display: block;
+  .museum_wrap .museum_exhibit_section .museum_inner {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 14px 18px 28px !important;
+    box-sizing: border-box !important;
   }
 
-  .museum_exhibit_section .museum_inner {
-    width: 100%;
-    max-width: 112px;
-    margin: 0 auto;
-    padding: 0;
-  }
-
-  .museum_exhibit_section.is_horizontal,
-  .museum_exhibit_section.is_horizontal .museum_track,
-  .museum_exhibit_section.is_horizontal .museum_list {
+  .museum_wrap .museum_h_track {
+    display: flex !important;
+    flex-direction: column !important;
     height: auto !important;
+    width: 100% !important;
+    gap: 42px !important;
     transform: none !important;
+    will-change: auto !important;
   }
 
-  .museum_exhibit_section.is_horizontal .museum_head {
+  /* ===== head ===== */
+  .museum_wrap .museum_head {
+    width: 100% !important;
+    margin: 0 0 20px !important;
+    padding: 0 !important;
     position: relative !important;
     top: auto !important;
     left: auto !important;
-    width: 100%;
-    margin: 0 0 12px;
-    padding: 0;
+    z-index: auto !important;
+    text-align: left !important;
   }
 
-  .museum_exhibit_section.is_horizontal .museum_track,
-  .museum_exhibit_section.is_horizontal .museum_list {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-    width: 100%;
+  .museum_wrap .museum_head_left {
+    align-items: flex-start !important;
   }
 
-  .museum_head {
-    margin-bottom: 10px;
+  .museum_wrap .museum_label {
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+    color: #cfcfcf !important;
+    margin: 0 0 4px !important;
   }
 
-  .museum_label {
-    font-size: 7px;
-    line-height: 1.2;
-    margin-bottom: 4px;
+  .museum_wrap .museum_name {
+    font-size: 17px !important;
+    line-height: 1.2 !important;
+    color: #fff !important;
+    font-weight: 500 !important;
+    letter-spacing: 0 !important;
   }
 
-  .museum_name {
-    font-size: 18px;
-    line-height: 1.1;
-    margin-bottom: 10px;
+  .museum_wrap .museum_tabs {
+    display: flex !important;
+    justify-content: flex-start !important;
+    gap: 18px !important;
+    margin-top: 12px !important;
   }
 
-  .museum_tabs {
-    gap: 10px;
-    margin-top: 0;
+  .museum_wrap .museum_tabs button {
+    font-size: 10px !important;
+    line-height: 1 !important;
+    color: #9d9d9d !important;
+    padding: 0 0 4px !important;
+    background: none !important;
+    border: 0 !important;
   }
 
-  .museum_tab,
-  .museum_tabs button,
-  .museum_tabs a {
-    font-size: 5px;
-    line-height: 1;
-    padding-bottom: 4px;
+  .museum_wrap .museum_tabs button.is_active {
+    color: #fff !important;
+    border-bottom: 1px solid #fff !important;
   }
 
-  .museum_exhibit_card {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 0;
-    padding: 0 0 10px;
-    min-height: auto !important;
+  /* ===== 카드 ===== */
+  .museum_wrap .museum_exhibit_card {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: none !important;
     height: auto !important;
+    min-height: auto !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 18px !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
   }
 
-  .museum_exhibit_poster {
-    width: 100%;
+  .museum_wrap .museum_exhibit_card > .museum_poster,
+  .museum_wrap .museum_exhibit_section.is_horizontal .museum_exhibit_card > .museum_poster {
+    margin-left: 0 !important;
   }
 
-  .museum_exhibit_poster img {
-    width: 100%;
-    height: auto;
+  .museum_wrap .museum_poster {
+    width: 120px !important;
+    max-width: 120px !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+  }
+
+  .museum_wrap .museum_poster img {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+  }
+
+  .museum_wrap .museum_content,
+  .museum_wrap .museum_exhibit_section.is_horizontal .museum_content {
+    flex: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    text-align: left !important;
+  }
+
+  .museum_wrap .museum_title {
+    font-size: 18px !important;
+    line-height: 1.25 !important;
+    font-weight: 500 !important;
+    color: #fff !important;
+    margin-bottom: 12px !important;
+    letter-spacing: 0 !important;
+    word-break: keep-all !important;
+  }
+
+  .museum_wrap .museum_meta {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 7px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  .museum_wrap .museum_meta li {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+    gap: 8px !important;
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+    color: #f3f3f3 !important;
+    margin-bottom: 0 !important;
+    text-align: left !important;
+  }
+
+  .museum_wrap .museum_meta i {
+    font-size: 12px !important;
+    flex-shrink: 0 !important;
+    margin-top: 1px !important;
+  }
+
+  .museum_wrap .museum_meta span {
+    display: block !important;
+  }
+
+  .museum_wrap .museum_desc {
+    max-width: 100% !important;
+    margin-top: 2px !important;
+    font-size: 10px !important;
+    line-height: 1.55 !important;
+    color: #bdbdbd !important;
+    text-align: left !important;
+  }
+
+  /* ===== highlight 제거 ===== */
+  .museum_wrap .museum_highlights,
+  .museum_wrap .highlight_list,
+  .museum_wrap .highlight_item {
+    display: none !important;
+  }
+
+  /* ===== ticket ===== */
+  .museum_wrap .museum_ticket {
+    display: inline-flex !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    margin-top: 8px !important;
+    transform: none !important;
+  }
+
+  .museum_wrap .ticket_main,
+  .museum_wrap .ticket_stub {
+    height: 30px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 10px !important;
+  }
+
+  .museum_wrap .ticket_main {
+    padding: 0 12px !important;
+    background: #fff !important;
+    color: #111 !important;
+    border-radius: 3px 0 0 3px !important;
+    border-right: 0 !important;
+  }
+
+  .museum_wrap .ticket_stub {
+    padding: 0 7px !important;
+    background: #fff !important;
+    color: #111 !important;
+    border-left: 1px dashed #111 !important;
+    border-radius: 0 3px 3px 0 !important;
+  }
+
+  .museum_wrap .ticket_stub i {
+    font-size: 14px !important;
+  }
+
+  /* ===== 빈 상태 ===== */
+  .museum_wrap .museum_empty {
+    padding: 40px 0 10px !important;
+    text-align: left !important;
+  }
+
+  .museum_wrap .museum_empty h3 {
+    margin-bottom: 12px !important;
+    font-size: 18px !important;
+    color: #fff !important;
+  }
+
+  .museum_wrap .museum_empty p {
+    font-size: 11px !important;
+    line-height: 1.6 !important;
+    color: #bdbdbd !important;
+  }
+
+  /* ===== top button ===== */
+  .top_btn {
+    right: 16px !important;
+    bottom: 16px !important;
+  }
+
+}
+@media screen and (max-width: 480px) {
+
+  /* ===== 큐브 제거 ===== */
+  .intro_scene,
+  .cube_pin,
+  .cube_stage,
+  .cube,
+  .cube_face {
+    display: none !important;
+  }
+
+  /* ===== 슬라이더 (원본 유지) ===== */
+  .museum_mobile {
     display: block;
+    width: calc(100% - 40px);
+    max-width: 360px;
+    margin: 20px auto;
+  }
+
+  .museum_mobile_track {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .museum_mobile_slide {
+    flex: 0 0 100%;
+    aspect-ratio: 1.2 / 0.8;
+    position: relative;
+    scroll-snap-align: center;
+  }
+
+  .museum_mobile_slide img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
-  .museum_exhibit_content {
-    width: 100%;
+  .museum_mobile_name {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    color: #fff;
+    font-size: 14px;
   }
 
-  .museum_exhibit_title {
-    font-size: 15px;
-    line-height: 1.2;
-    margin-bottom: 8px;
-    word-break: keep-all;
+  /* ===== 전시 영역 ===== */
+  .museum_wrap {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    width: calc(100% - 40px);
+    max-width: 360px;
+    margin: 0 auto;
   }
 
-  .museum_meta {
+  /* ===== section 하나만 보이기 ===== */
+  .museum_exhibit_section {
+    display: none !important;
+  }
+
+  .museum_exhibit_section.is_mobile_active {
+    display: block !important;
+  }
+
+  /* ===== 가로스크롤 구조 제거 ===== */
+  .museum_h_sticky,
+  .museum_h_scroll {
+    position: relative !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .museum_h_track {
     display: flex;
     flex-direction: column;
-    gap: 3px;
-    margin-bottom: 8px;
+    gap: 56px;
+    transform: none !important;
+    height: auto !important;
   }
 
-  .museum_meta li {
-    font-size: 5px;
-    line-height: 1.5;
-  }
-
-  .museum_desc {
-    font-size: 5px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-  }
-
-  .museum_ticket {
+  /* ===== 카드 ===== */
+  .museum_exhibit_card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    text-align: left;
     margin-top: 0;
+    height: auto;
+    padding: 0;
   }
 
-  .ticket_main {
-    min-height: 18px;
-    padding: 0 8px;
-    font-size: 8px;
-    border-radius: 2px;
-    border-right: 1px dashed var(--gray_01);
+  /* ===== 포스터 ===== */
+  .museum_poster {
+    width: 200px;
+    max-width: 100%;
   }
 
-  .ticket_stub {
-    min-height: 18px;
-    padding: 0 5px;
-    font-size: 8px;
-    border-radius: 2px;
-  }
-
-  .museum_highlights {
-    margin-top: 12px;
-    gap: 8px;
-  }
-
-  .museum_highlights strong {
-    font-size: 5px;
-    margin-bottom: 6px;
-  }
-
-  .museum_highlights strong::after {
-    height: 1px;
-  }
-
-  .museum_highlights ul,
-  .museum_highlights li,
-  .museum_highlights p {
-    font-size: 5px;
-    line-height: 1.5;
-  }
-
-  .museum_highlights img {
+  .museum_poster img {
     width: 100%;
     height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
     display: block;
   }
 
+  /* ===== 콘텐츠 ===== */
+  .museum_content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .museum_title {
+    font-size: 22px;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    letter-spacing: 0.01em;
+    font-weight: 700;
+  }
+
+  .museum_meta {
+    margin-bottom: 10px;
+  }
+
+  .museum_meta li {
+    gap: 8px;
+    font-size: 13px;
+    margin-bottom: 4px;
+    align-items: flex-start;
+  }
+
+  .museum_meta i {
+    font-size: 14px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .museum_desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 10px;
+    max-width: 100%;
+  }
+
+  /* ===== 티켓 ===== */
+  .museum_ticket {
+    margin-top: 18px;
+    justify-content: flex-start;
+  }
+
+  .ticket_main {
+    font-size: 14px;
+    padding: 7px 12px;
+    border-radius: 4px;
+  }
+
+  .ticket_stub {
+    padding: 7px 10px;
+    border-radius: 4px;
+  }
+
+  .ticket_stub i {
+    font-size: 16px;
+  }
+
+  /* ===== 하이라이트 제거 ===== */
+  .museum_highlights {
+    display: none;
+  }
+
+  /* ===== top btn 숨김 ===== */
   .top_btn {
-    right: 12px;
-    bottom: 12px;
-    transform: scale(0.8);
-    transform-origin: bottom right;
+    display: none;
   }
 }
 
