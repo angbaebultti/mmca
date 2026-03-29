@@ -500,6 +500,32 @@ const positionsMobile = [
     });
   }
 
+  (function () {
+      var overlay = document.getElementById('ai-overlay');
+      var btn     = document.getElementById('ai-confirm');
+ 
+      function closeModal() {
+        overlay.classList.add('hidden');
+        // 트랜지션 끝난 뒤 DOM에서 제거
+        overlay.addEventListener('transitionend', function () {
+          overlay.remove();
+        }, { once: true });
+      }
+ 
+      // 확인 버튼
+      btn.addEventListener('click', closeModal);
+ 
+      // 오버레이 바깥(배경) 클릭 시 닫기 — 원하지 않으면 이 블록 삭제
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeModal();
+      });
+ 
+      // ESC 키 닫기 — 원하지 않으면 이 블록 삭제
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeModal();
+      });
+    })();
+
   /* =========================================================
    * 14. 리사이즈 갱신
    * ========================================================= */

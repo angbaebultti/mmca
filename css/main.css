@@ -1,5 +1,95 @@
 @charset "utf-8";
 
+ #ai-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.38);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 1;
+      transition: opacity 0.25s ease;
+    }
+    #ai-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+ 
+    /* ── 모달 박스 ── */
+    #ai-modal {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2.25rem 2rem 1.75rem;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+ 
+    /* 아이콘 영역 */
+    .ai-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 1.25rem;
+      background: #f2f2f0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ai-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: #555;
+      fill: none;
+    }
+ 
+    /* 제목 */
+    #ai-modal h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #111;
+      margin: 0 0 0.6rem;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+    }
+ 
+    /* 설명 */
+    #ai-modal p {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.75;
+      margin: 0 0 1.5rem;
+    }
+ 
+    /* 확인 버튼 */
+    #ai-confirm {
+      width: 100%;
+      padding: 0.65rem 1rem;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: background 0.15s;
+    }
+    #ai-confirm:hover {
+      background: #333;
+    }
+ 
+    /* 하단 부연 */
+    .ai-footnote {
+      font-size: 11px;
+      color: #bbb;
+      margin: 0.9rem 0 0;
+    }
+
+
 .news_mobile_tabs {
   display: none;
 }
