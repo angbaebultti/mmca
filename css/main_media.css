@@ -316,6 +316,10 @@
   .news_group .news_date {
     font-size: 12px;
   }
+
+  #cursorDot {
+    display: none;
+  }
 }
 @media screen and (max-width: 480px) {
   /* ===== MAIN VISUAL ===== */
@@ -872,6 +876,10 @@
     align-self: center;
     font-size: 14px;
     color: var(--main_white);
+  }
+a
+  #cursorDot {
+    display: none;
   }
 
 }
