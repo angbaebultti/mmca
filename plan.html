@@ -2,34 +2,24 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="국립현대미술관 영문 웹사이트 리디자인 프로젝트"
-    />
-    <meta
-      name="keywords"
-      content="MMCA, 국립현대미술관, 미술관, 전시, 웹디자인"
-    />
+    <meta name="description" content="국립현대미술관 영문 웹사이트 리디자인 프로젝트" />
+    <meta name="keywords" content="MMCA, 국립현대미술관, 미술관, 전시, 웹디자인" />
     <meta name="author" content="TEAM 아이조아" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/b43057b3ba.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/b43057b3ba.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <title>National Museum of Modern and Contemporary Art, Korea</title>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/plan.css" />
     <link rel="stylesheet" href="css/common_media.css" />
-    <link rel="stylesheet" href="css/plan_media.css">
+    <link rel="stylesheet" href="css/plan_media.css" />
     <script src="js/common.js" defer></script>
     <script src="js/plan.js" defer></script>
   </head>
-  <!-- 햄버거 밑부터 개인별 작업 -->
   <body>
     <div class="wrap">
       <div class="top_btn">
@@ -52,60 +42,36 @@
                 <li><a href="museum.html">ABOUT</a></li>
                 <li><a href="plan.html">TICKETS</a></li>
               </ul>
-              <!-- //.gnb_l -->
               <div class="gnb_r">
                 <a href="#"><span>Sign in</span></a>
-                <a href="#"
-                  ><img src="img/ham_w.svg" alt="ham menu button" id="menu_btn"
-                /></a>
+                <a href="#"><img src="img/ham_w.svg" alt="ham menu button" id="menu_btn" /></a>
               </div>
-              <!-- //.gnb_r -->
             </div>
-            <!-- //.nav_bottom -->
           </div>
-          <!-- //.nav -->
           <div class="museum_nav">
             <div class="row_top">
               <a href="museum.html">
-                <div class="item seoul">
-                  <span class="text">SEOUL</span>
-                  <div class="bg"></div>
-                </div>
+                <div class="item seoul"><span class="text">SEOUL</span><div class="bg"></div></div>
               </a>
               <a href="#">
-                <div class="item deoksugung">
-                  <span class="text">DEOKSUGUNG</span>
-                  <div class="bg"></div>
-                </div>
+                <div class="item deoksugung"><span class="text">DEOKSUGUNG</span><div class="bg"></div></div>
               </a>
             </div>
-            <!-- //.row_top -->
             <div class="row_bottom">
               <a href="#">
-                <div class="item gwacheon">
-                  <span class="text">GWACHEON</span>
-                  <div class="bg"></div>
-                </div>
+                <div class="item gwacheon"><span class="text">GWACHEON</span><div class="bg"></div></div>
               </a>
               <a href="#">
-                <div class="item cheongju">
-                  <span class="text">CHEONGJU</span>
-                  <div class="bg"></div>
-                </div>
+                <div class="item cheongju"><span class="text">CHEONGJU</span><div class="bg"></div></div>
               </a>
             </div>
-            <!-- //.row_bottom -->
           </div>
-          <!-- //.museum_nav -->
         </div>
       </header>
-     
-      
+
       <div class="menu_overlay" id="menu">
         <div class="menu_top">
-          <h1>
-            <a href="#"><img src="img/logo_icon.png" />MMCA</a>
-          </h1>
+          <h1><a href="#"><img src="img/logo_icon.png" />MMCA</a></h1>
           <span class="close_btn" id="close_btn">✕</span>
         </div>
         <div class="menu_top_row">
@@ -173,17 +139,18 @@
           </div>
         </div>
       </div>
+
       <main class="plan_main">
         <div class="plan_inner">
           <!-- LEFT COLUMN -->
           <div class="plan_left">
+
             <!-- HERO -->
             <section class="hero_section">
               <div class="hero_title">
                 <h2>Shape Your Experience</h2>
                 <p class="hero_sub">
-                  Get essential visitor information including locations, hours,
-                  and tickets.
+                  Get essential visitor information including locations, hours, and tickets.
                 </p>
               </div>
               <div class="hero_img_box">
@@ -206,21 +173,14 @@
                 <div class="section_num">01</div>
                 <h3>SELECT DATE&amp;TIME</h3>
               </div>
-
               <div class="date_inner">
                 <div class="cal_outer">
                   <div class="cal_two" id="cal_two"></div>
-                  <div class="sel_label" id="sel_label">
-                    Please select a date.
-                  </div>
+                  <div class="sel_label" id="sel_label">Please select a date.</div>
                 </div>
                 <div class="time_select">
-                  <button class="time_btn active" data-time="10:00~18:00">
-                    10:00~18:00
-                  </button>
-                  <button class="time_btn" data-time="18:00~21:00">
-                    18:00~21:00
-                  </button>
+                  <button class="time_btn active" data-time="10:00~18:00">10:00~18:00</button>
+                  <button class="time_btn" data-time="18:00~21:00">18:00~21:00</button>
                 </div>
                 <div class="guide_links">
                   <a href="#">Cancellation</a>
@@ -236,7 +196,6 @@
                 <div class="section_num">02</div>
                 <h3>VISITOR SELECTION</h3>
               </div>
-
               <div class="visitor_box">
                 <div class="visitor_item">
                   <div class="visitor_info">
@@ -244,13 +203,9 @@
                     <em>AGE 24-64</em>
                   </div>
                   <div class="count_ctrl">
-                    <button class="count_btn minus" data-target="adult">
-                      −
-                    </button>
+                    <button class="count_btn minus" data-target="adult">−</button>
                     <span class="count_num" id="adult_count">1</span>
-                    <button class="count_btn plus" data-target="adult">
-                      +
-                    </button>
+                    <button class="count_btn plus" data-target="adult">+</button>
                   </div>
                 </div>
                 <div class="visitor_item">
@@ -259,13 +214,9 @@
                     <em>FREE ADMISSION · ID REQUIRED</em>
                   </div>
                   <div class="count_ctrl">
-                    <button class="count_btn minus" data-target="student">
-                      −
-                    </button>
+                    <button class="count_btn minus" data-target="student">−</button>
                     <span class="count_num" id="student_count">0</span>
-                    <button class="count_btn plus" data-target="student">
-                      +
-                    </button>
+                    <button class="count_btn plus" data-target="student">+</button>
                   </div>
                 </div>
                 <div class="visitor_item">
@@ -274,13 +225,9 @@
                     <em>FREE ADMISSION</em>
                   </div>
                   <div class="count_ctrl">
-                    <button class="count_btn minus" data-target="senior">
-                      −
-                    </button>
+                    <button class="count_btn minus" data-target="senior">−</button>
                     <span class="count_num" id="senior_count">0</span>
-                    <button class="count_btn plus" data-target="senior">
-                      +
-                    </button>
+                    <button class="count_btn plus" data-target="senior">+</button>
                   </div>
                 </div>
                 <div class="visitor_item">
@@ -289,16 +236,39 @@
                     <em>LAST WEDNESDAY OF EVERY MONTH</em>
                   </div>
                   <div class="count_ctrl">
-                    <button class="count_btn minus" data-target="culture">
-                      −
-                    </button>
+                    <button class="count_btn minus" data-target="culture">−</button>
                     <span class="count_num" id="culture_count">0</span>
-                    <button class="count_btn plus" data-target="culture">
-                      +
-                    </button>
+                    <button class="count_btn plus" data-target="culture">+</button>
                   </div>
                 </div>
               </div>
+
+              <!-- 태블릿/모바일 전용 인라인 summary -->
+              <div class="inline_summary" id="inline_summary">
+
+                <!-- 03 라벨: 480px에서만 보임 -->
+                <div class="inline_summary_label">
+                  <div class="inline_summary_num">03</div>
+                  <span class="inline_summary_heading">SUMMARY</span>
+                </div>
+
+                <!-- 포스터 + 정보 -->
+                <div class="inline_summary_body">
+                  <div class="inline_summary_poster">
+                    <img src="img/seoulposter1.png" alt="Exhibition poster" />
+                  </div>
+                  <div class="inline_summary_info">
+                    <p class="inline_summary_title">Sak-da:<br />The Poetics of Decomposition</p>
+                    <p class="inline_summary_date" id="inline_date">Select a date</p>
+                    <p class="inline_summary_ticket" id="inline_ticket">adult · 1 ticket</p>
+                    <span class="inline_summary_note">Last Wednesday of every month:<br />Culture Day admission</span>
+                  </div>
+                </div>
+
+                <!-- 버튼 -->
+                <button class="btn_payment inline_btn" id="inline_payment_btn">CONTINUE TO PAYMENT</button>
+              </div>
+
             </section>
           </div>
           <!-- //.plan_left -->
@@ -310,53 +280,38 @@
               <h3>Summary</h3>
               <p class="summary_sub">your reservation</p>
               <div class="summary_poster">
-                <img
-                  src="https://www.figma.com/api/mcp/asset/d03a5e71-d23d-4d2e-96de-67064bb626bc"
-                  alt="Exhibition poster"
-                />
+                <img src="https://www.figma.com/api/mcp/asset/d03a5e71-d23d-4d2e-96de-67064bb626bc" alt="Exhibition poster" />
               </div>
               <div class="summary_info">
                 <strong>Sak-da:<br />The Poetics of Decomposition</strong>
-                <p class="summary_date" id="summary_date">
-                  mar 19 · 2026 · 13:30
-                </p>
-                <p class="summary_ticket" id="summary_ticket">
-                  adult · 1 ticket
-                </p>
-                <span class="summary_note"
-                  >last wednesday of every month : culture day admission</span
-                >
+                <p class="summary_date" id="summary_date">mar 19 · 2026 · 13:30</p>
+                <p class="summary_ticket" id="summary_ticket">adult · 1 ticket</p>
+                <span class="summary_note">last wednesday of every month : culture day admission</span>
               </div>
               <button class="btn_payment">CONTINUE TO PAYMENT</button>
             </div>
           </aside>
         </div>
       </main>
+
+      <div class="plan_payment_bar">
+        <button class="btn_payment">CONTINUE TO PAYMENT</button>
+      </div>
+
       <footer>
         <div class="banner" aria-label="museum locations">
           <ul class="banner_track">
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li><li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li><li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li><li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li><li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li><li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li><li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li><li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li><li>MMCA CHEONGJU</li>
           </ul>
-          <!-- //.banner_track -->
         </div>
-        <!-- //.banner -->
         <div class="f_top">
-          <!-- f_left -->
           <ul class="f_left">
             <li class="branch">
               <span class="branch_name seoul">Seoul</span>
@@ -366,10 +321,7 @@
             <li class="branch">
               <span class="branch_name deoksugung">Deoksugung</span>
               <p class="tel">02-2022-0600</p>
-              <p>
-                99 Sejong-daero,<br />Jung-gu, Seoul<br />Inside Deoksugung
-                Palace
-              </p>
+              <p>99 Sejong-daero,<br />Jung-gu, Seoul<br />Inside Deoksugung Palace</p>
             </li>
             <li class="branch">
               <span class="branch_name gwacheon">Gwacheon</span>
@@ -382,55 +334,17 @@
               <p>314 Sangdang-ro,<br />Cheongwon-si,<br />Chungcheongbuk-do</p>
             </li>
           </ul>
-          <!-- f_right -->
           <div class="f_right">
             <div class="f_right_col">
               <h4>SNS</h4>
               <ul>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon icon="mdi:instagram"></iconify-icon></span
-                    >Instagram</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon
-                        icon="mingcute:facebook-fill"
-                      ></iconify-icon
-                    ></span>
-                    Facebook</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon icon="mdi:youtube"></iconify-icon
-                    ></span>
-                    YouTube</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><img src="img/blog_icon.svg" alt="Naver Blog" /> Naver
-                    Blog</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon
-                        icon="fa6-brands:square-x-twitter"
-                      ></iconify-icon
-                    ></span>
-                    X</a
-                  >
-                </li>
+                <li><a href="#"><span><iconify-icon icon="mdi:instagram"></iconify-icon></span>Instagram</a></li>
+                <li><a href="#"><span><iconify-icon icon="mingcute:facebook-fill"></iconify-icon></span> Facebook</a></li>
+                <li><a href="#"><span><iconify-icon icon="mdi:youtube"></iconify-icon></span> YouTube</a></li>
+                <li><a href="#"><img src="img/blog_icon.svg" alt="Naver Blog" /> Naver Blog</a></li>
+                <li><a href="#"><span><iconify-icon icon="fa6-brands:square-x-twitter"></iconify-icon></span> X</a></li>
               </ul>
             </div>
-            <!-- //.f_right_col -->
             <div class="f_right_col">
               <h4>Legal</h4>
               <ul>
@@ -442,23 +356,13 @@
                 <li><a href="#">Integrity Report</a></li>
               </ul>
             </div>
-            <!-- //.f_right_col -->
           </div>
-          <!-- //.f_right -->
         </div>
-        <!-- //.f_top -->
         <div class="f_bottom">
-          <div class="f_logo">
-            <span>MMCA</span>
-          </div>
-          <!-- //.f_logo -->
-          <p class="copyright">
-            © 2021 National Museum of Modern and Contemporary Art, Korea
-          </p>
+          <div class="f_logo"><span>MMCA</span></div>
+          <p class="copyright">© 2021 National Museum of Modern and Contemporary Art, Korea</p>
         </div>
-        <!-- //.f_bottom -->
       </footer>
     </div>
-    <!--//.wrap -->
   </body>
 </html>

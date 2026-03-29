@@ -1,7 +1,5 @@
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700&display=swap');
-/* font-family: "Red Hat Mono", monospace; */
-
 
 .plan_main {
   background: var(--main_black);
@@ -132,19 +130,15 @@
   color: #fff;
 }
 
-
 .date_inner {
   width: 100%;
   margin: 0 auto;
 }
 
-
 .cal_outer {
   width: 100%;
   margin-top: 40px;
 }
-
-
 
 .cal_two {
   display: grid;
@@ -153,8 +147,7 @@
   border-radius: 20px;
   padding: 20px;
   gap: 12px;
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   border: none;
   width: 100%;
   margin: 0;
@@ -166,7 +159,6 @@
   padding: 28px 24px;
   transition: all 0.3s ease;
 }
-
 
 .cal_mheader {
   display: flex;
@@ -242,63 +234,17 @@
   user-select: none;
 }
 
-.cal_day.other-month {
-  color: rgba(255, 255, 255, 0.2);
-  cursor: default;
-}
-
-.cal_day.disabled {
-  opacity: 0.25;
-  cursor: default;
-}
-
-
-.cal_day.today {
-  box-shadow: inset 0 0 0 1px #ccc;
-}
-
-.cal_day.today.selected {
-  box-shadow: none;
-}
-
-.cal_day:not(.other-month):not(.disabled):hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.cal_day.selected {
-  background: #0078D7;
-  color: #fff;
-  transform: none;
-  box-shadow: none;
-}
-
-
-.cal_day:hover {
-  background: rgba(0, 120, 215, 0.1);
-  transform: none;
-}
-
-.cal_day.sel-start,
-.cal_day.sel-end {
-  background: #fff;
-  color: #1e1e1e;
-  font-weight: 600;
-  border-radius: 50%;
-}
-
-.cal_day.in-range {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 0;
-}
-
-.cal_day.range-start-cap {
-  border-radius: 50% 0 0 50%;
-}
-
-.cal_day.range-end-cap {
-  border-radius: 0 50% 50% 0;
-}
-
+.cal_day.other-month { color: rgba(255,255,255,0.2); cursor: default; }
+.cal_day.disabled { opacity: 0.25; cursor: default; }
+.cal_day.today { box-shadow: inset 0 0 0 1px #ccc; }
+.cal_day.today.selected { box-shadow: none; }
+.cal_day:not(.other-month):not(.disabled):hover { background: rgba(255,255,255,0.15); }
+.cal_day.selected { background: #0078D7; color: #fff; transform: none; box-shadow: none; }
+.cal_day:hover { background: rgba(0,120,215,0.1); transform: none; }
+.cal_day.sel-start, .cal_day.sel-end { background: #fff; color: #1e1e1e; font-weight: 600; border-radius: 50%; }
+.cal_day.in-range { background: rgba(255,255,255,0.12); border-radius: 0; }
+.cal_day.range-start-cap { border-radius: 50% 0 0 50%; }
+.cal_day.range-end-cap { border-radius: 0 50% 50% 0; }
 
 .sel_label {
   font-size: 20px;
@@ -308,7 +254,6 @@
   min-height: 20px;
   letter-spacing: -0.02em;
 }
-
 
 .time_select {
   display: flex;
@@ -333,21 +278,9 @@
   font-family: var(--pretendard);
 }
 
-.time_btn:hover {
-  background: rgba(199, 49, 49, 0.08);
-}
-
-.time_btn:active {
-  transform: scale(0.96);
-}
-
-.time_btn.active {
-  background: #0078D7;
-  color: #fff;
-  border-color: #0078D7;
-  font-weight: 500;
-}
-
+.time_btn:hover { background: rgba(199,49,49,0.08); }
+.time_btn:active { transform: scale(0.96); }
+.time_btn.active { background: #0078D7; color: #fff; border-color: #0078D7; font-weight: 500; }
 
 .guide_links {
   display: flex;
@@ -366,54 +299,24 @@
   color: #fff;
 }
 
-
-/* ═══════════════════════════════════════════════════════
-   인원 선택 (기존 유지)
-   ═══════════════════════════════════════════════════════ */
-
-.visitor_box {
-  background: #424242;
-  padding: 10px 0;
-}
+/* 인원 선택 */
+.visitor_box { background: #424242; padding: 10px 0; }
 
 .visitor_item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 80px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.15);
 }
 
-.visitor_item:last-child {
-  border-bottom: none;
-}
+.visitor_item:last-child { border-bottom: none; }
 
-.visitor_info {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+.visitor_info { display: flex; flex-direction: column; gap: 6px; }
+.visitor_info strong { font-size: 20px; font-weight: 600; color: #f5f5f5; }
+.visitor_info em { font-size: 14px; font-weight: 300; font-style: normal; color: #f5f5f5; letter-spacing: -0.05em; opacity: 0.7; }
 
-.visitor_info strong {
-  font-size: 20px;
-  font-weight: 600;
-  color: #f5f5f5;
-}
-
-.visitor_info em {
-  font-size: 14px;
-  font-weight: 300;
-  font-style: normal;
-  color: #f5f5f5;
-  letter-spacing: -0.05em;
-  opacity: 0.7;
-}
-
-.count_ctrl {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+.count_ctrl { display: flex; align-items: center; gap: 20px; }
 
 .count_btn {
   background: none;
@@ -430,26 +333,11 @@
   cursor: pointer;
 }
 
-.count_btn:hover {
-  opacity: 1;
-}
+.count_btn:hover { opacity: 1; }
+.count_num { font-size: 20px; font-weight: 700; min-width: 20px; text-align: center; color: #f5f5f5; }
 
-.count_num {
-  font-size: 20px;
-  font-weight: 700;
-  min-width: 20px;
-  text-align: center;
-  color: #f5f5f5;
-}
-
-/* ═══════════════════════════════════════════════════════
-   Summary 카드 (기존 유지)
-   ═══════════════════════════════════════════════════════ */
-
-.plan_right {
-  position: relative;
-  transform: translateX(35%);
-}
+/* Summary 카드 */
+.plan_right { position: relative; transform: translateX(35%); }
 
 .summary_card {
   position: sticky;
@@ -462,9 +350,7 @@
   transform: translateX(80px);
 }
 
-.summary_card:hover {
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-}
+.summary_card:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
 
 .summary_clip {
   position: absolute;
@@ -477,33 +363,10 @@
   border-radius: 20px;
 }
 
-.summary_card h3 {
-  font-size: 36px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-bottom: 8px;
-  color: #1e1e1e;
-  text-align: center;
-}
-
-.summary_sub {
-  font-size: 18px;
-  font-weight: 400;
-  color: #666;
-  margin-bottom: 32px;
-  text-align: center;
-}
-
-.summary_poster {
-  margin: 0 auto 32px;
-  width: 200px;
-}
-
-.summary_poster img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
+.summary_card h3 { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; color: #1e1e1e; text-align: center; }
+.summary_sub { font-size: 18px; font-weight: 400; color: #666; margin-bottom: 32px; text-align: center; }
+.summary_poster { margin: 0 auto 32px; width: 200px; }
+.summary_poster img { width: 100%; height: auto; display: block; }
 
 .summary_info {
   font-family: 'Red Hat Mono', monospace;
@@ -513,28 +376,9 @@
   text-align: center;
 }
 
-.summary_info strong {
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.5;
-  letter-spacing: -0.05em;
-  color: #1e1e1e;
-}
-
-.summary_date,
-.summary_ticket {
-  font-size: 18px;
-  color: #585858;
-  letter-spacing: -0.05em;
-  text-transform: lowercase;
-}
-
-.summary_note {
-  font-size: 13px;
-  color: #999;
-  letter-spacing: -0.03em;
-  text-transform: lowercase;
-}
+.summary_info strong { font-size: 24px; font-weight: 500; line-height: 1.5; letter-spacing: -0.05em; color: #1e1e1e; }
+.summary_date, .summary_ticket { font-size: 18px; color: #585858; letter-spacing: -0.05em; text-transform: lowercase; }
+.summary_note { font-size: 13px; color: #999; letter-spacing: -0.03em; text-transform: lowercase; }
 
 .btn_payment {
   display: block;
@@ -553,7 +397,9 @@
   font-family: inherit;
 }
 
-.btn_payment:hover {
-  background: #1e1e1e;
-  color: #fff;
+.btn_payment:hover { background: #1e1e1e; color: #fff; }
+
+/* ── inline_summary: plan.css에서는 display:none만 (나머지는 plan_media.css에서) ── */
+.inline_summary {
+  display: none;
 }
