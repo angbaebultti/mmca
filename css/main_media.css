@@ -17,7 +17,7 @@
   }
 
   .visual_inner {
-    width: 100%; 
+    width: 100%;
     overflow: hidden;
   }
 
@@ -27,7 +27,7 @@
     max-width: 100%;
   }
 
-   .main_visual {
+  .main_visual {
     height: 80vh;
     min-height: 700px;
     overflow: hidden;
@@ -46,11 +46,10 @@
   .info_wrap {
     left: 32px;
     right: 32px;
-    bottom: 14%;
+    bottom: 16%;
     gap: 40px;
     flex-direction: row;
     align-items: flex-start;
-
   }
 
   .label {
@@ -120,7 +119,6 @@
   .about_title {
     font-size: 24px;
     padding: 0 30px;
-
   }
 
   .stat {
@@ -177,7 +175,7 @@
     height: 100vh;
     overflow: hidden;
     padding-bottom: 80px;
-    }
+  }
 
   .artist_wrap {
     height: 85vh;
@@ -286,7 +284,6 @@
     opacity: 0;
   }
 
-
   .news_inner {
     width: 100%;
     padding-left: 0;
@@ -295,7 +292,7 @@
   }
 
   .news_group {
-   clip-path: polygon(0 0, 200px 0, 260px 60px, 100% 60px, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 200px 0, 260px 60px, 100% 60px, 100% 100%, 0 100%);
   }
 
   .news_head {
@@ -348,8 +345,8 @@
 
   .main_title {
     font-size: 52px;
-    left: 38px;
-    bottom: 65%;
+    left: 32px;
+    bottom: 67%;
     line-height: 1.1;
     font-weight: 500;
     letter-spacing: -0.5%;
@@ -357,8 +354,8 @@
 
   .info_wrap {
     position: absolute;
-    bottom: 11%;
-    left: 40px;
+    bottom: 28%;
+    left: 34px;
     right: 80px;
     display: flex;
     gap: 172px;
@@ -408,7 +405,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 130px 40px 130px;
+    padding: 140px 30px 140px;
     gap: 130px;
   }
 
@@ -426,7 +423,7 @@
     text-align: left;
     line-height: auto;
     font-weight: 600;
-    letter-spacing: -5%;
+    letter-spacing: -4%;
   }
 
   .about_content {
@@ -444,6 +441,7 @@
     font-size: 32px;
     font-weight: 500;
     margin-bottom: 24px;
+    letter-spacing: -4%;
   }
 
   .about_title {
@@ -471,8 +469,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    border-left: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   .stat {
@@ -487,6 +483,14 @@
     align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
+  }
+
+  .stat:nth-child(even) {
+    border-right: none;
+  }
+
+  .stat:nth-child(n + 3) {
+    border-bottom: none;
   }
 
   .stat:first-child {
@@ -534,9 +538,15 @@
     -webkit-text-stroke: 1px var(--main_white);
   }
 
+  /* ===== ARTIST PRIZE 숨김 ===== */
+  .artist_prize {
+    display: none;
+  }
+
+  /* ===== SHOP ===== */
   .shop {
     height: auto;
-    padding: 60px 24px;
+    padding: 0;
   }
 
   .shop_sticky {
@@ -545,7 +555,7 @@
 
   .shop_mobile {
     display: block;
-    padding: 50px 30px;
+    padding: 40px 30px 50px;
     background: var(--main_black);
   }
 
@@ -647,7 +657,7 @@
     overflow: visible;
     cursor: default;
     background: var(--main_black);
-    padding: 160px 30px 160px;
+    padding: 160px 30px 150px;
     box-shadow: none;
   }
 
@@ -776,7 +786,7 @@
 
   .news_mobile_tabs {
     display: block;
-    padding: 0 30px 160px;
+    padding: 100px 30px 100px;
     background: #444;
   }
 
@@ -794,8 +804,8 @@
     padding: 0 0 8px;
     background: transparent;
     color: rgba(255, 255, 255, 0.45);
-    font-family: var(--pretendard);
-    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
     font-weight: 600;
     line-height: 1;
     cursor: pointer;
@@ -840,7 +850,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 10px 16px;
-    padding: 18px 0 16px;
+    padding: 30px 0 30px;
     color: var(--main_white);
   }
 
@@ -854,9 +864,10 @@
   .news_mobile_cate,
   .news_mobile_date {
     font-family: var(--pretendard);
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 400;
     line-height: 1.2;
+    letter-spacing: 1%;
   }
 
   .news_mobile_cate.gwacheon {
@@ -878,7 +889,7 @@
   .news_mobile_title {
     grid-column: 1 / 2;
     font-family: var(--pretendard);
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 1.35;
     letter-spacing: -0.02em;
@@ -896,5 +907,4 @@
     font-size: 14px;
     color: var(--main_white);
   }
-
 }

@@ -41,21 +41,24 @@ document.addEventListener('DOMContentLoaded', () => {
    * 2. 초기 세팅
    * ========================================================= */
   const isMobile = window.innerWidth <= 1024;
-  const isMobile480 = window.innerWidth <= 480;
+  const isMobile480 = window.matchMedia('(max-width: 480px)').matches;
 
-  gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
-  gsap.set(ticketRight, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
-  gsap.set(ticketWrap, {
-    opacity: 0,
-    x: isMobile ? 20 : 220,
-    y: isMobile ? 20 : 120
-  });
-  gsap.set(aboutContent, { opacity: 0, y: 60 });
+  if (!isMobile480) {
+    gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
+    gsap.set(ticketRight, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
+    gsap.set(ticketWrap, {
+      opacity: 0,
+      x: isMobile ? 20 : 220,
+      y: isMobile ? 20 : 120
+    });
+  }
+  gsap.set(aboutContent, { opacity: isMobile480 ? 1 : 0, y: isMobile480 ? 0 : 60 });
 
 
   /* =========================================================
    * 3. 메인 비주얼 - 티켓 등장 + 찢어짐 + 고정 + 떨어짐
    * ========================================================= */
+  if (!isMobile480) {
   const mainTL = gsap.timeline({
     scrollTrigger: {
       trigger: '.main_visual',
@@ -109,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ease: 'power4.out',
     duration: 1.0
   }, 0.2);
+  }
 
   /* =========================================================
    * 7. ABOUT 통계 등장 + 숫자 카운팅
@@ -126,9 +130,9 @@ document.addEventListener('DOMContentLoaded', () => {
       return { el: strong, target: match ? parseInt(match[1]) : 0, suffix: match ? match[2] : '', original: raw };
     });
 
+    statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
+    gsap.set(statArray, { opacity: 0, x: 0 });
     if (!isMobile480) {
-      statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
-      gsap.set(statArray, { opacity: 0, x: -60 });
       if (statsBg) gsap.set(statsBg, { opacity: 0 });
       if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
       if (lineRight) lineRight.style.setProperty('--line-scale', 0);
@@ -183,37 +187,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const lines = gsap.utils.toArray('.artist_prize .line');
   const letters = gsap.utils.toArray('.title_main span');
 
-  gsap.set(artistCards, { opacity: 0, xPercent: 30 });
+  if (!isMobile480) {
+    gsap.set(artistCards, { opacity: 0, xPercent: 30 });
 
-  function getScrollAmount() {
-    const track = document.querySelector('.artist_track');
-    if (!track) return 0;
-    return -(track.scrollWidth - window.innerWidth);
-  }
-
-  const masterTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.artist_prize', start: 'top top', end: '+=5500',
-      scrub: 1.2, pin: true, anticipatePin: 1
+    function getScrollAmount() {
+      const track = document.querySelector('.artist_track');
+      if (!track) return 0;
+      return -(track.scrollWidth - window.innerWidth);
     }
-  });
 
-  lines.forEach((line, i) => {
-    masterTL.to(line.querySelectorAll('span'), {
-      color: '#fff', stagger: 0.05, ease: 'none', duration: 0.3
-    }, i * 0.15);
-  });
-  masterTL.to({}, { duration: 0.3 });
-  masterTL.to(letters, {
-    x: () => gsap.utils.random(-200, 200),
-    y: () => gsap.utils.random(-200, 200),
-    rotation: () => gsap.utils.random(-60, 60),
-    opacity: 0, filter: 'blur(8px)',
-    stagger: { each: 0.02, from: 'random' }, ease: 'power2.out', duration: 0.4
-  });
-  masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.06, ease: 'power3.out', duration: 0.4 });
-  masterTL.to('.artist_track', { x: getScrollAmount, ease: 'none', duration: 1 });
-  masterTL.to({}, { duration: 0.4 });
+    const masterTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.artist_prize', start: 'top top', end: '+=5500',
+        scrub: 1.2, pin: true, anticipatePin: 1
+      }
+    });
+
+    lines.forEach((line, i) => {
+      masterTL.to(line.querySelectorAll('span'), {
+        color: '#fff', stagger: 0.05, ease: 'none', duration: 0.3
+      }, i * 0.15);
+    });
+    masterTL.to({}, { duration: 0.3 });
+    masterTL.to(letters, {
+      x: () => gsap.utils.random(-200, 200),
+      y: () => gsap.utils.random(-200, 200),
+      rotation: () => gsap.utils.random(-60, 60),
+      opacity: 0, filter: 'blur(8px)',
+      stagger: { each: 0.02, from: 'random' }, ease: 'power2.out', duration: 0.4
+    });
+    masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.06, ease: 'power3.out', duration: 0.4 });
+    masterTL.to('.artist_track', { x: getScrollAmount, ease: 'none', duration: 1 });
+    masterTL.to({}, { duration: 0.4 });
+  }
 
   /* =========================================================
    * 11. NEWS - 고급 탭 전환 + 커서 프리뷰
@@ -394,6 +400,7 @@ const scaledPositions = positions.map(p => ({
 }));
 
 /* ===== 초기 상태 ===== */
+  if (!isMobile480) {
 gsap.set('.p', {
   x: 0,
   y: 0,
@@ -466,49 +473,6 @@ shopTL.to('.glass_box', {
   duration: 0.8,
   ease: 'power3.out'
 }, 0.25);
-
-  /* =========================================================
-   * 모바일 480px - 터치 스와이프로 섹션 이동
-   * ========================================================= */
-  if (isMobile480) {
-    const snapSections = Array.from(document.querySelectorAll(
-      '.main_visual, .about, .artist_prize, .shop, .news, footer'
-    ));
-    let touchStartY = 0;
-    let isScrolling = false;
-
-    function scrollToSection(el) {
-      if (!el) return;
-      isScrolling = true;
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setTimeout(() => { isScrolling = false; }, 800);
-    }
-
-    document.addEventListener('touchstart', (e) => {
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    document.addEventListener('touchend', (e) => {
-      if (isScrolling) return;
-      const diff = touchStartY - e.changedTouches[0].clientY;
-      if (Math.abs(diff) < 40) return;
-
-      const scrollY = window.scrollY + window.innerHeight / 2;
-      const currentIdx = snapSections.findIndex(s => {
-        const rect = s.getBoundingClientRect();
-        return rect.top + window.scrollY <= scrollY && rect.bottom + window.scrollY > scrollY;
-      });
-
-      if (diff > 0) {
-        // 아래로 스와이프 → 다음 섹션
-        const next = snapSections[currentIdx + 1];
-        if (next) scrollToSection(next);
-      } else {
-        // 위로 스와이프 → 이전 섹션
-        const prev = snapSections[currentIdx - 1];
-        if (prev) scrollToSection(prev);
-      }
-    }, { passive: true });
   }
 
   /* =========================================================

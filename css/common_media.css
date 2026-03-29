@@ -455,13 +455,13 @@
   }
 
   .mobile_ticket_btn img {
-    width: 27px;
+    width: 24px;
     height: auto;
   }
 
   .gnb_r img#menu_btn {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
 
   .museum_nav {
@@ -546,7 +546,7 @@
   .menu_top_row {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px 16px;
-    padding-top: 20px;
+    padding-top: 40px;
     align-items: start;
   }
 
