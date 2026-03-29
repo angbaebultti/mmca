@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 @media screen and (max-width: 1024px) {
+
   /* ===== CURSOR 복원 ===== */
   * {
     cursor: auto !important;
@@ -17,8 +18,7 @@
   }
 
   /* 추가로 body, html에도 overflow 막기 */
-  html,
-  body {
+  html, body {
     overflow-x: hidden;
     max-width: 100%;
   }
@@ -72,9 +72,9 @@
   }
 
   .ticket_left {
-    width: 48px;
-    left: -10px;
-    bottom: -12px;
+    width: 30px;
+    left: -80px;
+    bottom: -20px;
   }
 
   .ticket_right {
@@ -131,10 +131,44 @@
     font-size: 30px;
   }
 
+    .stats_wrap {
+    position: relative;
+  }
+
+  .line_left,
+  .line_right {
+    display: block;
+    position: absolute;
+    top: 50%;
+    height: 1px;
+    background: var(--main_white);
+  }
+
+  .line_left {
+    right: 50%;
+    margin-right: 300px; /* 원 바깥쪽 시작 지점 */
+    width: calc(50vw - 300px);
+    transform: translateY(-50%) scaleX(var(--line-scale, 1));
+    transform-origin: right center;
+  }
+
+  .line_right {
+    left: 50%;
+    margin-left: 300px; /* 원 바깥쪽 시작 지점 */
+    width: calc(50vw - 300px);
+    transform: translateY(-50%) scaleX(var(--line-scale, 1));
+    transform-origin: left center;
+  }
+
   /* ===== ARTIST PRIZE ===== */
   .artist_prize {
+    height: 100vh;
     overflow: hidden;
   }
+
+  .artist_wrap {
+  height: 85vh;
+}
 
   .artist_prize .title {
     top: 160px;
@@ -159,8 +193,8 @@
   }
 
   .artist_card {
-    width: 160px;
-    padding: 8px;
+    width: 220px;
+    padding: 10px;
     margin: 6px;
   }
 
@@ -168,6 +202,7 @@
     font-size: 20px;
     margin: 6px 0 6px 4px;
   }
+  
 
   .view_btn_card {
     min-width: 140px;
@@ -185,14 +220,25 @@
     font-size: 12px;
   }
 
-  .shop {
-    height: 100vh;
-    padding: 60px 32px;
+ .shop {
+    --p-center-x: 48%;
+    --p-center-y: 48%;
+    --p-scale: 0.4;
+    height: 80vh;
+    padding: 20px 32px 20px; 
+    box-sizing: border-box;
+  }
+  
+  .shop_sticky {
+    height: 100%;
   }
 
-  .glass_box {
+   .glass_box {
     width: 420px;
     height: 270px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .glass_front h2 {
@@ -209,17 +255,18 @@
     height: 270px;
   }
 
-  .p1,
-  .p2,
-  .p3,
-  .p4,
-  .p5,
-  .p6,
-  .p7,
-  .p8,
-  .p9 {
-    width: 220px;
+  .p1, .p2, .p3, .p4, .p5,
+  .p6, .p7, .p8, .p9 {
+    width: 200px;
   }
+
+  .p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+}
 
   .news_inner {
     width: 100%;
@@ -246,7 +293,7 @@
   }
 
   .news_list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 28px;
   }
 
@@ -264,211 +311,5 @@
 
   .news_group .news_date {
     font-size: 12px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  /* ===== MAIN VISUAL ===== */
-  .ticket {
-    display: none;
-  }
-
-  .main_title {
-    font-size: 52px;
-    left: 38px;
-    bottom: 65%;
-    line-height: 1.1;
-    font-weight: 500;
-    letter-spacing: -0.5%;
-  }
-
-  .info_wrap {
-    position: absolute;
-    bottom: 11%;
-    left: 40px;
-    right: 80px;
-    display: flex;
-    gap: 172px;
-    color: var(--gray_06);
-    z-index: 2;
-  }
-
-  .info_left {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .info_right {
-    display: none;
-  }
-
-  .label {
-    font-size: 24px;
-    margin-bottom: 16px;
-    font-weight: 400;
-  }
-
-  .info_block .day {
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  .info_block .time {
-    font-size: 28px;
-    font-weight: 500;
-  }
-
-  /* ===== ABOUT ===== */
-  .about {
-    height: auto;
-    padding: 0;
-  }
-
-  .about_scene {
-    position: relative;
-    height: auto;
-  }
-
-  .about_inner {
-    height: auto;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 130px 40px 130px;
-    gap: 130px;
-  }
-
-  .about_hero {
-    position: relative;
-    inset: auto;
-    padding-top: 0;
-    opacity: 1;
-    transform: none;
-    text-align: left;
-  }
-
-  .about_desc_large {
-    font-size: 42px;
-    text-align: left;
-    line-height: auto;
-    font-weight: 600;
-    letter-spacing: -5%;
-  }
-
-  .about_content {
-    position: relative;
-    inset: auto;
-    opacity: 1;
-    transform: none;
-    margin-top: 0;
-    align-items: flex-start;
-    text-align: left;
-    width: 100%;
-  }
-
-  .about_sub {
-    font-size: 32px;
-    font-weight: 500;
-    margin-bottom: 24px;
-  }
-
-  .about_title {
-    font-size: 18px;
-    text-align: left;
-    font-weight: 300;
-    margin-bottom: 52px;
-    padding: 0;
-    line-height: 22px;
-    letter-spacing: -1%;
-  }
-
-  .stats_bg,
-  .line_left,
-  .line_right {
-    display: none;
-  }
-
-  .stats_wrap {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    border-left: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .stat {
-    width: auto;
-    height: auto;
-    border-radius: 0;
-    border: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    margin-left: 0;
-    padding: 24px 20px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-  }
-
-  .stat:first-child {
-    margin-left: 0;
-  }
-
-  .label_small {
-    font-weight: 500;
-    font-size: 12px;
-    margin-bottom: 8px;
-    letter-spacing: 0.06em;
-    font-family: var(--pretendard);
-  }
-
-  .stat strong {
-    font-size: 40px;
-    font-family: var(--pretendard);
-  }
-
-  .artist_prize {
-    height: auto;
-    padding: 60px 0 40px;
-    overflow: hidden;
-  }
-
-  .artist_wrap {
-    position: relative;
-    height: auto;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .artist_track {
-    transform: none !important;
-    padding-left: 24px;
-    padding-right: 24px;
-    gap: 16px;
-  }
-
-  .title_main span {
-    opacity: 1 !important;
-    filter: none !important;
-    transform: none !important;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--main_white);
-  }
-
-  .shop {
-    height: auto;
-    padding: 60px 24px;
-  }
-
-  .shop_sticky {
-    position: relative;
-    top: auto;
-    height: auto;
   }
 }
