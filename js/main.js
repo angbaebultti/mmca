@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * 2. 초기 세팅
    * ========================================================= */
   const isMobile = window.innerWidth <= 1024;
-  const isMobile480 = window.innerWidth <= 480;
+  const isMobile480 = window.matchMedia('(max-width: 480px)').matches;
 
   if (!isMobile480) {
     gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
@@ -130,21 +130,22 @@ document.addEventListener('DOMContentLoaded', () => {
       return { el: strong, target: match ? parseInt(match[1]) : 0, suffix: match ? match[2] : '', original: raw };
     });
 
+    statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
+    gsap.set(statArray, { opacity: 0, x: 0 });
     if (!isMobile480) {
-      statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
-      gsap.set(statArray, { opacity: 0, x: -60 });
       if (statsBg) gsap.set(statsBg, { opacity: 0 });
       if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
       if (lineRight) lineRight.style.setProperty('--line-scale', 0);
     }
 
     function runStatAnimation() {
-      if (isMobile480) return;
       statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
-      gsap.set(statArray, { opacity: 0, x: -60 });
-      if (statsBg) gsap.set(statsBg, { opacity: 0 });
-      if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
-      if (lineRight) lineRight.style.setProperty('--line-scale', 0);
+      gsap.set(statArray, { opacity: 0, x: isMobile480 ? 0 : -60 });
+      if (!isMobile480) {
+        if (statsBg) gsap.set(statsBg, { opacity: 0 });
+        if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
+        if (lineRight) lineRight.style.setProperty('--line-scale', 0);
+      }
 
       const statTL = gsap.timeline();
 
@@ -173,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ScrollTrigger.create({
       trigger: about,
-      start: 'top+=20% top',
+      start: 'top 80%',
       onEnter: () => runStatAnimation(),
       onEnterBack: () => runStatAnimation(),
     });
@@ -258,6 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!head || !body) return;
 
       group.addEventListener('click', () => {
+        if (isMobile480) return;
         if (group.classList.contains('is-open')) {
           const currentCards = group.querySelectorAll('.news_card');
           gsap.to(currentCards, {
@@ -317,12 +319,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const initCards = groups[0].querySelectorAll('.news_card');
-    gsap.set(initCards, { opacity: 0, y: 24 });
-    gsap.to(initCards, {
-      opacity: 1, y: 0,
-      stagger: 0.08, duration: 0.6, ease: 'power3.out',
-      delay: 0.3
-    });
+    if (isMobile480) {
+      gsap.set(initCards, { opacity: 1, y: 0 });
+    } else {
+      gsap.set(initCards, { opacity: 0, y: 24 });
+      gsap.to(initCards, {
+        opacity: 1, y: 0,
+        stagger: 0.08, duration: 0.6, ease: 'power3.out',
+        delay: 0.3
+      });
+    }
   }
 
   /* =========================================================
@@ -365,49 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
     shopTL.to('.glass_box', { scale: 1.04, z: 80, duration: 0.8, ease: 'power3.out' }, 0.25);
   }
 
-  /* =========================================================
-   * 모바일 480px - 터치 스와이프로 섹션 이동
-   * ========================================================= */
-  if (isMobile480) {
-    const snapSections = Array.from(document.querySelectorAll(
-      '.main_visual, .about, .artist_prize, .shop, .news, footer'
-    ));
-    let touchStartY = 0;
-    let isScrolling = false;
-
-    function scrollToSection(el) {
-      if (!el) return;
-      isScrolling = true;
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      setTimeout(() => { isScrolling = false; }, 800);
-    }
-
-    document.addEventListener('touchstart', (e) => {
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    document.addEventListener('touchend', (e) => {
-      if (isScrolling) return;
-      const diff = touchStartY - e.changedTouches[0].clientY;
-      if (Math.abs(diff) < 40) return;
-
-      const scrollY = window.scrollY + window.innerHeight / 2;
-      const currentIdx = snapSections.findIndex(s => {
-        const rect = s.getBoundingClientRect();
-        return rect.top + window.scrollY <= scrollY && rect.bottom + window.scrollY > scrollY;
-      });
-
-      if (diff > 0) {
-        // 아래로 스와이프 → 다음 섹션
-        const next = snapSections[currentIdx + 1];
-        if (next) scrollToSection(next);
-      } else {
-        // 위로 스와이프 → 이전 섹션
-        const prev = snapSections[currentIdx - 1];
-        if (prev) scrollToSection(prev);
-      }
-    }, { passive: true });
-  }
 
   /* =========================================================
    * 13. 커서 UI
