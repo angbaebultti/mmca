@@ -41,73 +41,78 @@ document.addEventListener('DOMContentLoaded', () => {
    * 2. 초기 세팅
    * ========================================================= */
   const isMobile = window.innerWidth <= 1024;
+  const isMobile480 = window.innerWidth <= 480;
 
-  gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
-  gsap.set(ticketRight, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
-  gsap.set(ticketWrap, {
-    opacity: 0,
-    x: isMobile ? 20 : 220,
-    y: isMobile ? 20 : 120
-  });
-  gsap.set(aboutContent, { opacity: 0, y: 60 });
+  if (!isMobile480) {
+    gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
+    gsap.set(ticketRight, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
+    gsap.set(ticketWrap, {
+      opacity: 0,
+      x: isMobile ? 20 : 220,
+      y: isMobile ? 20 : 120
+    });
+  }
 
+  gsap.set(aboutContent, { opacity: isMobile480 ? 1 : 0, y: isMobile480 ? 0 : 60 });
 
   /* =========================================================
    * 3. 메인 비주얼 - 티켓 등장 + 찢어짐 + 고정 + 떨어짐
    * ========================================================= */
-  const mainTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.main_visual',
-      start: 'top top',
-      end: '+=1800',
-      scrub: 1.2,
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-    }
-  });
+  if (!isMobile480) {
+    const mainTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.main_visual',
+        start: 'top top',
+        end: '+=1800',
+        scrub: 1.2,
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+      }
+    });
 
-  mainTL
-    .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: 'power2.out', duration: 0.4 }, 0)
-    .to('.info_wrap', { opacity: 0, y: -20, ease: 'power1.out', duration: 0.3 }, 0.3)
-    .to(mainTitle, { opacity: 0, y: -30, ease: 'power1.out', duration: 0.3 }, 0.3)
-    .to(ticketLeft, { rotation: -25, x: isMobile ? -40 : -150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
-    .to(ticketRight, { rotation: 25, x: isMobile ? 40 : 150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
-    .to(ticketLeft, { y: 1800, x: isMobile ? -80 : -400, rotationZ: -55, ease: 'power2.in', duration: 1.4 }, 0.75)
-    .to(ticketRight, { y: 1800, x: isMobile ? 80 : 400, rotationZ: 55, ease: 'power2.in', duration: 1.4 }, 0.75)
-    .to(ticketLeft, { opacity: 0, duration: 0.3 }, 1.8)
-    .to(ticketRight, { opacity: 0, duration: 0.3 }, 1.8);
+    mainTL
+      .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: 'power2.out', duration: 0.4 }, 0)
+      .to('.info_wrap', { opacity: 0, y: -20, ease: 'power1.out', duration: 0.3 }, 0.3)
+      .to(mainTitle, { opacity: 0, y: -30, ease: 'power1.out', duration: 0.3 }, 0.3)
+      .to(ticketLeft, { rotation: -25, x: isMobile ? -40 : -150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
+      .to(ticketRight, { rotation: 25, x: isMobile ? 40 : 150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
+      .to(ticketLeft, { y: 1800, x: isMobile ? -80 : -400, rotationZ: -55, ease: 'power2.in', duration: 1.4 }, 0.75)
+      .to(ticketRight, { y: 1800, x: isMobile ? 80 : 400, rotationZ: 55, ease: 'power2.in', duration: 1.4 }, 0.75)
+      .to(ticketLeft, { opacity: 0, duration: 0.3 }, 1.8)
+      .to(ticketRight, { opacity: 0, duration: 0.3 }, 1.8);
 
-  //about 타임라인
-  const aboutTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: about,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1.4,
-      pin: '.about_scene',
-      pinSpacing: true,
-      anticipatePin: 1,
-    }
-  });
-  aboutTL.to(aboutHero, { opacity: 0, scale: 0.95, y: -20, ease: 'none', duration: 0.5 }, 0);
-  tickets.forEach((t, i) => {
-    gsap.set(t, { left: Math.random() * 80 + 10 + '%', top: '-20%', position: 'absolute' });
-    aboutTL.to(t, {
-      opacity: 0.15,
-      y: () => window.innerHeight * (0.68 + Math.random() * 0.18),
-      x: () => gsap.utils.random(-140, 140),
-      rotation: () => gsap.utils.random(-32, 32),
-      scale: () => gsap.utils.random(0.55, 0.9),
-      ease: 'power1.out', duration: 0.5
-    }, 0.5 + i * 0.06);
-  });
-  aboutTL.to(aboutContent, {
-    opacity: 1,
-    y: 0,
-    ease: 'power4.out',
-    duration: 1.0
-  }, 0.2);
+    //about 타임라인
+    const aboutTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: about,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.4,
+        pin: '.about_scene',
+        pinSpacing: true,
+        anticipatePin: 1,
+      }
+    });
+    aboutTL.to(aboutHero, { opacity: 0, scale: 0.95, y: -20, ease: 'none', duration: 0.5 }, 0);
+    tickets.forEach((t, i) => {
+      gsap.set(t, { left: Math.random() * 80 + 10 + '%', top: '-20%', position: 'absolute' });
+      aboutTL.to(t, {
+        opacity: 0.15,
+        y: () => window.innerHeight * (0.68 + Math.random() * 0.18),
+        x: () => gsap.utils.random(-140, 140),
+        rotation: () => gsap.utils.random(-32, 32),
+        scale: () => gsap.utils.random(0.55, 0.9),
+        ease: 'power1.out', duration: 0.5
+      }, 0.5 + i * 0.06);
+    });
+    aboutTL.to(aboutContent, {
+      opacity: 1,
+      y: 0,
+      ease: 'power4.out',
+      duration: 1.0
+    }, 0.2);
+  }
 
   /* =========================================================
    * 7. ABOUT 통계 등장 + 숫자 카운팅
@@ -125,13 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
       return { el: strong, target: match ? parseInt(match[1]) : 0, suffix: match ? match[2] : '', original: raw };
     });
 
-    statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
-    gsap.set(statArray, { opacity: 0, x: -60 });
-    if (statsBg) gsap.set(statsBg, { opacity: 0 });
-    if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
-    if (lineRight) lineRight.style.setProperty('--line-scale', 0);
+    if (!isMobile480) {
+      statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
+      gsap.set(statArray, { opacity: 0, x: -60 });
+      if (statsBg) gsap.set(statsBg, { opacity: 0 });
+      if (lineLeft) lineLeft.style.setProperty('--line-scale', 0);
+      if (lineRight) lineRight.style.setProperty('--line-scale', 0);
+    }
 
     function runStatAnimation() {
+      if (isMobile480) return;
       statData.forEach(d => { if (d.el) d.el.textContent = '0' + d.suffix; });
       gsap.set(statArray, { opacity: 0, x: -60 });
       if (statsBg) gsap.set(statsBg, { opacity: 0 });
@@ -178,37 +186,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const lines = gsap.utils.toArray('.artist_prize .line');
   const letters = gsap.utils.toArray('.title_main span');
 
-  gsap.set(artistCards, { opacity: 0, xPercent: 30 });
+  if (!isMobile480) {
+    gsap.set(artistCards, { opacity: 0, xPercent: 30 });
 
-  function getScrollAmount() {
-    const track = document.querySelector('.artist_track');
-    if (!track) return 0;
-    return -(track.scrollWidth - window.innerWidth);
-  }
-
-  const masterTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.artist_prize', start: 'top top', end: '+=5500',
-      scrub: 1.2, pin: true, anticipatePin: 1
+    function getScrollAmount() {
+      const track = document.querySelector('.artist_track');
+      if (!track) return 0;
+      return -(track.scrollWidth - window.innerWidth);
     }
-  });
 
-  lines.forEach((line, i) => {
-    masterTL.to(line.querySelectorAll('span'), {
-      color: '#fff', stagger: 0.05, ease: 'none', duration: 0.3
-    }, i * 0.15);
-  });
-  masterTL.to({}, { duration: 0.3 });
-  masterTL.to(letters, {
-    x: () => gsap.utils.random(-200, 200),
-    y: () => gsap.utils.random(-200, 200),
-    rotation: () => gsap.utils.random(-60, 60),
-    opacity: 0, filter: 'blur(8px)',
-    stagger: { each: 0.02, from: 'random' }, ease: 'power2.out', duration: 0.4
-  });
-  masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.06, ease: 'power3.out', duration: 0.4 });
-  masterTL.to('.artist_track', { x: getScrollAmount, ease: 'none', duration: 1 });
-  masterTL.to({}, { duration: 0.4 });
+    const masterTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.artist_prize', start: 'top top', end: '+=5500',
+        scrub: 1.2, pin: true, anticipatePin: 1
+      }
+    });
+
+    lines.forEach((line, i) => {
+      masterTL.to(line.querySelectorAll('span'), {
+        color: '#fff', stagger: 0.05, ease: 'none', duration: 0.3
+      }, i * 0.15);
+    });
+    masterTL.to({}, { duration: 0.3 });
+    masterTL.to(letters, {
+      x: () => gsap.utils.random(-200, 200),
+      y: () => gsap.utils.random(-200, 200),
+      rotation: () => gsap.utils.random(-60, 60),
+      opacity: 0, filter: 'blur(8px)',
+      stagger: { each: 0.02, from: 'random' }, ease: 'power2.out', duration: 0.4
+    });
+    masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.06, ease: 'power3.out', duration: 0.4 });
+    masterTL.to('.artist_track', { x: getScrollAmount, ease: 'none', duration: 1 });
+    masterTL.to({}, { duration: 0.4 });
+  }
 
   /* =========================================================
    * 11. NEWS - 고급 탭 전환 + 커서 프리뷰
@@ -330,28 +340,74 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   const positions = isMobile ? positionsMobile : positionsDesktop;
 
-  gsap.set('.p', { x: 0, y: 0, scale: 0.5, opacity: 0, rotation: (i) => positions[i].r * 0.3 });
+  if (!isMobile480) {
+    gsap.set('.p', { x: 0, y: 0, scale: 0.5, opacity: 0, rotation: (i) => positions[i].r * 0.3 });
 
-  const shopTL = gsap.timeline({
-    scrollTrigger: { trigger: '.shop', start: 'top top', end: 'bottom bottom', scrub: 0.8 }
-  });
+    const shopTL = gsap.timeline({
+      scrollTrigger: { trigger: '.shop', start: 'top top', end: 'bottom top', scrub: 1.2 }
+    });
 
-  shopTL.to('.p', { opacity: 0.7, scale: 0.6, duration: 0.25, ease: 'power1.out' }, 0);
-  document.querySelectorAll('.p').forEach((el, i) => {
-    shopTL.to(el, {
-      opacity: 1, scale: 1, x: positions[i].x, y: positions[i].y,
-      rotation: positions[i].r, ease: 'expo.out', duration: 0.7
+    shopTL.to('.p', { opacity: 0.7, scale: 0.6, duration: 0.25, ease: 'power1.out' }, 0);
+    document.querySelectorAll('.p').forEach((el, i) => {
+      shopTL.to(el, {
+        opacity: 1, scale: 1, x: positions[i].x, y: positions[i].y,
+        rotation: positions[i].r, ease: 'expo.out', duration: 0.7
+      }, 0.25);
+    });
+    shopTL.to('.glass_front', {
+      background: 'rgba(255, 255, 255, 0.95)',
+      boxShadow: '0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)',
+      backdropFilter: 'blur(0px)', duration: 0.4
     }, 0.25);
-  });
-  shopTL.to('.glass_front', {
-    background: 'rgba(255, 255, 255, 0.95)',
-    boxShadow: '0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)',
-    backdropFilter: 'blur(0px)', duration: 0.4
-  }, 0.25);
-  shopTL.to('.glass_front h2', { color: '#000', duration: 0.3 }, 0.3);
-  shopTL.to('.glass_front p', { color: '#555', duration: 0.3 }, 0.3);
-  shopTL.to('.glow_bg', { opacity: 0.7, scale: 1.8, filter: 'blur(80px)', duration: 0.5 }, 0.25);
-  shopTL.to('.glass_box', { scale: 1.04, z: 80, duration: 0.8, ease: 'power3.out' }, 0.25);
+    shopTL.to('.glass_front h2', { color: '#000', duration: 0.3 }, 0.3);
+    shopTL.to('.glass_front p', { color: '#555', duration: 0.3 }, 0.3);
+    shopTL.to('.glow_bg', { opacity: 0.7, scale: 1.8, filter: 'blur(80px)', duration: 0.5 }, 0.25);
+    shopTL.to('.glass_box', { scale: 1.04, z: 80, duration: 0.8, ease: 'power3.out' }, 0.25);
+  }
+
+  /* =========================================================
+   * 모바일 480px - 터치 스와이프로 섹션 이동
+   * ========================================================= */
+  if (isMobile480) {
+    const snapSections = Array.from(document.querySelectorAll(
+      '.main_visual, .about, .artist_prize, .shop, .news, footer'
+    ));
+    let touchStartY = 0;
+    let isScrolling = false;
+
+    function scrollToSection(el) {
+      if (!el) return;
+      isScrolling = true;
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => { isScrolling = false; }, 800);
+    }
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', (e) => {
+      if (isScrolling) return;
+      const diff = touchStartY - e.changedTouches[0].clientY;
+      if (Math.abs(diff) < 40) return;
+
+      const scrollY = window.scrollY + window.innerHeight / 2;
+      const currentIdx = snapSections.findIndex(s => {
+        const rect = s.getBoundingClientRect();
+        return rect.top + window.scrollY <= scrollY && rect.bottom + window.scrollY > scrollY;
+      });
+
+      if (diff > 0) {
+        // 아래로 스와이프 → 다음 섹션
+        const next = snapSections[currentIdx + 1];
+        if (next) scrollToSection(next);
+      } else {
+        // 위로 스와이프 → 이전 섹션
+        const prev = snapSections[currentIdx - 1];
+        if (prev) scrollToSection(prev);
+      }
+    }, { passive: true });
+  }
 
   /* =========================================================
    * 13. 커서 UI

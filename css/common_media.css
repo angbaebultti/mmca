@@ -1,8 +1,12 @@
 @charset "utf-8";
 
-@media screen and (max-width: 1024px) {
+/* 모바일 전용 요소 — 기본 숨김 */
+.mobile_ticket_btn {
+  display: none;
+}
 
-    .nav {
+@media screen and (max-width: 1024px) {
+  .nav {
     padding: 0 32px; /* 65px → 32px */
   }
 
@@ -11,12 +15,12 @@
   }
 
   .gnb_l {
-    gap: 22px;        
-    font-size: 22px; 
+    gap: 22px;
+    font-size: 22px;
   }
 
   .gnb_r {
-    display:flex;
+    display: flex;
     gap: 10px;
     justify-content: center;
     align-items: center;
@@ -41,20 +45,16 @@
     margin-left: 16px;
   }
 
-  
-.f_logo{
+  .f_logo {
+  }
 
-}
-
- .top_btn {
+  .top_btn {
     right: 24px;
     bottom: 24px;
   }
 }
 
-
 @media (max-width: 1024px) {
-
   .header {
     width: 100%;
   }
@@ -83,7 +83,7 @@
     margin-bottom: 10px;
   }
 
-.gnb_l {
+  .gnb_l {
     font-size: 18px;
     gap: 10px;
   }
@@ -93,9 +93,9 @@
     gap: 12px;
   }
 
-   .gnb_r span{
+  .gnb_r span {
     font-size: 18px;
-   }
+  }
 
   .gnb_r img#menu_btn {
     width: 20px;
@@ -153,8 +153,8 @@
     text-align: center;
   }
 
-  .menu_col{
-    margin-bottom:30px;
+  .menu_col {
+    margin-bottom: 30px;
   }
 
   .menu_col h3 {
@@ -178,7 +178,7 @@
     padding-bottom: 30px;
   }
 
-  .close_btn{
+  .close_btn {
     top: 80px;
   }
 
@@ -192,8 +192,12 @@
   }
 
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
   .f_top {
@@ -212,7 +216,6 @@
     width: 128px;
     position: relative;
   }
-
 
   .branch_name {
     font-size: 14.4px;
@@ -266,16 +269,13 @@
   }
   .f_bottom {
     padding-top: 30px;
-    padding-bottom: 20px;    
+    padding-bottom: 20px;
   }
-
- 
 
   .copyright {
     font-size: 7.5px;
     padding-top: 16px;
   }
-
 
   .top_btn {
     right: 24px;
@@ -289,19 +289,16 @@
   }
 
   .f_right_col ul li img {
-  width: 10px;
-  height: 10px;
-  object-fit: contain;
-  display: block;
-  flex-shrink: 0;
-  padding-right: 2px;
+    width: 10px;
+    height: 10px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+    padding-right: 2px;
+  }
 }
-}
-
-
 
 @media (max-width: 768px) {
-
   .header.shrink .nav_bottom {
     padding: 12px 24px;
   }
@@ -332,13 +329,11 @@
     font-size: 32px;
   }
 
-  
   .f_top {
     flex-direction: column;
     padding: 60px 24px 0;
     gap: 48px;
   }
-
 
   .f_left {
     flex-direction: column;
@@ -359,12 +354,12 @@
     margin-bottom: 16px;
   }
 
-.f_right {
+  .f_right {
     flex-wrap: wrap;
     gap: 40px;
   }
 
-    .f_right_col {
+  .f_right_col {
     width: calc(50% - 20px);
   }
 
@@ -389,5 +384,181 @@
   .menu_col ul li a {
     font-size: 16px;
   }
+}
 
+@media (max-width: 480px) {
+  /* === HEADER === */
+  .header {
+    padding-top: 20px;
+    transition:
+      padding-top 0.4s ease,
+      background 0.4s ease,
+      height 0.4s ease;
+  }
+
+  .header .inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 30px;
+    height: 56px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .header.shrink {
+    padding-top: 0;
+  }
+
+  .header_top {
+    padding-top: 0;
+    height: auto;
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  .header_top h1 a {
+    font-size: 20px;
+    gap: 8px;
+  }
+
+  .header_top img {
+    height: 20px;
+  }
+
+  .nav {
+    padding: 0;
+    border-bottom: none;
+    width: auto;
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  .nav_bottom {
+    margin: 0;
+    padding: 0;
+  }
+
+  .gnb_l {
+    display: none;
+  }
+
+  .gnb_r {
+    gap: 15px;
+  }
+
+  .gnb_r > a:first-child {
+    display: none;
+  }
+
+  .mobile_ticket_btn {
+    display: flex !important;
+    align-items: center;
+  }
+
+  .mobile_ticket_btn img {
+    width: 27px;
+    height: auto;
+  }
+
+  .gnb_r img#menu_btn {
+    width: 22px;
+    height: 22px;
+  }
+
+  .museum_nav {
+    display: none !important;
+  }
+
+  /* shrink 상태에서 logo 유지 + 배경 적용 */
+  .header.shrink {
+    height: 56px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  .header.shrink .nav {
+    padding: 0;
+  }
+
+  .header.shrink .header_top {
+    transform: none;
+    opacity: 1;
+  }
+
+  .header.shrink .nav_bottom {
+    position: static;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom: none;
+    padding: 0;
+    width: auto;
+    top: auto;
+    left: auto;
+  }
+
+  /* === MENU OVERLAY === */
+  .menu_overlay {
+    padding: 20px 24px;
+    overflow-y: auto;
+  }
+
+  .menu_top {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    justify-content: flex-start;
+  }
+
+  .menu_top h1 {
+    position: static;
+    left: auto;
+    bottom: auto;
+  }
+
+  .menu_top h1 a {
+    font-size: 20px;
+    padding-top: 0;
+    gap: 8px;
+  }
+
+  .menu_top img {
+    height: 20px;
+  }
+
+  .close_btn {
+    font-size: 22px;
+    top: 20px;
+    right: 24px;
+    position: absolute;
+  }
+
+  .menu_top_row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 16px;
+    padding-top: 20px;
+  }
+
+  .menu_col {
+    min-width: 0;
+  }
+
+  .menu_col h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .menu_col ul li a {
+    font-size: 13px;
+  }
+
+  .menu_col ul {
+    gap: 10px;
+  }
+
+  .menu_bottom_row {
+    margin-top: 28px;
+  }
 }
