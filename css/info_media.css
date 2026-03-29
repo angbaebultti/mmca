@@ -374,6 +374,10 @@ align-items: center;
     font-size: 70px;
   }
 
+  .accessibility .inner{
+    gap: 30px;
+  }
+
   .acc_cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -412,6 +416,7 @@ align-items: center;
   position: relative;
   top: 4px;   /* 값 조절해서 맞춰보세요 */
 }
+
 
 } /* @media 끝 */
 
@@ -693,6 +698,8 @@ align-items: center;
   .accessibility h1.heading {
     font-size: 48px;
   }
+
+  
 
   .acc_cards {
     display: flex;
