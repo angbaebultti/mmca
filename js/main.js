@@ -358,11 +358,14 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================================================
    * 12. SHOP
    * ========================================================= */
-  const positionsDesktop = [
-    { x: -580, y: -280, r: -15 }, { x: 120, y: -320, r: 10 }, { x: 560, y: -200, r: 20 },
-    { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
-    { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 }
-  ];
+  const isMobile = window.innerWidth <= 1024;
+
+/* ===== 위치 데이터 ===== */
+const positionsDesktop = [
+  { x: -580, y: -280, r: -15 }, { x: 120, y: -320, r: 10 }, { x: 560, y: -200, r: 20 },
+  { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
+  { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 }
+];
 
 const positionsMobile = [
   { x: -280, y: -190, r: -15 },
@@ -370,18 +373,38 @@ const positionsMobile = [
   { x: 260, y: -140, r: 20 },
 
   { x: -300, y: 5,   r: 8 },
-  { x: 270, y: 40,  r: -12 },
+  { x: 270, y: 40,   r: -12 },
   { x: -220, y: 180, r: -20 },
 
   { x: -40, y: 210, r: 5 },
   { x: 200, y: 190, r: 18 },
   { x: 290, y: 160, r: -10 }
 ];
-  const positions = isMobile ? positionsMobile : positionsDesktop;
 
-  gsap.set('.p', { x: 0, y: 0, scale: 0.5, opacity: 0, rotation: (i) => positions[i].r * 0.3 });
+/* ===== 디바이스별 선택 ===== */
+const positions = isMobile ? positionsMobile : positionsDesktop;
 
-  const shopTL = gsap.timeline({
+/* ===== 퍼짐 강도 (여기만 조절하면 됨) ===== */
+const scale = isMobile ? 0.6 : 1;
+
+/* ===== 스케일 적용된 좌표 ===== */
+const scaledPositions = positions.map(p => ({
+  x: p.x * scale,
+  y: p.y * scale,
+  r: p.r
+}));
+
+/* ===== 초기 상태 ===== */
+gsap.set('.p', {
+  x: 0,
+  y: 0,
+  scale: 0.5,
+  opacity: 0,
+  rotation: (i) => positions[i].r * 0.3
+});
+
+/* ===== 타임라인 ===== */
+const shopTL = gsap.timeline({
   scrollTrigger: {
     trigger: '.shop',
     start: 'top top',
@@ -390,23 +413,60 @@ const positionsMobile = [
   }
 });
 
-    shopTL.to('.p', { opacity: 0.7, scale: 0.6, duration: 0.25, ease: 'power1.out' }, 0);
-    document.querySelectorAll('.p').forEach((el, i) => {
-      shopTL.to(el, {
-        opacity: 1, scale: 1, x: positions[i].x, y: positions[i].y,
-        rotation: positions[i].r, ease: 'expo.out', duration: 0.7
-      }, 0.25);
-    });
-    shopTL.to('.glass_front', {
-      background: 'rgba(255, 255, 255, 0.95)',
-      boxShadow: '0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)',
-      backdropFilter: 'blur(0px)', duration: 0.4
-    }, 0.25);
-    shopTL.to('.glass_front h2', { color: '#000', duration: 0.3 }, 0.3);
-    shopTL.to('.glass_front p', { color: '#555', duration: 0.3 }, 0.3);
-    shopTL.to('.glow_bg', { opacity: 0.7, scale: 1.8, filter: 'blur(80px)', duration: 0.5 }, 0.25);
-    shopTL.to('.glass_box', { scale: 1.04, z: 80, duration: 0.8, ease: 'power3.out' }, 0.25);
-  
+/* ===== 등장 ===== */
+shopTL.to('.p', {
+  opacity: 0.7,
+  scale: 0.6,
+  duration: 0.25,
+  ease: 'power1.out'
+}, 0);
+
+/* ===== 퍼지기 ===== */
+document.querySelectorAll('.p').forEach((el, i) => {
+  shopTL.to(el, {
+    opacity: 1,
+    scale: 1,
+    x: scaledPositions[i].x,
+    y: scaledPositions[i].y,
+    rotation: scaledPositions[i].r,
+    ease: 'expo.out',
+    duration: 0.7
+  }, 0.25);
+});
+
+/* ===== 글래스 효과 ===== */
+shopTL.to('.glass_front', {
+  background: 'rgba(255, 255, 255, 0.95)',
+  boxShadow: '0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)',
+  backdropFilter: 'blur(0px)',
+  duration: 0.4
+}, 0.25);
+
+shopTL.to('.glass_front h2', {
+  color: '#000',
+  duration: 0.3
+}, 0.3);
+
+shopTL.to('.glass_front p', {
+  color: '#555',
+  duration: 0.3
+}, 0.3);
+
+/* ===== 글로우 ===== */
+shopTL.to('.glow_bg', {
+  opacity: 0.7,
+  scale: 1.8,
+  filter: 'blur(80px)',
+  duration: 0.5
+}, 0.25);
+
+/* ===== 박스 확대 ===== */
+shopTL.to('.glass_box', {
+  scale: 1.04,
+  z: 80,
+  duration: 0.8,
+  ease: 'power3.out'
+}, 0.25);
 
   /* =========================================================
    * 모바일 480px - 터치 스와이프로 섹션 이동
