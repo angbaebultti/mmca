@@ -63,7 +63,7 @@
       color: #777;
       line-height: 1.75;
       margin: 0 0 1.5rem;
-      margin-top: 10px;
+
     }
  
     /* 확인 버튼 */
@@ -85,12 +85,11 @@
     }
  
     /* 하단 부연 */
-    .ai-footnote {
+     .ai-footnote {
       font-size: 11px;
       color: #bbb;
-      margin: 0.9rem 0 0;
+      margin: 2rem 0 0;
     }
-
 
 .news_mobile_tabs {
   display: none;
