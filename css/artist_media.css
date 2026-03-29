@@ -17,7 +17,7 @@
 
   .page_title_bar {
     padding: 20px 75px;
-    margin-top: 118px;
+    margin-top: 128px;
   }
 
   .page_title,
@@ -161,9 +161,14 @@
     transform: none;
     gap: 8px;
     z-index: 2;
-    align-self: flex-start;
-    margin-left: 0;
+    align-self: center;
+    justify-content: center;
+    margin-inline: auto;
     margin-top: -4px;
+  }
+
+  .slide_dots_wrap {
+    display: none;
   }
 
   /* history 섹션 */
@@ -243,6 +248,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .top_btn {
+    display: none;
+  }
+
   .page_title_bar {
     padding: 18px 20px;
     margin-top: 85px;

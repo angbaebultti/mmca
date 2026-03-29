@@ -671,11 +671,17 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "hidden";
 
     // 모달 열릴 때 제목 배경 초기화
-    document
-      .querySelectorAll(".modal_title_line")
-      .forEach((el) => (el.style.background = ""));
-    modalTitleMaxProgress = 0;
-    isFillingTitle = true;
+    const modalTitleLines = document.querySelectorAll(".modal_title_line");
+    modalTitleLines.forEach((el) => (el.style.background = ""));
+    if (window.matchMedia("(max-width: 1024px)").matches && modalTitleLines[0]) {
+      modalTitleLines[0].style.background =
+        "linear-gradient(to right, rgba(255, 102, 36, 0.8) 100%, transparent 100%)";
+      modalTitleMaxProgress = 1;
+      isFillingTitle = false;
+    } else {
+      modalTitleMaxProgress = 0;
+      isFillingTitle = true;
+    }
 
     // 모달 패널 스크롤 위치 초기화
     const panel = document.getElementById("modalPanel");
