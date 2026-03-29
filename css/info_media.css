@@ -31,6 +31,10 @@
     gap: 28px;
   }
 
+  .plan .inner .tit{
+align-items: center;
+  }
+
   .plan .inner .tit h3 {
     font-size: 50px;
     letter-spacing: -0.04em;
@@ -391,11 +395,23 @@
     font-size: 16px;
   }
 
-  .acc_icon {
-    font-size: 48px;
-    right: 28px;
-    top: 24px;
-  }
+.acc_icon {
+  font-size: 48px;
+  right: 28px;
+  top: 34px;        /* transform 제거하고 고정값으로 */
+  transform: none;
+}
+
+.acc_icon .fa-wheelchair {
+  position: relative;
+  top: -4px; 
+}
+
+/* 사람 아이콘만 */
+.acc_icon .fa-user {
+  position: relative;
+  top: 4px;   /* 값 조절해서 맞춰보세요 */
+}
 
 } /* @media 끝 */
 
@@ -432,6 +448,7 @@
   .plan .inner .plus {
     width: 28px;
     height: 28px;
+     margin: 0; 
   }
 
   .plan .inner .plus::before {
