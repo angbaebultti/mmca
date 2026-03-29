@@ -1,5 +1,8 @@
 @charset "utf-8";
 
+.news_mobile_tabs {
+  display: none;
+}
 
 .main_visual {
   background-image: url(../img/main_bg.png);
