@@ -6,7 +6,6 @@
 }
 
 @media screen and (max-width: 1024px) {
-
   /* ===== CURSOR 복원 ===== */
   * {
     cursor: auto !important;
@@ -22,7 +21,8 @@
     overflow: hidden;
   }
 
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
     max-width: 100%;
   }
@@ -135,7 +135,7 @@
     font-size: 30px;
   }
 
-    .stats_wrap {
+  .stats_wrap {
     position: relative;
   }
 
@@ -171,8 +171,8 @@
   }
 
   .artist_wrap {
-  height: 85vh;
-}
+    height: 85vh;
+  }
 
   .artist_prize .title {
     top: 160px;
@@ -206,7 +206,6 @@
     font-size: 20px;
     margin: 6px 0 6px 4px;
   }
-  
 
   .view_btn_card {
     min-width: 140px;
@@ -224,20 +223,20 @@
     font-size: 12px;
   }
 
- .shop {
+  .shop {
     --p-center-x: 48%;
     --p-center-y: 48%;
     --p-scale: 0.4;
     height: 80vh;
-    padding: 20px 32px 20px; 
+    padding: 20px 32px 20px;
     box-sizing: border-box;
   }
-  
+
   .shop_sticky {
     height: 100%;
   }
 
-   .glass_box {
+  .glass_box {
     width: 420px;
     height: 270px;
     top: 50%;
@@ -259,18 +258,25 @@
     height: 270px;
   }
 
-  .p1, .p2, .p3, .p4, .p5,
-  .p6, .p7, .p8, .p9 {
+  .p1,
+  .p2,
+  .p3,
+  .p4,
+  .p5,
+  .p6,
+  .p7,
+  .p8,
+  .p9 {
     width: 200px;
   }
 
   .p {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.3);
-  opacity: 0;
-}
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
 
   .news_inner {
     width: 100%;
@@ -876,10 +882,6 @@
     align-self: center;
     font-size: 14px;
     color: var(--main_white);
-  }
-a
-  #cursorDot {
-    display: none;
   }
 
 }
