@@ -336,15 +336,12 @@
   }
 
   .f_left {
-    flex-direction: column;
-    gap: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 20px;
   }
   .branch {
-    width: 50%;
-  }
-
-  .branch:nth-child(2n)::after {
-    display: none;
+    width: 100%;
   }
 
   .branch:nth-child(1),
@@ -507,9 +504,18 @@
   }
 
   .menu_top {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding-top: 16px;
     padding-bottom: 16px;
-    justify-content: flex-start;
+  }
+
+  .menu_top::after {
+    left: -24px;
+    right: -24px;
+    width: auto;
   }
 
   .menu_top h1 {
@@ -530,15 +536,18 @@
 
   .close_btn {
     font-size: 22px;
-    top: 20px;
-    right: 24px;
+    top: 50%;
+    right: 0;
     position: absolute;
+    transform: translateY(-50%);
+    line-height: 1;
   }
 
   .menu_top_row {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px 16px;
     padding-top: 20px;
+    align-items: start;
   }
 
   .menu_col {
@@ -559,6 +568,105 @@
   }
 
   .menu_bottom_row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 16px;
     margin-top: 28px;
+    text-align: center;
+  }
+
+  .menu_bottom_row .menu_col {
+    grid-column: 1 / 2;
+  }
+
+  footer {
+    background: #1f1f1f;
+  }
+
+  .f_top {
+    align-items: center;
+    flex-direction: column;
+    padding: 56px 40px 40px;
+    gap: 56px;
+  }
+
+  .f_left {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px 26px;
+  }
+
+  .branch {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .branch:nth-child(1),
+  .branch:nth-child(2) {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  .branch_name {
+    font-size: 18px;
+    letter-spacing: -0.03em;
+  }
+
+  .branch p {
+    font-size: 12px;
+    line-height: 1.35;
+    letter-spacing: -0.03em;
+  }
+
+  .branch p.tel {
+    font-size: 11px;
+    margin-bottom: 2px;
+  }
+
+  .f_right {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* gap: 24px 26px; */
+    gap: 10px;
+    align-items: start;
+    width: 100%;
+    padding-left: 35px;
+  }
+
+  .f_right_col {
+    width: 100%;
+    flex: none;
+  }
+
+  .f_right_col h4 {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+
+  .f_right_col ul {
+    gap: 10px;
+  }
+
+  .f_right_col ul li a {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .f_right_col ul li span {
+    width: 14px;
+    height: 14px;
+  }
+
+  .f_right_col ul li iconify-icon {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .f_right_col ul li img {
+    width: 11px;
+    height: 11px;
+    padding-right: 0;
   }
 }
