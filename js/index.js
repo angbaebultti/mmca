@@ -72,8 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Stage 6 */
     tl.to(textLayer, { opacity: 0, scale: 0.6, duration: 1, ease: 'power2.inOut' }, 7);
     tl.to(shapesLayer, { opacity: 1, duration: 3, ease: 'power2.inOut' }, 7.5);
-
-    // 👉 추가
+    
     tl.call(() => {
         window.location.href = "./main.html";
     }, null, 10.5);
