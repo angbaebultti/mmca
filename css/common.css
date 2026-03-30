@@ -250,6 +250,14 @@ section {}
   pointer-events: none;
 }
 
+.museum_nav.nav_locked .item .bg {
+  width: 0 !important;
+  transition: none !important;
+}
+
+.museum_nav.nav_locked .item:hover .bg {
+  width: 0 !important;
+}
 .row_top {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -641,9 +649,7 @@ footer {
   transform: scale(1.08);
 }
 
-.f_right_col ul li:nth-child(4) {
-  transform: translateX(2px);
-}
+
 
 .f_right_col ul li span {
   display: block;

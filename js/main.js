@@ -524,33 +524,66 @@ shopTL.to('.glass_box', {
   }
 
   (function () {
-      var overlay = document.getElementById('ai-overlay');
-      var btn     = document.getElementById('ai-confirm');
- 
-      function closeModal() {
-        overlay.classList.add('hidden');
-        // 트랜지션 끝난 뒤 DOM에서 제거
-        overlay.addEventListener('transitionend', function () {
-          overlay.remove();
-        }, { once: true });
-      }
- 
-      // 확인 버튼
-      btn.addEventListener('click', closeModal);
- 
-      // 오버레이 바깥(배경) 클릭 시 닫기 — 원하지 않으면 이 블록 삭제
-      overlay.addEventListener('click', function (e) {
-        if (e.target === overlay) closeModal();
-      });
- 
-      // ESC 키 닫기 — 원하지 않으면 이 블록 삭제
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeModal();
-      });
-    })();
+    var overlay = document.getElementById('ai-overlay');
+    var btn     = document.getElementById('ai-confirm');
+
+ function closeModal() {
+  overlay.classList.add('hidden');
+
+  const nav = document.querySelector('.museum_nav');
+  const bgs = nav.querySelectorAll('.item .bg');
+
+  // nav_locked 먼저 제거 (hover 차단 해제)
+  nav.classList.remove('nav_locked');
+
+  // 1. GSAP inline style 완전 제거 + width 0 초기화
+  gsap.set(bgs, { clearProps: 'all' });
+  bgs.forEach(bg => {
+    bg.style.transition = 'none';
+    bg.style.width = '0%';
+  });
+
+  // 2. 두 프레임 뒤에 width 100%로 채우기
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      bgs.forEach(bg => {
+  bg.style.transition = 'width 1.2s ease'; // 0.5s → 1.2s
+  bg.style.width = '100%';
+});
+
+setTimeout(() => {
+  bgs.forEach(bg => {
+    bg.style.transition = 'width 1.4s cubic-bezier(0.65, 0, 0.35, 1)';
+    bg.style.width = '0%';
+  });
+
+  setTimeout(() => {
+    bgs.forEach(bg => {
+      bg.style.transition = '';
+      bg.style.width = '';
+    });
+    gsap.set(bgs, { clearProps: 'all' });
+  }, 1500);
+}, 1300);
+    });
+  });
+
+  overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+}
+
+    btn.addEventListener('click', closeModal);
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) closeModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  })();
 
   /* =========================================================
    * 14. 리사이즈 갱신
    * ========================================================= */
-  window.addEventListener('resize', () => ScrollTrigger.refresh());
+ window.addEventListener('resize', () => ScrollTrigger.refresh());
 });
