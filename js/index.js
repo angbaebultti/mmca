@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const textMmca = document.getElementById('text_mmca');
     const shapesLayer = document.getElementById('shapes_layer');
     const scrollHint = document.getElementById('scroll_hint');
+    const skipBtn = document.getElementById('skip_btn');
     const borders = document.querySelectorAll('.letter-cell:not(:last-child)');
 
     function clamp01(v) { return Math.min(Math.max(v, 0), 1); }
@@ -42,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const s2 = easeOutExpo(range(p, 0.05, 0.60));
         const waterY = 1200 + (-200 - 1200) * s2;
         waterRects.forEach(r => { if (r) r.setAttribute('y', waterY); });
-        scrollHint.style.opacity = Math.max(0, 0.6 - range(p, 0, 0.03) * 3);
+        scrollHint.style.opacity = 0.6;
+        scrollHint.classList.toggle('is-soft', p >= 0.1 && p < 0.94);
 
         if (p >= 0.60) {
             const crossbar = document.querySelector('.a-crossbar');
@@ -52,6 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    skipBtn?.addEventListener('click', () => {
+        window.location.href = './main.html';
+    });
 
     const tl = gsap.timeline({
         scrollTrigger: {
