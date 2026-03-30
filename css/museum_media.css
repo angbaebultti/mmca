@@ -29,7 +29,8 @@
 
   .museum_wrap {
     padding-top: 80px;
-    margin-bottom: 120px;
+    /* 홍짱 */
+    margin-bottom: -200px;
   }
 
   .museum_exhibit_section .museum_inner {
@@ -41,7 +42,7 @@
   .museum_exhibit_section.is_horizontal .museum_head {
     width: 100%;
     margin: 0 auto 24px;
-    padding: 0 48px;
+    padding: 130px 48px;
     box-sizing: border-box;
   }
 
@@ -197,6 +198,7 @@
 .museum_mobile {
   display: none;
 }
+
 
 @media screen and (max-width: 480px) {
   /* ===== 큐브 숨김 ===== */
