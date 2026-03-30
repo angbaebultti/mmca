@@ -224,3 +224,11 @@
             position: relative;
             z-index: 0;
         }
+
+        @media (max-width: 1024px) {
+  #intro_wrapper,
+  .scroll_hint,
+  .scroll_spacer {
+    display: none !important;
+  }
+}

@@ -6,6 +6,7 @@
 }
 
 @media screen and (max-width: 1024px) {
+
   /* ===== CURSOR 복원 ===== */
   * {
     cursor: auto !important;
@@ -156,7 +157,8 @@
 
   .line_left {
     right: 50%;
-    margin-right: 300px; /* 원 바깥쪽 시작 지점 */
+    margin-right: 300px;
+    /* 원 바깥쪽 시작 지점 */
     width: calc(50vw - 300px);
     transform: translateY(-50%) scaleX(var(--line-scale, 1));
     transform-origin: right center;
@@ -164,7 +166,8 @@
 
   .line_right {
     left: 50%;
-    margin-left: 300px; /* 원 바깥쪽 시작 지점 */
+    margin-left: 300px;
+    /* 원 바깥쪽 시작 지점 */
     width: calc(50vw - 300px);
     transform: translateY(-50%) scaleX(var(--line-scale, 1));
     transform-origin: left center;
@@ -337,12 +340,13 @@
     display: none;
   }
 }
+
 @media screen and (max-width: 480px) {
+
   /* ===== MAIN VISUAL ===== */
   .ticket {
     display: none;
   }
-
   .main_title {
     font-size: 52px;
     left: 32px;

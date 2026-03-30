@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+       if (window.innerWidth <= 1024) {
+        window.location.replace('./main.html');
+        return; // 이하 코드 전부 중단
+    }
+
     history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
 
