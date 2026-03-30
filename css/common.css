@@ -176,7 +176,7 @@ section {}
     padding 0.5s ease,
     border 0.3s ease;
   width: 100%;
-  max-width: 1920px;
+  /* max-width: 1920px; */
   margin: 0 auto;
 }
 

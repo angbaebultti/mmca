@@ -450,14 +450,15 @@
   justify-content: center;
 }
 
-.artist_prize .title {
+
+  .main_title {
   position: absolute;
-  top: 70px;
-  left: 120px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 10;
-  padding-left: 76px;
-  line-height: 1.25;
 }
+
 
 .artist_prize .line {
   display: flex;
