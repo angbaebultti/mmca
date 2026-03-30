@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (immediate) {
         commitContent();
       } else {
-        contentSwapTimerId = window.setTimeout(commitContent, 500);
+        contentSwapTimerId = window.setTimeout(commitContent, 50);
       }
 
       // dots 업데이트
@@ -673,7 +673,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // 모달 열릴 때 제목 배경 초기화
     const modalTitleLines = document.querySelectorAll(".modal_title_line");
     modalTitleLines.forEach((el) => (el.style.background = ""));
-    if (window.matchMedia("(max-width: 1024px)").matches && modalTitleLines[0]) {
+    if (
+      window.matchMedia("(max-width: 1024px)").matches &&
+      modalTitleLines[0]
+    ) {
       modalTitleLines[0].style.background =
         "linear-gradient(to right, rgba(255, 102, 36, 0.8) 100%, transparent 100%)";
       modalTitleMaxProgress = 1;
@@ -794,8 +797,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     // 각 카드가 등장하는 스크롤 진행률
-    const appearAt = [0.18, 0.5, 0.82];
-    const animationEnd = 0.92;
+    const appearAt = [0.1, 0.3, 0.5];
+    const animationEnd = 0.65;
 
     // 페이지 로드 시 transition 미리 설정
     items.forEach((item) => {
@@ -815,6 +818,38 @@ document.addEventListener("DOMContentLoaded", () => {
         iframe.src = baseSrc;
       });
     });
+
+    const mobileMedia = window.matchMedia("(max-width: 480px)");
+
+    // 480px 이하에서는 IntersectionObserver로 처리
+    if (mobileMedia.matches) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const item = entry.target;
+            if (entry.isIntersecting) {
+              item.classList.add("visible");
+              window.clearTimeout(item._floatTimerId);
+              item._floatTimerId = window.setTimeout(() => {
+                item.classList.add("float_active");
+              }, 420);
+            } else {
+              window.clearTimeout(item._floatTimerId);
+              item.classList.remove("float_active");
+              window.clearTimeout(item._hideTimerId);
+              item._hideTimerId = window.setTimeout(() => {
+                requestAnimationFrame(() => {
+                  item.classList.remove("visible");
+                });
+              }, 40);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      items.forEach((item) => { if (item) observer.observe(item); });
+      return;
+    }
 
     window.addEventListener(
       "scroll",
