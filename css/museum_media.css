@@ -334,12 +334,12 @@
   /* ===== head ===== */
   .museum_wrap .museum_head {
     width: 100% !important;
-    padding-bottom: 10px  !important;
     position: relative !important;
     top: auto !important;
     left: auto !important;
     z-index: auto !important;
     text-align: left !important;
+    padding: 0 !important;
   }
 
   .museum_wrap .museum_head_left {
@@ -360,6 +360,7 @@
     color: #fff !important;
     font-weight: 500 !important;
     letter-spacing: 0 !important;
+    padding: 0;
   }
 
   .museum_wrap .museum_tabs {
