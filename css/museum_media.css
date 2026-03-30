@@ -41,7 +41,7 @@
   .museum_exhibit_section.is_horizontal .museum_head {
     width: 100%;
     margin: 0 auto 24px;
-    padding: 0;
+    padding: 50px 50px;
     box-sizing: border-box;
   }
 
@@ -55,6 +55,7 @@
   .museum_name {
     font-size: 54px;
     line-height: 1.08;
+    padding-top: 50px;
   }
 
   .museum_tabs {
@@ -78,6 +79,7 @@
 
   .museum_exhibit_card {
     padding-left: 30px;
+
   }
 
   .museum_poster {
@@ -188,10 +190,6 @@
     font-size: 44px;
     line-height: 1.2;
   }
-}
-
-.museum_mobile {
-  display: none;
 }
 
 .museum_mobile {
@@ -408,17 +406,14 @@
   }
 
   .museum_wrap .museum_poster {
-    width: 120px !important;
-    max-width: 120px !important;
-    flex-shrink: 0 !important;
-    margin: 0 !important;
+    width: 100% !important;
+    max-width: 55% !important;
+    flex-shrink: 1 !important;  /* 0 → 1 */
   }
 
   .museum_wrap .museum_poster img {
-    display: block !important;
     width: 100% !important;
     height: auto !important;
-    object-fit: cover !important;
   }
 
   .museum_wrap .museum_content,
@@ -498,7 +493,7 @@
 
   .museum_wrap .ticket_main,
   .museum_wrap .ticket_stub {
-    height: 30px !important;
+    height: 21px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -628,7 +623,7 @@
   .museum_h_track {
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: 120px;
     transform: none !important;
     height: auto !important;
   }
@@ -666,15 +661,15 @@
   }
 
   .museum_title {
-    font-size: 22px;
+    font-size: 32px;
     line-height: 1.3;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     letter-spacing: 0.01em;
     font-weight: 700;
   }
 
   .museum_meta {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .museum_meta li {
@@ -694,6 +689,7 @@
     font-size: 13px;
     line-height: 1.6;
     margin-top: 10px;
+    margin-bottom: 16px;
     max-width: 100%;
   }
 
@@ -746,8 +742,7 @@
 
     .museum_poster {
     width: 100%;
-    max-width: 260px;
-    margin: 0 auto;
+    max-width: 100%;
   }
 
 }
