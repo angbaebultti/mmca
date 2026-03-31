@@ -365,7 +365,7 @@
   /* ===== MAIN VISUAL ===== */
   .main_visual,
   .visual_inner {
-    height: 100svh;
+    height: 100vh;
     min-height: 0;
     width: 100%;
   }
