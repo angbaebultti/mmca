@@ -252,3 +252,19 @@
   text-decoration: none;
 }
 
+.login_page,
+.login_page * {
+  cursor: auto !important;
+}
+
+.login_page a,
+.login_page button,
+.login_page label,
+.login_page .sns_btn {
+  cursor: pointer !important;
+}
+
+.login_page input {
+  cursor: text !important;
+}
+
