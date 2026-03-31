@@ -27,201 +27,240 @@ body.is_ready {
     visibility: visible;
 }
 
+/* ── 최대 너비 제한 래퍼 ── */
 #intro_wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    z-index: 10;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 1920px;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 10;
 }
 
 .columns_layer {
-    position: absolute;
-    inset: 0;
-    display: flex;
+  position: absolute;
+  inset: 0;
+  display: flex;
 }
 
 .letter-cell {
-    flex: 1;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .letter-cell:not(:last-child) {
-    border-right: 2px solid rgba(255, 255, 255, 0);
+  border-right: 2px solid rgba(255, 255, 255, 0);
 }
 
 .letter-cell svg {
-    width: 100%;
-    height: 100%;
-    display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .draw-path {
-    fill: none;
-    stroke: #ffffff;
-    stroke-width: 2;
-    stroke-linecap: butt;
-    stroke-linejoin: miter;
-    stroke-dasharray: 20000 20000;
-    stroke-dashoffset: 20000;
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 2;
+  stroke-linecap: butt;
+  stroke-linejoin: miter;
+  stroke-dasharray: 20000 20000;
+  stroke-dashoffset: 20000;
 }
 
 .divider {
-    display: none;
+  display: none;
 }
 
+/* ── text layer ── */
 .text_layer {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    z-index: 2;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 2;
 }
 
+/* 세 글자 모두 같은 기준점(화면 중앙)에서 시작하도록 absolute 처리 */
 .text_mmca {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
 }
 
 .text_part {
-    font-size: 18vw;
-    font-weight: 900;
-    color: #1a1a1a;
-    line-height: 1;
-    letter-spacing: -0.02em;
-    display: block;
-    will-change: transform;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 18vw;
+  font-weight: 900;
+  color: #1a1a1a;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  will-change: transform;
+  /* 초기 위치 / scale 은 GSAP gsap.set() 으로 제어 */
 }
 
-#part_mm {
-    transform: translateX(-44%) translateY(100%);
-}
-
-#part_c {
-    transform: translateX(142%) translateY(0%);
-    scale: 1.05;
-}
-
-#part_a {
-    transform: translateX(230%) translateY(-98%);
-    scale: 1.03;
-}
-
+/* ── shapes layer (로고) ── */
 .shapes_layer {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    z-index: 2;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  z-index: 2;
 }
 
 .logo_wrap {
-    position: relative;
-    width: 25vw;
-    max-width: 350px;
+  position: relative;
+  width: 20vw;
+  max-width: 350px;
+  min-width: 160px;
 }
 
 .logo_img {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .logo_orange {
-    scale: 70.6%;
-    position: absolute;
-    top: 14%;
-    left: 0%;
-    opacity: 0;
+  scale: 70.6%;
+  position: absolute;
+  top: 14%;
+  left: 0%;
+  opacity: 0;
 }
 
+/* ── 배경 레이어 ── */
 .bg_layer {
-    position: absolute;
-    inset: 0;
-    background: #ffffff;
-    opacity: 0;
-    z-index: 1;
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  opacity: 0;
+  z-index: 1;
 }
 
+/* ── scroll hint ── */
+/* opacity 고정 + mix-blend-mode: difference 로
+   배경이 어둡든 밝든 항상 대비되는 색으로 자동 반전 */
 .scroll_hint {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 200;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    opacity: 0.6;
+  position: fixed;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  mix-blend-mode: difference;
 }
 
 .scroll_hint span {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+  font-size: clamp(9px, 0.8vw, 11px);
+  color: #ffffff;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
 .scroll_hint .arrow {
-    width: 1px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.3);
-    animation: scroll_arrow 1.5s ease-in-out infinite;
+  width: 1px;
+  height: 30px;
+  background: #ffffff;
+  animation: scroll_arrow 1.5s ease-in-out infinite;
 }
 
 .scroll_hint .arrow::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    width: 6px;
-    height: 6px;
-    border-right: 1px solid rgba(255, 255, 255, 0.4);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 6px;
+  height: 6px;
+  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
 }
 
 @keyframes scroll_arrow {
-
-    0%,
-    100% {
-        opacity: 0.3;
-        transform: translateY(0);
-    }
-
-    50% {
-        opacity: 1;
-        transform: translateY(8px);
-    }
+  0%, 100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(8px);
+  }
 }
 
+/* ── skip 버튼 ── */
+.skip_btn {
+  position: fixed;
+  top: 3.5vh;
+  right: 3vw;
+  z-index: 200;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #ffffff;
+  color: #ffffff;
+  font-size: clamp(14px, 1.2vw, 18px);
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  cursor: pointer;
+  padding-bottom: 1px;
+  opacity: 0.72;
+  transition: opacity 0.2s ease;
+  mix-blend-mode: difference;
+}
+
+.skip_btn:hover {
+  opacity: 1;
+  color: rgb(255, 102, 36);
+  border-bottom: 1px solid rgb(255, 102, 36);
+  text-shadow: none;
+  mix-blend-mode: normal;
+  -webkit-text-stroke: 0.3px rgb(255, 102, 36);
+  transition: opacity 0.2s ease;
+}
+
+/* ── scroll spacer ── */
 .scroll_spacer {
-    height: 700vh;
-    pointer-events: none;
+  height: 700vh;
+  pointer-events: none;
 }
 
-/* 메인페이지 */
+/* ── 메인페이지 ── */
 #main_page {
-    display: none;
-    width: 100vw;
-    min-height: 100vh;
-    background: #ffffff;
-    position: relative;
-    z-index: 0;
+  display: none;
+  width: 100vw;
+  max-width: 1920px;
+  margin: 0 auto;
+  min-height: 100vh;
+  background: #ffffff;
+  position: relative;
+  z-index: 0;
+}
+
+/* ── 1024px 이하 인트로 숨김 ── */
+@media (max-width: 1024px) {
+  #intro_wrapper,
+  .scroll_hint,
+  .skip_btn,
+  .scroll_spacer {
+    display: none !important;
+  }
 }

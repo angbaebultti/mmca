@@ -69,31 +69,23 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScroll = currentScroll;
     });
 
-    gsap.registerPlugin(ScrollTrigger);
+    // gsap.registerPlugin(ScrollTrigger);
 
-    gsap.fromTo(".item .bg",
-        {
-            scaleY: 0,
-            opacity: 0
-        },
-        {
-            scaleY: 1,
-            opacity: 1,
-            duration: 0.6,
-            ease: "power4.out",
-            transformOrigin: "bottom",
-            scrollTrigger: {
-                trigger: ".nav",
-                start: "bottom 85%",
-                toggleActions: "play none none reverse"
+    const items = document.querySelectorAll('.item');
+    items.forEach((item, i) => {
+        const bg = item.querySelector('.bg');
+        gsap.fromTo(bg,
+            { width: '0%' },
+            {
+                width: '100%',
+                duration: 0.4,       
+                ease: 'power4.out',
+                delay: 0.1 + i * 0.05, 
             }
-        }
-    );
+        );
+    });
 
-    document.body.insertAdjacentHTML('beforeend', `
-    <div class="cursor-ring" id="cursorRing">ENTER ↗</div>
-    <div class="cursor-dot" id="cursorDot"></div>
-  `);
+
 
     const ring = document.getElementById('cursorRing');
     const dot = document.getElementById('cursorDot');

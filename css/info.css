@@ -44,7 +44,6 @@ body {
   align-items: flex-start;
   gap: 36px;
   flex-shrink: 0;
-  /* padding-top: 250px; */
 }
 
 .address,
@@ -106,7 +105,6 @@ body {
   transform: rotate(90deg);
   opacity: 0;
 }
-
 
 .plan .inner .plus:focus-visible {
     outline: 2px solid rgba(255, 255, 255, 0.9);
@@ -174,7 +172,6 @@ body {
     font-size: 24px;
     font-weight: 400;
     line-height: 1.5;
-    /* letter-spacing: -0.02em; */
 }
 
 .address .txt p:last-child {
@@ -185,7 +182,6 @@ body {
 .accordion_divider {
     width: 100%;
     height: 1px;
-    /* background-color: rgba(255, 255, 255, 0.72); */
 }
 
 .plan .inner .address {
@@ -219,14 +215,12 @@ font-weight: 400;
 margin-top: 5px;
 }
 
-
 .opening .container .txt p:last-child {
 color: #adada5;
 font-size: 20px;
 font-weight: 400;
 margin-top: 5px;
 }
-
 
 .charges .container .txt p:nth-child(3) {
 color: #adada5;
@@ -241,7 +235,6 @@ font-size: 20px;
 font-weight: 400;
 margin-top: 5px;
 }
-
 
 .parking .container .txt p:nth-child(2) {
 color: #929292;
@@ -258,7 +251,6 @@ letter-spacing: -1.1px;
 }
 
 
-
 /* getting */
 
 .getting{
@@ -268,13 +260,11 @@ display:flex;
 flex-direction:column;
 }
 
-/* getting here 타이틀 */
 .getting h1.heading {
     margin-bottom: 60px;
     font-size: var(--h1);
     font-weight: 600;
     line-height: 1.1;
-
 }
 
 .getting .inner{
@@ -283,8 +273,6 @@ display:flex;
 flex-direction:column;
 gap:80px;
 }
-
-/* 탭 메뉴 */
 
 .getting .btn_box{
 display:flex;
@@ -312,9 +300,6 @@ color:#fff;
 border-bottom:2px solid #fff;
 }
 
-
-/* panel */
-
 .subway_panel,
 .bus_panel,
 .shuttle_panel{
@@ -330,14 +315,11 @@ justify-content:flex-start;
 display:flex;
 }
 
-/* 카드 영역 */
-
 .info_box{
 display:block;
 width:100%;
 }
 
-/* 카드 */
 .left,
 .right{
 display:flex;
@@ -354,7 +336,6 @@ box-shadow:0 4px 4px rgba(0,0,0,0.25);
 flex-shrink:0;
 }
 
-/* station title */
 .station_group {
     display: flex;
     flex-direction: column;
@@ -371,7 +352,6 @@ letter-spacing:-1px;
 color:#fff;
 }
 
-/* line badge */
 .line_badge{
 display:flex;
 justify-content:center;
@@ -392,7 +372,6 @@ background:#D87E2F;
 background:#A24CC8;
 }
 
-/* exit / walk */
 .station_meta{
 display:flex;
 gap:18px;
@@ -414,7 +393,6 @@ color:#fff;
 font-size:20px;
 }
 
-/* description */
 .station_desc{
 color:#fff;
 font-family:"Pretendard Variable", Pretendard, sans-serif;
@@ -424,7 +402,6 @@ letter-spacing:-0.02em;
 max-width:420px;
 }
 
-/* view map */
 .viewmap_btn{
 display:flex;
 align-items:center;
@@ -454,7 +431,6 @@ transition: .5s;
 color:#333;
 }
 
-/* Bus */
 .bus11{
 background:#09ba0c;
 }
@@ -462,8 +438,6 @@ background:#09ba0c;
 .bus01{
 background:#FFC400;
 }
-
-/* shuttle — 이미지4 스타일 */
 
 .shuttle_panel {
   display: none;
@@ -475,7 +449,6 @@ background:#FFC400;
   display: flex;
 }
 
-/* 공통 카드 */
 .sh_card {
   display: flex;
   flex-direction: column;
@@ -491,9 +464,9 @@ background:#FFC400;
 
 .sh_card_right {
   height: fit-content;
+  gap: 0;
 }
 
-/* label 행 (ICON + 라벨 텍스트) */
 .sh_label {
   display: flex;
   align-items: center;
@@ -514,7 +487,6 @@ background:#FFC400;
   font-size: 20px;
 }
 
-/* SERVICE DAY 텍스트 */
 .sh_service_day {
   font-size: 32px;
   font-weight: 700;
@@ -529,7 +501,6 @@ background:#FFC400;
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* 구분선 */
 .sh_divider {
   width: 100%;
   height: 1px;
@@ -537,7 +508,6 @@ background:#FFC400;
   margin: 32px 0;
 }
 
-/* ROUTE */
 .sh_route_list {
   display: flex;
   flex-direction: column;
@@ -558,13 +528,9 @@ background:#FFC400;
   flex-shrink: 0;
 }
 
-.sh_dot_green {
-  background: #4ade80;
-}
-
-.sh_dot_yellow {
-  background: #facc15;
-}
+.sh_dot_green { background: #4ade80; }
+.sh_dot_yellow { background: #facc15; }
+.sh_dot_blue { background: #60a5fa; }
 
 .sh_route_name {
   font-size: 20px;
@@ -578,11 +544,6 @@ background:#FFC400;
   height: 28px;
   background: rgba(255, 255, 255, 0.2);
   margin-left: 4px;
-}
-
-/* 오른쪽 카드 — DEPARTURE TIME */
-.sh_card_right {
-  gap: 0;
 }
 
 .sh_schedule_top {
@@ -606,7 +567,6 @@ background:#FFC400;
   font-size: 28px;
 }
 
-/* 시간표 리스트 */
 .sh_schedule_list {
   display: flex;
   flex-direction: column;
@@ -636,11 +596,6 @@ background:#FFC400;
   letter-spacing: 0.02em;
 }
 
-.sh_dot_blue {
-  background: #60a5fa;
-}
-
-/* 탑승 위치 설명 */
 .sh_boarding_desc {
   font-size: 20px;
   font-weight: 400;
@@ -650,7 +605,6 @@ background:#FFC400;
   margin-top: 2px;
 }
 
-/* 방향 배지 (Outbound / Return) */
 .sh_route_direction {
   display: flex;
   align-items: center;
@@ -674,7 +628,6 @@ background:#FFC400;
   letter-spacing: 0.03em;
 }
 
-/* 운행 중단 안내 */
 .sh_notice {
   margin-top: 20px;
   font-size: 17px;
@@ -684,7 +637,6 @@ background:#FFC400;
   letter-spacing: -0.2px;
 }
 
-/* 무료 배지 */
 .sh_free_badge {
   display: flex;
   align-items: center;
@@ -702,7 +654,6 @@ background:#FFC400;
 
 /* convenient 섹션 */
 
-/* 물결 배경 */
 .wave_canvas {
   position: fixed;
   top: 0;
@@ -711,141 +662,140 @@ background:#FFC400;
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0;  
+  opacity: 0;
   transition: opacity 0.5s ease;
 }
-.convenient h1.heading{
-font-size:var(--h1);
-font-weight:600;
-line-height:1.1;
-color:#fff;
-}
-.convenient{
-display:flex;
-padding:170px 120px;
-flex-direction:column;
-gap:130px;
-background: transparent;
+
+.convenient h1.heading {
+  font-size: var(--h1);
+  font-weight: 600;
+  line-height: 1.1;
+  color: #fff;
 }
 
-.convenient_cards{
-display:grid;
-grid-template-columns:repeat(2, 500px);
-column-gap:200px;
-row-gap:80px;
-justify-content:center;
-width:100%;
+.convenient {
+  display: flex;
+  padding: 170px 120px;
+  flex-direction: column;
+  gap: 130px;
+  background: transparent;
 }
 
-/* 짝수 카드만 아래로 밀기 */
-.con_card:nth-child(even){
-margin-top:160px;
+.convenient_cards {
+  display: grid;
+  grid-template-columns: repeat(2, 500px);
+  column-gap: 200px;
+  row-gap: 80px;
+  justify-content: center;
+  width: 100%;
 }
 
-.title_row{
-display:flex;
-align-items:center;
-gap:10px;
+.con_card:nth-child(even) {
+  margin-top: 160px;
 }
 
-.con_text{
-display:flex;
-flex-direction:column;
-margin-top: 36px;
-margin-left: 30px;
-margin-right: 30px;
-gap:20px;
-width:calc(500px - 60px);
-height:auto;
+.title_row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.con_text h3{
-font-family:Inter;
-font-size:32px;
-font-weight:600;
-letter-spacing:-1.5px;
-color:#000;
+.con_text {
+  display: flex;
+  flex-direction: column;
+  margin-top: 36px;
+  margin-left: 30px;
+  margin-right: 30px;
+  gap: 20px;
+  width: calc(500px - 60px);
+  height: auto;
 }
 
-.floor{
-color:#969696;
-font-family:Inter;
-font-size:20px;
-font-weight:500;
-line-height:150%;
-letter-spacing:-0.5px;
+.con_text h3 {
+  font-family: Inter;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+  color: #000;
 }
 
-.con_text p{
-font-family:Inter;
-font-size:20px;
-font-weight:400;
-line-height:30px;
-letter-spacing:-0.5px;
-color:#000;
+/* floor — PC에서 | 표시, 반응형에서 ::before content 비워서 제거 */
+.floor {
+  color: #969696;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.5px;
 }
 
-.con_img{
-width:100%;
-height:380px;
-background-size:cover;
-background-position:center;
+.floor::before {
+  content: '| ';
 }
 
-.con_card{
-display:flex;
-flex-direction:column;
-align-items:center;
-width:500px;
-height:680px;
-border-radius:18px;
-background:#fff;
-overflow:hidden;
-transition:0.3s;
+.con_text p {
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  color: #000;
 }
 
-.con_card:hover{
-transform:translateY(-10px);
-box-shadow:0 30px 60px rgba(0,0,0,0.25);
+.con_img {
+  width: 100%;
+  height: 380px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
 
-/* 카드 안 이미지 */
-.img_shop{
-background-image:url(../img/info_convenient1.png);
+.con_img:hover {
+  transform: scale(1.05);
+  transition: 0.4s;
 }
 
-.img_book{
-background-image:url(../img/info_convenient2.png);
+.con_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+  height: 680px;
+  border-radius: 18px;
+  background: #fff;
+  overflow: hidden;
+  transition: 0.3s;
 }
 
-.img_osulloc{
-background-image:url(../img/info_convenient3.png);
+.con_card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
 }
 
-.img_terarosa{
-background-image:url(../img/info_convenient4.png);
+@keyframes card_flip_in {
+  0%   { transform: perspective(800px) rotateY(-90deg); opacity: 0; }
+  60%  { transform: perspective(800px) rotateY(10deg);  opacity: 1; }
+  80%  { transform: perspective(800px) rotateY(-4deg); }
+  100% { transform: perspective(800px) rotateY(0deg);   opacity: 1; }
 }
 
-.img_doore{
-background-image:url(../img/info_convenient5.png);
+.con_card.flip_animate {
+  animation: card_flip_in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.con_img{
-overflow:hidden;
-}
+.img_shop { background-image: url(../img/info_convenient1.png); }
+.img_book { background-image: url(../img/info_convenient2.png); }
+.img_osulloc { background-image: url(../img/info_convenient3.png); }
+.img_terarosa { background-image: url(../img/info_convenient4.png); }
+.img_doore { background-image: url(../img/info_convenient5.png); }
 
-.con_img:hover{
-transform:scale(1.05);
-transition:0.4s;
-}
+/* accessibility */
 
-/* accessibility 카드 */
-.accessibility{
-padding:170px 120px 300px 120px;
-
-display:flex;
-flex-direction:column;
-gap:80px;
+.accessibility {
+  padding: 170px 120px 300px 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
 .accessibility h1.heading {
@@ -855,100 +805,78 @@ gap:80px;
     line-height: 1.1;
 }
 
-.accessibility .inner{
-display:flex;
-flex-direction:column;
-gap:60px;
+.accessibility .inner {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
 }
 
-.acc_cards{
-display:flex;
-gap:24px;
+.acc_cards {
+  display: flex;
+  gap: 24px;
 }
 
-.acc_card{
-display:flex;
-width:600px;
-height:220px;
-padding:20px 46px;
-flex-direction:column;
-justify-content:center;
-align-items:flex-start;
-gap:40px;
-position:relative;
-
-border-radius:15px;
-border:1px solid rgba(255,255,255,0.2);
-background:rgba(45,45,45,0.6);
-box-shadow:0 4px 4px rgba(0,0,0,0.25);
-
-transition:all .4s;
-cursor: pointer;
+.acc_card {
+  display: flex;
+  width: 600px;
+  height: 220px;
+  padding: 20px 46px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  position: relative;
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(45, 45, 45, 0.6);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: all .5s;
+  cursor: pointer;
 }
 
-/* 카드 텍스트 위아래 간격 */
-.acc_text{
-display:flex;
-flex-direction:column;
-gap:20px;
+.acc_text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.acc_card h3{
-color:#FFF;
-font-family:Inter;
-font-size:32px;
-font-weight:600;
-letter-spacing:-0.5px;
-line-height:1;
+.acc_card h3 {
+  color: #FFF;
+  font-family: Inter;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: 1;
 }
 
-.acc_card p{
-color:#A2A2A2;
-font-size:18px;
-line-height:1.4;
+.acc_card p {
+  color: #A2A2A2;
+  font-size: 18px;
+  line-height: 1.4;
 }
 
-.acc_icon{
-position:absolute;
-right:40px;
-top:30px;
-font-size:60px;
-color:#fff;
-opacity:0.9;
+.acc_icon {
+  position: absolute;
+  right: 40px;
+  top: 30px;
+  font-size: 60px;
+  color: #fff;
+  opacity: 0.9;
 }
 
-.fa-user{
-font-size:50px;
+.fa-user {
+  font-size: 50px;
 }
 
-/* 카드 hover효과 */
-.acc_card{
-transition:all .5s;
-}
+.acc_card:hover { background: #fff; color: #333; }
+.acc_card:hover h3 { color: #333; }
+.acc_card:hover p { color: #333; }
+.acc_card:hover .acc_icon { color: #333; }
 
-.acc_card:hover{
-background:#fff;
-color:#333;
-}
-
-.acc_card:hover h3{
-color:#333;
-}
-
-.acc_card:hover p{
-color:#333;
-}
-
-.acc_card:hover .acc_icon{
-color:#333;
-}
-
-/* =============================================
-   MUSEUM MAP
-   ============================================= */
+/* MUSEUM MAP */
 
 .museum_map {
-  padding: 200px 120px;
+  padding: 80px 120px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -963,17 +891,14 @@ color:#333;
   margin-bottom: 40px;
 }
 
-/* ---- 3열 레이아웃 ---- */
 .map_inner {
   display: grid;
   grid-template-columns: 56px 1fr 280px;
   gap: 0 32px;
   align-items: start;
   max-width: 1200px;
-  margin: 0 auto;
 }
 
-/* ---- 층 탭 (세로 스택) ---- */
 .floor_tabs {
   display: flex;
   flex-direction: column;
@@ -999,9 +924,7 @@ color:#333;
   letter-spacing: -0.3px;
 }
 
-.floor_tab:last-child {
-  border-bottom: none;
-}
+.floor_tab:last-child { border-bottom: none; }
 
 .floor_tab.is_active {
   background: #fff;
@@ -1016,7 +939,6 @@ color:#333;
   color: #fff;
 }
 
-/* ---- 도면 이미지 ---- */
 .floor_map_wrap {
   position: relative;
   width: 100%;
@@ -1026,9 +948,7 @@ color:#333;
   background: #000;
 }
 
-.floor_panel {
-  display: none;
-}
+.floor_panel { display: none; }
 
 .floor_panel.is_active {
   display: block;
@@ -1051,9 +971,6 @@ color:#333;
   to   { opacity: 1; transform: translateY(0); }
 }
 
-
-
-/* ---- 공간 리스트 ---- */
 .floor_legend {
   padding: 36px 40px;
   border-radius: 12px;
@@ -1064,27 +981,16 @@ color:#333;
   overflow: hidden;
 }
 
-/* 스크롤바 스타일 */
-.floor_legend::-webkit-scrollbar {
-  width: 4px;
-}
-.floor_legend::-webkit-scrollbar-track {
-  background: transparent;
-}
+.floor_legend::-webkit-scrollbar { width: 4px; }
+.floor_legend::-webkit-scrollbar-track { background: transparent; }
 .floor_legend::-webkit-scrollbar-thumb {
   background: rgba(255,255,255,0.15);
   border-radius: 2px;
 }
 
-.legend_panel {
-  display: none;
-}
+.legend_panel { display: none; }
+.legend_panel.is_active { display: block; }
 
-.legend_panel.is_active {
-  display: block;
-}
-
-/* 층 이름 타이틀 */
 .legend_floor_label {
   display: block;
   font-size: 40px;
@@ -1115,15 +1021,12 @@ color:#333;
   cursor: default;
 }
 
-.legend_panel ul li:last-child {
-  border-bottom: none;
-}
+.legend_panel ul li:last-child { border-bottom: none; }
 
 .legend_panel ul li:hover {
   color: #fff;
   padding-left: 6px;
 }
-
 
 /* 마우스 */
 * { cursor: none; }

@@ -1,30 +1,36 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="국립현대미술관 영문 웹사이트 리디자인 프로젝트"
-    />
-    <meta
-      name="keywords"
-      content="MMCA, 국립현대미술관, 미술관, 전시, 웹디자인"
-    />
+<meta
+    name="description"
+    content="MMCA (National Museum of Modern and Contemporary Art) English Website Redesign Project"
+/>
+<meta
+    name="keywords"
+    content="MMCA, National Museum of Modern and Contemporary Art, museum, exhibition, web design"
+/>
     <meta name="author" content="TEAM 아이조아" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="MMCA — National Museum of Modern and Contemporary Art">
+  <meta property="og:description" content="Discover Korean contemporary art at the MMCA. Explore exhibitions and plan your visit.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/angbaebultti/mmca/main/img/og_img.jpg" />
+    <meta property="og:url" content="https://angbaebultti.github.io/mmca/" />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <script
       src="https://kit.fontawesome.com/b43057b3ba.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
     <title>National Museum of Modern and Contemporary Art, Korea</title>
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/common_media.css" />
     <link rel="stylesheet" href="css/artist.css" />
+    <link rel="stylesheet" href="css/artist_media.css" />
     <script src="js/common.js" defer></script>
     <script src="js/artist.js" defer></script>
   </head>
@@ -41,27 +47,28 @@
           <div class="nav">
             <div class="nav_bottom">
               <ul class="gnb_l">
-                <li><a href="#">VISIT</a></li>
-                <li><a href="#">ARTIST</a></li>
+                <li><a href="info.html">VISIT</a></li>
+                <li><a href="artist_award.html">ARTIST</a></li>
                 <li><a href="#">EXPLORE</a></li>
                 <li><a href="#">PROGRAM</a></li>
-                <li><a href="#">ABOUT</a></li>
-                <li><a href="#">TICKETS</a></li>
+                <li><a href="museum.html">ABOUT</a></li>
+                <li><a href="plan.html">TICKETS</a></li>
               </ul>
-              <!-- //.gnb_l -->
               <div class="gnb_r">
                 <a href="#"><span>Sign in</span></a>
+                <a href="plan.html" class="mobile_ticket_btn">
+                  <img src="img/mobile_ticket.svg" alt="ticket" />
+                </a>
                 <a href="#"
                   ><img src="img/ham_w.svg" alt="ham menu button" id="menu_btn"
                 /></a>
               </div>
-              <!-- //.gnb_r -->
             </div>
-            <!-- //.nav_bottom -->
           </div>
-          <!-- //.nav -->
+
         </div>
       </header>
+       
       <div class="menu_overlay" id="menu">
         <div class="menu_top">
           <h1>
@@ -74,10 +81,10 @@
             <h3><a href="#">VISIT</a></h3>
             <ul>
               <li><a href="#">Location</a></li>
-              <li class="active"><a href="#">Seoul</a></li>
-              <li class="active"><a href="#">Gwacheon</a></li>
-              <li class="active"><a href="#">Deoksugung</a></li>
-              <li class="active"><a href="#">Cheongju</a></li>
+              <li class="active"><a href="museum.html#seoul">Seoul</a></li>
+              <li class="active"><a href="museum.html#gwacheon">Gwacheon</a></li>
+              <li class="active"><a href="museum.html#deoksugung">Deoksugung</a></li>
+              <li class="active"><a href="museum.html#cheongju">Cheongju</a></li>
             </ul>
           </div>
           <div class="menu_col">
@@ -91,7 +98,7 @@
           <div class="menu_col">
             <h3><a href="#">EXPLORE</a></h3>
             <ul>
-              <li class="active"><a href="#">Collection</a></li>
+              <li><a href="#">Collection</a></li>
               <li><a href="#">Research</a></li>
               <li><a href="#">Archive</a></li>
               <li><a href="#">Digital Museum</a></li>
@@ -100,7 +107,7 @@
           <div class="menu_col">
             <h3><a href="#">ARTIST</a></h3>
             <ul>
-              <li><a href="#">Prize</a></li>
+              <li class="active"><a href="artist_award.html">Prize</a></li>
               <li><a href="#">Residency</a></li>
               <li><a href="#">Art Bank</a></li>
             </ul>
@@ -108,18 +115,18 @@
           <div class="menu_col">
             <h3><a href="#">ABOUT</a></h3>
             <ul>
-              <li><a href="#">About MMCA</a></li>
-              <li class="active"><a href="#">History</a></li>
+              <li class="active"><a href="info.html">About MMCA</a></li>
+              <li><a href="#">History</a></li>
               <li><a href="#">Mission</a></li>
               <li><a href="#">Organization</a></li>
               <li><a href="#">News</a></li>
             </ul>
           </div>
           <div class="menu_col">
-            <h3 class="tickets"><a href="#">TICKET</a></h3>
+            <h3 class="tickets"><a href="plan.html">TICKETS</a></h3>
             <ul>
-              <li class="active"><a href="#">Purchase</a></li>
-              <li><a href="#">Reservation</a></li>
+              <li><a href="#">Purchase</a></li>
+              <li class="active"><a href="plan.html">Reservation</a></li>
             </ul>
           </div>
         </div>
@@ -199,6 +206,9 @@
               <button class="skip_btn" aria-label="가로 스크롤 건너뛰기">
                 skip
               </button>
+              <section id="section05" class="demo">
+                <a href="#section06"><span></span><span></span>Scroll</a>
+              </section>
             </div>
           </div>
 
@@ -214,115 +224,118 @@
         <!-- //horizontal_scroll_sticky -->
       </div>
       <!-- //.horizontal_scroll_wrapper -->
-      <section id="section05" class="demo">
-        <a href="#section06"><span></span>Scroll</a>
-      </section>
 
+      
       <!-- =====================
     2번: History 섹션
   ===================== -->
-      <h2 class="history_title" id="history_skip">History</h2>
-      <section class="history_section" id="history">
-        <div class="history_slider_wrap">
-          <div class="history_track" id="historyTrack">
-            <div class="poster_item">
-              <img src="img/2025 fit_100.jpg" alt="2025 포스터" /><span
-                class="poster_year"
-                >2025</span
-              >
+      <div class="history_wrapper" id="historyWrapper">
+        <div class="history_sticky">
+          <h2 class="history_title" id="history_skip">History</h2>
+          <section class="history_section" id="history">
+            <div class="history_slider_wrap">
+              <div class="history_track" id="historyTrack">
+                <div class="poster_item">
+                  <img src="img/2025 fit_100.jpg" alt="2025 포스터" /><span
+                    class="poster_year"
+                    >2025</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2024 fit_100.jpg" alt="2024 포스터" /><span
+                    class="poster_year"
+                    >2024</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2023 fit_100.jpg" alt="2023 포스터" /><span
+                    class="poster_year"
+                    >2023</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2022 fit_100.jpg" alt="2022 포스터" /><span
+                    class="poster_year"
+                    >2022</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2021 fit_100.jpg" alt="2021 포스터" /><span
+                    class="poster_year"
+                    >2021</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2020 fit_100.jpg" alt="2020 포스터" /><span
+                    class="poster_year"
+                    >2020</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2019 fit_100.jpg" alt="2019 포스터" /><span
+                    class="poster_year"
+                    >2019</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2018 fit_100.jpg" alt="2018 포스터" /><span
+                    class="poster_year"
+                    >2018</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2017 fit_100.jpg" alt="2017 포스터" /><span
+                    class="poster_year"
+                    >2017</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2016 fit_100.jpg" alt="2016 포스터" /><span
+                    class="poster_year"
+                    >2016</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2015 fit_100.jpg" alt="2015 포스터" /><span
+                    class="poster_year"
+                    >2015</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2014 fit_100.jpg" alt="2014 포스터" /><span
+                    class="poster_year"
+                    >2014</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2013 fit_100.jpg" alt="2013 포스터" /><span
+                    class="poster_year"
+                    >2013</span
+                  >
+                </div>
+                <div class="poster_item">
+                  <img src="img/2012 fit_100.jpg" alt="2012 포스터" /><span
+                    class="poster_year"
+                    >2012</span
+                  >
+                </div>
+              </div>
             </div>
-            <div class="poster_item">
-              <img src="img/2024 fit_100.jpg" alt="2024 포스터" /><span
-                class="poster_year"
-                >2024</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2023 fit_100.jpg" alt="2023 포스터" /><span
-                class="poster_year"
-                >2023</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2022 fit_100.jpg" alt="2022 포스터" /><span
-                class="poster_year"
-                >2022</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2021 fit_100.jpg" alt="2021 포스터" /><span
-                class="poster_year"
-                >2021</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2020 fit_100.jpg" alt="2020 포스터" /><span
-                class="poster_year"
-                >2020</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2019 fit_100.jpg" alt="2019 포스터" /><span
-                class="poster_year"
-                >2019</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2018 fit_100.jpg" alt="2018 포스터" /><span
-                class="poster_year"
-                >2018</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2017 fit_100.jpg" alt="2017 포스터" /><span
-                class="poster_year"
-                >2017</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2016 fit_100.jpg" alt="2016 포스터" /><span
-                class="poster_year"
-                >2016</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2015 fit_100.jpg" alt="2015 포스터" /><span
-                class="poster_year"
-                >2015</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2014 fit_100.jpg" alt="2014 포스터" /><span
-                class="poster_year"
-                >2014</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2013 fit_100.jpg" alt="2013 포스터" /><span
-                class="poster_year"
-                >2013</span
-              >
-            </div>
-            <div class="poster_item">
-              <img src="img/2012 fit_100.jpg" alt="2012 포스터" /><span
-                class="poster_year"
-                >2012</span
-              >
-            </div>
-          </div>
-        </div>
-        <!-- //.history_slider_wrap -->
+            <!-- //.history_slider_wrap -->
 
-        <!-- 슬라이더 레버 -->
-        <div class="history_slider_control">
-          <span class="slider_label">2026</span>
-          <div class="slider_track_wrap" id="sliderTrackWrap">
-            <div class="slider_bar"></div>
-            <div class="slider_thumb" id="sliderThumb"></div>
-          </div>
-          <span class="slider_label">2012</span>
+            <!-- 슬라이더 레버 -->
+            <div class="history_slider_control">
+              <span class="slider_label">2026</span>
+              <div class="slider_track_wrap" id="sliderTrackWrap">
+                <div class="slider_bar"></div>
+                <div class="slider_fill" id="sliderFill"></div>
+                <div class="slider_thumb" id="sliderThumb"></div>
+              </div>
+              <span class="slider_label">2012</span>
+            </div>
+          </section>
         </div>
-      </section>
+      </div>
 
       <!-- =====================
     3번: 모달
@@ -345,8 +358,10 @@
           </button>
           <div class="modal_content">
             <h3 class="modal_essay_title">
-              Beyond the Lines and Into New Grounds<br />
-              Minji Lee
+              <span class="modal_title_line"
+                >Beyond the Lines and Into New Grounds</span
+              ><br />
+              <span class="modal_title_line">Minji Lee</span>
             </h3>
             <p class="modal_essay_author">
               Curator / Contemporary Art Institution
@@ -440,76 +455,71 @@
         </div>
       </div>
 
-      <!-- =====================
-  4번: Korea Artist Prize Video
-===================== -->
-      <section class="video_section">
-        <h2 class="video_section_title">Korea Artist Prize Video</h2>
-        <div class="video_grid">
-          <div class="video_thumb">
-            <iframe
-              src="https://www.youtube.com/embed/Y8zWL1FupD8?si=esIVoT_OL32_ZyqZ&mute=1"
-              title="YouTube video player"
-              frameborder="0"
-              allow="
-                accelerometer;
-                autoplay;
-                clipboard-write;
-                encrypted-media;
-                gyroscope;
-                picture-in-picture;
-                web-share;
-              "
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-            <p class="video_label">2025 ARTIST TALKS</p>
-          </div>
-
-          <div class="video_thumb">
-            <iframe
-              src="https://www.youtube.com/embed/asestrMKq1I?si=yngSbw8J2vMV4N2u&mute=1"
-              title="YouTube video player"
-              frameborder="0"
-              allow="
-                accelerometer;
-                autoplay;
-                clipboard-write;
-                encrypted-media;
-                gyroscope;
-                picture-in-picture;
-                web-share;
-              "
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-            <p class="video_label">2024 ARTIST TALKS</p>
-          </div>
-
-          <div class="video_thumb">
-            <iframe
-              src="https://www.youtube.com/embed/mQTU74dS5g0?si=l3FwO5-8ahawX2s5&mute=1"
-              title="YouTube video player"
-              frameborder="0"
-              allow="
-                accelerometer;
-                autoplay;
-                clipboard-write;
-                encrypted-media;
-                gyroscope;
-                picture-in-picture;
-                web-share;
-              "
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen
-            ></iframe>
-            <p class="video_label">2021 TEASER</p>
+      <!-- 4번: Korea Artist Prize Video -->
+      <div class="video_wrapper" id="videoWrapper">
+        <div class="video_sticky">
+          <h2 class="video_section_title">Korea Artist Prize Video</h2>
+          <div class="video_grid">
+            <div class="video_item" id="vi0">
+              <iframe
+                src="https://www.youtube.com/embed/Y8zWL1FupD8?si=esIVoT_OL32_ZyqZ&mute=1"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+              <p class="video_label">2025 ARTIST TALKS</p>
+            </div>
+            <div class="video_item" id="vi1">
+              <iframe
+                src="https://www.youtube.com/embed/asestrMKq1I?si=yngSbw8J2vMV4N2u&mute=1"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+              <p class="video_label">2024 ARTIST TALKS</p>
+            </div>
+            <div class="video_item" id="vi2">
+              <iframe
+                src="https://www.youtube.com/embed/mQTU74dS5g0?si=l3FwO5-8ahawX2s5&mute=1"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+              <p class="video_label">2021 TEASER</p>
+            </div>
           </div>
         </div>
-        <a href="javascript:void(0)" class="view_more_btn"
-          >View More &nbsp;&nbsp;&gt;</a
-        >
-      </section>
+      </div>
 
       <div class="top_btn">
         <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
@@ -517,14 +527,6 @@
       <footer>
         <div class="banner" aria-label="museum locations">
           <ul class="banner_track">
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
             <li>MMCA SEOUL</li>
             <li>MMCA DEOKSUGUNG</li>
             <li>MMCA GWACHEON</li>
@@ -561,7 +563,7 @@
             <li class="branch">
               <span class="branch_name cheongju">Cheongju</span>
               <p class="tel">043-261-1400</p>
-              <p>314 Sangdang-ro,<br />Cheongwon-si,<br />Chungcheongbuk-do</p>
+              <p>314 Sangdang-ro,<br />Cheongwon-gu,<br />Chungcheongbuk-do</p>
             </li>
           </ul>
           <!-- f_right -->
@@ -635,7 +637,7 @@
           </div>
           <!-- //.f_logo -->
           <p class="copyright">
-            © 2021 National Museum of Modern and Contemporary Art, Korea
+           © 2026 IZoa Team. MMCA Website Redesign Concept.
           </p>
         </div>
         <!-- //.f_bottom -->

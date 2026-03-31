@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
       wrap.appendChild(col);
     }
   }
+
   function renderSelLabel() {
     const el = document.getElementById('sel_label');
     if (!el) return;
@@ -158,26 +159,34 @@ document.addEventListener('DOMContentLoaded', () => {
     el.textContent = `${mo} ${day} · ${d.getFullYear()}`;
   }
 
-  // ✅ summary 카드
+  // ✅ summary 카드 + 인라인 summary 동기화
   function updateSummary() {
     const dateEl = document.getElementById('summary_date');
     const ticketEl = document.getElementById('summary_ticket');
 
-    if (dateEl) {
-      dateEl.textContent = state.selectedDate
-        ? fmtSummary(state.selectedDate)
-        : 'Select a date';
-    }
+    // 인라인 summary 요소
+    const inlineDateEl = document.getElementById('inline_date');
+    const inlineTicketEl = document.getElementById('inline_ticket');
 
-    if (ticketEl) {
-      const c = state.counts;
-      const parts = [];
-      if (c.adult) parts.push(`adult · ${c.adult}`);
-      if (c.student) parts.push(`student · ${c.student}`);
-      if (c.senior) parts.push(`senior · ${c.senior}`);
-      if (c.culture) parts.push(`culture · ${c.culture}`);
-      ticketEl.textContent = parts.join(' / ') || '—';
-    }
+    // 날짜 텍스트
+    const dateText = state.selectedDate
+      ? fmtSummary(state.selectedDate)
+      : 'Select a date';
+
+    if (dateEl) dateEl.textContent = dateText;
+    if (inlineDateEl) inlineDateEl.textContent = dateText;
+
+    // 인원 텍스트
+    const c = state.counts;
+    const parts = [];
+    if (c.adult)   parts.push(`adult · ${c.adult}`);
+    if (c.student) parts.push(`student · ${c.student}`);
+    if (c.senior)  parts.push(`senior · ${c.senior}`);
+    if (c.culture) parts.push(`culture · ${c.culture}`);
+    const ticketText = parts.join(' / ') || '—';
+
+    if (ticketEl) ticketEl.textContent = ticketText;
+    if (inlineTicketEl) inlineTicketEl.textContent = ticketText;
   }
 
   function initCountButtons() {
@@ -230,33 +239,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function initPaymentButton() {
-    const btn = document.querySelector('.btn_payment');
-    if (!btn) return;
+  // ✅ 결제 버튼 공통 로직 (데스크톱 summary 카드 + 인라인 summary 둘 다 동작)
+  function handlePayment() {
+    if (!state.selectedDate) {
+      alert('Please select a date first.');
+      return;
+    }
 
-    btn.addEventListener('click', () => {
+    const total = Object.values(state.counts).reduce((a, b) => a + b, 0);
 
-      if (!state.selectedDate) {
-        alert('Please select a date first.');
-        return;
-      }
+    if (total === 0) {
+      alert('Please select at least one visitor.');
+      return;
+    }
 
-      const total = Object.values(state.counts).reduce((a, b) => a + b, 0);
+    alert(`Proceeding to payment!\n\nDate: ${fmtSummary(state.selectedDate)}\nTime: ${state.selectedTime}\nVisitors: ${total}`);
 
-      if (total === 0) {
-        alert('Please select at least one visitor.');
-        return;
-      }
-      alert(`Proceeding to payment!
-
-Date: ${fmtSummary(state.selectedDate)}
-Time: ${state.selectedTime}
-Visitors: ${total}`);
-
-
-      window.location.href = './reserve.html';
-    });
+    window.location.href = './reserve.html';
   }
+
+  function initPaymentButton() {
+    // 데스크톱 summary 카드 버튼
+    const btn = document.querySelector('.summary_card .btn_payment');
+    if (btn) btn.addEventListener('click', handlePayment);
+
+    // 태블릿 인라인 summary 버튼
+    const inlineBtn = document.getElementById('inline_payment_btn');
+    if (inlineBtn) inlineBtn.addEventListener('click', handlePayment);
+
+    // 하단 fixed 바 버튼 (혹시 활성화할 경우 대비)
+    const barBtn = document.querySelector('.plan_payment_bar .btn_payment');
+    if (barBtn) barBtn.addEventListener('click', handlePayment);
+  }
+
   renderCalendar();
   renderSelLabel();
   initCountButtons();

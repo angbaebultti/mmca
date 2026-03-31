@@ -192,12 +192,13 @@ a {
 .museum_wrap {
   position: relative;
   width: 100%;
-  padding-top: 140px;
-  padding-bottom: 140px;
+  padding-top: 210px;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.6s ease;
+  margin-bottom: 200px;
+  padding-bottom: 30vh;
 }
 
 .museum_wrap.active {
@@ -342,7 +343,7 @@ a {
   padding: 0 0 80px;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 120px;
 }
 
@@ -361,7 +362,7 @@ a {
   display: flex;
   gap: 120px;
   margin-top: 100px;
-  height: 100vh;
+  height: 80vh;
 }
 
 .museum_poster {
@@ -427,14 +428,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5px 14px;
+  padding: 8px 14px;
   border-radius: 6px;
   border-right: 2px dashed var(--gray_01);
   background: var(--main_white);
   color: var(--main_black);
   font-size: 24px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
   transition:
     background 0.35s ease,
     color 0.35s ease,
@@ -468,7 +469,7 @@ a {
 .museum_ticket:hover .ticket_main,
 .museum_ticket:hover .ticket_stub {
   color: var(--main_white);
-  background: var(--gray_03);
+  background: #FF6624;
 
 }
 
@@ -577,4 +578,14 @@ a {
 
 .top_btn a:hover {
   transform: translateY(-4px);
+}
+
+.cursor-ring.cube-hover {
+  width: 130px;
+  height: 130px;
+  border-color: transparent;
+  font-size: 14px;
+  color: #fff;
+  letter-spacing: 0.01em;
+  font-weight: 400;
 }

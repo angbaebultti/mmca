@@ -1,5 +1,135 @@
 @charset "utf-8";
 
+/* ===================== AI TOAST ===================== */
+#ai_overlay {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  z-index: 999999;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: auto;
+}
+
+#ai_overlay.hidden {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+
+#ai_modal {
+  background: rgba(18, 18, 18, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 16px 18px 14px;
+  width: 320px;
+  text-align: left;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* 상단 행 */
+.ai_toast_header {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* 아이콘 */
+.ai_icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.ai_icon svg {
+  width: 14px;
+  height: 14px;
+  stroke: rgba(255, 255, 255, 0.7);
+  fill: none;
+}
+
+/* 제목 — 1순위 위계 */
+#ai_modal_title {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  letter-spacing: 0.01em;
+  line-height: 1.45;
+  flex: 1;
+}
+
+/* X 닫기 버튼 */
+#ai_confirm {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  padding: 0;
+  margin-top: 1px;
+}
+
+
+/* 본문 — 2순위 위계 */
+#ai_modal p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.45);
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+
+/* 하단 버튼 행 */
+.ai_action_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Don't show today 버튼 — 3순위 (텍스트형) */
+#ai_dont_show {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+#ai_dont_show:hover {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* 하단 부연 — 토스트에서는 숨김 (너무 많음) */
+.ai_footnote {
+  display: none;
+}
+.news_mobile_tabs {
+  display: none;
+}
 
 .main_visual {
   background-image: url(../img/main_bg.png);
@@ -9,7 +139,6 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  /* ← 200vh → 100vh */
   overflow: visible;
   z-index: 10;
 }
@@ -28,11 +157,12 @@
   line-height: 1.05;
   color: #fff;
   position: absolute;
-  left: 55px;
+  left: 5%;
   bottom: 50%;
   z-index: 2000;
-  padding-top: 0;
-}
+  width: 100%;
+  margin-bottom: 30px;
+  padding-top: 200px;}
 
 .ticket {
   position: absolute;
@@ -44,7 +174,6 @@
   z-index: 30000;
   pointer-events: none;
   overflow: visible;
-  /* ← 추가 */
 }
 
 .ticket_bg {
@@ -138,7 +267,7 @@
 }
 
 .info_block .day {
-  font-size: 35px;
+  font-size: 28px;
   font-weight: 500;
   letter-spacing: -0.06em;
   color: var(--gray_06);
@@ -247,7 +376,6 @@
   margin-top: -300px;
 }
 
-/* ── stats 래퍼 ── */
 .stats_wrap {
   position: relative;
   width: 100%;
@@ -263,7 +391,8 @@
   margin-right: 590px;
   transform: translateY(-50%) scaleX(var(--line-scale, 0));
   transform-origin: right center;
-  width: 18vw;
+  width: max(0px, calc(50vw - 590px));
+  /* 음수 방지 */
   height: 1px;
   background: var(--main_white);
 }
@@ -275,7 +404,8 @@
   margin-left: 590px;
   transform: translateY(-50%) scaleX(var(--line-scale, 0));
   transform-origin: left center;
-  width: 18vw;
+  width: max(0px, calc(50vw - 590px));
+  /* 음수 방지 */
   height: 1px;
   background: var(--main_white);
 }
@@ -353,19 +483,19 @@
   height: 100vh;
   background: var(--main_black);
   overflow: visible;
-  padding-bottom: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* padding-top, padding-bottom 전부 제거 */
+}
+.artist_prize .title{
+  margin-top: -100px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.artist_prize .title {
-  position: absolute;
-  top: 80px;
-  left: 120px;
-  z-index: 10;
-  padding-left: 76px;
-}
 
 .artist_prize .line {
   display: flex;
@@ -399,9 +529,11 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;       /* 100vh → 100% */
   overflow: hidden;
   z-index: 1;
+  display: flex;
+  align-items: center; /* 이것만 남기기 */
 }
 
 .artist_track {
@@ -420,7 +552,7 @@
   flex-shrink: 0;
   transform: rotate(-6deg);
   transition: transform 0.4s ease;
-  background: var(#1e1e1e);
+  background: #1e1e1e;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6);
   margin: 16px;
   padding: 16px;
@@ -443,7 +575,6 @@
   transform: rotate(6deg);
 }
 
-/* view_btn — artist_track 안 카드로 배치 */
 .view_btn_card {
   display: flex;
   align-items: center;
@@ -494,7 +625,6 @@
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* 가운데에서 양쪽으로 퍼지는 hover 효과 */
 .view_btn_inline::before {
   content: "";
   position: absolute;
@@ -505,7 +635,6 @@
   background: var(--hover);
   transform: scaleX(0);
   transform-origin: center;
-  /* 가운데에서 퍼짐 */
   transition: transform 0.4s ease;
   z-index: 0;
 }
@@ -545,19 +674,24 @@
   width: 100%;
   clip-path: polygon(0 0, 340px 0, 400px 60px, 100% 60px, 100% 100%, 0 100%);
   box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
-  overflow: hidden;
   max-height: 80px;
+  overflow: hidden;
   transition: max-height 0.7s cubic-bezier(0.77, 0, 0.175, 1);
   cursor: pointer;
 }
 
+.news_group:not(.is-open) .news_body {
+  pointer-events: none;
+}
+
 .news_group.is-open {
-  max-height: 1000px;
+  max-height: 2000px;
   cursor: default;
 }
 
 .news_head {
   position: relative;
+  /* sticky → relative로 되돌리기 */
   width: 100%;
   height: 90px;
   display: flex;
@@ -577,24 +711,16 @@
   transition: opacity 0.3s ease;
 }
 
-.news_group:not(.is-open) .news_head h2 {
-  opacity: 0.45;
-}
-
-.news_group:not(.is-open):hover .news_head h2 {
-  opacity: 0.8;
-}
-
 .news_group.is-open .news_head h2::before {
   opacity: 1;
 }
 
 .news_group.events .news_head h2::before {
-  background: #111;
+  background: #1e1e1e;
 }
 
 .news_group.press .news_head h2::before {
-  background: #111;
+  background: #1e1e1e;
 }
 
 .news_group.notice .news_head h2::before {
@@ -662,7 +788,7 @@
 
 .news_thumb {
   width: 100%;
-  height: 400px;
+  height: 350px;
   overflow: hidden;
 }
 
@@ -703,7 +829,7 @@
   white-space: nowrap;
   font-family: Pretendard;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 300;
   line-height: 1.4;
   letter-spacing: -0.54px;
   margin-bottom: 18px;
@@ -721,7 +847,6 @@
   display: inline-block;
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 8px;
   color: #ff4b24;
 }
 
@@ -790,7 +915,6 @@
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.72px;
-  margin-bottom: 10px;
 }
 
 .news_group.notice .news_txt h3 {
@@ -833,7 +957,7 @@
   left: 0;
   width: 0;
   height: 2px;
-  background: currentColor;
+  background: #FF6624;
   transition: width 0.35s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
@@ -845,13 +969,10 @@
   opacity: 1 !important;
 }
 
-/* news_body — max-height transition 제거하고 visibility로 */
 .news_body {
   transition: none;
-  /* 기존 transition 덮어씌우기 */
 }
 
-/* 커서 프리뷰 */
 #newsPreview {
   position: fixed;
   width: 260px;
@@ -881,14 +1002,13 @@
   display: block;
 }
 
-/* 카드 hover — 이미지 scale */
 .news_card:hover .news_thumb img {
   transform: scale(1.07);
 }
 
-/* 열린 탭 카드들 초기 opacity 0 방지 */
 .news_group:not(.is-open) .news_card {
   opacity: 0;
+  pointer-events: none;
 }
 
 /* ===================== SHOP ===================== */

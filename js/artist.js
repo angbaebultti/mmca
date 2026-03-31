@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const tabletMedia = window.matchMedia("(max-width: 1024px)");
   /* =============================================
      1번+6번: 가로 스크롤
   ============================================= */
@@ -7,8 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!wrapper) return;
 
     const TOTAL_SLIDES = 4;
+    const horizontalAnimationEnd = 0.82;
     let currentIndex = 0;
+    let renderedIndex = 0;
     let isAnimating = false;
+    let contentSwapTimerId = null;
 
     const slides = [
       {
@@ -58,12 +62,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const scrollBtn = document.getElementById("section05");
+    const slideLayout = wrapper.querySelector(".slide_layout");
 
     const photoEl = document.getElementById("slidePhoto");
     const nameEl = document.getElementById("slideName");
     const descEl = document.getElementById("slideDesc");
     const artworksEl = document.getElementById("slideArtworks");
     const artworkEffectTimers = [];
+    let isPointerDragging = false;
+    let pointerStartX = 0;
+    let pointerStartY = 0;
     // slide_dots 안의 dot 선택 (slide_dots_wrap 또는 slide_dots 모두 대응)
     const dots = document.querySelectorAll(
       ".slide_dots .dot, .slide_dots_wrap .dot",
@@ -94,9 +102,9 @@ document.addEventListener("DOMContentLoaded", () => {
           card.classList.add("glass-flow");
           const cleanupId = window.setTimeout(() => {
             card.classList.remove("glass-flow");
-          }, 980);
+          }, 1180);
           artworkEffectTimers.push(cleanupId);
-        }, index * 80);
+        }, index * 110);
 
         artworkEffectTimers.push(timerId);
       });
@@ -104,10 +112,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ensureArtworkCards();
 
-    function updateContent(index) {
-      if (isAnimating) return;
-      isAnimating = true;
+    function updateContent(index, { immediate = false } = {}) {
+      if (contentSwapTimerId) {
+        window.clearTimeout(contentSwapTimerId);
+        contentSwapTimerId = null;
+      }
 
+      if (!immediate && renderedIndex === index && !isAnimating) return;
+
+      currentIndex = index;
+      isAnimating = true;
       const s = slides[index];
 
       // 페이드 아웃
@@ -116,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       nameEl.style.opacity = "0";
       descEl.style.opacity = "0";
 
-      setTimeout(() => {
+      const commitContent = () => {
         photoEl.src = s.photo;
         nameEl.textContent = s.name;
         descEl.textContent = s.desc;
@@ -133,8 +147,16 @@ document.addEventListener("DOMContentLoaded", () => {
         descEl.style.opacity = "1";
         runArtworkGlassEffect();
 
+        renderedIndex = index;
         isAnimating = false;
-      }, 500); // 500ms로 늘려서 부드럽게
+        contentSwapTimerId = null;
+      };
+
+      if (immediate) {
+        commitContent();
+      } else {
+        contentSwapTimerId = window.setTimeout(commitContent, 50);
+      }
 
       // dots 업데이트
       dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
@@ -147,27 +169,94 @@ document.addEventListener("DOMContentLoaded", () => {
       return Math.min(Math.max(scrolled / scrollableH, 0), 1);
     }
 
-    function applySlide(progress) {
-      const rawIndex = progress * (TOTAL_SLIDES - 1);
-      const newIndex = Math.round(rawIndex);
-      if (newIndex !== currentIndex) {
-        currentIndex = newIndex;
-        updateContent(currentIndex);
+    function applySlide(progress, rawProgress = progress) {
+      // 가로 슬라이드: 각 슬라이드 구간을 동일한 폭으로 나눠 전환 시점을 고르게 맞춥니다.
+      const newIndex = Math.min(
+        Math.floor(progress * TOTAL_SLIDES),
+        TOTAL_SLIDES - 1,
+      );
+      if (newIndex !== currentIndex || renderedIndex !== newIndex) {
+        updateContent(newIndex, { immediate: progress === 0 });
       }
       if (scrollBtn) {
-        scrollBtn.style.opacity = progress > 0 && progress < 1 ? "1" : "0";
+        // 스크롤 안내는 애니메이션이 끝나도 섹션이 끝날 때까지 유지합니다.
+        scrollBtn.style.opacity =
+          rawProgress > 0 && rawProgress < 1 ? "1" : "0";
       }
+    }
+
+    function goToSlide(index, { immediate = true } = {}) {
+      const clampedIndex = Math.min(Math.max(index, 0), TOTAL_SLIDES - 1);
+      if (clampedIndex === renderedIndex && clampedIndex === currentIndex)
+        return;
+      updateContent(clampedIndex, { immediate });
     }
 
     window.addEventListener(
       "scroll",
       () => {
-        applySlide(getScrollProgress());
+        if (tabletMedia.matches) return;
+        const rawProgress = getScrollProgress();
+
+        // 가로 스크롤 섹션: 마지막 구간은 여유 스크롤로 남기고 애니메이션은 먼저 끝냅니다.
+        const animationProgress = Math.min(
+          rawProgress / horizontalAnimationEnd,
+          1,
+        );
+
+        applySlide(animationProgress, rawProgress);
       },
       { passive: true },
     );
 
-    runArtworkGlassEffect();
+    updateContent(0, { immediate: true });
+
+    if (slideLayout) {
+      slideLayout.addEventListener("pointerdown", (e) => {
+        if (!tabletMedia.matches) return;
+
+        isPointerDragging = true;
+        pointerStartX = e.clientX;
+        pointerStartY = e.clientY;
+        slideLayout.setPointerCapture(e.pointerId);
+      });
+
+      const handlePointerEnd = (e) => {
+        if (!tabletMedia.matches || !isPointerDragging) return;
+
+        const deltaX = e.clientX - pointerStartX;
+        const deltaY = e.clientY - pointerStartY;
+        const absX = Math.abs(deltaX);
+        const absY = Math.abs(deltaY);
+        const horizontalThreshold = 42;
+
+        isPointerDragging = false;
+
+        if (absX < horizontalThreshold || absX <= absY) return;
+
+        if (deltaX < 0) {
+          if (renderedIndex < TOTAL_SLIDES - 1) {
+            goToSlide(renderedIndex + 1, { immediate: false }); // immediate: false 로 변경
+            return;
+          }
+
+          const historyEl = document.getElementById("history_skip");
+          if (historyEl) {
+            historyEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+          return;
+        }
+
+        if (renderedIndex > 0) {
+          goToSlide(renderedIndex - 1, { immediate: false }); // immediate: false 로 변경
+        }
+      };
+
+      slideLayout.addEventListener("pointerup", handlePointerEnd);
+      slideLayout.addEventListener("pointercancel", () => {
+        isPointerDragging = false;
+      });
+    }
 
     document.querySelectorAll(".skip_btn").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -195,22 +284,63 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function draw() {
       ctx.clearRect(0, 0, width, height);
-
-      ctx.beginPath();
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
-      ctx.lineWidth = 1.5;
-
       const amplitude = 40; // 진폭 (출렁임 크기)
       const frequency = 0.004; // 주파수 (물결 촘촘함)
       const speed = 0.005; // 흐르는 속도
 
-      for (let x = 0; x <= width; x++) {
-        const y = height / 2 + Math.sin(x * frequency + offset) * amplitude;
-        if (x === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+      // 물결선 한 줄을 그리는 함수
+      function drawWaveLine({
+        strokeStyle,
+        phaseOffset,
+        verticalOffset = 0,
+        angleDeg = 0,
+        amplitude: amp,
+        frequency: freq,
+      }) {
+        const cx = width / 2;
+        const cy = height / 2;
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate((angleDeg * Math.PI) / 190);
+        ctx.translate(-cx, -cy);
+
+        ctx.beginPath();
+        ctx.strokeStyle = strokeStyle;
+        ctx.lineWidth = 1.5;
+
+        for (let x = -width; x <= width * 2; x++) {
+          const y =
+            cy +
+            Math.sin(x * freq + offset + phaseOffset) * amp +
+            verticalOffset;
+          x === -width ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+
+        ctx.stroke();
+        ctx.restore();
       }
 
-      ctx.stroke();
+      // 흰색 선 (우하향)
+      drawWaveLine({
+        strokeStyle: "rgba(255, 255, 255, 0.12)",
+        phaseOffset: 0,
+        angleDeg: 8,
+        amplitude: 60, // 출렁임 크기 조절
+        frequency: 0.004, // 물결 촘촘함 조절
+        verticalOffset: -80, // 위로 올리기 (음수=위, 양수=아래)
+      });
+
+      // 오렌지 선 (우상향, 흰색과 X자 교차)
+      drawWaveLine({
+        strokeStyle: "rgba(255, 102, 36, 0.12)",
+        phaseOffset: Math.PI,
+        angleDeg: 8,
+        amplitude: -60, // 출렁임 크기 조절
+        frequency: 0.004, // 물결 촘촘함 조절
+        verticalOffset: 180, // 아래로 내리기
+      });
+
       offset += speed;
       animId = requestAnimationFrame(draw);
     }
@@ -222,35 +352,82 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   })();
 
-  /* scroll down 이거 코드펜인데 얘가 제이쿼리라 오류생겨서 주석시킴*/
-  /*   $(function() {
-    $('a[href*=#]').on('click', function(e) {
-      e.preventDefault();
-      $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top }, 500, 'linear');
-    });
-  }); */
-
   /* =============================================
      2번: History 슬라이더 레버
   ============================================= */
   (function initHistorySlider() {
+    const historyWrapper = document.getElementById("historyWrapper");
     const track = document.getElementById("historyTrack");
     const trackWrap = document.getElementById("sliderTrackWrap");
     const thumb = document.getElementById("sliderThumb");
+    const fill = document.getElementById("sliderFill");
+    const sliderViewport = track?.closest(".history_slider_wrap");
     if (!track || !trackWrap || !thumb) return;
 
     const posters = track.querySelectorAll(".poster_item");
     const TOTAL_POSTERS = posters.length;
     const MIN_PERCENT = 1 / (TOTAL_POSTERS + 1);
+    const historyAnimationEnd = 0.84;
     let isDragging = false;
     let currentPercent = MIN_PERCENT;
+    let tabletSyncFrame = 0;
+    let tabletDragScrollLeft = 0;
+
+    function updateSliderUi(percent) {
+      currentPercent = Math.min(Math.max(percent, MIN_PERCENT), 1);
+      const trackW = trackWrap.offsetWidth;
+      const thumbRadius = thumb.offsetWidth / 2;
+      const thumbX = currentPercent * trackW - thumbRadius;
+      thumb.style.transform = `translate3d(${thumbX}px, -50%, 0)`;
+      if (fill) fill.style.transform = `scaleX(${currentPercent})`;
+    }
+
+    function getTabletScrollMax() {
+      if (!sliderViewport) return 0;
+      return Math.max(
+        sliderViewport.scrollWidth - sliderViewport.clientWidth,
+        0,
+      );
+    }
+
+    function syncFromTabletScroll() {
+      if (!tabletMedia.matches || !sliderViewport) return;
+      if (tabletSyncFrame) return;
+
+      tabletSyncFrame = window.requestAnimationFrame(() => {
+        tabletSyncFrame = 0;
+        const maxScroll = getTabletScrollMax();
+        const normalized =
+          maxScroll > 0 ? sliderViewport.scrollLeft / maxScroll : 0;
+        updateSliderUi(MIN_PERCENT + normalized * (1 - MIN_PERCENT));
+        track.style.transform = "translateX(0)";
+      });
+    }
 
     function applyPosition(percent) {
+      if (tabletMedia.matches) {
+        updateSliderUi(percent);
+        const normalized = (currentPercent - MIN_PERCENT) / (1 - MIN_PERCENT);
+        const maxScroll = getTabletScrollMax();
+        tabletDragScrollLeft = normalized * maxScroll;
+        if (sliderViewport && !isDragging) {
+          sliderViewport.scrollLeft = tabletDragScrollLeft;
+        }
+        track.style.transform = isDragging
+          ? `translateX(-${tabletDragScrollLeft}px)`
+          : "translateX(0)";
+        return;
+      }
       currentPercent = Math.min(Math.max(percent, MIN_PERCENT), 1);
 
       // 레버 위치
       const trackW = trackWrap.offsetWidth;
-      thumb.style.left = currentPercent * trackW + "px";
+      const thumbRadius = thumb.offsetWidth / 2;
+      const thumbX = currentPercent * trackW - thumbRadius;
+      thumb.style.transform = `translate3d(${thumbX}px, -50%, 0)`;
+
+      // 2번 History - 레버 지나간 자리 포인트컬러 채움
+      if (fill) fill.style.transform = `scaleX(${currentPercent})`;
 
       // 트랙 이동: MIN_PERCENT → 0(2025보임), 1 → 최대(2012보임)
       const normalized = (currentPercent - MIN_PERCENT) / (1 - MIN_PERCENT);
@@ -267,18 +444,37 @@ document.addEventListener("DOMContentLoaded", () => {
       track.style.transform = `translateX(-${normalized * maxOffset}px)`;
     }
 
+    function syncWindowScrollFromPercent(percent) {
+      const normalized =
+        (Math.min(Math.max(percent, MIN_PERCENT), 1) - MIN_PERCENT) /
+        (1 - MIN_PERCENT);
+      const historyWrapper = document.getElementById("historyWrapper");
+      if (!historyWrapper) return;
+
+      const scrollableH =
+        historyWrapper.getBoundingClientRect().height - window.innerHeight;
+      const targetScroll =
+        historyWrapper.offsetTop +
+        normalized * (scrollableH * historyAnimationEnd);
+
+      window.scrollTo({ top: targetScroll, behavior: "auto" });
+    }
+
     function handleMove(clientX) {
       const rect = trackWrap.getBoundingClientRect();
       const percent = (clientX - rect.left) / rect.width;
       applyPosition(percent);
     }
 
-    /*     trackWrap.addEventListener("pointerdown", (e) => {
+    // 교체 - thumb에 캡처 걸어서 밖으로 나가도 드래그 유지
+    trackWrap.addEventListener("pointerdown", (e) => {
       isDragging = true;
-      thumb.setPointerCapture(e.pointerId);
+      track.style.transition = "none";
+      trackWrap.setPointerCapture(e.pointerId);
       handleMove(e.clientX);
     });
 
+    // pointermove를 thumb에 걸어야 캡처된 포인터 이벤트를 받음
     trackWrap.addEventListener("pointermove", (e) => {
       if (!isDragging) return;
       handleMove(e.clientX);
@@ -286,30 +482,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     trackWrap.addEventListener("pointerup", () => {
       isDragging = false;
+      track.style.transition = "";
+      if (tabletMedia.matches && sliderViewport) {
+        sliderViewport.scrollLeft = tabletDragScrollLeft;
+        track.style.transform = "translateX(0)";
+        return;
+      }
+      syncWindowScrollFromPercent(currentPercent);
     });
     trackWrap.addEventListener("lostpointercapture", () => {
       isDragging = false;
-    }); */
-
-    // 교체 - thumb에 캡처 걸어서 밖으로 나가도 드래그 유지
-    trackWrap.addEventListener("pointerdown", (e) => {
-      isDragging = true;
-      thumb.setPointerCapture(e.pointerId);
-      handleMove(e.clientX);
+      track.style.transition = "";
+      if (tabletMedia.matches && sliderViewport) {
+        sliderViewport.scrollLeft = tabletDragScrollLeft;
+        track.style.transform = "translateX(0)";
+        return;
+      }
+      syncWindowScrollFromPercent(currentPercent);
     });
 
-    // pointermove를 thumb에 걸어야 캡처된 포인터 이벤트를 받음
-    thumb.addEventListener("pointermove", (e) => {
-      if (!isDragging) return;
-      handleMove(e.clientX);
-    });
-
-    thumb.addEventListener("pointerup", () => {
-      isDragging = false;
-    });
-    thumb.addEventListener("lostpointercapture", () => {
-      isDragging = false;
-    });
+    sliderViewport?.addEventListener(
+      "scroll",
+      () => {
+        if (isDragging) return;
+        syncFromTabletScroll();
+      },
+      { passive: true },
+    );
 
     const modalData = {
       2025: {
@@ -408,7 +607,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //모달내용 업데이트
         document.querySelector(".modal_essay_title").innerHTML =
-          `${data.title}<br />${data.author}`;
+          `<span class="modal_title_line">${data.title}</span><br /><span class="modal_title_line">${data.author}</span>`;
         document.querySelector(".modal_essay_author").textContent = data.role;
         document.querySelector(".modal_essay_body").innerHTML = data.body;
 
@@ -416,8 +615,50 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    window.addEventListener("load", () => applyPosition(MIN_PERCENT));
-    if (document.readyState === "complete") applyPosition(MIN_PERCENT);
+    /* 스크롤로 포스터 슬라이드 연동 */
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (tabletMedia.matches) return;
+        if (isDragging) return;
+        if (!historyWrapper) return;
+        const wrapperTop = historyWrapper.getBoundingClientRect().top;
+        const scrolled = -wrapperTop;
+        const scrollableH = historyWrapper.offsetHeight - window.innerHeight;
+        if (scrollableH <= 0) return;
+        const rawProgress = Math.min(Math.max(scrolled / scrollableH, 0), 1);
+
+        // 히스토리 섹션: 포스터 이동은 먼저 끝내고 마지막 구간은 머무는 스크롤로 남깁니다.
+        const progress = Math.min(rawProgress / historyAnimationEnd, 1);
+
+        applyPosition(MIN_PERCENT + progress * (1 - MIN_PERCENT));
+      },
+      { passive: true },
+    );
+
+    window.addEventListener("load", () => {
+      if (tabletMedia.matches) {
+        syncFromTabletScroll();
+        return;
+      }
+      applyPosition(MIN_PERCENT);
+    });
+
+    window.addEventListener("resize", () => {
+      if (tabletMedia.matches) {
+        syncFromTabletScroll();
+        return;
+      }
+      applyPosition(currentPercent);
+    });
+
+    tabletMedia.addEventListener("change", () => {
+      if (tabletMedia.matches) {
+        syncFromTabletScroll();
+        return;
+      }
+      applyPosition(currentPercent);
+    });
   })();
 
   /* =============================================
@@ -428,6 +669,26 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!overlay) return;
     overlay.classList.add("active");
     document.body.style.overflow = "hidden";
+
+    // 모달 열릴 때 제목 배경 초기화
+    const modalTitleLines = document.querySelectorAll(".modal_title_line");
+    modalTitleLines.forEach((el) => (el.style.background = ""));
+    if (
+      window.matchMedia("(max-width: 1024px)").matches &&
+      modalTitleLines[0]
+    ) {
+      modalTitleLines[0].style.background =
+        "linear-gradient(to right, rgba(255, 102, 36, 0.8) 100%, transparent 100%)";
+      modalTitleMaxProgress = 1;
+      isFillingTitle = false;
+    } else {
+      modalTitleMaxProgress = 0;
+      isFillingTitle = true;
+    }
+
+    // 모달 패널 스크롤 위치 초기화
+    const panel = document.getElementById("modalPanel");
+    if (panel) panel.scrollTop = 0;
   }
 
   function closeModal() {
@@ -435,7 +696,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!overlay) return;
     overlay.classList.remove("active");
     document.body.style.overflow = "";
+
+    // 모달 닫힐 때 제목 배경 초기화
+    document
+      .querySelectorAll(".modal_title_line")
+      .forEach((el) => (el.style.background = ""));
+    modalTitleMaxProgress = 0;
+    isFillingTitle = true;
   }
+
+  let modalTitleMaxProgress = 0; // closeModal에서도 접근하려고 밖에 선언
 
   (function initModal() {
     const overlay = document.getElementById("modalOverlay");
@@ -450,5 +720,190 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
     });
+
+    // 3번 모달 - 제목 배경 채워지는 동안 스크롤 고정, 다 채워지면 해제
+    panel.addEventListener(
+      "wheel",
+      (e) => {
+        const lines = document.querySelectorAll(".modal_title_line");
+        if (!lines.length) return;
+
+        if (isFillingTitle) {
+          e.preventDefault(); // 스크롤 막기
+
+          const progress = Math.min(modalTitleMaxProgress + 0.03, 1); // 휠 한번에 채워지는 속도 조절
+          modalTitleMaxProgress = progress;
+
+          lines[0].style.background = `linear-gradient(to right, rgba(255, 102, 36, 0.8) ${progress * 100}%, transparent ${progress * 100}%)`;
+          if (lines[1]) {
+            lines[1].style.background = "";
+          }
+
+          if (modalTitleMaxProgress >= 1) {
+            isFillingTitle = false;
+          }
+        }
+      },
+      { passive: false },
+    ); // passive: false 여야 preventDefault 작동
+  })();
+
+  document.body.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class="cursor-ring" id="cursorRing">ENTER ↗</div>
+    <div class="cursor-dot" id="cursorDot"></div>
+  `,
+  );
+
+  const ring = document.getElementById("cursorRing");
+  const dot = document.getElementById("cursorDot");
+  let mx = 0,
+    my = 0,
+    rx = window.innerWidth / 2,
+    ry = window.innerHeight / 2;
+
+  document.addEventListener("mousemove", (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+    if (dot) {
+      dot.style.left = mx + "px";
+      dot.style.top = my + "px";
+    }
+  });
+
+  (function lerpRing() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    if (ring) {
+      ring.style.left = rx + "px";
+      ring.style.top = ry + "px";
+    }
+    requestAnimationFrame(lerpRing);
+  })();
+
+  /* =============================================
+   4번: Video 섹션 - 스크롤하면 카드 하나씩 등장 후 둥실둥실
+============================================= */
+  (function initVideoScroll() {
+    const wrapper = document.getElementById("videoWrapper");
+    if (!wrapper) return;
+    const sectionTitle = wrapper.querySelector(".video_section_title");
+
+    const items = [
+      document.getElementById("vi0"),
+      document.getElementById("vi1"),
+      document.getElementById("vi2"),
+    ];
+
+    // 각 카드가 등장하는 스크롤 진행률
+    const appearAt = [0.14, 0.38, 0.62];
+    const animationEnd = 0.9;
+
+    // 페이지 로드 시 transition 미리 설정
+    items.forEach((item) => {
+      if (!item) return;
+
+      item.style.transition =
+        "opacity 0.45s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+
+      const iframe = item.querySelector("iframe");
+      if (!iframe) return;
+
+      const baseSrc = iframe.src;
+      item.addEventListener("mouseenter", () => {
+        iframe.src = baseSrc.replace("mute=1", "mute=1&autoplay=1");
+      });
+      item.addEventListener("mouseleave", () => {
+        iframe.src = baseSrc;
+      });
+    });
+
+    const mobileMedia = window.matchMedia("(max-width: 480px)");
+
+    // 480px 이하에서는 IntersectionObserver로 처리
+    if (mobileMedia.matches) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const item = entry.target;
+            if (entry.isIntersecting) {
+              item.classList.add("visible");
+              window.clearTimeout(item._floatTimerId);
+              item._floatTimerId = window.setTimeout(() => {
+                item.classList.add("float_active");
+              }, 420);
+            } else {
+              window.clearTimeout(item._floatTimerId);
+              item.classList.remove("float_active");
+              window.clearTimeout(item._hideTimerId);
+              item._hideTimerId = window.setTimeout(() => {
+                requestAnimationFrame(() => {
+                  item.classList.remove("visible");
+                });
+              }, 40);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      items.forEach((item) => { if (item) observer.observe(item); });
+      return;
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        const top = wrapper.getBoundingClientRect().top;
+        const scrolled = -top;
+        const scrollableH = wrapper.offsetHeight - window.innerHeight;
+        if (scrollableH <= 0) return;
+        const rawProgress = Math.min(Math.max(scrolled / scrollableH, 0), 1);
+        const progress = Math.min(rawProgress / animationEnd, 1);
+        const titleReachedMidpoint =
+          tabletMedia.matches && sectionTitle
+            ? sectionTitle.getBoundingClientRect().top <=
+              window.innerHeight * 0.58
+            : false;
+
+        items.forEach((item, i) => {
+          if (!item) return;
+
+          const shouldShow =
+            tabletMedia.matches && i === 0
+              ? titleReachedMidpoint
+              : progress >= appearAt[i];
+
+          if (shouldShow) {
+            window.clearTimeout(item._hideTimerId);
+            if (item.classList.contains("visible")) return;
+
+            item.classList.add("visible");
+
+            // 비디오 카드: 등장 전환이 끝난 뒤에만 부유 애니메이션을 붙입니다.
+            window.clearTimeout(item._floatTimerId);
+            item._floatTimerId = window.setTimeout(() => {
+              item.classList.add("float_active");
+            }, 420);
+            return;
+          }
+
+          window.clearTimeout(item._floatTimerId);
+          item.classList.remove("float_active");
+          if (!item.classList.contains("visible")) return;
+
+          // 비디오 카드: 떠다니는 움직임을 먼저 멈추고 다음 프레임에 자연스럽게 숨깁니다.
+          window.clearTimeout(item._hideTimerId);
+          item._hideTimerId = window.setTimeout(() => {
+            requestAnimationFrame(() => {
+              item.classList.remove("visible");
+            });
+          }, 40);
+        });
+      },
+      { passive: true },
+    );
+
+    window.dispatchEvent(new Event("scroll"));
   })();
 }); // DOMContentLoaded end
