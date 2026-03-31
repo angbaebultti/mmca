@@ -1,0 +1,414 @@
+@charset "utf-8";
+
+/* ═══════════════════════════════════════════════════════
+   기본값 — 데스크톱에서 숨길 요소들
+   ═══════════════════════════════════════════════════════ */
+
+.inline_summary {
+  display: none;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 60px;
+  padding: 40px;
+  background: #fff;
+  color: #1e1e1e;
+  font-family: 'Red Hat Mono', monospace;
+}
+
+.inline_summary_label {
+  display: none;
+}
+
+.inline_summary_body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.inline_summary_poster {
+  display: none;
+}
+
+.inline_summary_info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.inline_summary_title {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1.5;
+  color: #1e1e1e;
+}
+
+.inline_summary_date,
+.inline_summary_ticket {
+  font-size: 17px;
+  color: #585858;
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+}
+
+.inline_summary_note {
+  font-size: 13px;
+  color: #999;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+  display: block;
+  margin-top: 4px;
+}
+
+.inline_btn {
+  margin-top: 0;
+}
+
+.plan_payment_bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background: #fff;
+  border-top: 1px solid rgba(30, 30, 30, 0.15);
+  padding: 16px 64px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
+.plan_payment_bar .btn_payment {
+  width: 100%;
+  max-width: 600px;
+  margin-top: 0;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   태블릿 — 1024px 이하
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+
+  .plan_main {
+    padding: 80px 64px 80px;
+  }
+
+  .plan_inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .plan_inner::after {
+    display: none;
+  }
+
+  .plan_right {
+    display: none;
+  }
+
+  .hero_title h2 {
+    font-size: 90px;
+    padding-top: 100px;
+  }
+
+  .hero_sub {
+    font-size: 20px;
+  }
+
+  .hero_img_box {
+    width: 100%;
+    height: auto;
+    min-height: 250px;
+  }
+
+  .hero_poster {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  .hero_desc p {
+    font-size: 17px;
+  }
+
+  .section_label {
+    padding: 80px 0 24px;
+  }
+
+  .section_label h3 {
+    font-size: 44px;
+  }
+
+  .section_num {
+    width: 54px;
+    height: 54px;
+    font-size: 24px;
+  }
+
+  .cal_two {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .cal_month_col {
+    padding: 18px 14px;
+  }
+
+  .cal_mname {
+    font-size: 15px;
+  }
+
+  .cal_day {
+    font-size: 12px;
+    color: #1e1e1e;
+  }
+
+  
+
+
+.cal_days_grid {
+  gap: 4px;
+}
+
+.cal_dow_row span {
+  font-size: 11px;
+}
+
+.time_btn {
+  width: 240px;
+  font-size: 18px;
+  padding: 14px 40px;
+}
+
+.visitor_item {
+  padding: 20px 40px;
+}
+
+.visitor_info strong {
+  font-size: 17px;
+}
+
+.inline_summary {
+  display: flex;
+  flex-direction: column;
+}
+
+.plan_payment_bar {
+  display: none;
+}
+}
+
+/* ═══════════════════════════════════════════════════════
+   모바일 — 480px 이하
+   ═══════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  /* ── 레이아웃 ── */
+  .plan_main {
+    padding: 50px 24px 60px;
+  }
+
+  /* ── hero ── */
+  .hero_title {
+    margin-bottom: 56px;
+  }
+
+  .hero_title h2 {
+    font-size: 40px;
+    padding-top: 50px;
+    margin-bottom: 24px;
+  }
+
+  .hero_sub {
+    font-size: 16px;
+    letter-spacing: -0.03em;
+  }
+
+  .hero_img_box {
+    width: 100%;
+    height: 169px;
+    min-height: unset;
+    gap: 0;
+  }
+
+  .hero_poster {
+    width: 134px;
+    min-width: 134px;
+  }
+
+  .hero_desc {
+    padding: 20px 16px;
+  }
+
+  .hero_desc p {
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: -0.04em;
+  }
+
+  /* ── section label ── */
+  .section_label {
+    padding: 50px 0 20px;
+    gap: 12px;
+    margin-bottom: 32px;
+    margin-top: 32px;
+  }
+
+  .section_label h3 {
+    font-size: 30px;
+  }
+
+  .section_num {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  /* ── 캘린더: 태블릿과 동일하게 유지 ── */
+  .cal_two {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 14px;
+  }
+
+  .cal_month_col {
+    padding: 18px 14px;
+  }
+
+  .cal_mname {
+    font-size: 15px;
+    color: #1e1e1e;
+  }
+
+  .cal_day {
+    font-size: 12px;
+  }
+
+  .cal_days_grid {
+    gap: 4px;
+  }
+
+  .cal_dow_row span {
+    font-size: 11px;
+    opacity: 1;
+  }
+
+  .cal_day.other-month {
+    color: #ccc;
+    cursor: default;
+  }
+
+  .cal_day.disabled {
+    color: #1e1e1e;
+    opacity: 0.25;
+  }
+
+  .cal_day:not(.other-month):not(.disabled):hover {
+    background: rgba(0, 120, 215, 0.1);
+  }
+
+  .cal_day.today {
+    box-shadow: inset 0 0 0 1px #ccc;
+    color: #1e1e1e;
+  }
+
+  .cal_day.selected {
+    background: #0078D7;
+    color: #fff;
+    box-shadow: none;
+  }
+
+  .cal_day.today.selected {
+    box-shadow: none;
+  }
+
+  /* ── 시간 버튼 ── */
+  .time_select {
+    gap: 12px;
+    margin: 50px 0 36px 0;
+    justify-content: center;
+  }
+
+  .time_btn {
+    width: auto;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 60px;
+    border-radius: 587px;
+    border: 0.5px solid #1e1e1e;
+    background: #f5f5f5;
+    color: #1e1e1e;
+    letter-spacing: -0.05em;
+  }
+
+  .time_btn.active {
+    background: #0078D7;
+    color: #fff;
+    border-color: #0078D7;
+  }
+
+  /* ── guide links ── */
+  .guide_links a {
+    font-size: 12px;
+    font-weight: 300;
+    padding: 4px 8px;
+    letter-spacing: 0;
+  }
+
+  /* ── visitor box ── */
+  .visitor_item {
+    padding: 14px 16px;
+  }
+
+  .visitor_info strong {
+    font-size: 14px;
+  }
+
+  .visitor_info em {
+    font-size: 11px;
+  }
+
+  .count_num {
+    font-size: 16px;
+  }
+
+  .inline_summary {
+    padding: 20px;
+  }
+
+  .inline_summary_title {
+    font-size: 16px;
+  }
+
+  .inline_summary_ticket,
+  .inline_summary_date {
+    font-size: 15px;
+  }
+
+  /* ── CONTINUE TO PAYMENT 버튼 ── */
+  .inline_btn {
+    width: 100%;
+    max-width: 384px;
+    align-self: center;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 0;
+    background: #fff;
+    color: #1e1e1e;
+    border: 1px solid #1e1e1e;
+    letter-spacing: -0.04em;
+  }
+
+  .inline_btn:hover {
+    background: #1e1e1e;
+    color: #fff;
+  }
+
+  #cursorDot {
+    display: none;
+  }
+}

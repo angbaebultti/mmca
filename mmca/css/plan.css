@@ -1,0 +1,563 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700&display=swap');
+/* font-family: "Red Hat Mono", monospace; */
+
+
+.plan_main {
+  background: var(--main_black);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 120px 220px;
+  margin-top: 0px;
+}
+
+.plan_inner {
+  max-width: var(--inner-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 830px 420px;
+  gap: 60px;
+  position: relative;
+}
+
+.plan_inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 618px;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.25);
+  pointer-events: none;
+}
+
+.plan_left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.hero_title {
+  margin-bottom: 80px;
+}
+
+.hero_title h2 {
+  font-size: 130px;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  padding-top: 100px;
+  margin-bottom: 24px;
+  color: #fff;
+}
+
+.hero_sub {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  color: #fff;
+}
+
+.hero_img_box {
+  display: flex;
+  align-items: stretch;
+  width: 835px;
+  height: 406px;
+}
+
+.hero_poster {
+  width: 288px;
+  min-width: 288px;
+  overflow: hidden;
+}
+
+.hero_poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero_desc {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 48px;
+  background: #fff;
+  color: #1e1e1e;
+}
+
+.hero_desc p {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.03em;
+}
+
+.date_time_section,
+.visitor_section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section_label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 120px 0 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+
+.section_num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: #fff;
+  color: #1e1e1e;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  flex-shrink: 0;
+}
+
+.section_label h3 {
+  font-size: 53px;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+
+.date_inner {
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+.cal_outer {
+  width: 100%;
+  margin-top: 40px;
+}
+
+
+
+.cal_two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  gap: 12px;
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.15);
+  border: none;
+  width: 100%;
+  margin: 0;
+}
+
+.cal_month_col {
+  background: #fafafa;
+  border-radius: 16px;
+  padding: 28px 24px;
+  transition: all 0.3s ease;
+}
+
+
+.cal_mheader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.cal_mname {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: #111;
+  white-space: nowrap;
+}
+
+.nav_arrows {
+  display: flex;
+  gap: 4px;
+}
+
+.cal_arrow_btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #000000;
+  font-size: 26px;
+  line-height: 1;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+}
+
+.cal_arrow_btn:hover {
+  opacity: 1;
+}
+
+.cal_dow_row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.cal_dow_row span {
+  font-size: 13px;
+  font-weight: 400;
+  color: #999;
+  padding: 6px 0;
+}
+
+.cal_days_grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+  gap: 10px;
+}
+
+.cal_day {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  color: #222;
+  border-radius: 50%;
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+}
+
+.cal_day.other-month {
+  color: rgba(255, 255, 255, 0.2);
+  cursor: default;
+}
+
+.cal_day.disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+
+.cal_day.today {
+  box-shadow: inset 0 0 0 1px #ccc;
+}
+
+.cal_day.today.selected {
+  box-shadow: none;
+}
+
+.cal_day:not(.other-month):not(.disabled):hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cal_day.selected {
+  background: #0078D7;
+  color: #fff;
+  transform: none;
+  box-shadow: none;
+}
+
+
+.cal_day:hover {
+  background: rgba(0, 120, 215, 0.1);
+  transform: none;
+}
+
+.cal_day.sel-start,
+.cal_day.sel-end {
+  background: #fff;
+  color: #1e1e1e;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+.cal_day.in-range {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 0;
+}
+
+.cal_day.range-start-cap {
+  border-radius: 50% 0 0 50%;
+}
+
+.cal_day.range-end-cap {
+  border-radius: 0 50% 50% 0;
+}
+
+
+.sel_label {
+  font-size: 20px;
+  color: #fff;
+  margin-top: 60px;
+  text-align: center;
+  min-height: 20px;
+  letter-spacing: -0.02em;
+}
+
+
+.time_select {
+  display: flex;
+  gap: 40px;
+  margin: 80px 0 48px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.time_btn {
+  padding: 16px 60px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 300px;
+  font-family: var(--pretendard);
+}
+
+.time_btn:hover {
+  background: rgba(199, 49, 49, 0.08);
+}
+
+.time_btn:active {
+  transform: scale(0.96);
+}
+
+.time_btn.active {
+  background: #0078D7;
+  color: #fff;
+  border-color: #0078D7;
+  font-weight: 500;
+}
+
+
+.guide_links {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.guide_links a {
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  letter-spacing: 0.02em;
+  padding: 10px 14px;
+  display: block;
+  color: #fff;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   인원 선택 (기존 유지)
+   ═══════════════════════════════════════════════════════ */
+
+.visitor_box {
+  background: #424242;
+  padding: 10px 0;
+}
+
+.visitor_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 80px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.visitor_item:last-child {
+  border-bottom: none;
+}
+
+.visitor_info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.visitor_info strong {
+  font-size: 20px;
+  font-weight: 600;
+  color: #f5f5f5;
+}
+
+.visitor_info em {
+  font-size: 14px;
+  font-weight: 300;
+  font-style: normal;
+  color: #f5f5f5;
+  letter-spacing: -0.05em;
+  opacity: 0.7;
+}
+
+.count_ctrl {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.count_btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+.count_btn:hover {
+  opacity: 1;
+}
+
+.count_num {
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 20px;
+  text-align: center;
+  color: #f5f5f5;
+}
+
+/* ═══════════════════════════════════════════════════════
+   Summary 카드 (기존 유지)
+   ═══════════════════════════════════════════════════════ */
+
+.plan_right {
+  position: relative;
+  transform: translateX(35%);
+}
+
+.summary_card {
+  position: sticky;
+  top: 80px;
+  padding: 40px;
+  background: #fff;
+  color: #1e1e1e;
+  opacity: 0;
+  will-change: transform, opacity;
+  transform: translateX(80px);
+}
+
+.summary_card:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.summary_clip {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 18px;
+  background: #e6e6e7;
+  border-radius: 20px;
+}
+
+.summary_card h3 {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: #1e1e1e;
+  text-align: center;
+}
+
+.summary_sub {
+  font-size: 18px;
+  font-weight: 400;
+  color: #666;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.summary_poster {
+  margin: 0 auto 32px;
+  width: 200px;
+}
+
+.summary_poster img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.summary_info {
+  font-family: 'Red Hat Mono', monospace;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+.summary_info strong {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.05em;
+  color: #1e1e1e;
+}
+
+.summary_date,
+.summary_ticket {
+  font-size: 18px;
+  color: #585858;
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+}
+
+.summary_note {
+  font-size: 13px;
+  color: #999;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+}
+
+.btn_payment {
+  display: block;
+  width: 100%;
+  margin-top: 36px;
+  padding: 22px 0;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: none;
+  border: 1.4px solid #1e1e1e;
+  color: #1e1e1e;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn_payment:hover {
+  background: #1e1e1e;
+  color: #fff;
+}
+
+.inline_summary {
+  display: none;
+}

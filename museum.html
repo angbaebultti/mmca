@@ -1,17 +1,25 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="국립현대미술관 영문 웹사이트 리디자인 프로젝트"
-    />
-    <meta
-      name="keywords"
-      content="MMCA, 국립현대미술관, 미술관, 전시, 웹디자인"
-    />
+  <meta
+    name="description"
+    content="MMCA (National Museum of Modern and Contemporary Art) English Website Redesign Project"
+/>
+<meta
+    name="keywords"
+    content="MMCA, National Museum of Modern and Contemporary Art, museum, exhibition, web design"
+/>
     <meta name="author" content="TEAM 아이조아" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="MMCA — National Museum of Modern and Contemporary Art">
+  <meta property="og:description" content="Discover Korean contemporary art at the MMCA. Explore exhibitions and plan your visit.">
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/angbaebultti/mmca/main/img/og_img.jpg"
+    />
+    <meta property="og:url" content="https://angbaebultti.github.io/mmca/" />
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script
       src="https://kit.fontawesome.com/b43057b3ba.js"
@@ -44,16 +52,20 @@
           <div class="nav">
             <div class="nav_bottom">
               <ul class="gnb_l">
-                <li><a href="#">VISIT</a></li>
-                <li><a href="#">ARTIST</a></li>
+                <li><a href="info.html">VISIT</a></li>
+                <li><a href="artist_award.html">ARTIST</a></li>
                 <li><a href="#">EXPLORE</a></li>
                 <li><a href="#">PROGRAM</a></li>
-                <li><a href="#">ABOUT</a></li>
-                <li><a href="#">TICKETS</a></li>
+                <li><a href="museum.html">ABOUT</a></li>
+                <li><a href="plan.html">TICKETS</a></li>
               </ul>
               <!-- //.gnb_l -->
               <div class="gnb_r">
                 <a href="#"><span>Sign in</span></a>
+                <!-- 모바일 티켓 아이콘 -->
+                <a href="plan.html" class="mobile_ticket_btn">
+                  <img src="img/mobile_ticket.svg" alt="ticket" />
+                </a>
                 <a href="#"
                   ><img src="img/ham_w.svg" alt="ham menu button" id="menu_btn"
                 /></a>
@@ -77,10 +89,16 @@
             <h3><a href="#">VISIT</a></h3>
             <ul>
               <li><a href="#">Location</a></li>
-              <li class="active"><a href="#">Seoul</a></li>
-              <li class="active"><a href="#">Gwacheon</a></li>
-              <li class="active"><a href="#">Deoksugung</a></li>
-              <li class="active"><a href="#">Cheongju</a></li>
+              <li class="active"><a href="museum.html#seoul">Seoul</a></li>
+              <li class="active">
+                <a href="museum.html#gwacheon">Gwacheon</a>
+              </li>
+              <li class="active">
+                <a href="museum.html#deoksugung">Deoksugung</a>
+              </li>
+              <li class="active">
+                <a href="museum.html#cheongju">Cheongju</a>
+              </li>
             </ul>
           </div>
           <div class="menu_col">
@@ -94,7 +112,7 @@
           <div class="menu_col">
             <h3><a href="#">EXPLORE</a></h3>
             <ul>
-              <li class="active"><a href="#">Collection</a></li>
+              <li><a href="#">Collection</a></li>
               <li><a href="#">Research</a></li>
               <li><a href="#">Archive</a></li>
               <li><a href="#">Digital Museum</a></li>
@@ -103,7 +121,7 @@
           <div class="menu_col">
             <h3><a href="#">ARTIST</a></h3>
             <ul>
-              <li><a href="#">Prize</a></li>
+              <li class="active"><a href="artist_award.html">Prize</a></li>
               <li><a href="#">Residency</a></li>
               <li><a href="#">Art Bank</a></li>
             </ul>
@@ -111,18 +129,18 @@
           <div class="menu_col">
             <h3><a href="#">ABOUT</a></h3>
             <ul>
-              <li><a href="#">About MMCA</a></li>
-              <li class="active"><a href="#">History</a></li>
+              <li class="active"><a href="#">About MMCA</a></li>
+              <li><a href="#">History</a></li>
               <li><a href="#">Mission</a></li>
               <li><a href="#">Organization</a></li>
               <li><a href="#">News</a></li>
             </ul>
           </div>
           <div class="menu_col">
-            <h3 class="tickets"><a href="#">TICKET</a></h3>
+            <h3 class="tickets"><a href="plan.html">TICKET</a></h3>
             <ul>
-              <li class="active"><a href="#">Purchase</a></li>
-              <li><a href="#">Reservation</a></li>
+              <li><a href="#">Purchase</a></li>
+              <li class="active"><a href="plan.html">Reservation</a></li>
             </ul>
           </div>
         </div>
@@ -203,10 +221,56 @@
       </section>
       <!-- //.intro_scene -->
 
+      <section class="museum_mobile">
+        <div class="museum_mobile_inner">
+          <div class="museum_mobile_track">
+            <button
+              class="museum_mobile_slide is_active"
+              type="button"
+              data-museum="seoul"
+            >
+              <img src="img/seoul.png" alt="MMCA Seoul" />
+              <span class="museum_mobile_name">Seoul</span>
+            </button>
+
+            <button
+              class="museum_mobile_slide"
+              type="button"
+              data-museum="deoksugung"
+            >
+              <img src="img/deoksugung.png" alt="MMCA Deoksugung" />
+              <span class="museum_mobile_name">Deoksugung</span>
+            </button>
+
+            <button
+              class="museum_mobile_slide"
+              type="button"
+              data-museum="gwacheon"
+            >
+              <img src="img/gwacheon.png" alt="MMCA Gwacheon" />
+              <span class="museum_mobile_name">Gwacheon</span>
+            </button>
+
+            <button
+              class="museum_mobile_slide"
+              type="button"
+              data-museum="cheongju"
+            >
+              <img src="img/cheongju.png" alt="MMCA Cheongju" />
+              <span class="museum_mobile_name">Cheongju</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
       <!-- EXHIBITIONS -->
       <div class="museum_wrap" id="museumWrap">
         <!-- ── 1. SEOUL ── -->
-        <section id="seoul" class="museum_exhibit_section is_horizontal">
+        <section
+          id="seoul"
+          class="museum_exhibit_section is_horizontal is_mobile_active"
+          data-museum-section="seoul"
+        >
           <div class="museum_inner">
             <div class="museum_h_sticky">
               <div class="museum_head">
@@ -330,7 +394,11 @@
         </section>
 
         <!-- ── 2. DEOKSUGUNG ── -->
-        <section id="deoksugung" class="museum_exhibit_section">
+        <section
+          id="deoksugung"
+          class="museum_exhibit_section"
+          data-museum-section="deoksugung"
+        >
           <div class="museum_inner">
             <div class="museum_head">
               <div class="museum_head_left">
@@ -354,7 +422,11 @@
         </section>
 
         <!-- ── 3. GWACHEON ── -->
-        <section id="gwacheon" class="museum_exhibit_section is_horizontal">
+        <section
+          id="gwacheon"
+          class="museum_exhibit_section is_horizontal"
+          data-museum-section="gwacheon"
+        >
           <div class="museum_inner">
             <div class="museum_h_sticky">
               <div class="museum_head">
@@ -479,7 +551,11 @@
         </section>
 
         <!-- ── 4. CHEONGJU ── -->
-        <section id="cheongju" class="museum_exhibit_section is_horizontal">
+        <section
+          id="cheongju"
+          class="museum_exhibit_section is_horizontal"
+          data-museum-section="cheongju"
+        >
           <div class="museum_inner">
             <div class="museum_h_sticky">
               <div class="museum_head">

@@ -114,6 +114,7 @@ section {}
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.3s ease;
   will-change: transform;
+  max-width: 1920px;
 }
 
 .header.hide {
@@ -176,7 +177,7 @@ section {}
     padding 0.5s ease,
     border 0.3s ease;
   width: 100%;
-  max-width: 1920px;
+  /* max-width: 1920px; */
   margin: 0 auto;
 }
 
@@ -225,12 +226,14 @@ section {}
   gap: 16px;
   font-size: 27px;
   cursor: pointer;
+  align-items: center; 
 }
 
 .gnb_r img#menu_btn {
   width: 32px;
   height: 32px;
-  margin-top: 3px;
+  margin-top: 0;
+  display: block;
 }
 
 .museum_nav {
@@ -248,6 +251,14 @@ section {}
   pointer-events: none;
 }
 
+.museum_nav.nav_locked .item .bg {
+  width: 0 !important;
+  transition: none !important;
+}
+
+.museum_nav.nav_locked .item:hover .bg {
+  width: 0 !important;
+}
 .row_top {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -296,7 +307,6 @@ section {}
   top: 0;
   left: 0;
   width: 0%;
-  /* 그대로 유지 */
   height: 100%;
   z-index: -1;
   transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
@@ -462,7 +472,6 @@ section {}
   opacity: 0.5;
 }
 
-/* 비활성메뉴 커서제거 */
 .menu_col ul li:not(.active) a {
   pointer-events: none;
   cursor: default;
@@ -530,13 +539,12 @@ footer {
 .f_top {
   display: flex;
   justify-content: space-between;
-  padding: 120px 120px 0 120px;
+  padding: 120px 140px 0 140px;
 }
 
 .f_left {
   display: flex;
   gap: 60px;
-  /* 28px → 원하는 값으로 */
   align-items: flex-start;
 }
 
@@ -639,9 +647,7 @@ footer {
   transform: scale(1.08);
 }
 
-.f_right_col ul li:nth-child(4) {
-  transform: translateX(2px);
-}
+
 
 .f_right_col ul li span {
   display: block;
@@ -662,7 +668,7 @@ footer {
   flex-direction: column;
   align-items: center;
   padding-bottom: 32px;
-}
+  }
 
 .f_logo {
   width: 100%;
@@ -675,7 +681,7 @@ footer {
 .f_logo span {
   display: block;
   font-family: 'Inter', sans-serif;
-  font-size: 500px;
+  font-size: 600px;
   font-weight: 700;
   letter-spacing: -0.06em;
   color: #ffffff;
@@ -693,7 +699,51 @@ footer {
   font-family: 'Inter', sans-serif;
 }
 
-* {
+.nav li {
+  position: relative;
+}
+
+.nav li a {
+  position: relative;
+  display: inline-block;
+  padding: 10px 12px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav li a::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  
+  width: 6px;
+  height: 6px;
+  background: #ff4b24;
+  border-radius: 50%;
+
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.nav li a:hover::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav li.active a::before {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav li:nth-child(3) a::before {
+  display: none;
+  cursor: none;
+}
+
+.nav li:nth-child(4) a::before {
+  display: none;
   cursor: none;
 }
 

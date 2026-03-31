@@ -1,0 +1,649 @@
+@charset "utf-8";
+
+
+@media (max-width: 1024px) {
+
+  .checkout {
+    padding: 90px 0;
+  }
+
+  .checkout .inner {
+    padding-top: 100px;
+    max-width: 938px;
+    padding-left: 43px;
+    padding-right: 43px;
+  }
+
+  .checkout_head h2 {
+    font-size: 90px;
+    letter-spacing: -5.3px;
+    font-weight: 500;
+  }
+
+  .checkout_head p {
+    font-size: 20px;
+    letter-spacing: -1px;
+    font-weight: 300;
+    margin-bottom: 107px;
+  }
+
+  .checkout_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .checkout_right {
+    display: none;
+  }
+
+  .checkout_left {
+    width: 100%;
+  }
+
+  .small_title {
+    font-size: 35px;
+    letter-spacing: -1.75px;
+  }
+
+  .main_title {
+    font-size: 56px;
+    letter-spacing: -2.8px;
+    margin: 10px 0 88px;
+    font-weight: 600;
+  }
+
+  /* step 너비를 전체로 열고, 내부 요소들이 자연스럽게 채우도록 */
+  .step {
+    margin-bottom: 60px;
+    max-width: 100%;
+  }
+
+  .step_head {
+    gap: 35px;
+    margin-bottom: 46px;
+  }
+
+  .num {
+    width: 57px;
+    height: 57px;
+    line-height: 57px;
+    font-size: 24px;
+  }
+
+  .step h4 {
+    font-size: 46px;
+    letter-spacing: -2.3px;
+  }
+
+  .form_group {
+    margin-bottom: 49px;
+    max-width: 550px;
+  }
+
+  .form_group label {
+    font-size: 20px;
+    letter-spacing: -0.88px;
+  }
+
+  .form_group input {
+    height: 35px;
+    font-size: 14px;
+    border-bottom-width: 0.876px;
+  }
+
+  .helper {
+    font-size: 12px;
+    letter-spacing: -0.53px;
+  }
+
+  .send_code .box {
+    width: 21px;
+    height: 21px;
+  }
+
+  .send_code .text {
+    font-size: 16px;
+  }
+
+  /* ── CARD BOX (02 Payment) ── */
+  /* max-width 제거 — .step 너비 안에서 100% 채움 */
+  .card_box {
+    padding: 28px 21px;
+    background: #434343;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .card_box .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: 26px;
+    padding-bottom: 14px;
+    border-bottom: 0.876px solid #f5f5f5;
+    margin-bottom: 20px;
+  }
+
+  .card_box .card_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .card_box .title i {
+    line-height: 1;
+    vertical-align: middle;
+    font-size: 22px;
+  }
+
+  .card_title {
+    font-size: 22px;
+    letter-spacing: -1.1px;
+    margin-bottom: 0;
+  }
+
+  .row {
+    gap: 40px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .row .form_group {
+    max-width: none;
+    flex: 1;
+    margin-bottom: 0;
+  }
+
+  /* ── AGREEMENT (03) ── */
+  .agree {
+    font-size: 18px;
+    letter-spacing: -0.7px;
+    gap: 14px;
+  }
+
+  .checkmark {
+    width: 24.5px;
+    height: 24.5px;
+    flex-shrink: 0;
+  }
+
+  .notice {
+    padding: 14px 42px;
+    font-size: 17px;
+    border-left-width: 4.4px;
+  }
+
+  .notice strong {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  /* ── PURCHASE BUTTON ── */
+  .purchase_btn {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 24px;
+    letter-spacing: -1.23px;
+    border-width: 1px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+}
+
+@media (max-width: 480px) {
+ 
+  /* ── 섹션 전체 ── */
+  .checkout {
+    padding: 0;
+  }
+ 
+  .checkout .inner {
+    padding-top: 50px;
+    padding-bottom: 60px;
+    padding-left: 48px;
+    padding-right: 48px;
+    max-width: 100%;
+  }
+ 
+  /* ── 타이틀 ── */
+  .checkout_head h2 {
+    font-size: 50px;
+    letter-spacing: -3px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+ 
+  .checkout_head p {
+    font-size: 16px;
+    letter-spacing: -0.64px;
+    font-weight: 400;
+    margin-bottom: 90px;
+  }
+ 
+  /* ── SECURE CHECKOUT / Finalize ── */
+  .small_title {
+    font-size: 16.4px;
+    letter-spacing: -0.82px;
+    font-weight: 400;
+  }
+ 
+  .main_title {
+    font-size: 28px;
+    letter-spacing: -1.4px;
+    font-weight: 600;
+    margin: 8px 0 53px;
+  }
+ 
+  /* ── STEP 공통 ── */
+  .step {
+    margin-bottom: 80px;
+    max-width: 100%;
+  }
+ 
+  .step_head {
+    gap: 16px;
+    margin-bottom: 33px;
+  }
+ 
+  .num {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+ 
+  .step h4 {
+    font-size: 30px;
+    letter-spacing: -1.5px;
+    font-weight: 500;
+  }
+ 
+  /* ── FORM ── */
+  .form_group {
+    margin-bottom: 33px;
+    max-width: 100%;
+  }
+ 
+  .form_group label {
+    font-size: 16px;
+    letter-spacing: -0.8px;
+    font-weight: 600;
+  }
+ 
+  .form_group input {
+    height: 32px;
+    font-size: 16px;
+    border-bottom-width: 0.6px;
+  }
+ 
+  .input_row {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 8px;
+  }
+ 
+  .helper {
+    font-size: 12px;
+    letter-spacing: -0.6px;
+    color: #4b85f0;
+    font-weight: 500;
+  }
+ 
+  /* send_code */
+  .send_code label {
+    padding: 0;
+    height: 32px;
+    gap: 7px;
+  }
+ 
+  .send_code .box {
+    width: 15px;
+    height: 15px;
+  }
+ 
+  .send_code .text {
+    font-size: 14px;
+    letter-spacing: -0.7px;
+    font-weight: 600;
+  }
+ 
+  /* ── CARD BOX (02 Payment) ── */
+  .card_box {
+    padding: 13px 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+ 
+  .card_box .title {
+    gap: 14px;
+    padding-bottom: 8px;
+    border-bottom-width: 0.48px;
+    margin-bottom: 26px;
+  }
+ 
+  .card_box .title i {
+    font-size: 18px;
+  }
+ 
+  .card_title {
+    font-size: 13px;
+    letter-spacing: -0.66px;
+    font-weight: 600;
+  }
+ 
+  .row {
+    gap: 38px;
+  }
+ 
+  .row .form_group {
+    margin-bottom: 0;
+  }
+ 
+  .row .form_group label {
+    font-size: 13px;
+    letter-spacing: -0.66px;
+  }
+ 
+  .row .form_group input {
+    font-size: 15px;
+    border-bottom-width: 0.48px;
+  }
+ 
+  /* card 내 form_group (card number) */
+  .card_box > .form_group label {
+    font-size: 13px;
+    letter-spacing: -0.66px;
+  }
+ 
+  .card_box > .form_group input {
+    font-size: 15px;
+    border-bottom-width: 0.48px;
+  }
+ 
+  /* ── AGREEMENT (03) ── */
+  .agree {
+    font-size: 14px;
+    letter-spacing: -0.42px;
+    gap: 15px;
+    padding-left: 14px;
+    align-items: flex-start;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+ 
+  .checkmark {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+ 
+  .notice {
+    padding: 15px 20px;
+    font-size: 12px;
+    border-left-width: 2px;
+    line-height: 1.5;
+  }
+ 
+  .notice strong {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+ 
+  /* ── PURCHASE BUTTON ── */
+  .purchase_btn {
+    width: 384px;
+    max-width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    font-weight: 600;
+    border-width: 1px;
+    background: #fff;
+    color: #1e1e1e;
+    border-color: #1e1e1e;
+    text-align: center;
+    margin-top: 22px;
+  }
+ 
+  .purchase_btn:hover,
+  .purchase_btn.active {
+    background: #FF6624;
+    border-color: #FF6624;
+    color: #fff;
+  }
+ 
+}
+
+@media (max-width: 480px) {
+ 
+  /* ── 섹션 전체 ── */
+  .checkout {
+    padding: 0;
+  }
+ 
+  .checkout .inner {
+    padding-top: 50px;
+    padding-bottom: 60px;
+    padding-left: 48px;
+    padding-right: 48px;
+    max-width: 100%;
+  }
+ 
+  /* ── 타이틀 ── */
+  .checkout_head h2 {
+    font-size: 48px;
+    letter-spacing: -3px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+ 
+  .checkout_head p {
+    font-size: 16px;
+    letter-spacing: -0.64px;
+    font-weight: 400;
+    margin-bottom: 90px;
+  }
+ 
+  /* ── SECURE CHECKOUT / Finalize ── */
+  .small_title {
+    font-size: 16.4px;
+    letter-spacing: -0.82px;
+    font-weight: 400;
+  }
+ 
+  .main_title {
+    font-size: 28px;
+    letter-spacing: -1.4px;
+    font-weight: 600;
+    margin: 8px 0 53px;
+  }
+ 
+  /* ── STEP 공통 ── */
+  .step {
+    margin-bottom: 80px;
+    max-width: 100%;
+  }
+ 
+  .step_head {
+    gap: 16px;
+    margin-bottom: 33px;
+  }
+ 
+  .num {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+ 
+  .step h4 {
+    font-size: 30px;
+    letter-spacing: -1.5px;
+    font-weight: 500;
+  }
+ 
+  /* ── FORM ── */
+  .form_group {
+    margin-bottom: 33px;
+    max-width: 100%;
+  }
+ 
+  .form_group label {
+    font-size: 16px;
+    letter-spacing: -0.8px;
+    font-weight: 600;
+  }
+ 
+  .form_group input {
+    height: 32px;
+    font-size: 16px;
+    border-bottom-width: 0.6px;
+  }
+ 
+  .input_row {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 8px;
+  }
+ 
+  .helper {
+    font-size: 12px;
+    letter-spacing: -0.6px;
+    color: #4b85f0;
+    font-weight: 500;
+  }
+ 
+  /* send_code */
+  .send_code label {
+    padding: 0;
+    height: 32px;
+    gap: 7px;
+  }
+ 
+  .send_code .box {
+    width: 15px;
+    height: 15px;
+  }
+ 
+  .send_code .text {
+    font-size: 14px;
+    letter-spacing: -0.7px;
+    font-weight: 600;
+  }
+ 
+  /* ── CARD BOX (02 Payment) ── */
+  .card_box {
+    padding: 13px 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+ 
+  .card_box .title {
+    gap: 14px;
+    padding-bottom: 8px;
+    border-bottom-width: 0.48px;
+    margin-bottom: 26px;
+  }
+ 
+  .card_box .title i {
+    font-size: 18px;
+  }
+ 
+  .card_title {
+    font-size: 13px;
+    letter-spacing: -0.66px;
+    font-weight: 600;
+  }
+ 
+  .row {
+    gap: 38px;
+  }
+ 
+  .row .form_group {
+    margin-bottom: 0;
+  }
+ 
+  .row .form_group label {
+    font-size: 13px;
+    letter-spacing: -0.66px;
+  }
+ 
+  .row .form_group input {
+    font-size: 15px;
+    border-bottom-width: 0.48px;
+  }
+ 
+  /* card 내 form_group (card number) */
+  .card_box > .form_group label {
+    font-size: 13px;
+    letter-spacing: -0.66px;
+  }
+ 
+  .card_box > .form_group input {
+    font-size: 15px;
+    border-bottom-width: 0.48px;
+  }
+ 
+  /* ── AGREEMENT (03) ── */
+  .agree {
+    font-size: 14px;
+    letter-spacing: -0.42px;
+    gap: 15px;
+    padding-left: 14px;
+    align-items: flex-start;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+ 
+  .checkmark {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+ 
+  .notice {
+    padding: 15px 20px;
+    font-size: 12px;
+    border-left-width: 2px;
+    line-height: 1.5;
+  }
+ 
+  .notice strong {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+ 
+  /* ── PURCHASE BUTTON ── */
+  .purchase_btn {
+    width: 384px;
+    max-width: 100%;
+    padding: 16px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    font-weight: 600;
+    border-width: 1px;
+    background: #fff;
+    color: #1e1e1e;
+    border-color: #1e1e1e;
+    text-align: center;
+    margin-top: 22px;
+  }
+ 
+  .purchase_btn:hover,
+  .purchase_btn.active {
+    background: #FF6624;
+    border-color: #FF6624;
+    color: #fff;
+  }
+ 
+}

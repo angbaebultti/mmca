@@ -1,0 +1,394 @@
+@charset "utf-8";
+
+@media screen and (max-width: 1024px) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+
+  .horizontal_scroll_wrapper {
+    height: auto;
+  }
+
+  .horizontal_scroll_sticky {
+    height: auto;
+    position: relative;
+  }
+
+  .page_title_bar {
+    padding: 20px 75px;
+    margin-top: 128px;
+  }
+
+  .page_title,
+  .history_title,
+  .video_section_title {
+    font-size: 65px;
+  }
+
+  .history_title,
+  .video_section_title {
+    padding: 20px 75px;
+  }
+
+  .horizontal_scroll_wrapper {
+    height: auto;
+  }
+
+  .horizontal_scroll_sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .slide_layout {
+    flex-direction: column;
+    gap: 25px;
+    align-items: stretch;
+    touch-action: pan-y;
+  }
+
+  .artist_left_col {
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .slide_artworks {
+    flex-direction: row;
+  }
+
+  .slide_meta_col {
+    flex-direction: row;
+    order: -1;
+    height: fit-content;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .skip_btn {
+    display: none;
+  }
+
+  #section05 {
+    position: static;
+    transform: none;
+    margin-left: auto;
+    z-index: 1;
+  }
+
+  #section05 a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 82px;
+    height: 40px;
+    padding-right: 0;
+    color: rgba(255, 102, 36, 0.78);
+    font-size: 0;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  #section05 a span {
+    position: absolute;
+    top: 45%;
+    right: 28px;
+    width: 28px;
+    height: 28px;
+    margin-left: 0;
+    border-top: 1px solid rgba(255, 102, 36, 0.78);
+    border-right: 1px solid rgba(255, 102, 36, 0.78);
+    border-left: 0;
+    border-bottom: 0;
+    box-sizing: border-box;
+    transform: translateY(-50%) rotate(45deg);
+    animation: swipe_arrow 1.4s infinite;
+  }
+
+  #section05 a span:nth-of-type(1) {
+    left: 54px;
+    animation-delay: 0s;
+  }
+
+  #section05 a span:nth-of-type(2) {
+    right: 16px;
+    animation-delay: 0.12s;
+  }
+
+  @keyframes swipe_arrow {
+    0% {
+      transform: translate(-4px, -50%) rotate(45deg);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(8px, -50%) rotate(45deg);
+      opacity: 0;
+    }
+  }
+
+  .slide_year {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    line-height: 1;
+  }
+
+  .slide_artworks {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .slide_artworks .artwork_card {
+    width: 100%;
+  }
+
+  .slide_artworks img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .slide_dots {
+    width: auto;
+    position: static;
+    transform: none;
+    gap: 8px;
+    z-index: 2;
+    align-self: center;
+    justify-content: center;
+    margin-inline: auto;
+    margin-top: -4px;
+  }
+
+  .slide_dots_wrap {
+    display: none;
+  }
+
+  /* history 섹션 */
+
+  .history_wrapper {
+    height: auto;
+  }
+
+  .history_sticky {
+    position: relative;
+    height: auto;
+  }
+
+  .history_title {
+    /* margin-bottom: 28px; */
+  }
+
+  .history_section {
+    padding: 170px 78px 170px;
+    gap: 20px;
+  }
+
+  .history_slider_wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .history_slider_wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .history_track {
+    width: max-content;
+    transform: translateX(0);
+    padding-right: 56px;
+    transition: none;
+  }
+
+  .poster_item img {
+    width: 180px;
+    height: 246px;
+  }
+
+  .history_slider_control {
+    padding-inline: 0;
+  }
+
+  /* video 섹션 */
+
+  .video_wrapper {
+    height: auto;
+  }
+
+  .video_sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+  }
+
+  .video_grid {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 28px;
+    padding: 150px 56px;
+  }
+
+  .video_item {
+    width: min(100%, 680px);
+  }
+
+  .video_item iframe {
+    height: 360px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .top_btn {
+    display: none;
+  }
+
+  .page_title_bar {
+    padding: 18px 20px;
+    margin-top: 85px;
+  }
+
+  .page_title,
+  .history_title,
+  .video_section_title {
+    font-size: 32px;
+  }
+
+  .history_title,
+  .video_section_title {
+    padding: 18px 20px;
+  }
+
+  .slide_layout {
+    padding: 36px 20px 64px;
+    gap: 18px;
+  }
+
+  #section05 a span:nth-of-type(1) {
+    left: 24px;
+    animation-delay: 0s;
+  }
+
+  #section05 a span:nth-of-type(2) {
+    right: 6px;
+    animation-delay: 0.12s;
+  }
+
+  .artist_left_col {
+    gap: 14px;
+  }
+
+  .artist_photo_wrap {
+    width: 40%;
+    min-width: 96px;
+    aspect-ratio: 3 / 4;
+  }
+
+  .slide_info {
+    margin-top: 0;
+    max-width: none;
+    flex: 1;
+  }
+
+  .artist_name {
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+  .artist_desc {
+    max-width: none;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .slide_meta_col {
+    gap: 10px;
+  }
+
+  .slide_year {
+    font-size: 58px;
+  }
+
+  .slide_artworks {
+    gap: 12px;
+  }
+
+  .slide_artworks img {
+    height: 120px;
+  }
+
+  .history_section {
+    padding: 80px 20px 100px;
+    gap: 28px;
+  }
+
+  .poster_item img {
+    width: 136px;
+    height: 186px;
+  }
+
+  .poster_year {
+    font-size: 16px;
+  }
+
+  .history_slider_control {
+    gap: 14px;
+  }
+
+  .slider_label {
+    font-size: 16px;
+  }
+
+  .video_grid {
+    gap: 20px;
+    padding: 90px 20px;
+  }
+
+  .video_item iframe {
+    height: 220px;
+  }
+
+  .modal_panel {
+    width: calc(100% - 56px);
+    max-width: 360px;
+    padding: 28px 20px 48px;
+  }
+
+  .modal_close_btn {
+    font-size: 22px;
+    margin-bottom: 18px;
+    padding: 2px;
+  }
+
+  .modal_essay_title {
+    font-size: 28px;
+    line-height: 1.25;
+  }
+
+  .modal_title_line {
+    display: inline;
+  }
+
+  .modal_essay_author {
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+  }
+
+  .modal_essay_body p {
+    font-size: 14px;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+}

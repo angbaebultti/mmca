@@ -1,12 +1,10 @@
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@0,300..700&display=swap');
-/* font-family: "Red Hat Mono", monospace; */
-
 
 .plan_main {
   background: var(--main_black);
   border-top: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 120px 220px;
+  padding: 140px 250px;
   margin-top: 0px;
 }
 
@@ -23,7 +21,7 @@
   content: '';
   position: absolute;
   top: 0;
-  right: 618px;
+  right:42%;
   width: 1px;
   height: 100%;
   background: rgba(255, 255, 255, 0.25);
@@ -132,19 +130,15 @@
   color: #fff;
 }
 
-
 .date_inner {
   width: 100%;
   margin: 0 auto;
 }
 
-
 .cal_outer {
   width: 100%;
   margin-top: 40px;
 }
-
-
 
 .cal_two {
   display: grid;
@@ -153,8 +147,7 @@
   border-radius: 20px;
   padding: 20px;
   gap: 12px;
-  box-shadow:
-    0 20px 60px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   border: none;
   width: 100%;
   margin: 0;
@@ -166,7 +159,6 @@
   padding: 28px 24px;
   transition: all 0.3s ease;
 }
-
 
 .cal_mheader {
   display: flex;
@@ -252,7 +244,6 @@
   cursor: default;
 }
 
-
 .cal_day.today {
   box-shadow: inset 0 0 0 1px #ccc;
 }
@@ -271,7 +262,6 @@
   transform: none;
   box-shadow: none;
 }
-
 
 .cal_day:hover {
   background: rgba(0, 120, 215, 0.1);
@@ -299,7 +289,6 @@
   border-radius: 0 50% 50% 0;
 }
 
-
 .sel_label {
   font-size: 20px;
   color: #fff;
@@ -308,7 +297,6 @@
   min-height: 20px;
   letter-spacing: -0.02em;
 }
-
 
 .time_select {
   display: flex;
@@ -348,7 +336,6 @@
   font-weight: 500;
 }
 
-
 .guide_links {
   display: flex;
   justify-content: center;
@@ -366,11 +353,7 @@
   color: #fff;
 }
 
-
-/* ═══════════════════════════════════════════════════════
-   인원 선택 (기존 유지)
-   ═══════════════════════════════════════════════════════ */
-
+/* 인원 선택 */
 .visitor_box {
   background: #424242;
   padding: 10px 0;
@@ -442,13 +425,11 @@
   color: #f5f5f5;
 }
 
-/* ═══════════════════════════════════════════════════════
-   Summary 카드 (기존 유지)
-   ═══════════════════════════════════════════════════════ */
 
 .plan_right {
   position: relative;
-  transform: translateX(35%);
+  transform: translateX(80%);
+
 }
 
 .summary_card {
@@ -556,4 +537,8 @@
 .btn_payment:hover {
   background: #1e1e1e;
   color: #fff;
+}
+
+.inline_summary {
+  display: none;
 }

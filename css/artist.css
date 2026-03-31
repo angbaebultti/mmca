@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+/* 1번+6번섹션 */
+
 .page_title_bar {
   display: flex;
   align-items: baseline;
@@ -7,7 +9,7 @@
   align-items: center;
   padding: 20px 136px;
   border-bottom: 1px solid var(--gray_06);
-  margin-top: 161px;
+  margin-top: 172px;
 }
 
 .page_title {
@@ -368,6 +370,7 @@
   overflow: hidden;
   flex: 1;
   min-height: 0;
+  justify-content: center;
 }
 
 .history_title {
@@ -378,7 +381,7 @@
   color: var(--main_white);
   border-block: 1px solid var(--gray_06);
   padding: 20px 136px;
-  margin-bottom: 130px; /* 추가 */
+  /* margin-bottom: 130px; */
 }
 
 /* 포스터 트랙 컨테이너 - overflow hidden으로 잘라냄 */
@@ -474,10 +477,14 @@
 .slider_fill {
   position: absolute;
   left: 0;
+  right: 0;
   height: 1px;
   background: rgba(255, 102, 36, 0.9);
-  width: 0%;
+  width: 100%;
   z-index: 1;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
 }
 
 .slider_thumb {
@@ -488,10 +495,11 @@
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   cursor: grab;
   z-index: 2;
   touch-action: none;
+  will-change: transform;
 }
 
 .slider_thumb:active {
@@ -505,7 +513,7 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: rgba(102, 43, 17, 0.8); /* 포인트컬러로 교체 */
+  background: rgba(85, 43, 25, 0.8); /* 포인트컬러로 교체 */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s;
@@ -718,6 +726,7 @@
   cursor: none;
 }
 
+/* 커서 css */
 .cursor-dot {
   position: fixed;
   width: 6px;
