@@ -86,8 +86,14 @@ document.addEventListener("DOMContentLoaded", () => {
     y: isMobile480 ? 0 : 60,
   });
 
-  if (isMobile480) {
-    gsap.set(mainTitle, { opacity: 1, y: 0, clearProps: "all" });
+  /* =========================================================
+   * ✅ 수정: 480px 이하에서 mainTitle GSAP 완전 차단
+   *    - gsap.set clearProps로 GSAP 인라인 스타일 초기화
+   *    - gsap.killTweensOf로 이후 트윈 등록 차단
+   * ========================================================= */
+  if (isMobile480 && mainTitle) {
+    gsap.set(mainTitle, { clearProps: "all" });
+    gsap.killTweensOf(mainTitle);
   }
 
   /* =========================================================

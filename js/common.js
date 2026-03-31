@@ -69,22 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   });
 
-  fillTl.to(museumNav, {
-    height: 0,
-    borderTopWidth: 0,
-    borderBottomWidth: 0,
-    duration: 0.6,
-    ease: 'power2.inOut',
-    overflow: 'hidden',
-  }, '+=0.5');
+fillTl.to(header, {
+  yPercent: -100,
+  opacity: 0,
+  duration: 0.6,
+  ease: 'power2.inOut',
+}, '+=0.5');
 
-  fillTl.to(header, {
-    height: header.offsetHeight - navHeight,
-    duration: 0.6,
-    ease: 'power2.inOut',
-  }, '<');
+// 애니메이션 끝나면 GSAP 인라인 스타일 제거 → CSS 클래스가 다시 제어
+fillTl.call(() => {
+  gsap.set(header, { clearProps: 'transform,opacity' });
+  header.classList.add('hide');
+});
 
-  fillTl.set(museumNav, { display: 'none' });
 
 
 }); // DOMContentLoaded end
