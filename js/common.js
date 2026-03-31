@@ -1,113 +1,90 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const menuBtn = document.getElementById("menu_btn");
-    const closeBtn = document.getElementById("close_btn");
-    const menu = document.getElementById("menu");
+  /* ── 메뉴 ── */
+  const menuBtn  = document.getElementById("menu_btn");
+  const closeBtn = document.getElementById("close_btn");
+  const menu     = document.getElementById("menu");
+  let scrollY = 0;
 
-    let scrollY = 0;
+  menuBtn.addEventListener("click", () => {
+    scrollY = window.scrollY;
+    menu.classList.add("active");
+    document.body.classList.add("menu_open");
+  });
 
-    menuBtn.addEventListener("click", () => {
-        scrollY = window.scrollY;
+  closeBtn.addEventListener("click", () => {
+    menu.classList.remove("active");
+    document.body.classList.remove("menu_open");
+    window.scrollTo(0, scrollY);
+  });
 
-        menu.classList.add("active");
+  /* ── 탑버튼 ── */
+  const topBtn = document.querySelector('.top_btn');
 
-        document.body.classList.add("menu_open");
-        /* document.body.style.position = "fixed";
-        document.body.style.top = `-${scrollY}px`;
-        document.body.style.width = "100%";  */
-    });
+  window.addEventListener('scroll', () => {
+    topBtn.classList.toggle('active', window.scrollY > 300);
+  });
 
-    closeBtn.addEventListener("click", () => {
-        menu.classList.remove("active");
-        document.body.classList.remove("menu_open");
-        window.scrollTo(0, scrollY);
-        /*         menu.classList.remove("active");
-        
-                document.body.style.position = "";
-                document.body.style.top = "";
-                document.body.style.width = "";
-        
-                window.scrollTo(0, scrollY); */
-    });
+  /* ── 헤더 shrink / hide ── */
+  const header = document.querySelector(".header");
+  let lastScroll    = 0;
+  let scrollUpStart = 0;
 
+  window.addEventListener("scroll", () => {
+    const cur = window.scrollY;
 
-    const top_btn = document.querySelector('.top_btn');
+    header.classList.toggle("shrink", cur > 60);
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            top_btn.classList.add('active');
-        } else {
-            top_btn.classList.remove('active');
-        }
-    });
+    if (cur > lastScroll && cur > 100) {
+      header.classList.add("hide");
+      scrollUpStart = cur;
+    } else {
+      if (scrollUpStart - cur > 60) {
+        header.classList.remove("hide");
+      }
+    }
 
+    lastScroll = cur;
+  });
 
+  /* ── museum nav GSAP 애니메이션 ── */
+  const museumNav = document.querySelector('.museum_nav');
+  const items     = document.querySelectorAll('.item');
 
-    const header = document.querySelector(".header");
-
-    let lastScroll = 0;
-    let scrollUpStart = 0;
-
-    window.addEventListener("scroll", () => {
-        const currentScroll = window.scrollY;
-
-        if (currentScroll > 60) {
-            header.classList.add("shrink");
-        } else {
-            header.classList.remove("shrink");
-        }
-
-        if (currentScroll > lastScroll && currentScroll > 100) {
-            header.classList.add("hide");
-            scrollUpStart = currentScroll;
-        } else {
-            if (scrollUpStart - currentScroll > 60) {
-                header.classList.remove("hide");
-            }
-        }
-
-        lastScroll = currentScroll;
-    });
-
-    // gsap.registerPlugin(ScrollTrigger);
-
-const museumNav = document.querySelector('.museum_nav');
-const items = document.querySelectorAll('.item');
-
-museumNav.classList.remove('nav_locked');
-
-items.forEach(item => {
+  museumNav.classList.remove('nav_locked');
+  items.forEach(item => {
     item.querySelector('.bg').style.transition = 'none';
-});
+  });
 
-const fillTL = gsap.timeline();
+  const navHeight = museumNav.offsetHeight;
 
-items.forEach((item, i) => {
-    fillTL.fromTo(
-        item.querySelector('.bg'),
-        { width: '0%' },
-        { width: '100%', duration: 0.9, ease: 'power3.out' },
-        i * 0.3
+  const fillTl = gsap.timeline();
+
+  items.forEach((item, i) => {
+    fillTl.fromTo(
+      item.querySelector('.bg'),
+      { width: '0%' },
+      { width: '100%', duration: 0.9, ease: 'power3.out' },
+      i * 0.3
     );
-});
+  });
 
-fillTL.to(museumNav, {
+  fillTl.to(museumNav, {
     height: 0,
+    borderTopWidth: 0,
+    borderBottomWidth: 0,
     duration: 0.6,
     ease: 'power2.inOut',
     overflow: 'hidden',
-     borderTopWidth: 0,      // ✅ 추가
-    borderBottomWidth: 0, 
-}, '+=0.5');
+  }, '+=0.5');
 
-fillTL.to(header, {
+  fillTl.to(header, {
     height: header.offsetHeight - navHeight,
     duration: 0.6,
     ease: 'power2.inOut',
-}, '<');
+  }, '<');
 
-fillTL.set(museumNav, {
-    display: 'none',
-});
-});
-//dom end
+  fillTl.set(museumNav, { display: 'none' });
+
+
+}); // DOMContentLoaded end
