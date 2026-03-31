@@ -78,9 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
             { width: '0%' },
             {
                 width: '100%',
-                duration: 0.4,        // 0.8 → 0.4
+                duration: 0.4,       
                 ease: 'power4.out',
-                delay: 0.1 + i * 0.05,  // 0.2 + i * 0.1 → 더 빠르게
+                delay: 0.1 + i * 0.05, 
             }
         );
     });
