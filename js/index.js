@@ -156,6 +156,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
   buildTimeline();
 
+ScrollTrigger.create({
+  trigger: '.scroll_spacer',
+  start: '95% top',
+  onEnter: () => {
+    gsap.to('#intro_wrapper', {
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power2.inOut',
+      onComplete: () => {
+        window.location.href = 'main.html';
+      }
+    });
+  },
+  once: true,
+});
+document.getElementById('skip_btn').addEventListener('click', () => {
+  // 인트로 즉시 페이드아웃 후 main.html로 이동
+  gsap.to('#intro_wrapper', {
+    opacity: 0,
+    duration: 0.5,
+    ease: 'power2.inOut',
+    onComplete: () => {
+      window.location.href = 'main.html';
+    }
+  });
+});
+
   /* ── 리사이즈 시 타임라인 재생성 (debounce) ── */
   let resizeTimer = null;
   window.addEventListener('resize', () => {
