@@ -29,6 +29,10 @@
     max-width: 100%;
   }
 
+  .museum_nav{
+    display: none;
+  }
+
   .main_visual {
     height: 80vh;
     min-height: 700px;
@@ -352,6 +356,10 @@
    html, body {
     overflow-x: hidden;
     max-width: 100%;
+  }
+
+  .museum_nav{
+    display: none;
   }
 
   /* ===== MAIN VISUAL ===== */
