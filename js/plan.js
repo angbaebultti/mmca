@@ -23,7 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
   ];
 
-  let visibleMonthCount = window.innerWidth <= 1024 ? 1 : 2;
+  function getVisibleMonthCount() {
+    return window.matchMedia('(max-width: 480px)').matches ? 1 : 2;
+  }
+
+  let visibleMonthCount = getVisibleMonthCount();
 
   function moveMonth(delta) {
     state.month += delta;
@@ -292,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function initCalendarResponsive() {
     window.addEventListener('resize', () => {
-      const nextVisibleMonthCount = window.innerWidth <= 1024 ? 1 : 2;
+      const nextVisibleMonthCount = getVisibleMonthCount();
       if (nextVisibleMonthCount === visibleMonthCount) return;
 
       visibleMonthCount = nextVisibleMonthCount;
