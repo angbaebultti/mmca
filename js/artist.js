@@ -797,8 +797,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     // 각 카드가 등장하는 스크롤 진행률
-    const appearAt = [0.1, 0.3, 0.5];
-    const animationEnd = 0.65;
+    const appearAt = [0.14, 0.38, 0.62];
+    const animationEnd = 0.9;
 
     // 페이지 로드 시 transition 미리 설정
     items.forEach((item) => {

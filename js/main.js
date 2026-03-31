@@ -17,14 +17,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const stats = qsa(".stat");
   const ticketBg = qs(".ticket_bg");
 
+<<<<<<< HEAD
   window.addEventListener("scroll", () => {
     const visual = document.querySelector(".main_visual");
+=======
+ // 480에서는 z-index 조작 안 함
+window.addEventListener('scroll', () => {
+     if (window.innerWidth <= 480) return; // ← 추가
+    const visual = document.querySelector('.main_visual');
+>>>>>>> 8a6d3fb2044fc581e151b61352ae85d6903bff72
     if (window.scrollY > 100) {
       visual.style.zIndex = "5";
     } else {
       visual.style.zIndex = "1001";
     }
-  });
+});
 
   /* =========================================================
    * 1. 배경 티켓 생성

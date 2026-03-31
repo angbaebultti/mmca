@@ -354,6 +354,7 @@
   .visual_inner {
     height: 100svh;
     min-height: 0;
+    width: 100%;
   }
 
   .ticket {
