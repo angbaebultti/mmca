@@ -484,7 +484,7 @@
 }
 
 .artist_prize .title {
-  margin-top: -100px;
+  margin-top: -160px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -519,10 +519,7 @@
 
 .artist_wrap {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   overflow: hidden;
   z-index: 1;
   display: flex;
@@ -533,39 +530,52 @@
 .artist_track {
   display: flex;
   align-items: center;
-  gap: 6vw;
+  gap: clamp(32px, 3vw, 64px);
   height: 100%;
-  padding-left: 15vw;
+  padding-left: clamp(40px, 8vw, 180px);
   padding-right: 0;
+  padding-bottom: 0;
   will-change: transform;
   width: max-content;
 }
 
 /* ✅ 수정: 카드 width를 vw, 높이는 자동으로 화면 비율에 맞게 */
 .artist_card {
-  width: 20vw;
+  height: clamp(360px, 46vh, 520px);
+  aspect-ratio: 350 / 470;
+  width: auto;
   flex-shrink: 0;
   transform: rotate(-6deg);
   transition: transform 0.4s ease;
   background: #1e1e1e;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6);
-  margin: 1vw;
-  padding: 1vw;
+  margin: 0;
+  padding: clamp(10px, 0.8vw, 16px);
+  display: flex;
+}
+
+.artist_card a {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
 }
 
 /* ✅ 수정: 이미지 3:4 비율 */
 .artist_card img {
   width: 100%;
-  aspect-ratio: 3 / 4;
-  display: block;
+  flex: 1;
   object-fit: cover;
+  display: block;
+  min-height: 0;
 }
 
 /* ✅ 수정: 연도 텍스트 크기를 vh 기반으로 */
 .artist_card p {
-  margin: 1vh 0 1vh 0.5vw;
+  margin: 12px 0 0;
   font-weight: 800;
-  font-size: 4vh;
+  font-size: clamp(28px, 2.4vw, 52px);
+  line-height: 1;
   text-align: center;
 }
 

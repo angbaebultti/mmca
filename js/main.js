@@ -248,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scrollTrigger: {
         trigger: ".artist_prize",
         start: "top 10%",
-        end: () => "+=" + (Math.abs(getScrollAmount()) + window.innerWidth),
+        end: () => "+=" + Math.abs(getScrollAmount()),
         scrub: 1.2,
         pin: true,
         anticipatePin: 1,
@@ -266,30 +266,29 @@ document.addEventListener("DOMContentLoaded", () => {
         filter: "blur(0px)",
         color: "#ffffff",
         "-webkit-text-stroke": "0px transparent",
-        stagger: { each: 0.03, from: "random" },
+        stagger: { each: 0.02, from: "random" },
         ease: "power3.out",
-        duration: 0.5,
+        duration: 0.2,
       }, 0);
     }
 
     /* 2단계 — 카드 등장 + 텍스트 opacity 0.3으로 동시에 */
-    masterTL.to({}, { duration: 0.15 });
-
     masterTL.to(artistCards, {
       opacity: 1,
       xPercent: 0,
-      stagger: 0.06,
+      stagger: 0.03,
       ease: "power3.out",
-      duration: 0.4,
+      duration: 0.15,
     });
 
     if (letters.length) {
       masterTL.to(letters, {
         opacity: 0.3,
         ease: "power2.out",
-        duration: 0.3,
+        duration: 0.1,
       }, "<");
     }
+
     /* 3단계 — 카드 가로 슬라이드 */
     masterTL.to(".artist_track", {
       x: getScrollAmount,
@@ -297,7 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
       duration: 1,
     });
 
-    masterTL.to({}, { duration: 0.4 });
+    masterTL.to({}, { duration: 0.1 });
   }
 
   const groups = Array.from(qsa(".news_group"));
