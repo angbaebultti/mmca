@@ -29,6 +29,7 @@ body.is_ready {
 
 /* ── 최대 너비 제한 래퍼 ── */
 #intro_wrapper {
+  width: 100%;
   position: fixed;
   top: 0;
   left: 50%;
