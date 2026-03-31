@@ -53,32 +53,37 @@
         aria-modal="true"
         aria-labelledby="ai_modal_title"
       >
-        <div class="ai_icon">
-          <svg
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <rect x="3" y="5" width="18" height="14" rx="2" />
-            <circle cx="8.5" cy="10.5" r="1.5" />
-            <polyline points="3,16 7.5,12 10.5,15 14,11 21,16" />
-          </svg>
+        <!-- 상단 행: 아이콘 + 제목 + X 닫기 -->
+        <div class="ai_toast_header">
+          <div class="ai_icon">
+            <svg
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="5" width="18" height="14" rx="2" />
+              <circle cx="8.5" cy="10.5" r="1.5" />
+              <polyline points="3,16 7.5,12 10.5,15 14,11 21,16" />
+            </svg>
+          </div>
+          <h2 id="ai_modal_title">
+            All images are AI-generated virtual content
+          </h2>
+          <button id="ai_confirm" aria-label="Close">✕</button>
         </div>
-        <h2 id="ai_modal_title">
-          All images are AI-generated<br />virtual content
-        </h2>
+        <!-- 본문 -->
         <p>
-          All images on this site are virtually generated<br />through
-          artificial intelligence (AI).<br />They are not related to real
-          people, places, or objects.
+          All images on this site are virtually generated through AI. They are
+          not related to real people, places, or objects.
         </p>
-        <button id="ai_confirm">Confirm</button>
-        <p class="ai_footnote" style="margin-top: 1.25rem">
-          By continuing to use this site, you agree to the above notice.
-        </p>
+        <!-- 하단 버튼 행 -->
+        <div class="ai_action_row">
+          <button id="ai_dont_show">Don't show today</button>
+        </div>
       </div>
     </div>
+    <!-- //.ai_overlay -->
 
     <div class="wrap">
       <div class="top_btn">

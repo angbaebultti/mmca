@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-/* ===================== AI TOAST (좌측 하단) ===================== */
+/* ===================== AI TOAST ===================== */
 #ai_overlay {
   position: fixed;
   bottom: 32px;
@@ -11,34 +11,33 @@
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: auto;
 }
- 
+
 #ai_overlay.hidden {
   opacity: 0;
   transform: translateY(12px);
   pointer-events: none;
 }
- 
-/* 모달 박스 → 토스트 카드 */
+
 #ai_modal {
-  background: rgba(18, 18, 18, 0.82);
+  background: rgba(18, 18, 18, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 14px;
-  padding: 18px 20px 16px;
+  padding: 16px 18px 14px;
   width: 320px;
   text-align: left;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
 }
- 
-/* 상단 행: 아이콘 + 제목 + 닫기 버튼 */
+
+/* 상단 행 */
 .ai_toast_header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
- 
+
 /* 아이콘 */
 .ai_icon {
   width: 28px;
@@ -49,26 +48,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 1px;
 }
- 
+
 .ai_icon svg {
   width: 14px;
   height: 14px;
-  stroke: rgba(255, 255, 255, 0.75);
+  stroke: rgba(255, 255, 255, 0.7);
   fill: none;
 }
- 
-/* 제목 */
+
+/* 제목 — 1순위 위계 */
 #ai_modal_title {
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
   letter-spacing: 0.01em;
-  line-height: 1.4;
+  line-height: 1.45;
   flex: 1;
 }
- 
-/* 닫기(X) 버튼 */
+
+/* X 닫기 버튼 */
 #ai_confirm {
   width: 22px;
   height: 22px;
@@ -76,8 +76,8 @@
   background: rgba(255, 255, 255, 0.08);
   border: none;
   border-radius: 50%;
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
   line-height: 1;
   cursor: pointer;
   display: flex;
@@ -85,21 +85,44 @@
   justify-content: center;
   transition: background 0.15s, color 0.15s;
   padding: 0;
+  margin-top: 1px;
 }
- 
-#ai_confirm:hover {
-  background: rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.9);
-}
- 
-/* 본문 설명 */
-#ai_modal p:not(.ai_footnote) {
-  font-size: 11px;
+
+
+/* 본문 — 2순위 위계 */
+#ai_modal p {
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.45);
-  line-height: 1.65;
-  margin: 0;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
 }
- 
+
+/* 하단 버튼 행 */
+.ai_action_row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Don't show today 버튼 — 3순위 (텍스트형) */
+#ai_dont_show {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.15s;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+#ai_dont_show:hover {
+  color: rgba(255, 255, 255, 0.65);
+}
+
 /* 하단 부연 — 토스트에서는 숨김 (너무 많음) */
 .ai_footnote {
   display: none;
@@ -139,7 +162,7 @@
   z-index: 2000;
   width: 100%;
   margin-bottom: 30px;
-  padding-top: 200px}
+  padding-top: 200px;}
 
 .ticket {
   position: absolute;
@@ -529,7 +552,7 @@
   flex-shrink: 0;
   transform: rotate(-6deg);
   transition: transform 0.4s ease;
-  background: var(#1e1e1e);
+  background: #1e1e1e;
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.6);
   margin: 16px;
   padding: 16px;

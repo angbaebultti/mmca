@@ -99,9 +99,6 @@ body.menu_open {
   transform: translateY(-4px);
 }
 
-section {}
-
-
 .header {
   position: fixed;
   top: 0;
