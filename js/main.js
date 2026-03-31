@@ -690,37 +690,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-let isInNews = false;
-let isOnTopBtn = false;
+let isInLight = false;
 
 document.addEventListener("mousedown", () => dot.classList.add("orange"));
 document.addEventListener("mouseup", () => {
-  if (!isInNews && !isOnTopBtn) dot.classList.remove("orange");
+  if (!isInLight) dot.classList.remove("orange");
 });
 
-const newsSection = qs(".news");
-if (newsSection) {
-  newsSection.addEventListener("mouseenter", () => {
-    isInNews = true;
+// data-cursor="light" 달린 모든 섹션에 자동 적용
+const lightSections = qsa('[data-cursor="light"]');
+lightSections.forEach((section) => {
+  section.addEventListener("mouseenter", () => {
+    isInLight = true;
     dot.classList.add("orange");
+    ring.classList.add("orange");
   });
-  newsSection.addEventListener("mouseleave", () => {
-    isInNews = false;
+  section.addEventListener("mouseleave", () => {
+    isInLight = false;
     dot.classList.remove("orange");
+    ring.classList.remove("orange");
   });
-}
-
-const topBtn = qs(".top_btn");
-if (topBtn) {
-  topBtn.addEventListener("mouseenter", () => {
-    isOnTopBtn = true;
-    dot.classList.add("orange");
-  });
-  topBtn.addEventListener("mouseleave", () => {
-    isOnTopBtn = false;
-    dot.classList.remove("orange");
-  });
-}
+});
 
 const scrollIndicator = document.querySelector('.scroll_indicator');
 

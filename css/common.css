@@ -815,6 +815,9 @@ footer {
 }
 
 .cursor-dot.orange {
-  background: #ff4b24;
+   background: #FF4B24; 
 }
 
+.cursor-ring.orange {
+  border-color: #FF4B24;
+}
