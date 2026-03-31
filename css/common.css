@@ -419,7 +419,9 @@ body.menu_open {
 
 .menu_all{
   width: 100%;
-  padding-left: 50px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 100px
 }
 
 .menu_top::after {
