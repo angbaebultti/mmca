@@ -50,8 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * 2. 초기 세팅
    * ========================================================= */
   const isMobile = window.innerWidth <= 1024;
-  const isMobile480 = window.matchMedia('(max-width: 480px)').matches;
-
+ const isMobile480 = window.innerWidth <= 480;
   if (!isMobile480) {
     gsap.set(ticketLeft, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
     gsap.set(ticketRight, { rotation: 0, x: 0, y: 0, opacity: 1, transformOrigin: 'bottom center', scale: isMobile ? 0.65 : 1 });
@@ -63,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   gsap.set(aboutContent, { opacity: isMobile480 ? 1 : 0, y: isMobile480 ? 0 : 60 });
 
+  if (isMobile480) {
+  gsap.set(mainTitle, { opacity: 1, y: 0, clearProps: 'all' });
+}
 
   /* =========================================================
    * 3. 메인 비주얼 - 티켓 등장 + 찢어짐 + 고정 + 떨어짐
