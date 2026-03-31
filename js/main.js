@@ -17,6 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const stats = qsa('.stat');
   const ticketBg = qs('.ticket_bg');
 
+  window.addEventListener('scroll', () => {
+  const visual = document.querySelector('.main_visual');
+  if (window.scrollY > 100) {
+    visual.style.zIndex = '5';
+  } else {
+    visual.style.zIndex = '1001';
+  }
+});
+
   /* =========================================================
    * 1. 배경 티켓 생성
    * ========================================================= */
