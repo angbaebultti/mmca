@@ -722,6 +722,15 @@ if (topBtn) {
   });
 }
 
+const scrollIndicator = document.querySelector('.scroll_indicator');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 80) {
+    scrollIndicator.classList.add('hidden');
+  } else {
+    scrollIndicator.classList.remove('hidden');
+  }
+});
 
   // 리사이즈 갱신
   window.addEventListener("resize", () => ScrollTrigger.refresh());
