@@ -12,7 +12,7 @@
   padding: 40px;
   background: #fff;
   color: #1e1e1e;
-  font-family: 'Red Hat Mono', monospace;
+  font-family: "Red Hat Mono", monospace;
 }
 
 .inline_summary_label {
@@ -87,12 +87,10 @@
   margin-top: 0;
 }
 
-
 /* ═══════════════════════════════════════════════════════
    태블릿 — 1024px 이하
    ═══════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
-
   .plan_main {
     padding: 80px 64px 80px;
   }
@@ -150,20 +148,22 @@
 
   .cal_two {
     grid-template-columns: 1fr;
-    width: min(100%, 458px);
+    width: min(100%, 500px);
     margin: 0 auto;
-    gap: 8px;
-    padding: 14px;
+    gap: 10px;
+    padding: 18px;
+    background: #fff;
   }
 
   .cal_month_col {
     width: 100%;
     max-width: none;
-    padding: 18px 14px;
+    padding: 22px 18px;
+    background: #f5f5f5;
   }
 
   .cal_mheader {
-    margin-bottom: 18px;
+    margin-bottom: 22px;
   }
 
   .nav_arrows {
@@ -171,54 +171,50 @@
   }
 
   .cal_mname {
-    font-size: 15px;
+    font-size: 17px;
   }
 
   .cal_day {
-    font-size: 12px;
+    font-size: 14px;
     color: #1e1e1e;
   }
 
-  
+  .cal_days_grid {
+    gap: 6px;
+  }
 
+  .cal_dow_row span {
+    font-size: 12px;
+  }
 
-.cal_days_grid {
-  gap: 4px;
-}
+  .time_btn {
+    width: 240px;
+    font-size: 18px;
+    padding: 14px 40px;
+  }
 
-.cal_dow_row span {
-  font-size: 11px;
-}
+  .visitor_item {
+    padding: 20px 40px;
+  }
 
-.time_btn {
-  width: 240px;
-  font-size: 18px;
-  padding: 14px 40px;
-}
+  .visitor_info strong {
+    font-size: 17px;
+  }
 
-.visitor_item {
-  padding: 20px 40px;
-}
+  .inline_summary {
+    display: flex;
+    flex-direction: column;
+  }
 
-.visitor_info strong {
-  font-size: 17px;
-}
-
-.inline_summary {
-  display: flex;
-  flex-direction: column;
-}
-
-.plan_payment_bar {
-  display: none;
-}
+  .plan_payment_bar {
+    display: none;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════
    모바일 — 480px 이하
    ═══════════════════════════════════════════════════════ */
 @media (max-width: 480px) {
-
   /* ── 레이아웃 ── */
   .plan_main {
     padding: 50px 24px 60px;
@@ -285,17 +281,19 @@
     grid-template-columns: 1fr;
     width: 100%;
     margin: 0 auto;
-    gap: 8px;
-    padding: 14px;
+    gap: 10px;
+    padding: 16px;
+    background: #fff;
   }
 
   .cal_month_col {
     width: 100%;
-    padding: 18px 14px;
+    padding: 20px 16px;
+    background: #f5f5f5;
   }
 
   .cal_mheader {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
   .nav_arrows {
@@ -303,20 +301,20 @@
   }
 
   .cal_mname {
-    font-size: 15px;
+    font-size: 16px;
     color: #1e1e1e;
   }
 
   .cal_day {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .cal_days_grid {
-    gap: 4px;
+    gap: 5px;
   }
 
   .cal_dow_row span {
-    font-size: 11px;
+    font-size: 12px;
     opacity: 1;
   }
 
@@ -340,7 +338,7 @@
   }
 
   .cal_day.selected {
-    background: #0078D7;
+    background: #0078d7;
     color: #fff;
     box-shadow: none;
   }
@@ -369,9 +367,9 @@
   }
 
   .time_btn.active {
-    background: #0078D7;
+    background: #0078d7;
     color: #fff;
-    border-color: #0078D7;
+    border-color: #0078d7;
   }
 
   /* ── guide links ── */
