@@ -31,10 +31,6 @@
     gap: 28px;
   }
 
-  .plan .inner .tit{
-align-items: center;
-  }
-
   .plan .inner .tit h3 {
     font-size: 50px;
     letter-spacing: -0.04em;
@@ -374,10 +370,6 @@ align-items: center;
     font-size: 70px;
   }
 
-  .accessibility .inner{
-    gap: 30px;
-  }
-
   .acc_cards {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -399,24 +391,11 @@ align-items: center;
     font-size: 16px;
   }
 
-.acc_icon {
-  font-size: 48px;
-  right: 28px;
-  top: 34px;        /* transform 제거하고 고정값으로 */
-  transform: none;
-}
-
-.acc_icon .fa-wheelchair {
-  position: relative;
-  top: -4px; 
-}
-
-/* 사람 아이콘만 */
-.acc_icon .fa-user {
-  position: relative;
-  top: 4px;   /* 값 조절해서 맞춰보세요 */
-}
-
+  .acc_icon {
+    font-size: 48px;
+    right: 28px;
+    top: 24px;
+  }
 
 } /* @media 끝 */
 
@@ -443,7 +422,6 @@ align-items: center;
   .plan .inner {
     width: 100%;
     gap: 20px;
-    margin-top: 40px;
   }
 
   .plan .inner .tit h3 {
@@ -454,7 +432,6 @@ align-items: center;
   .plan .inner .plus {
     width: 28px;
     height: 28px;
-     margin: 0; 
   }
 
   .plan .inner .plus::before {
@@ -698,8 +675,6 @@ align-items: center;
   .accessibility h1.heading {
     font-size: 48px;
   }
-
-  
 
   .acc_cards {
     display: flex;
