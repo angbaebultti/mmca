@@ -30,11 +30,899 @@
 </head>
 <!-- 햄버거 밑부터 개인별 작업 -->
 
-<body>
-  <canvas class="wave_canvas" id="waveCanvas"></canvas><!-- Convenient 배경 물결효과 -->
-  <div class="wrap">
-    <div class="top_btn">
-      <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
+      <header class="header">
+        <div class="inner">
+          <div class="header_top">
+            <h1>
+              <a href="main.html"><img src="img/logo_icon.png" />MMCA</a>
+            </h1>
+          </div>
+          <div class="nav">
+            <div class="nav_bottom">
+              <ul class="gnb_l">
+                <li><a href="info.html">VISIT</a></li>
+                <li><a href="artist_award.html">ARTIST</a></li>
+                <li><a href="#">EXPLORE</a></li>
+                <li><a href="#">PROGRAM</a></li>
+                <li><a href="museum.html">ABOUT</a></li>
+                <li><a href="plan.html">TICKETS</a></li>
+              </ul>
+              <div class="gnb_r">
+                <a href="#"><span>Sign in</span></a>
+                <!-- 모바일 티켓 아이콘 -->
+                <a href="plan.html" class="mobile_ticket_btn">
+                  <img src="img/mobile_ticket.svg" alt="ticket" />
+                </a>
+                <a href="#"
+                  ><img src="img/ham_w.svg" alt="ham menu button" id="menu_btn"
+                /></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="menu_overlay" id="menu">
+        <div class="menu_top">
+          <h1>
+            <a href="#"><img src="img/logo_icon.png" />MMCA</a>
+          </h1>
+          <span class="close_btn" id="close_btn">✕</span>
+        </div>
+        <div class="menu_top_row">
+          <div class="menu_col">
+            <h3><a href="#">VISIT</a></h3>
+            <ul>
+              <li><a href="#">Location</a></li>
+              <li class="active"><a href="museum.html#seoul">Seoul</a></li>
+              <li class="active">
+                <a href="museum.html#gwacheon">Gwacheon</a>
+              </li>
+              <li class="active">
+                <a href="museum.html#deoksugung">Deoksugung</a>
+              </li>
+              <li class="active">
+                <a href="museum.html#cheongju">Cheongju</a>
+              </li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">PROGRAM</a></h3>
+            <ul>
+              <li><a href="#">Event</a></li>
+              <li><a href="#">Education</a></li>
+              <li><a href="#">Tour</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">EXPLORE</a></h3>
+            <ul>
+              <li><a href="#">Collection</a></li>
+              <li><a href="#">Research</a></li>
+              <li><a href="#">Archive</a></li>
+              <li><a href="#">Digital Museum</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">ARTIST</a></h3>
+            <ul>
+              <li class="active"><a href="artist_award.html">Prize</a></li>
+              <li><a href="#">Residency</a></li>
+              <li><a href="#">Art Bank</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">ABOUT</a></h3>
+            <ul>
+              <li class="active"><a href="info.html">About MMCA</a></li>
+              <li><a href="#">History</a></li>
+              <li><a href="#">Mission</a></li>
+              <li><a href="#">Organization</a></li>
+              <li><a href="#">News</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3 class="tickets"><a href="plan.html">TICKET</a></h3>
+            <ul>
+              <li><a href="#">Purchase</a></li>
+              <li class="active"><a href="plan.html">Reservation</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="menu_bottom_row">
+          <div class="menu_col">
+            <h3><a href="#">MEMBERSHIP</a></h3>
+            <ul>
+              <li><a href="">Membership</a></li>
+              <li><a href="">Benefits</a></li>
+              <li><a href="">Program</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== PLAN YOUR VISIT ===== -->
+      <section class="plan">
+        <h1 class="heading">Plan your <br />visit</h1>
+        <div class="inner">
+          <div class="address">
+            <div class="tit">
+              <h3>Address</h3>
+              <button
+                class="plus"
+                aria-expanded="false"
+                aria-controls="address_container"
+              ></button>
+            </div>
+            <div
+              class="container"
+              id="address_container"
+              role="region"
+              aria-hidden="true"
+            >
+              <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div class="txt">
+                <p>30 Samcheong-ro, Jongno-gu</p>
+                <p>Seoul 03062, South Korea</p>
+              </div>
+            </div>
+            <div class="accordion_divider"></div>
+          </div>
+          <div class="opening">
+            <div class="tit">
+              <h3>Opening</h3>
+              <button
+                class="plus"
+                aria-expanded="false"
+                aria-controls="opening_container"
+              ></button>
+            </div>
+            <div
+              class="container"
+              id="opening_container"
+              role="region"
+              aria-hidden="true"
+            >
+              <div class="icon"><i class="fa-regular fa-clock"></i></div>
+              <div class="txt">
+                <p>
+                  Monday, Tuesday, Thursday, Friday, Sunday 10:00 AM – 6:00 PM
+                </p>
+                <p>Late night openings on Wednesday and Saturday 10:00–21:00</p>
+                <p>Closed January 1, Seollal, and Chuseok</p>
+              </div>
+            </div>
+            <div class="accordion_divider"></div>
+          </div>
+          <div class="charges">
+            <div class="tit">
+              <h3>Charges</h3>
+              <button
+                class="plus"
+                aria-expanded="false"
+                aria-controls="charges_container"
+              ></button>
+            </div>
+            <div
+              class="container"
+              id="charges_container"
+              role="region"
+              aria-hidden="true"
+            >
+              <div class="icon">
+                <i class="fa-solid fa-money-bill-wave"></i>
+              </div>
+              <div class="txt">
+                <p>Paid Exhibition Ticket: admission fees vary</p>
+                <p>
+                  All Pass Ticket: 10,000 KRW ※ When operating 3 or more paid
+                  exhibitions
+                </p>
+                <p>
+                  Free admission day is the last Wednesday of every month, known
+                  as "Culture Day".
+                </p>
+                <p>
+                  Free admission on Wednesdays and Saturdays during late opening
+                  hours
+                </p>
+              </div>
+            </div>
+            <div class="accordion_divider"></div>
+          </div>
+          <div class="parking">
+            <div class="tit">
+              <h3>Parking</h3>
+              <button
+                class="plus"
+                aria-expanded="false"
+                aria-controls="parking_container"
+              ></button>
+            </div>
+            <div
+              class="container"
+              id="parking_container"
+              role="region"
+              aria-hidden="true"
+            >
+              <div class="icon"><i class="fa-solid fa-p"></i></div>
+              <div class="txt">
+                <p>
+                  Minimum charge: KRW 4,200 for 1 hour<br />Service hours:
+                  08:00–23:00
+                </p>
+                <p>
+                  (KRW 700 for every additional 10 minutes, KRW 30,000 per day)
+                </p>
+                <p>Parking capacity: 384 (Ground level 2 &amp; 3)</p>
+              </div>
+            </div>
+            <div class="accordion_divider"></div>
+          </div>
+        </div>
+      </section>
+      <!-- //.plan -->
+
+      <!-- ===== GETTING HERE ===== -->
+      <section class="getting">
+        <h1 class="heading">Getting Here</h1>
+        <div class="inner">
+          <div class="btn_box">
+            <button
+              type="button"
+              class="sub is_active"
+              data-target="subway_panel"
+            >
+              <i class="fa-solid fa-train-subway"></i>Subway
+            </button>
+            <button type="button" class="bus" data-target="bus_panel">
+              <i class="fa-solid fa-bus-simple"></i>Bus
+            </button>
+            <button type="button" class="sut" data-target="shuttle_panel">
+              <i class="fa-solid fa-route"></i>Shuttle
+            </button>
+          </div>
+
+          <div class="info_box">
+            <div class="subway_panel" id="subway_panel">
+              <div class="left">
+                <div class="station_group">
+                  <div class="station">
+                    <span class="line_badge line_orange">Line 3</span>
+                    <p>Anguk Station</p>
+                  </div>
+                  <div class="station_meta">
+                    <span>Exit 1</span>
+                    <span
+                      ><i class="fa-solid fa-person-walking"></i>10 min</span
+                    >
+                  </div>
+                </div>
+                <p class="station_desc">
+                  Walk straight on Insadong street toward Samcheong-dong
+                </p>
+                <button class="viewmap_btn">
+                  View Map
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
+              </div>
+              <div class="right">
+                <div class="station_group">
+                  <div class="station">
+                    <span class="line_badge line_purple">Line 5</span>
+                    <p>Gwanghwamun Station</p>
+                  </div>
+                  <div class="station_meta">
+                    <span>Exit 2</span>
+                    <span
+                      ><i class="fa-solid fa-person-walking"></i>15 min</span
+                    >
+                  </div>
+                </div>
+                <p class="station_desc">
+                  Head east toward Gyeongbokgung Palace, and turn right
+                </p>
+                <button class="viewmap_btn">
+                  View Map
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
+              </div>
+            </div>
+            <!-- //.subway_panel -->
+
+            <div class="bus_panel" id="bus_panel" hidden>
+              <div class="left">
+                <div class="station_group">
+                  <div class="station">
+                    <span class="line_badge bus11">Jongno 11</span>
+                    <p>Jeongdok Public Library</p>
+                  </div>
+                  <div class="station_meta">
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M21.5 8H21V6c0-2.21-1.79-4-4-4H7C4.79 2 3 3.79 3 6v2h-.5c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5H3v6c0 .74.41 1.38 1 1.72v1.78c0 .28.22.5.5.5h2c.28 0 .5-.22.5-.5V20h10v1.5c0 .28.22.5.5.5h2c.28 0 .5-.22.5-.5v-1.78A2 2 0 0 0 21 18v-6h.5c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5M19 18H5v-5h14zM5 11V8h6v3zm8 0V8h6v3zM7 4h10c1.1 0 2 .9 2 2H5c0-1.1.9-2 2-2"
+                        ></path>
+                        <path
+                          d="M7.5 14a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3m9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3"
+                        ></path>
+                      </svg>
+                      5 min
+                    </span>
+                  </div>
+                </div>
+                <p class="station_desc">
+                  Direction of Samcheong Police Station
+                </p>
+                <button class="viewmap_btn">
+                  View Map
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
+              </div>
+              <div class="right">
+                <div class="station_group">
+                  <div class="station">
+                    <span class="line_badge bus01">A01</span>
+                    <p>National Folk Museum</p>
+                  </div>
+                  <div class="station_meta">
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M21.5 8H21V6c0-2.21-1.79-4-4-4H7C4.79 2 3 3.79 3 6v2h-.5c-.28 0-.5.22-.5.5v3c0 .28.22.5.5.5H3v6c0 .74.41 1.38 1 1.72v1.78c0 .28.22.5.5.5h2c.28 0 .5-.22.5-.5V20h10v1.5c0 .28.22.5.5.5h2c.28 0 .5-.22.5-.5v-1.78A2 2 0 0 0 21 18v-6h.5c.28 0 .5-.22.5-.5v-3c0-.28-.22-.5-.5-.5M19 18H5v-5h14zM5 11V8h6v3zm8 0V8h6v3zM7 4h10c1.1 0 2 .9 2 2H5c0-1.1.9-2 2-2"
+                        ></path>
+                        <path
+                          d="M7.5 14a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3m9 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 1 0 0-3"
+                        ></path>
+                      </svg>
+                      3 min
+                    </span>
+                  </div>
+                </div>
+                <p class="station_desc">Direction of Gwanghwamun</p>
+                <button class="viewmap_btn">
+                  View Map
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </button>
+              </div>
+            </div>
+            <!-- //.bus_panel -->
+
+            <div class="shuttle_panel" id="shuttle_panel">
+              <div class="sh_card sh_card_left">
+                <div class="sh_label">
+                  <i class="fa-regular fa-calendar sh_icon_green"></i>
+                  <span class="sh_label_text">SERVICE DAY</span>
+                </div>
+                <p class="sh_service_day">
+                  Tue — Fri
+                  <span class="sh_closed">(Closed Mon, Weekends)</span>
+                </p>
+                <div class="sh_divider"></div>
+                <div class="sh_label">
+                  <i class="fa-solid fa-location-dot sh_icon_green"></i>
+                  <span class="sh_label_text">BOARDING POINT</span>
+                </div>
+                <p class="sh_boarding_desc">
+                  MMCA Seoul — Ground parking lot next to the administration
+                  building
+                </p>
+                <div class="sh_divider"></div>
+                <div class="sh_label">
+                  <i class="fa-solid fa-route sh_icon_green"></i>
+                  <span class="sh_label_text">ROUTE</span>
+                </div>
+                <div class="sh_route_direction">
+                  <span class="sh_direction_badge">Outbound</span>
+                </div>
+                <div class="sh_route_list">
+                  <div class="sh_route_item">
+                    <span class="sh_dot sh_dot_green"></span
+                    ><span class="sh_route_name">MMCA Seoul</span>
+                  </div>
+                  <div class="sh_route_line"></div>
+                  <div class="sh_route_item">
+                    <span class="sh_dot sh_dot_blue"></span
+                    ><span class="sh_route_name">MMCA Deoksugung</span>
+                  </div>
+                  <div class="sh_route_line"></div>
+                  <div class="sh_route_item">
+                    <span class="sh_dot sh_dot_yellow"></span
+                    ><span class="sh_route_name">MMCA Gwacheon</span>
+                  </div>
+                </div>
+                <div class="sh_route_direction sh_route_direction_return">
+                  <span class="sh_direction_badge">Return</span>
+                </div>
+                <div class="sh_route_list">
+                  <div class="sh_route_item">
+                    <span class="sh_dot sh_dot_yellow"></span
+                    ><span class="sh_route_name">MMCA Gwacheon</span>
+                  </div>
+                  <div class="sh_route_line"></div>
+                  <div class="sh_route_item">
+                    <span class="sh_dot sh_dot_blue"></span
+                    ><span class="sh_route_name">MMCA Deoksugung</span>
+                  </div>
+                  <div class="sh_route_line"></div>
+                  <div class="sh_route_item">
+                    <span class="sh_dot sh_dot_green"></span
+                    ><span class="sh_route_name">MMCA Seoul</span>
+                  </div>
+                </div>
+                <p class="sh_notice">
+                  * Service suspended on days when Seoul or Gwacheon is closed.
+                </p>
+              </div>
+              <div class="sh_card sh_card_right">
+                <div class="sh_schedule_top">
+                  <div class="sh_label">
+                    <span class="sh_label_text">DEPARTURE TIME</span>
+                  </div>
+                  <div class="sh_title_row">
+                    <p class="sh_schedule_title">Today's Schedule</p>
+                    <i
+                      class="fa-regular fa-clock sh_icon_green sh_clock_icon"
+                    ></i>
+                  </div>
+                </div>
+                <div class="sh_schedule_list">
+                  <div class="sh_schedule_row">
+                    <span class="sh_dep_label">1st Departure</span
+                    ><span class="sh_dep_time">10:00 AM</span>
+                  </div>
+                  <div class="sh_schedule_row">
+                    <span class="sh_dep_label">2nd Departure</span
+                    ><span class="sh_dep_time">12:00 PM</span>
+                  </div>
+                  <div class="sh_schedule_row">
+                    <span class="sh_dep_label">3rd Departure</span
+                    ><span class="sh_dep_time">02:00 PM</span>
+                  </div>
+                  <div class="sh_schedule_row">
+                    <span class="sh_dep_label">Last Departure</span
+                    ><span class="sh_dep_time">04:00 PM</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- //.shuttle_panel -->
+          </div>
+          <!-- //.info_box -->
+        </div>
+        <!-- //.inner -->
+      </section>
+      <!-- //.getting -->
+
+      <!-- ===== MUSEUM MAP ===== -->
+      <section class="museum_map">
+        <h1 class="heading">Museum Map</h1>
+
+        <!-- PC 전용 -->
+        <div class="map_inner">
+          <div class="floor_tabs" role="tablist" aria-label="Floor selection">
+            <button
+              class="floor_tab"
+              role="tab"
+              aria-selected="false"
+              data-floor="3f"
+              aria-controls="floor_3f"
+            >
+              3F
+            </button>
+            <button
+              class="floor_tab"
+              role="tab"
+              aria-selected="false"
+              data-floor="2f"
+              aria-controls="floor_2f"
+            >
+              2F
+            </button>
+            <button
+              class="floor_tab is_active"
+              role="tab"
+              aria-selected="true"
+              data-floor="1f"
+              aria-controls="floor_1f"
+            >
+              1F
+            </button>
+            <button
+              class="floor_tab"
+              role="tab"
+              aria-selected="false"
+              data-floor="b1"
+              aria-controls="floor_b1"
+            >
+              B1
+            </button>
+          </div>
+          <div class="floor_map_wrap">
+            <div class="floor_panel" id="floor_b1" role="tabpanel">
+              <img src="img/B1.png" alt="B1 floor plan" />
+            </div>
+            <div class="floor_panel is_active" id="floor_1f" role="tabpanel">
+              <img src="img/1F.png" alt="1F floor plan" />
+            </div>
+            <div class="floor_panel" id="floor_2f" role="tabpanel">
+              <img src="img/2F.png" alt="2F floor plan" />
+            </div>
+            <div class="floor_panel" id="floor_3f" role="tabpanel">
+              <img src="img/3F.png" alt="3F floor plan" />
+            </div>
+          </div>
+          <div class="floor_legend">
+            <div class="legend_panel" data-legend="b1">
+              <span class="legend_floor_label">B1</span>
+              <ul>
+                <li>Multi-Project Hall</li>
+                <li>Media Lab</li>
+                <li>Seoul Box</li>
+                <li>MMCA Film &amp; Video</li>
+                <li>Lounge</li>
+                <li>Gallery 2 ~ 7</li>
+              </ul>
+            </div>
+            <div class="legend_panel is_active" data-legend="1f">
+              <span class="legend_floor_label">1F</span>
+              <ul>
+                <li>Seoul Box</li>
+                <li>Gallery 1</li>
+                <li>Cafe</li>
+                <li>Lobby</li>
+                <li>Garden</li>
+                <li>Doore</li>
+                <li>Open Ground</li>
+                <li>Art Zone</li>
+              </ul>
+            </div>
+            <div class="legend_panel" data-legend="2f">
+              <span class="legend_floor_label">2F</span>
+              <ul>
+                <li>Art Library</li>
+                <li>Classroom 1</li>
+                <li>Classroom 2</li>
+                <li>Learning Studio</li>
+                <li>Lecture Hall Lobby</li>
+                <li>MMCA Space Kids</li>
+                <li>MMCA Studio</li>
+                <li>Royal Family Association Office</li>
+              </ul>
+            </div>
+            <div class="legend_panel" data-legend="3f">
+              <span class="legend_floor_label">3F</span>
+              <ul>
+                <li>Office Room</li>
+                <li>Art Research Center</li>
+                <li>Membership Lounge</li>
+                <li>Workspace 2</li>
+                <li>Mountain View Rooftop</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- //.map_inner -->
+
+        <!-- 태블릿 전용 -->
+        <div class="map_tablet_wrap">
+          <div class="map_floor_list">
+            <div class="map_floor_item" data-floor="b1">
+              <span class="map_floor_label">B1</span>
+              <div class="map_floor_content">
+                <p class="map_floor_primary">
+                  Multi-Project Hall, Media Lab, Seoul Box, MMCA Film &amp;
+                  Video, Lounge, Gallery 2 ~ 7
+                </p>
+                <p class="map_floor_secondary">
+                  Information desk, Emergency Staircase, Toilet, Elevator,
+                  Escalator
+                </p>
+              </div>
+            </div>
+            <div class="map_floor_item" data-floor="1f">
+              <span class="map_floor_label">1F</span>
+              <div class="map_floor_content">
+                <p class="map_floor_primary">
+                  Lobby, Garden, Seoul Box, Art Zone, Open Ground, Gallery 1,
+                  Cafe, Doore
+                </p>
+                <p class="map_floor_secondary">
+                  Ticket booth, Emergency Staircase, Toilet, Elevator,
+                  Escalator, Locker, First aid station, Cloakroom, Baby Lounge
+                </p>
+              </div>
+            </div>
+            <div class="map_floor_item" data-floor="2f">
+              <span class="map_floor_label">2F</span>
+              <div class="map_floor_content">
+                <p class="map_floor_primary">
+                  Lecture Hall Lobby, Art Library, MMCA Space Kids, Learning
+                  Studio, Classroom1, Classroom2, MMCA Studio, Royal Family
+                  Association Office
+                </p>
+                <p class="map_floor_secondary">
+                  Ticket booth, Emergency Staircase, Toilet, Elevator, Locker
+                </p>
+              </div>
+            </div>
+            <div class="map_floor_item" data-floor="3f">
+              <span class="map_floor_label">3F</span>
+              <div class="map_floor_content">
+                <p class="map_floor_primary">
+                  Art Research Center, Membership Lounge, Office Room,
+                  Workspace2, Mountain-view Rooftop
+                </p>
+                <p class="map_floor_secondary">
+                  Emergency Staircase, Toilet, Elevator
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- //.map_floor_list -->
+        </div>
+        <!-- //.map_tablet_wrap -->
+      </section>
+      <!-- //.museum_map -->
+
+      <!-- ===== CONVENIENT ===== -->
+      <section class="convenient">
+        <h1 class="heading">Convenient</h1>
+        <div class="convenient_cards">
+          <div class="con_card">
+            <div class="con_img img_shop"></div>
+            <div class="con_text">
+              <div class="title_row">
+                <h3>MMCA SHOP</h3>
+                <span class="floor">1F lobby</span>
+              </div>
+              <p>
+                Showcasing the identity of MMCA Shop Seoul through curated
+                merchandise inspired by art, exhibitions, and education.
+              </p>
+            </div>
+          </div>
+          <div class="con_card">
+            <div class="con_img img_book"></div>
+            <div class="con_text">
+              <div class="title_row">
+                <h3>MMCA Art Book Shop</h3>
+                <span class="floor">1F lobby</span>
+              </div>
+              <p>
+                MMCA Art Book Shop offers not only the publications of MMCA,
+                including various exhibition catalogues but also a wide
+                selection of art books.
+              </p>
+            </div>
+          </div>
+          <div class="con_card">
+            <div class="con_img img_osulloc"></div>
+            <div class="con_text">
+              <div class="title_row">
+                <h3>Osulloc</h3>
+                <span class="floor">1F lobby</span>
+              </div>
+              <p>
+                Tea House Osulloc is a complex tea culture space located in MMCA
+                Seoul, boasting a panoramic view of the museum's outer yard and
+                beautiful Samcheong-dong.
+              </p>
+            </div>
+          </div>
+          <div class="con_card">
+            <div class="con_img img_terarosa"></div>
+            <div class="con_text">
+              <div class="title_row">
+                <h3>TERAROSA</h3>
+                <span class="floor">1F lobby</span>
+              </div>
+              <p>
+                TERAROSA COFFEE offers guests cozy and relaxed ambience. Besides
+                house beverages and bakeries, the store serves espresso and drip
+                coffee from different countries.
+              </p>
+            </div>
+          </div>
+          <div class="con_card">
+            <div class="con_img img_doore"></div>
+            <div class="con_text">
+              <div class="title_row">
+                <h3>DOORE</h3>
+                <span class="floor">1F Lecture Hall</span>
+              </div>
+              <p>
+                DOORE is a Korean restaurant offering traditional Korean
+                cuisine, offering from snacks and one-dish meals to full course
+                meals.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- //.convenient -->
+
+      <!-- ===== ACCESSIBILITY ===== -->
+      <section class="accessibility">
+        <div class="inner">
+          <h1 class="heading">Accessibility</h1>
+          <div class="acc_cards">
+            <div class="acc_card">
+              <div class="acc_text">
+                <h3>Audio Guide</h3>
+                <p>Available in 4 languages<br />Free rental with ID</p>
+              </div>
+              <div class="acc_icon"><i class="fa-solid fa-headphones"></i></div>
+            </div>
+            <div class="acc_card">
+              <div class="acc_text">
+                <h3>Wheelchair<br />Access</h3>
+                <p>
+                  Accessible via elevator<br />Wheelchairs available on site
+                </p>
+              </div>
+              <div class="acc_icon"><i class="fa-solid fa-wheelchair"></i></div>
+            </div>
+            <div class="acc_card">
+              <div class="acc_text">
+                <h3>Docent Tours</h3>
+                <p>Daily tours at 11am, 2pm<br />Korean &amp; English</p>
+              </div>
+              <div class="acc_icon">
+                <i class="fa-solid fa-circle-info"></i>
+              </div>
+            </div>
+            <div class="acc_card">
+              <div class="acc_text">
+                <h3>Visitor Support</h3>
+                <p>Info desk assistance<br />Sign interpretation available</p>
+              </div>
+              <div class="acc_icon"><i class="fa-solid fa-user"></i></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- //.accessibility -->
+
+      <footer>
+        <div class="banner" aria-label="museum locations">
+          <ul class="banner_track">
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+            <li>MMCA SEOUL</li>
+            <li>MMCA DEOKSUGUNG</li>
+            <li>MMCA GWACHEON</li>
+            <li>MMCA CHEONGJU</li>
+          </ul>
+        </div>
+        <div class="f_top">
+          <ul class="f_left">
+            <li class="branch">
+              <span class="branch_name seoul">Seoul</span>
+              <p class="tel">02-3701-9500</p>
+              <p>30 Samcheong-ro,<br />Jongno-gu,<br />Seoul</p>
+            </li>
+            <li class="branch">
+              <span class="branch_name deoksugung">Deoksugung</span>
+              <p class="tel">02-2022-0600</p>
+              <p>
+                99 Sejong-daero,<br />Jung-gu, Seoul<br />Inside Deoksugung
+                Palace
+              </p>
+            </li>
+            <li class="branch">
+              <span class="branch_name gwacheon">Gwacheon</span>
+              <p class="tel">02-2188-6000</p>
+              <p>313 Gwangmyeong-ro,<br />Gwacheon-si,<br />Gyeonggi-do</p>
+            </li>
+            <li class="branch">
+              <span class="branch_name cheongju">Cheongju</span>
+              <p class="tel">043-261-1400</p>
+              <p>314 Sangdang-ro,<br />Cheongwon-si,<br />Chungcheongbuk-do</p>
+            </li>
+          </ul>
+          <div class="f_right">
+            <div class="f_right_col">
+              <h4>SNS</h4>
+              <ul>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon icon="mdi:instagram"></iconify-icon></span
+                    >Instagram</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon
+                        icon="mingcute:facebook-fill"
+                      ></iconify-icon></span
+                    >Facebook</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon icon="mdi:youtube"></iconify-icon></span
+                    >YouTube</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><img src="img/blog_icon.svg" alt="Naver Blog" /> Naver
+                    Blog</a
+                  >
+                </li>
+                <li>
+                  <a href="#"
+                    ><span
+                      ><iconify-icon
+                        icon="fa6-brands:square-x-twitter"
+                      ></iconify-icon></span
+                    >X</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="f_right_col">
+              <h4>Legal</h4>
+              <ul>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Copyright</a></li>
+                <li><a href="#">Complaints</a></li>
+                <li><a href="#">Information Disclosure</a></li>
+                <li><a href="#">Integrity Report</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="f_bottom">
+          <div class="f_logo"><span>MMCA</span></div>
+          <p class="copyright">
+            © 2026 IZoa Team. MMCA Website Redesign Concept.
+          </p>
+        </div>
+      </footer>
+
+      <!-- ===== MAP MODAL ===== -->
+      <div class="map_modal" id="map_modal" aria-hidden="true">
+        <div class="map_modal_inner">
+          <button class="map_modal_close" id="map_modal_close">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <div class="floor_map_wrap">
+            <div class="floor_panel" id="modal_floor_b1">
+              <img src="img/B1.png" alt="B1" />
+            </div>
+            <div class="floor_panel is_active" id="modal_floor_1f">
+              <img src="img/1F.png" alt="1F" />
+            </div>
+            <div class="floor_panel" id="modal_floor_2f">
+              <img src="img/2F.png" alt="2F" />
+            </div>
+            <div class="floor_panel" id="modal_floor_3f">
+              <img src="img/3F.png" alt="3F" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- //.map_modal -->
     </div>
     <header class="header">
       <div class="inner">
