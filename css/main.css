@@ -530,11 +530,11 @@
 .artist_track {
   display: flex;
   align-items: center;
-  gap: clamp(32px, 3vw, 64px);
+  gap: clamp(128px, 32vw, 200px);
   height: 100%;
-  padding-left: clamp(40px, 8vw, 180px);
+  padding-left: clamp(80px, 16vw, 360px);
   padding-right: 0;
-  padding-bottom: 0;
+  padding-bottom: clamp(40px, 8vw, 180px);;
   will-change: transform;
   width: max-content;
 }
