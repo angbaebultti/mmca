@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
         trigger: about,
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.4,
+        scrub: 1.0,
         pin: ".about_scene",
         pinSpacing: true,
         anticipatePin: 1,

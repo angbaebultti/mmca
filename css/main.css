@@ -293,11 +293,11 @@
 
 /* ===================== ABOUT ===================== */
 .about {
-  height: 800vh;
+  height: 550vh;
   position: relative;
   background: var(--bg_about);
   width: 100%;
-  padding: 200px 0 600px;
+  padding: 200px 0 400px;
 }
 
 .about_scene {
@@ -343,7 +343,6 @@
   justify-content: flex-start;
   padding-top: 12vh;
   margin-top: 0;
-  /* -140px 제거 */
   gap: 16px;
 }
 
@@ -358,7 +357,7 @@
   font-size: 72px;
   letter-spacing: var(--letter-spacing-base);
   font-weight: 500;
-  margin-bottom: 16px;
+  margin-bottom: 0px;
 }
 
 .about_title {
@@ -367,7 +366,7 @@
   color: var(--main_white);
   letter-spacing: -0.04em;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 80px; 
 }
 
 .about_content {
