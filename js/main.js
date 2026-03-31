@@ -17,24 +17,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const stats = qsa(".stat");
   const ticketBg = qs(".ticket_bg");
 
-<<<<<<< HEAD
+  /* =========================================================
+   * 0. 스크롤 시 main_visual z-index 조작
+   *    ✅ 수정: 중첩된 이중 scroll 리스너 → 하나로 통합
+   *            visual null 체크 추가
+   * ========================================================= */
   window.addEventListener("scroll", () => {
-    const visual = document.querySelector(".main_visual");
-=======
- // 480에서는 z-index 조작 안 함
-window.addEventListener('scroll', () => {
-     if (window.innerWidth <= 480) return; // ← 추가
-    const visual = document.querySelector('.main_visual');
->>>>>>> 8a6d3fb2044fc581e151b61352ae85d6903bff72
-    if (window.scrollY > 100) {
-      visual.style.zIndex = "5";
-    } else {
-      visual.style.zIndex = "1001";
-    }
-});
+    if (window.innerWidth <= 480) return;
+    const visual = qs(".main_visual");
+    if (!visual) return;
+    visual.style.zIndex = window.scrollY > 100 ? "5" : "1001";
+  });
 
   /* =========================================================
    * 1. 배경 티켓 생성
+   *    ✅ HTML에 .ticket_bg 요소가 없어 null 체크 후 생성
+   *       (HTML에 <div class="ticket_bg"></div> 추가를 권장)
    * ========================================================= */
   if (ticketBg) {
     for (let i = 0; i < 12; i++) {
@@ -58,6 +56,7 @@ window.addEventListener('scroll', () => {
    * ========================================================= */
   const isMobile = window.innerWidth <= 1024;
   const isMobile480 = window.innerWidth <= 480;
+
   if (!isMobile480) {
     gsap.set(ticketLeft, {
       rotation: 0,
@@ -81,6 +80,7 @@ window.addEventListener('scroll', () => {
       y: isMobile ? 20 : 120,
     });
   }
+
   gsap.set(aboutContent, {
     opacity: isMobile480 ? 1 : 0,
     y: isMobile480 ? 0 : 60,
@@ -171,7 +171,7 @@ window.addEventListener('scroll', () => {
       .to(ticketLeft, { opacity: 0, duration: 0.3 }, 1.8)
       .to(ticketRight, { opacity: 0, duration: 0.3 }, 1.8);
 
-    //about 타임라인
+    // about 타임라인
     const aboutTL = gsap.timeline({
       scrollTrigger: {
         trigger: about,
@@ -183,11 +183,13 @@ window.addEventListener('scroll', () => {
         anticipatePin: 1,
       },
     });
+
     aboutTL.to(
       aboutHero,
       { opacity: 0, scale: 0.95, y: -20, ease: "none", duration: 0.5 },
       0,
     );
+
     tickets.forEach((t, i) => {
       gsap.set(t, {
         left: Math.random() * 80 + 10 + "%",
@@ -208,14 +210,10 @@ window.addEventListener('scroll', () => {
         0.5 + i * 0.06,
       );
     });
+
     aboutTL.to(
       aboutContent,
-      {
-        opacity: 1,
-        y: 0,
-        ease: "power4.out",
-        duration: 1.0,
-      },
+      { opacity: 1, y: 0, ease: "power4.out", duration: 1.0 },
       0.2,
     );
   }
@@ -225,9 +223,9 @@ window.addEventListener('scroll', () => {
    * ========================================================= */
   if (aboutContent && stats.length) {
     const statArray = Array.from(stats);
-    const lineLeft = document.querySelector(".line_left");
-    const lineRight = document.querySelector(".line_right");
-    const statsBg = document.querySelector(".stats_bg");
+    const lineLeft = qs(".line_left");
+    const lineRight = qs(".line_right");
+    const statsBg = qs(".stats_bg");
 
     const statData = statArray.map((stat) => {
       const strong = stat.querySelector("strong");
@@ -244,7 +242,9 @@ window.addEventListener('scroll', () => {
     statData.forEach((d) => {
       if (d.el) d.el.textContent = "0" + d.suffix;
     });
+
     gsap.set(statArray, { opacity: 0, x: 0 });
+
     if (!isMobile480) {
       if (statsBg) gsap.set(statsBg, { opacity: 0 });
       if (lineLeft) lineLeft.style.setProperty("--line-scale", 0);
@@ -256,6 +256,7 @@ window.addEventListener('scroll', () => {
         if (d.el) d.el.textContent = "0" + d.suffix;
       });
       gsap.set(statArray, { opacity: 0, x: isMobile480 ? 0 : -60 });
+
       if (!isMobile480) {
         if (statsBg) gsap.set(statsBg, { opacity: 0 });
         if (lineLeft) lineLeft.style.setProperty("--line-scale", 0);
@@ -265,19 +266,14 @@ window.addEventListener('scroll', () => {
       const statTL = gsap.timeline();
 
       if (statsBg)
-        statTL.to(
-          statsBg,
-          { opacity: 0.25, ease: "power2.out", duration: 0.8 },
-          0,
-        );
+        statTL.to(statsBg, { opacity: 0.25, ease: "power2.out", duration: 0.8 }, 0);
 
       statTL.to(
         {},
         {
           duration: 0.6,
           onUpdate() {
-            if (lineLeft)
-              lineLeft.style.setProperty("--line-scale", this.progress());
+            if (lineLeft) lineLeft.style.setProperty("--line-scale", this.progress());
           },
         },
         0,
@@ -314,8 +310,7 @@ window.addEventListener('scroll', () => {
         {
           duration: 0.6,
           onUpdate() {
-            if (lineRight)
-              lineRight.style.setProperty("--line-scale", this.progress());
+            if (lineRight) lineRight.style.setProperty("--line-scale", this.progress());
           },
         },
         1.4,
@@ -341,7 +336,7 @@ window.addEventListener('scroll', () => {
     gsap.set(artistCards, { opacity: 0, xPercent: 30 });
 
     function getScrollAmount() {
-      const track = document.querySelector(".artist_track");
+      const track = qs(".artist_track");
       if (!track) return 0;
       return -(track.scrollWidth - window.innerWidth);
     }
@@ -361,15 +356,11 @@ window.addEventListener('scroll', () => {
     lines.forEach((line, i) => {
       masterTL.to(
         line.querySelectorAll("span"),
-        {
-          color: "#fff",
-          stagger: 0.05,
-          ease: "none",
-          duration: 0.3,
-        },
+        { color: "#fff", stagger: 0.05, ease: "none", duration: 0.3 },
         i * 0.15,
       );
     });
+
     masterTL.to({}, { duration: 0.3 });
     masterTL.to(letters, {
       x: () => gsap.utils.random(-200, 200),
@@ -397,9 +388,11 @@ window.addEventListener('scroll', () => {
   }
 
   /* =========================================================
-   * 11. NEWS - 고급 탭 전환 + 커서 프리뷰
+   * 11. NEWS - 탭 전환 + 커서 프리뷰
+   *    ✅ 수정: press/notice 그룹의 .news_more가 .news_head 밖에
+   *            있어서 탭 클릭이 막히던 문제 → body 존재만 체크
    * ========================================================= */
-  const groups = Array.from(document.querySelectorAll(".news_group"));
+  const groups = Array.from(qsa(".news_group"));
 
   let newsPreview = null;
   let previewImg = null;
@@ -412,10 +405,8 @@ window.addEventListener('scroll', () => {
     previewImg = document.getElementById("previewImg");
   }
 
-  let previewX = 0,
-    previewY = 0;
-  let previewRX = 0,
-    previewRY = 0;
+  let previewX = 0, previewY = 0;
+  let previewRX = 0, previewRY = 0;
 
   if (!isMobile480) {
     (function lerpPreview() {
@@ -438,12 +429,13 @@ window.addEventListener('scroll', () => {
     groups[0].classList.add("is-open");
 
     groups.forEach((group) => {
-      const head = group.querySelector(".news_head");
+      // ✅ 수정: head 없어도 body만 있으면 동작하도록 조건 완화
       const body = group.querySelector(".news_body");
-      if (!head || !body) return;
+      if (!body) return;
 
       group.addEventListener("click", () => {
         if (isMobile480) return;
+
         if (group.classList.contains("is-open")) {
           const currentCards = group.querySelectorAll(".news_card");
           gsap.to(currentCards, {
@@ -531,12 +523,8 @@ window.addEventListener('scroll', () => {
   }
 
   if (isMobile480) {
-    const mobileTabButtons = Array.from(
-      document.querySelectorAll(".news_mobile_tab_btn"),
-    );
-    const mobileTabPanels = Array.from(
-      document.querySelectorAll(".news_mobile_tab_panel"),
-    );
+    const mobileTabButtons = Array.from(qsa(".news_mobile_tab_btn"));
+    const mobileTabPanels = Array.from(qsa(".news_mobile_tab_panel"));
 
     mobileTabButtons.forEach((button) => {
       button.addEventListener("click", () => {
@@ -560,8 +548,6 @@ window.addEventListener('scroll', () => {
   /* =========================================================
    * 12. SHOP
    * ========================================================= */
-
-  /* ===== 위치 데이터 ===== */
   const positionsDesktop = [
     { x: -580, y: -280, r: -15 },
     { x: 120, y: -320, r: 10 },
@@ -578,18 +564,15 @@ window.addEventListener('scroll', () => {
     { x: -280, y: -190, r: -15 },
     { x: 80, y: -220, r: 10 },
     { x: 260, y: -140, r: 20 },
-
     { x: -300, y: 5, r: 8 },
     { x: 270, y: 40, r: -12 },
     { x: -220, y: 180, r: -20 },
-
     { x: -40, y: 210, r: 5 },
     { x: 200, y: 190, r: 18 },
     { x: 290, y: 160, r: -10 },
   ];
 
   const positions = isMobile ? positionsMobile : positionsDesktop;
-
   const scale = isMobile ? 0.6 : 1;
 
   const scaledPositions = positions.map((p) => ({
@@ -598,7 +581,6 @@ window.addEventListener('scroll', () => {
     r: p.r,
   }));
 
-  /* ===== 초기 상태 ===== */
   if (!isMobile480) {
     gsap.set(".p", {
       x: 0,
@@ -608,7 +590,6 @@ window.addEventListener('scroll', () => {
       rotation: (i) => positions[i].r * 0.3,
     });
 
-    /* ===== 타임라인 ===== */
     const shopTL = gsap.timeline({
       scrollTrigger: {
         trigger: ".shop",
@@ -618,20 +599,9 @@ window.addEventListener('scroll', () => {
       },
     });
 
-    /* ===== 등장 ===== */
-    shopTL.to(
-      ".p",
-      {
-        opacity: 0.7,
-        scale: 0.6,
-        duration: 0.25,
-        ease: "power1.out",
-      },
-      0,
-    );
+    shopTL.to(".p", { opacity: 0.7, scale: 0.6, duration: 0.25, ease: "power1.out" }, 0);
 
-    /* ===== 퍼지기 ===== */
-    document.querySelectorAll(".p").forEach((el, i) => {
+    qsa(".p").forEach((el, i) => {
       shopTL.to(
         el,
         {
@@ -647,60 +617,20 @@ window.addEventListener('scroll', () => {
       );
     });
 
-    /* ===== 글래스 효과 ===== */
     shopTL.to(
       ".glass_front",
       {
         background: "rgba(255, 255, 255, 0.95)",
-        boxShadow:
-          "0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)",
+        boxShadow: "0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)",
         backdropFilter: "blur(0px)",
         duration: 0.4,
       },
       0.25,
     );
-
-    shopTL.to(
-      ".glass_front h2",
-      {
-        color: "#000",
-        duration: 0.3,
-      },
-      0.3,
-    );
-
-    shopTL.to(
-      ".glass_front p",
-      {
-        color: "#555",
-        duration: 0.3,
-      },
-      0.3,
-    );
-
-    /* ===== 글로우 ===== */
-    shopTL.to(
-      ".glow_bg",
-      {
-        opacity: 0.7,
-        scale: 1.8,
-        filter: "blur(80px)",
-        duration: 0.5,
-      },
-      0.25,
-    );
-
-    /* ===== 박스 확대 ===== */
-    shopTL.to(
-      ".glass_box",
-      {
-        scale: 1.04,
-        z: 80,
-        duration: 0.8,
-        ease: "power3.out",
-      },
-      0.25,
-    );
+    shopTL.to(".glass_front h2", { color: "#000", duration: 0.3 }, 0.3);
+    shopTL.to(".glass_front p", { color: "#555", duration: 0.3 }, 0.3);
+    shopTL.to(".glow_bg", { opacity: 0.7, scale: 1.8, filter: "blur(80px)", duration: 0.5 }, 0.25);
+    shopTL.to(".glass_box", { scale: 1.04, z: 80, duration: 0.8, ease: "power3.out" }, 0.25);
   }
 
   /* =========================================================
@@ -708,18 +638,13 @@ window.addEventListener('scroll', () => {
    * ========================================================= */
   document.body.insertAdjacentHTML(
     "beforeend",
-    `
-    <div class="cursor-ring" id="cursorRing">ENTER ↗</div>
-    <div class="cursor-dot" id="cursorDot"></div>
-  `,
+    `<div class="cursor-ring" id="cursorRing">ENTER ↗</div>
+     <div class="cursor-dot" id="cursorDot"></div>`,
   );
 
   const ring = document.getElementById("cursorRing");
   const dot = document.getElementById("cursorDot");
-  let mx = 0,
-    my = 0,
-    rx = window.innerWidth / 2,
-    ry = window.innerHeight / 2;
+  let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
 
   document.addEventListener("mousemove", (e) => {
     mx = e.clientX;
@@ -740,7 +665,7 @@ window.addEventListener('scroll', () => {
     requestAnimationFrame(lerpRing);
   })();
 
-  const glassBox = document.querySelector(".glass_box");
+  const glassBox = qs(".glass_box");
 
   if (glassBox && ring && dot) {
     glassBox.addEventListener("mouseenter", () => {
@@ -758,30 +683,21 @@ window.addEventListener('scroll', () => {
       const rect = glassBox.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
-      gsap.to(glassBox, {
-        x: x * 0.08,
-        y: y * 0.08,
-        duration: 0.5,
-        ease: "power2.out",
-      });
+      gsap.to(glassBox, { x: x * 0.08, y: y * 0.08, duration: 0.5, ease: "power2.out" });
     });
     glassBox.addEventListener("mouseleave", () => {
-      gsap.to(glassBox, {
-        x: 0,
-        y: 0,
-        duration: 0.8,
-        ease: "elastic.out(1, 0.4)",
-      });
+      gsap.to(glassBox, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.4)" });
     });
   }
 
   /* =========================================================
    * AI OVERLAY
+   *    ✅ 수정: overlay null 체크 추가
+   *            nav null 체크 추가
    * ========================================================= */
   (function () {
     const STORAGE_KEY = "ai_modal_hidden_date";
 
-    // 00시 자정 기준 오늘 날짜를 YYYY-MM-DD 형식으로 반환
     function getTodayKey() {
       const d = new Date();
       const yyyy = d.getFullYear();
@@ -791,8 +707,8 @@ window.addEventListener('scroll', () => {
     }
 
     const overlay = document.getElementById("ai_overlay");
+    if (!overlay) return; // ✅ overlay 없으면 조기 종료
 
-    // 오늘 하루 보지 않기 체크 (00시 기준)
     if (localStorage.getItem(STORAGE_KEY) === getTodayKey()) {
       overlay.classList.add("hidden");
       overlay.style.display = "none";
@@ -800,13 +716,14 @@ window.addEventListener('scroll', () => {
     }
 
     const btnX = document.getElementById("ai_confirm");
-    const btnConfirm = document.getElementById("ai_confirm_text"); // HTML에 없을 수 있음
+    const btnConfirm = document.getElementById("ai_confirm_text"); // HTML에 없으므로 null → if 체크로 안전 처리
     const btnDontShow = document.getElementById("ai_dont_show");
 
     function closeModal() {
       overlay.classList.add("hidden");
 
-      const nav = document.querySelector(".museum_nav");
+      const nav = qs(".museum_nav");
+      if (!nav) return; // ✅ nav null 체크
       const bgs = nav.querySelectorAll(".item .bg");
 
       nav.classList.remove("nav_locked");
@@ -841,9 +758,7 @@ window.addEventListener('scroll', () => {
         });
       });
 
-      overlay.addEventListener("transitionend", () => overlay.remove(), {
-        once: true,
-      });
+      overlay.addEventListener("transitionend", () => overlay.remove(), { once: true });
     }
 
     if (btnX) btnX.addEventListener("click", closeModal);
@@ -856,14 +771,15 @@ window.addEventListener('scroll', () => {
       });
     }
 
-    overlay.addEventListener("click", function (e) {
+    overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closeModal();
     });
 
-    document.addEventListener("keydown", function (e) {
+    document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeModal();
     });
   })();
-  //리사이즈 갱신
+
+  // 리사이즈 갱신
   window.addEventListener("resize", () => ScrollTrigger.refresh());
 });
