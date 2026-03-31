@@ -149,13 +149,25 @@
   }
 
   .cal_two {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    width: min(100%, 458px);
+    margin: 0 auto;
     gap: 8px;
     padding: 14px;
   }
 
   .cal_month_col {
+    width: 100%;
+    max-width: none;
     padding: 18px 14px;
+  }
+
+  .cal_mheader {
+    margin-bottom: 18px;
+  }
+
+  .nav_arrows {
+    gap: 8px;
   }
 
   .cal_mname {
@@ -270,13 +282,24 @@
 
   /* ── 캘린더: 태블릿과 동일하게 유지 ── */
   .cal_two {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin: 0 auto;
     gap: 8px;
     padding: 14px;
   }
 
   .cal_month_col {
+    width: 100%;
     padding: 18px 14px;
+  }
+
+  .cal_mheader {
+    margin-bottom: 18px;
+  }
+
+  .nav_arrows {
+    gap: 8px;
   }
 
   .cal_mname {
@@ -304,7 +327,7 @@
 
   .cal_day.disabled {
     color: #1e1e1e;
-    opacity: 0.25;
+    opacity: 1;
   }
 
   .cal_day:not(.other-month):not(.disabled):hover {

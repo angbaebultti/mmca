@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
   const museumNav = document.querySelector('.museum_nav');
   if (museumNav) {
@@ -9,9 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const state = {
-    year: 2026,
-    month: 2,
-    selectedDate: null,
+    year: today.getFullYear(),
+    month: today.getMonth(),
+    selectedDate: new Date(today),
     selectedTime: '10:00~18:00',
     counts: { adult: 1, student: 0, senior: 0, culture: 0 },
   };
@@ -20,6 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
     'JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE',
     'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'
   ];
+
+  let visibleMonthCount = window.innerWidth <= 1024 ? 1 : 2;
+
+  function moveMonth(delta) {
+    state.month += delta;
+
+    while (state.month < 0) {
+      state.month += 12;
+      state.year--;
+    }
+
+    while (state.month > 11) {
+      state.month -= 12;
+      state.year++;
+    }
+  }
 
   function sameDay(a, b) {
     return a && b &&
@@ -40,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!wrap) return;
     wrap.innerHTML = '';
 
-    for (let m = 0; m < 2; m++) {
+    for (let m = 0; m < visibleMonthCount; m++) {
       let yr = state.year;
       let mo = state.month + m;
       if (mo > 11) { mo -= 12; yr++; }
@@ -58,23 +76,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const navDiv = document.createElement('div');
       navDiv.className = 'nav_arrows';
 
-      if (m === 0) {
+      if (visibleMonthCount === 1 || m === 0) {
         const prev = document.createElement('button');
+        prev.type = 'button';
         prev.className = 'cal_arrow_btn';
         prev.innerHTML = '&#8249;';
         prev.addEventListener('click', () => {
-          state.month--;
-          if (state.month < 0) { state.month = 11; state.year--; }
+          moveMonth(-1);
           renderCalendar();
         });
         navDiv.appendChild(prev);
-      } else {
+      }
+
+      if (visibleMonthCount === 1 || m === visibleMonthCount - 1) {
         const next = document.createElement('button');
+        next.type = 'button';
         next.className = 'cal_arrow_btn';
         next.innerHTML = '&#8250;';
         next.addEventListener('click', () => {
-          state.month++;
-          if (state.month > 11) { state.month = 0; state.year++; }
+          moveMonth(1);
           renderCalendar();
         });
         navDiv.appendChild(next);
@@ -99,8 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const firstDay = new Date(yr, mo, 1).getDay();
       const daysInMonth = new Date(yr, mo + 1, 0).getDate();
       const prevDays = new Date(yr, mo, 0).getDate();
-      const today = new Date(); today.setHours(0, 0, 0, 0);
-
       for (let i = 0; i < firstDay; i++) {
         const el = document.createElement('div');
         el.className = 'cal_day other-month';
@@ -272,12 +290,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (barBtn) barBtn.addEventListener('click', handlePayment);
   }
 
+  function initCalendarResponsive() {
+    window.addEventListener('resize', () => {
+      const nextVisibleMonthCount = window.innerWidth <= 1024 ? 1 : 2;
+      if (nextVisibleMonthCount === visibleMonthCount) return;
+
+      visibleMonthCount = nextVisibleMonthCount;
+      renderCalendar();
+    });
+  }
+
   renderCalendar();
   renderSelLabel();
   initCountButtons();
   initTimeBtns();
   updateSummary();
   initPaymentButton();
+  initCalendarResponsive();
   setTimeout(initSummaryAnimation, 150);
 
 });
