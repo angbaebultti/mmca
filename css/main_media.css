@@ -357,8 +357,8 @@
     height: fit-content;
     font-size: 52px;
     left: 45vw;
-    top: 300px;
-    bottom: auto;
+    top: 270px;
+    /* bottom: auto; */
     line-height: 1.1;
     font-weight: 500;
     letter-spacing: -0.5%;
@@ -366,7 +366,7 @@
 
   .info_wrap {
     position: absolute;
-    bottom: 140px;
+    bottom: 90px;
     left: 9vw;
     display: flex;
     gap: 172px;
