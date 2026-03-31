@@ -340,6 +340,10 @@
   #cursorDot {
     display: none;
   }
+
+  .menu_all{
+    padding-left: 0;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -954,9 +958,7 @@
     color: var(--main_white);
   }
 
-  /* 
-  .main_visual {
-    height: 100vh;
-    min-height: unset;
-  } */
+.menu_all{
+  padding-left: 0;
+}
 }
