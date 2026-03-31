@@ -5,6 +5,7 @@
   display: none;
 }
 
+
 @media screen and (max-width: 1024px) {
 
   /* ===== CURSOR 복원 ===== */
@@ -959,6 +960,6 @@
   }
 
 .menu_all{
-  padding-left: 0;
+  padding: 0;
 }
 }
