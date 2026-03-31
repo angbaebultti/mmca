@@ -18,13 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const ticketBg = qs('.ticket_bg');
 
   window.addEventListener('scroll', () => {
-  const visual = document.querySelector('.main_visual');
-  if (window.scrollY > 100) {
-    visual.style.zIndex = '5';
-  } else {
-    visual.style.zIndex = '1001';
-  }
-});
+    const visual = document.querySelector('.main_visual');
+    if (window.scrollY > 100) {
+      visual.style.zIndex = '5';
+    } else {
+      visual.style.zIndex = '1001';
+    }
+  });
 
   /* =========================================================
    * 1. 배경 티켓 생성
@@ -68,59 +68,59 @@ document.addEventListener('DOMContentLoaded', () => {
    * 3. 메인 비주얼 - 티켓 등장 + 찢어짐 + 고정 + 떨어짐
    * ========================================================= */
   if (!isMobile480) {
-  const mainTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.main_visual',
-      start: 'top top',
-      end: '+=1800',
-      scrub: 1.2,
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-    }
-  });
+    const mainTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.main_visual',
+        start: 'top top',
+        end: '+=1800',
+        scrub: 1.2,
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+      }
+    });
 
-  mainTL
-    .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: 'power2.out', duration: 0.4 }, 0)
-    .to('.info_wrap', { opacity: 0, y: -20, ease: 'power1.out', duration: 0.3 }, 0.3)
-    .to(mainTitle, { opacity: 0, y: -30, ease: 'power1.out', duration: 0.3 }, 0.3)
-    .to(ticketLeft, { rotation: -25, x: isMobile ? -40 : -150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
-    .to(ticketRight, { rotation: 25, x: isMobile ? 40 : 150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
-    .to(ticketLeft, { y: 1800, x: isMobile ? -80 : -400, rotationZ: -55, ease: 'power2.in', duration: 1.4 }, 0.75)
-    .to(ticketRight, { y: 1800, x: isMobile ? 80 : 400, rotationZ: 55, ease: 'power2.in', duration: 1.4 }, 0.75)
-    .to(ticketLeft, { opacity: 0, duration: 0.3 }, 1.8)
-    .to(ticketRight, { opacity: 0, duration: 0.3 }, 1.8);
+    mainTL
+      .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: 'power2.out', duration: 0.4 }, 0)
+      .to('.info_wrap', { opacity: 0, y: -20, ease: 'power1.out', duration: 0.3 }, 0.3)
+      .to(mainTitle, { opacity: 0, y: -30, ease: 'power1.out', duration: 0.3 }, 0.3)
+      .to(ticketLeft, { rotation: -25, x: isMobile ? -40 : -150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
+      .to(ticketRight, { rotation: 25, x: isMobile ? 40 : 150, y: isMobile ? 20 : 100, scale: isMobile ? 0.65 : 1, ease: 'none', duration: 0.4 }, 0.35)
+      .to(ticketLeft, { y: 1800, x: isMobile ? -80 : -400, rotationZ: -55, ease: 'power2.in', duration: 1.4 }, 0.75)
+      .to(ticketRight, { y: 1800, x: isMobile ? 80 : 400, rotationZ: 55, ease: 'power2.in', duration: 1.4 }, 0.75)
+      .to(ticketLeft, { opacity: 0, duration: 0.3 }, 1.8)
+      .to(ticketRight, { opacity: 0, duration: 0.3 }, 1.8);
 
-  //about 타임라인
-  const aboutTL = gsap.timeline({
-    scrollTrigger: {
-      trigger: about,
-      start: 'top top',
-      end: 'bottom bottom',
-      scrub: 1.4,
-      pin: '.about_scene',
-      pinSpacing: true,
-      anticipatePin: 1,
-    }
-  });
-  aboutTL.to(aboutHero, { opacity: 0, scale: 0.95, y: -20, ease: 'none', duration: 0.5 }, 0);
-  tickets.forEach((t, i) => {
-    gsap.set(t, { left: Math.random() * 80 + 10 + '%', top: '-20%', position: 'absolute' });
-    aboutTL.to(t, {
-      opacity: 0.15,
-      y: () => window.innerHeight * (0.68 + Math.random() * 0.18),
-      x: () => gsap.utils.random(-140, 140),
-      rotation: () => gsap.utils.random(-32, 32),
-      scale: () => gsap.utils.random(0.55, 0.9),
-      ease: 'power1.out', duration: 0.5
-    }, 0.5 + i * 0.06);
-  });
-  aboutTL.to(aboutContent, {
-    opacity: 1,
-    y: 0,
-    ease: 'power4.out',
-    duration: 1.0
-  }, 0.2);
+    //about 타임라인
+    const aboutTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: about,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.4,
+        pin: '.about_scene',
+        pinSpacing: true,
+        anticipatePin: 1,
+      }
+    });
+    aboutTL.to(aboutHero, { opacity: 0, scale: 0.95, y: -20, ease: 'none', duration: 0.5 }, 0);
+    tickets.forEach((t, i) => {
+      gsap.set(t, { left: Math.random() * 80 + 10 + '%', top: '-20%', position: 'absolute' });
+      aboutTL.to(t, {
+        opacity: 0.15,
+        y: () => window.innerHeight * (0.68 + Math.random() * 0.18),
+        x: () => gsap.utils.random(-140, 140),
+        rotation: () => gsap.utils.random(-32, 32),
+        scale: () => gsap.utils.random(0.55, 0.9),
+        ease: 'power1.out', duration: 0.5
+      }, 0.5 + i * 0.06);
+    });
+    aboutTL.to(aboutContent, {
+      opacity: 1,
+      y: 0,
+      ease: 'power4.out',
+      duration: 1.0
+    }, 0.2);
   }
 
   /* =========================================================
@@ -207,8 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const masterTL = gsap.timeline({
       scrollTrigger: {
-        trigger: '.artist_prize', start: 'top top', end: '+=5500',
-        scrub: 1.2, pin: true, anticipatePin: 1
+        trigger: '.artist_prize', start: 'top 10%', end: '+=5500',
+        scrub: 1.2, pin: true, anticipatePin: 1, pinSpacing: true 
       }
     });
 
@@ -374,111 +374,111 @@ document.addEventListener('DOMContentLoaded', () => {
    * 12. SHOP
    * ========================================================= */
 
-/* ===== 위치 데이터 ===== */
-const positionsDesktop = [
-  { x: -580, y: -280, r: -15 }, { x: 120, y: -320, r: 10 }, { x: 560, y: -200, r: 20 },
-  { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
-  { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 }
-];
+  /* ===== 위치 데이터 ===== */
+  const positionsDesktop = [
+    { x: -580, y: -280, r: -15 }, { x: 120, y: -320, r: 10 }, { x: 560, y: -200, r: 20 },
+    { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
+    { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 }
+  ];
 
-const positionsMobile = [
-  { x: -280, y: -190, r: -15 },
-  { x: 80,  y: -220, r: 10 },
-  { x: 260, y: -140, r: 20 },
+  const positionsMobile = [
+    { x: -280, y: -190, r: -15 },
+    { x: 80, y: -220, r: 10 },
+    { x: 260, y: -140, r: 20 },
 
-  { x: -300, y: 5,   r: 8 },
-  { x: 270, y: 40,   r: -12 },
-  { x: -220, y: 180, r: -20 },
+    { x: -300, y: 5, r: 8 },
+    { x: 270, y: 40, r: -12 },
+    { x: -220, y: 180, r: -20 },
 
-  { x: -40, y: 210, r: 5 },
-  { x: 200, y: 190, r: 18 },
-  { x: 290, y: 160, r: -10 }
-];
+    { x: -40, y: 210, r: 5 },
+    { x: 200, y: 190, r: 18 },
+    { x: 290, y: 160, r: -10 }
+  ];
 
-const positions = isMobile ? positionsMobile : positionsDesktop;
+  const positions = isMobile ? positionsMobile : positionsDesktop;
 
-const scale = isMobile ? 0.6 : 1;
+  const scale = isMobile ? 0.6 : 1;
 
-const scaledPositions = positions.map(p => ({
-  x: p.x * scale,
-  y: p.y * scale,
-  r: p.r
-}));
+  const scaledPositions = positions.map(p => ({
+    x: p.x * scale,
+    y: p.y * scale,
+    r: p.r
+  }));
 
-/* ===== 초기 상태 ===== */
+  /* ===== 초기 상태 ===== */
   if (!isMobile480) {
-gsap.set('.p', {
-  x: 0,
-  y: 0,
-  scale: 0.5,
-  opacity: 0,
-  rotation: (i) => positions[i].r * 0.3
-});
+    gsap.set('.p', {
+      x: 0,
+      y: 0,
+      scale: 0.5,
+      opacity: 0,
+      rotation: (i) => positions[i].r * 0.3
+    });
 
-/* ===== 타임라인 ===== */
-const shopTL = gsap.timeline({
-  scrollTrigger: {
-    trigger: '.shop',
-    start: 'top top',
-    end: 'bottom bottom',
-    scrub: 1.8
-  }
-});
+    /* ===== 타임라인 ===== */
+    const shopTL = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.shop',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 1.8
+      }
+    });
 
-/* ===== 등장 ===== */
-shopTL.to('.p', {
-  opacity: 0.7,
-  scale: 0.6,
-  duration: 0.25,
-  ease: 'power1.out'
-}, 0);
+    /* ===== 등장 ===== */
+    shopTL.to('.p', {
+      opacity: 0.7,
+      scale: 0.6,
+      duration: 0.25,
+      ease: 'power1.out'
+    }, 0);
 
-/* ===== 퍼지기 ===== */
-document.querySelectorAll('.p').forEach((el, i) => {
-  shopTL.to(el, {
-    opacity: 1,
-    scale: 1,
-    x: scaledPositions[i].x,
-    y: scaledPositions[i].y,
-    rotation: scaledPositions[i].r,
-    ease: 'expo.out',
-    duration: 0.7
-  }, 0.25);
-});
+    /* ===== 퍼지기 ===== */
+    document.querySelectorAll('.p').forEach((el, i) => {
+      shopTL.to(el, {
+        opacity: 1,
+        scale: 1,
+        x: scaledPositions[i].x,
+        y: scaledPositions[i].y,
+        rotation: scaledPositions[i].r,
+        ease: 'expo.out',
+        duration: 0.7
+      }, 0.25);
+    });
 
-/* ===== 글래스 효과 ===== */
-shopTL.to('.glass_front', {
-  background: 'rgba(255, 255, 255, 0.95)',
-  boxShadow: '0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)',
-  backdropFilter: 'blur(0px)',
-  duration: 0.4
-}, 0.25);
+    /* ===== 글래스 효과 ===== */
+    shopTL.to('.glass_front', {
+      background: 'rgba(255, 255, 255, 0.95)',
+      boxShadow: '0 0 40px 20px rgba(255,255,255,0.4), 0 0 100px 40px rgba(255,255,255,0.2)',
+      backdropFilter: 'blur(0px)',
+      duration: 0.4
+    }, 0.25);
 
-shopTL.to('.glass_front h2', {
-  color: '#000',
-  duration: 0.3
-}, 0.3);
+    shopTL.to('.glass_front h2', {
+      color: '#000',
+      duration: 0.3
+    }, 0.3);
 
-shopTL.to('.glass_front p', {
-  color: '#555',
-  duration: 0.3
-}, 0.3);
+    shopTL.to('.glass_front p', {
+      color: '#555',
+      duration: 0.3
+    }, 0.3);
 
-/* ===== 글로우 ===== */
-shopTL.to('.glow_bg', {
-  opacity: 0.7,
-  scale: 1.8,
-  filter: 'blur(80px)',
-  duration: 0.5
-}, 0.25);
+    /* ===== 글로우 ===== */
+    shopTL.to('.glow_bg', {
+      opacity: 0.7,
+      scale: 1.8,
+      filter: 'blur(80px)',
+      duration: 0.5
+    }, 0.25);
 
-/* ===== 박스 확대 ===== */
-shopTL.to('.glass_box', {
-  scale: 1.04,
-  z: 80,
-  duration: 0.8,
-  ease: 'power3.out'
-}, 0.25);
+    /* ===== 박스 확대 ===== */
+    shopTL.to('.glass_box', {
+      scale: 1.04,
+      z: 80,
+      duration: 0.8,
+      ease: 'power3.out'
+    }, 0.25);
   }
 
   /* =========================================================
@@ -529,53 +529,53 @@ shopTL.to('.glass_box', {
     });
   }
 
+  /* =========================================================
+   * AI OVERLAY
+   * ========================================================= */
   (function () {
-    var overlay = document.getElementById('ai-overlay');
-    var btn     = document.getElementById('ai-confirm');
+    const overlay = document.getElementById('ai_overlay');
+    const btn = document.getElementById('ai_confirm');
 
- function closeModal() {
-  overlay.classList.add('hidden');
+    function closeModal() {
+      overlay.classList.add('hidden');
 
-  const nav = document.querySelector('.museum_nav');
-  const bgs = nav.querySelectorAll('.item .bg');
+      const nav = document.querySelector('.museum_nav');
+      const bgs = nav.querySelectorAll('.item .bg');
 
-  // nav_locked 먼저 제거 (hover 차단 해제)
-  nav.classList.remove('nav_locked');
+      nav.classList.remove('nav_locked');
 
-  // 1. GSAP inline style 완전 제거 + width 0 초기화
-  gsap.set(bgs, { clearProps: 'all' });
-  bgs.forEach(bg => {
-    bg.style.transition = 'none';
-    bg.style.width = '0%';
-  });
-
-  // 2. 두 프레임 뒤에 width 100%로 채우기
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
+      gsap.set(bgs, { clearProps: 'all' });
       bgs.forEach(bg => {
-  bg.style.transition = 'width 1.2s ease'; 
-  bg.style.width = '100%';
-});
+        bg.style.transition = 'none';
+        bg.style.width = '0%';
+      });
 
-setTimeout(() => {
-  bgs.forEach(bg => {
-    bg.style.transition = 'width 1.4s cubic-bezier(0.65, 0, 0.35, 1)';
-    bg.style.width = '0%';
-  });
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          bgs.forEach(bg => {
+            bg.style.transition = 'width 1.2s ease';
+            bg.style.width = '100%';
+          });
 
-  setTimeout(() => {
-    bgs.forEach(bg => {
-      bg.style.transition = '';
-      bg.style.width = '';
-    });
-    gsap.set(bgs, { clearProps: 'all' });
-  }, 1500);
-}, 1300);
-    });
-  });
+          setTimeout(() => {
+            bgs.forEach(bg => {
+              bg.style.transition = 'width 1.4s cubic-bezier(0.65, 0, 0.35, 1)';
+              bg.style.width = '0%';
+            });
 
-  overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
-}
+            setTimeout(() => {
+              bgs.forEach(bg => {
+                bg.style.transition = '';
+                bg.style.width = '';
+              });
+              gsap.set(bgs, { clearProps: 'all' });
+            }, 1500);
+          }, 1300);
+        });
+      });
+
+      overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+    }
 
     btn.addEventListener('click', closeModal);
 
@@ -587,7 +587,6 @@ setTimeout(() => {
       if (e.key === 'Escape') closeModal();
     });
   })();
-
- //리사이즈 갱신
- window.addEventListener('resize', () => ScrollTrigger.refresh());
+  //리사이즈 갱신
+  window.addEventListener('resize', () => ScrollTrigger.refresh());
 });

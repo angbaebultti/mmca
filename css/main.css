@@ -1,6 +1,6 @@
 @charset "utf-8";
 
-#ai-overlay {
+#ai_overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.38);
@@ -14,13 +14,13 @@
   z-index: 999999;
 }
 
-#ai-overlay.hidden {
+#ai_overlay.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
 /* ── 모달 박스 ── */
-#ai-modal {
+#ai_modal {
   background: #fff;
   border-radius: 12px;
   padding: 2.25rem 2rem 1.75rem;
@@ -31,7 +31,7 @@
 }
 
 /* 아이콘 영역 */
-.ai-icon {
+.ai_icon {
   width: 44px;
   height: 44px;
   margin: 0 auto 1.25rem;
@@ -42,7 +42,7 @@
   justify-content: center;
 }
 
-.ai-icon svg {
+.ai_icon svg {
   width: 20px;
   height: 20px;
   stroke: #555;
@@ -50,7 +50,7 @@
 }
 
 /* 제목 */
-#ai-modal h2 {
+#ai_modal h2 {
   font-size: 16px;
   font-weight: 600;
   color: #111;
@@ -60,7 +60,7 @@
 }
 
 /* 설명 */
-#ai-modal p {
+#ai_modal p {
   font-size: 13px;
   color: #777;
   line-height: 1.75;
@@ -69,7 +69,7 @@
 }
 
 /* 확인 버튼 */
-#ai-confirm {
+#ai_confirm {
   width: 100%;
   padding: 0.65rem 1rem;
   background: #111;
@@ -83,12 +83,12 @@
   transition: background 0.15s;
 }
 
-#ai-confirm:hover {
+#ai_confirm:hover {
   background: #333;
 }
 
 /* 하단 부연 */
-.ai-footnote {
+.ai_footnote {
   font-size: 11px;
   color: #bbb;
   margin: 2rem 0 0;
@@ -450,20 +450,14 @@
   height: 100vh;
   background: var(--main_black);
   overflow: visible;
-  padding-bottom: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* padding-top, padding-bottom 전부 제거 */
 }
-
-
-/* .main_title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-} */
+.artist_prize .title{
+  margin-top: 100px;
+}
 
 
 .artist_prize .line {
@@ -498,10 +492,11 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100%;       /* 100vh → 100% */
   overflow: hidden;
   z-index: 1;
-  padding-top: 100px;
+  display: flex;
+  align-items: center; /* 이것만 남기기 */
 }
 
 .artist_track {

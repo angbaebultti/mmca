@@ -1,24 +1,33 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
- <meta
-    name="description"
-    content="MMCA (National Museum of Modern and Contemporary Art) English Website Redesign Project"
-/>
-<meta
-    name="keywords"
-    content="MMCA, National Museum of Modern and Contemporary Art, museum, exhibition, web design"
-/>
+    <meta
+      name="description"
+      content="MMCA (National Museum of Modern and Contemporary Art) English Website Redesign Project"
+    />
+    <meta
+      name="keywords"
+      content="MMCA, National Museum of Modern and Contemporary Art, museum, exhibition, web design"
+    />
     <meta name="author" content="TEAM 아이조아" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="MMCA — National Museum of Modern and Contemporary Art">
-  <meta property="og:description" content="Discover Korean contemporary art at the MMCA. Explore exhibitions and plan your visit.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/angbaebultti/mmca/main/img/og_img.jpg" />
+    <meta
+      property="og:title"
+      content="MMCA — National Museum of Modern and Contemporary Art"
+    />
+    <meta
+      property="og:description"
+      content="Discover Korean contemporary art at the MMCA. Explore exhibitions and plan your visit."
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/angbaebultti/mmca/main/img/og_img.jpg"
+    />
     <meta property="og:url" content="https://angbaebultti.github.io/mmca/" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script> 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <script
       src="https://kit.fontawesome.com/b43057b3ba.js"
@@ -35,25 +44,42 @@
     <script src="js/main.js" defer></script>
   </head>
 
-
   <body>
-     <div id="ai-overlay">
-    <div id="ai-modal" role="dialog" aria-modal="true" aria-labelledby="ai-modal-title">
- 
-      <div class="ai-icon">
-        <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="5" width="18" height="14" rx="2"/>
-          <circle cx="8.5" cy="10.5" r="1.5"/>
-          <polyline points="3,16 7.5,12 10.5,15 14,11 21,16"/>
-        </svg>
+    <!-- ========== AI OVERLAY ========== -->
+    <div id="ai_overlay">
+      <div
+        id="ai_modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="ai_modal_title"
+      >
+        <div class="ai_icon">
+          <svg
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <circle cx="8.5" cy="10.5" r="1.5" />
+            <polyline points="3,16 7.5,12 10.5,15 14,11 21,16" />
+          </svg>
+        </div>
+        <h2 id="ai_modal_title">
+          All images are AI-generated<br />virtual content
+        </h2>
+        <p>
+          All images on this site are virtually generated<br />through
+          artificial intelligence (AI).<br />They are not related to real
+          people, places, or objects.
+        </p>
+        <button id="ai_confirm">Confirm</button>
+        <p class="ai_footnote" style="margin-top: 1.25rem">
+          By continuing to use this site, you agree to the above notice.
+        </p>
       </div>
- <h2 id="ai-modal-title">All images are AI-generated<br>virtual content</h2>
-<p>All images on this site are virtually generated<br>through artificial intelligence (AI).<br>They are not related to real people, places, or objects.</p>
-
-<button id="ai-confirm">Confirm</button>
-<p class="ai-footnote" style="margin-top: 1.25rem;">By continuing to use this site, you agree to the above notice.</p>
     </div>
-  </div>
+
     <div class="wrap">
       <div class="top_btn">
         <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
@@ -134,9 +160,15 @@
             <ul>
               <li><a href="#">Location</a></li>
               <li class="active"><a href="museum.html#seoul">Seoul</a></li>
-              <li class="active"><a href="museum.html#gwacheon">Gwacheon</a></li>
-              <li class="active"><a href="museum.html#deoksugung">Deoksugung</a></li>
-              <li class="active"><a href="museum.html#cheongju">Cheongju</a></li>
+              <li class="active">
+                <a href="museum.html#gwacheon">Gwacheon</a>
+              </li>
+              <li class="active">
+                <a href="museum.html#deoksugung">Deoksugung</a>
+              </li>
+              <li class="active">
+                <a href="museum.html#cheongju">Cheongju</a>
+              </li>
             </ul>
           </div>
           <div class="menu_col">
@@ -348,7 +380,6 @@
 
       <!-- ========== SHOP ========== -->
       <section class="shop">
-
         <!-- 모바일 전용 샵 -->
         <div class="shop_mobile">
           <div class="shop_mobile_head">
@@ -356,10 +387,18 @@
             <a href="#" class="shop_mobile_more">View More &gt;</a>
           </div>
           <div class="shop_mobile_grid">
-            <div class="shop_mobile_item"><img src="img/mobile_shop_1.jpg" alt="product" /></div>
-            <div class="shop_mobile_item"><img src="img/mobile_shop_2.jpg" alt="product" /></div>
-            <div class="shop_mobile_item"><img src="img/mobile_shop_3.jpg" alt="product" /></div>
-            <div class="shop_mobile_item"><img src="img/mobile_shop_4.jpg" alt="product" /></div>
+            <div class="shop_mobile_item">
+              <img src="img/mobile_shop_1.jpg" alt="product" />
+            </div>
+            <div class="shop_mobile_item">
+              <img src="img/mobile_shop_2.jpg" alt="product" />
+            </div>
+            <div class="shop_mobile_item">
+              <img src="img/mobile_shop_3.jpg" alt="product" />
+            </div>
+            <div class="shop_mobile_item">
+              <img src="img/mobile_shop_4.jpg" alt="product" />
+            </div>
           </div>
           <a href="#" class="shop_mobile_banner">
             <p>THE COLLECTION STORE</p>
@@ -407,7 +446,10 @@
                       <img src="img/event_01.png" alt="" />
                     </div>
                     <div class="news_txt">
-                      <h3>MMCA Performing Arts 2026: Deep Time, Ryoji Ikeda/Ensemble Modern, Music for Strings</h3>
+                      <h3>
+                        MMCA Performing Arts 2026: Deep Time, Ryoji
+                        Ikeda/Ensemble Modern, Music for Strings
+                      </h3>
                       <p>Ryoji Ikeda / Ensemble Modern, Music for Strings</p>
                       <span class="news_date">2026-04-01 ~ 2026-04-02</span>
                     </div>
@@ -577,7 +619,11 @@
             </div>
           </div>
           <section class="news_mobile_tabs" aria-label="Notice and Press">
-            <div class="news_mobile_tab_buttons" role="tablist" aria-label="Notice and Press Tabs">
+            <div
+              class="news_mobile_tab_buttons"
+              role="tablist"
+              aria-label="Notice and Press Tabs"
+            >
               <button
                 type="button"
                 class="news_mobile_tab_btn is-active"
@@ -613,10 +659,15 @@
                 <li class="news_mobile_tab_item">
                   <a href="#" class="news_mobile_tab_link">
                     <div class="news_mobile_meta">
-                      <strong class="news_mobile_cate gwacheon">Gwacheon</strong>
+                      <strong class="news_mobile_cate gwacheon"
+                        >Gwacheon</strong
+                      >
                       <span class="news_mobile_date">2026-02-27</span>
                     </div>
-                    <p class="news_mobile_title">MMCA Collection: Korean Modern and Contemporary Art I Temporary Closure Notice</p>
+                    <p class="news_mobile_title">
+                      MMCA Collection: Korean Modern and Contemporary Art I
+                      Temporary Closure Notice
+                    </p>
                     <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
                   </a>
                 </li>
@@ -626,7 +677,10 @@
                       <strong class="news_mobile_cate seoul">Seoul</strong>
                       <span class="news_mobile_date">2026-02-11</span>
                     </div>
-                    <p class="news_mobile_title">MMCA to Release Early Bird Tickets for Damien Hirst Exhibition & Pre-opening Event</p>
+                    <p class="news_mobile_title">
+                      MMCA to Release Early Bird Tickets for Damien Hirst
+                      Exhibition & Pre-opening Event
+                    </p>
                     <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
                   </a>
                 </li>
@@ -636,7 +690,9 @@
                       <strong class="news_mobile_cate recruit">Recruit</strong>
                       <span class="news_mobile_date">2026-01-16</span>
                     </div>
-                    <p class="news_mobile_title">Recruitment Notice: 7th #helloMMCA foreign supporters</p>
+                    <p class="news_mobile_title">
+                      Recruitment Notice: 7th #helloMMCA foreign supporters
+                    </p>
                     <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
                   </a>
                 </li>
@@ -657,7 +713,10 @@
                     <div class="news_mobile_meta">
                       <span class="news_mobile_date">2026-03-16</span>
                     </div>
-                    <p class="news_mobile_title">MMCA to Host Lecture by Alexander Alberro, 2026 Fellow of the MMCA Research Program</p>
+                    <p class="news_mobile_title">
+                      MMCA to Host Lecture by Alexander Alberro, 2026 Fellow of
+                      the MMCA Research Program
+                    </p>
                     <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
                   </a>
                 </li>
@@ -666,7 +725,10 @@
                     <div class="news_mobile_meta">
                       <span class="news_mobile_date">2026-02-23</span>
                     </div>
-                    <p class="news_mobile_title">MMCA Begin Early-bird Ticket Sales for the Exhibition Hirst: Nothing Is True, Everything Is Possible</p>
+                    <p class="news_mobile_title">
+                      MMCA Begin Early-bird Ticket Sales for the Exhibition
+                      Hirst: Nothing Is True, Everything Is Possible
+                    </p>
                     <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
                   </a>
                 </li>
@@ -675,7 +737,10 @@
                     <div class="news_mobile_meta">
                       <span class="news_mobile_date">2026-02-11</span>
                     </div>
-                    <p class="news_mobile_title">MMCA Selects Christine Sun Kim as the participating Artist for MMCA X LG OLED Series</p>
+                    <p class="news_mobile_title">
+                      MMCA Selects Christine Sun Kim as the participating Artist
+                      for MMCA X LG OLED Series
+                    </p>
                     <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
                   </a>
                 </li>
@@ -797,7 +862,7 @@
           </div>
           <!-- //.f_logo -->
           <p class="copyright">
-           © 2026 IZoa Team. MMCA Website Redesign Concept.
+            © 2026 IZoa Team. MMCA Website Redesign Concept.
           </p>
         </div>
         <!-- //.f_bottom -->
