@@ -744,18 +744,22 @@ footer {
   cursor: none;
 }
 
+/* ===================== CURSOR ===================== */
+* {
+  cursor: none;
+}
+
 .cursor-dot {
   position: fixed;
   width: 6px;
   height: 6px;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.7); 
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 99999;
-  transition: opacity 0.2s;
+  transition: background 0.2s, opacity 0.2s;
 }
-
 .cursor-ring {
   position: fixed;
   width: 44px;
@@ -786,7 +790,11 @@ footer {
 .cursor-ring.shop-hover {
   width: 130px;
   height: 130px;
-  background: #fff;
+  background: #FF4B24;
   border-color: transparent;
   font-size: 14px;
+  color: #fff;
+}
+.cursor-dot.orange {
+  background: #ff4b24;
 }

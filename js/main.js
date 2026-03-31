@@ -690,6 +690,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+let isInNews = false;
+let isOnTopBtn = false;
+
+document.addEventListener("mousedown", () => dot.classList.add("orange"));
+document.addEventListener("mouseup", () => {
+  if (!isInNews && !isOnTopBtn) dot.classList.remove("orange");
+});
+
+const newsSection = qs(".news");
+if (newsSection) {
+  newsSection.addEventListener("mouseenter", () => {
+    isInNews = true;
+    dot.classList.add("orange");
+  });
+  newsSection.addEventListener("mouseleave", () => {
+    isInNews = false;
+    dot.classList.remove("orange");
+  });
+}
+
+const topBtn = qs(".top_btn");
+if (topBtn) {
+  topBtn.addEventListener("mouseenter", () => {
+    isOnTopBtn = true;
+    dot.classList.add("orange");
+  });
+  topBtn.addEventListener("mouseleave", () => {
+    isOnTopBtn = false;
+    dot.classList.remove("orange");
+  });
+}
+
   /* =========================================================
    * AI OVERLAY
    *    ✅ 수정: overlay null 체크 추가
