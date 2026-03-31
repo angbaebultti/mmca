@@ -386,13 +386,10 @@ const positionsMobile = [
   { x: 290, y: 160, r: -10 }
 ];
 
-/* ===== 디바이스별 선택 ===== */
 const positions = isMobile ? positionsMobile : positionsDesktop;
 
-/* ===== 퍼짐 강도 (여기만 조절하면 됨) ===== */
 const scale = isMobile ? 0.6 : 1;
 
-/* ===== 스케일 적용된 좌표 ===== */
 const scaledPositions = positions.map(p => ({
   x: p.x * scale,
   y: p.y * scale,
@@ -547,7 +544,7 @@ shopTL.to('.glass_box', {
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       bgs.forEach(bg => {
-  bg.style.transition = 'width 1.2s ease'; // 0.5s → 1.2s
+  bg.style.transition = 'width 1.2s ease'; 
   bg.style.width = '100%';
 });
 
@@ -582,8 +579,6 @@ setTimeout(() => {
     });
   })();
 
-  /* =========================================================
-   * 14. 리사이즈 갱신
-   * ========================================================= */
+ //리사이즈 갱신
  window.addEventListener('resize', () => ScrollTrigger.refresh());
 });

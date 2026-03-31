@@ -114,6 +114,7 @@ section {}
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     background 0.3s ease;
   will-change: transform;
+  max-width: 1920px;
 }
 
 .header.hide {
