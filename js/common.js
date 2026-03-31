@@ -71,22 +71,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // gsap.registerPlugin(ScrollTrigger);
 
- const museumNav = document.querySelector('.museum_nav');
+   const museumNav = document.querySelector('.museum_nav');
 const items = document.querySelectorAll('.item');
-const mainContent = document.querySelector('main'); // hero 섹션 바로 위 부모 or 첫 섹션
 
+// ✅ nav_locked 제거 (CSS에서 bg width를 0으로 강제하던 클래스)
 museumNav.classList.remove('nav_locked');
 
+// hover transition 차단 (GSAP 애니메이션 충돌 방지)
 items.forEach(item => {
     item.querySelector('.bg').style.transition = 'none';
 });
 
-const navHeight = museumNav.offsetHeight;
-
-// ✅ 콘텐츠에 nav 높이만큼 margin 미리 부여
-mainContent.style.marginTop = navHeight + 'px';
-
-const fillTL = gsap.timeline();
+const fillTL = gsap.timeline({
+    onComplete: () => {
+        // 애니메이션 완료 후 hover transition 복원
+        items.forEach(item => {
+            item.querySelector('.bg').style.transition = 'width 0.6s cubic-bezier(0.65, 0, 0.35, 1)';
+        });
+    }
+});
 
 items.forEach((item, i) => {
     fillTL.fromTo(
@@ -97,21 +100,27 @@ items.forEach((item, i) => {
     );
 });
 
-// ✅ nav 올라가면서 margin도 동시에 줄어듦 → 빈 공간 없음
+// ✅ 추가: 슬라이드 아웃 전에 bg를 다시 0으로 되돌리기
+fillTL.to(
+    Array.from(items).map(item => item.querySelector('.bg')),
+    { width: '0%', duration: 0.4, ease: 'power2.in', stagger: 0.05 },
+    '+=0.3'  // 채우기 완료 후 0.3s 뒤에 빠르게 빠짐
+);
+
+// 그 다음 위로 슬라이드 아웃
 fillTL.to(museumNav, {
-    yPercent: -100,
-    duration: 0.7,
+    y: '-100%',
+    opacity: 0,
+    duration: 0.6,
     ease: 'power2.inOut',
-}, '+=0.5');
+}, '+=0.1');
 
-fillTL.to(mainContent, {
-    marginTop: 0,
-    duration: 0.7,
-    ease: 'power2.inOut',
-}, '<'); // ✅ '<' 로 nav랑 동시에 실행
-
+// 슬라이드 아웃 완료 후 공간 제거
 fillTL.set(museumNav, {
-    display: 'none',
+    height: 0,
+    overflow: 'hidden',
+    pointerEvents: 'none',
+    visibility: 'hidden',
 });
 
 });
