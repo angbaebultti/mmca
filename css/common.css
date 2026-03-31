@@ -225,14 +225,14 @@ section {}
   gap: 16px;
   font-size: 27px;
   cursor: pointer;
-  align-items: center; /* 추가 */
+  align-items: center; 
 }
 
 .gnb_r img#menu_btn {
   width: 32px;
   height: 32px;
-  margin-top: 0; /* 3px → 0 */
-  display: block; /* 추가 */
+  margin-top: 0;
+  display: block;
 }
 
 .museum_nav {
@@ -306,7 +306,6 @@ section {}
   top: 0;
   left: 0;
   width: 0%;
-  /* 그대로 유지 */
   height: 100%;
   z-index: -1;
   transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
@@ -472,7 +471,6 @@ section {}
   opacity: 0.5;
 }
 
-/* 비활성메뉴 커서제거 */
 .menu_col ul li:not(.active) a {
   pointer-events: none;
   cursor: default;
