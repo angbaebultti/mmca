@@ -30,7 +30,6 @@
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* 상단 행 */
 .ai_toast_header {
   display: flex;
   align-items: flex-start;
@@ -38,7 +37,6 @@
   margin-bottom: 10px;
 }
 
-/* 아이콘 */
 .ai_icon {
   width: 28px;
   height: 28px;
@@ -58,7 +56,6 @@
   fill: none;
 }
 
-/* 제목 — 1순위 위계 */
 #ai_modal_title {
   font-size: 13px;
   font-weight: 700;
@@ -68,7 +65,6 @@
   flex: 1;
 }
 
-/* X 닫기 버튼 */
 #ai_confirm {
   width: 22px;
   height: 22px;
@@ -88,8 +84,6 @@
   margin-top: 1px;
 }
 
-
-/* 본문 — 2순위 위계 */
 #ai_modal p {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.45);
@@ -97,7 +91,6 @@
   letter-spacing: -0.02em;
 }
 
-/* 하단 버튼 행 */
 .ai_action_row {
   display: flex;
   align-items: center;
@@ -105,7 +98,6 @@
   gap: 8px;
 }
 
-/* Don't show today 버튼 — 3순위 (텍스트형) */
 #ai_dont_show {
   background: none;
   border: none;
@@ -123,14 +115,15 @@
   color: rgba(255, 255, 255, 0.65);
 }
 
-/* 하단 부연 — 토스트에서는 숨김 (너무 많음) */
 .ai_footnote {
   display: none;
 }
+
 .news_mobile_tabs {
   display: none;
 }
 
+/* ===================== MAIN VISUAL ===================== */
 .main_visual {
   background-image: url(../img/main_bg.png);
   background-size: cover;
@@ -162,7 +155,8 @@
   z-index: 2000;
   width: 100%;
   margin-bottom: 30px;
-  padding-top: 200px;}
+  padding-top: 200px;
+}
 
 .ticket {
   position: absolute;
@@ -172,7 +166,7 @@
   height: 300px;
   opacity: 1;
   z-index: 30000;
-  pointer-events: none;  /* ← 이 줄 삭제 또는 아래처럼 변경 */
+  pointer-events: none;
   overflow: visible;
 }
 
@@ -343,7 +337,6 @@
   justify-content: flex-start;
   padding-top: 12vh;
   margin-top: 0;
-  /* -140px 제거 */
   gap: 16px;
 }
 
@@ -398,7 +391,6 @@
   transform: translateY(-50%) scaleX(var(--line-scale, 0));
   transform-origin: right center;
   width: max(0px, calc(50vw - 590px));
-  /* 음수 방지 */
   height: 1px;
   background: var(--main_white);
 }
@@ -411,7 +403,6 @@
   transform: translateY(-50%) scaleX(var(--line-scale, 0));
   transform-origin: left center;
   width: max(0px, calc(50vw - 590px));
-  /* 음수 방지 */
   height: 1px;
   background: var(--main_white);
 }
@@ -443,7 +434,6 @@
   will-change: transform;
 }
 
-/* ── 개별 원 ── */
 .stat {
   width: 340px;
   height: 340px;
@@ -481,7 +471,6 @@
   color: var(--main_white);
 }
 
-
 /* ===================== ARTIST PRIZE ===================== */
 .artist_prize {
   position: relative;
@@ -492,16 +481,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding-top, padding-bottom 전부 제거 */
 }
-.artist_prize .title{
+
+.artist_prize .title {
   margin-top: -100px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 
 .artist_prize .line {
   display: flex;
@@ -535,11 +523,11 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;       /* 100vh → 100% */
+  height: 100%;
   overflow: hidden;
   z-index: 1;
   display: flex;
-  align-items: center; /* 이것만 남기기 */
+  align-items: center;
 }
 
 .artist_track {
@@ -660,7 +648,6 @@
   color: var(--hover);
 }
 
-
 /* ===================== NEWS ===================== */
 .news {
   width: 100%;
@@ -675,6 +662,7 @@
   padding-bottom: 180px;
 }
 
+/* ✅ 수정: max-height 트랜지션 easing 부드럽게, 속도 조정 */
 .news_group {
   position: relative;
   width: 100%;
@@ -682,7 +670,7 @@
   box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.18);
   max-height: 80px;
   overflow: hidden;
-  transition: max-height 0.7s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
 }
 
@@ -697,7 +685,6 @@
 
 .news_head {
   position: relative;
-  /* sticky → relative로 되돌리기 */
   width: 100%;
   height: 90px;
   display: flex;
@@ -752,23 +739,21 @@
   pointer-events: auto;
 }
 
-.news_group.notice>.news_more {
+.news_group.notice > .news_more {
   color: var(--main_white);
 }
 
+/* ✅ 수정: CSS transition 제거 — JS 가 opacity 직접 제어 */
 .news_body {
   padding: 40px 40px 80px;
   border-top: 1px solid #000;
   opacity: 0;
-  transform: translateY(16px);
-  transition:
-    opacity 0.5s ease 0.2s,
-    transform 0.5s ease 0.2s;
+  transform: translateY(0);
+  transition: none;
 }
 
 .news_group.is-open .news_body {
   opacity: 1;
-  transform: translateY(0);
 }
 
 .notice .news_body {
@@ -975,8 +960,9 @@
   opacity: 1 !important;
 }
 
-.news_body {
-  transition: none;
+.news_group:not(.is-open) .news_card {
+  opacity: 0;
+  pointer-events: none;
 }
 
 #newsPreview {
@@ -1010,11 +996,6 @@
 
 .news_card:hover .news_thumb img {
   transform: scale(1.07);
-}
-
-.news_group:not(.is-open) .news_card {
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* ===================== SHOP ===================== */
@@ -1116,23 +1097,10 @@
   z-index: 6;
 }
 
-.p1,
-.p2,
-.p3,
-.p4,
-.p5,
-.p6,
-.p7,
-.p8,
-.p9 {
+.p1, .p2, .p3, .p4, .p5,
+.p6, .p7, .p8, .p9 {
   width: 400px;
 }
-
-
-
-
-
-
 
 .shop_title {
   transition: letter-spacing 0.4s cubic-bezier(0.25, 1, 0.5, 1);

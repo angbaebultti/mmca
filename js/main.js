@@ -409,10 +409,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let previewRX = 0, previewRY = 0;
 
   if (!isMobile480) {
-    /* ✅ 수정: lerp 속도 0.1 → 0.18 로 높여서 꿀렁임 감소 */
     (function lerpPreview() {
-      previewRX += (previewX - previewRX) * 0.18;
-      previewRY += (previewY - previewRY) * 0.18;
+      previewRX += (previewX - previewRX) * 0.1;
+      previewRY += (previewY - previewRY) * 0.1;
       if (newsPreview) {
         newsPreview.style.left = previewRX + "px";
         newsPreview.style.top = previewRY + "px";
@@ -425,15 +424,6 @@ document.addEventListener("DOMContentLoaded", () => {
       previewY = e.clientY;
     });
   }
-
-  /* ✅ 수정: 이미지 미리 로드 — hover 시 깜빡임/지연 제거 */
-  function preloadNewsImages() {
-    qsa(".news_thumb img").forEach((img) => {
-      const preload = new Image();
-      preload.src = img.src;
-    });
-  }
-  preloadNewsImages();
 
   if (groups.length) {
     groups[0].classList.add("is-open");
@@ -506,21 +496,12 @@ document.addEventListener("DOMContentLoaded", () => {
       cards.forEach((card) => {
         const img = card.querySelector(".news_thumb img");
         if (!img || isMobile480) return;
-
-        /* ✅ 수정: fade in/out 애니메이션 추가로 부드럽게 전환 */
         card.addEventListener("mouseenter", () => {
           previewImg.src = img.src;
-          gsap.to(newsPreview, { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" });
           newsPreview.classList.add("is-visible");
         });
         card.addEventListener("mouseleave", () => {
-          gsap.to(newsPreview, {
-            opacity: 0,
-            scale: 0.95,
-            duration: 0.15,
-            ease: "power2.in",
-            onComplete: () => newsPreview.classList.remove("is-visible"),
-          });
+          newsPreview.classList.remove("is-visible");
         });
       });
     });
