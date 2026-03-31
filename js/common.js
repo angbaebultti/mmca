@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScroll = currentScroll;
     });
 
-    gsap.registerPlugin(ScrollTrigger);
+    // gsap.registerPlugin(ScrollTrigger);
 
     const items = document.querySelectorAll('.item');
     items.forEach((item, i) => {
@@ -85,10 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
 
-    document.body.insertAdjacentHTML('beforeend', `
-    <div class="cursor-ring" id="cursorRing">ENTER ↗</div>
-    <div class="cursor-dot" id="cursorDot"></div>
-  `);
+
 
     const ring = document.getElementById('cursorRing');
     const dot = document.getElementById('cursorDot');

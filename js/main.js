@@ -17,14 +17,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const stats = qsa('.stat');
   const ticketBg = qs('.ticket_bg');
 
-  window.addEventListener('scroll', () => {
+ // 480에서는 z-index 조작 안 함
+window.addEventListener('scroll', () => {
+     if (window.innerWidth <= 480) return; // ← 추가
     const visual = document.querySelector('.main_visual');
     if (window.scrollY > 100) {
       visual.style.zIndex = '5';
     } else {
       visual.style.zIndex = '1001';
     }
-  });
+});
 
   /* =========================================================
    * 1. 배경 티켓 생성
