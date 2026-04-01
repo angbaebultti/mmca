@@ -188,6 +188,10 @@
   gap: 12px;
 }
 
+.sns_login a{
+  cursor: pointer;
+}
+
 .sns_btn {
   display: flex;
   align-items: center;
@@ -220,6 +224,7 @@
   color: #fff;
   letter-spacing: -0.02em;
 }
+
 
 .sns_btn.google .sns_icon {
   background: #fff;
@@ -268,3 +273,10 @@
   cursor: text !important;
 }
 
+.cursor-ring{
+  display: none;
+}
+
+.cursor-dot{
+  display: none;
+}

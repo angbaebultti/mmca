@@ -50,4 +50,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 300);
     });
+
+// 커서
+const ring = document.getElementById('cursorRing');
+const dot = document.getElementById('cursorDot');
+let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
+
+document.addEventListener('mousemove', (e) => {
+  mx = e.clientX; my = e.clientY;
+  if (dot) { dot.style.left = mx + 'px'; dot.style.top = my + 'px'; }
+});
+
+(function lerpRing() {
+  rx += (mx - rx) * 0.1;
+  ry += (my - ry) * 0.1;
+  if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+  requestAnimationFrame(lerpRing);
+})();
+
+// data-cursor="light" → 커서 주황색
+document.querySelectorAll('[data-cursor="light"]').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    ring.classList.add('orange');
+    dot.classList.add('orange');
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.classList.remove('orange');
+    dot.classList.remove('orange');
+  });
+});
 });

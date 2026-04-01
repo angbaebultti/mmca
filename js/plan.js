@@ -201,9 +201,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // 인원 텍스트
     const c = state.counts;
     const parts = [];
-    if (c.adult)   parts.push(`adult · ${c.adult}`);
+    if (c.adult) parts.push(`adult · ${c.adult}`);
     if (c.student) parts.push(`student · ${c.student}`);
-    if (c.senior)  parts.push(`senior · ${c.senior}`);
+    if (c.senior) parts.push(`senior · ${c.senior}`);
     if (c.culture) parts.push(`culture · ${c.culture}`);
     const ticketText = parts.join(' / ') || '—';
 
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ✅ 결제 버튼 공통 로직 (데스크톱 summary 카드 + 인라인 summary 둘 다 동작)
+  // 결제 버튼 공통 로직 (데스크톱 summary 카드 + 인라인 summary 둘 다 동작)
   function handlePayment() {
     if (!state.selectedDate) {
       alert('Please select a date first.');
@@ -303,6 +303,35 @@ document.addEventListener('DOMContentLoaded', () => {
       renderCalendar();
     });
   }
+
+  // 커서
+  const ring = document.getElementById('cursorRing');
+  const dot = document.getElementById('cursorDot');
+  let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
+
+  document.addEventListener('mousemove', (e) => {
+    mx = e.clientX; my = e.clientY;
+    if (dot) { dot.style.left = mx + 'px'; dot.style.top = my + 'px'; }
+  });
+
+  (function lerpRing() {
+    rx += (mx - rx) * 0.1;
+    ry += (my - ry) * 0.1;
+    if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
+    requestAnimationFrame(lerpRing);
+  })();
+
+  // data-cursor="light" → 커서 주황색
+document.querySelectorAll('[data-cursor="light"]').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    ring.classList.add('orange');
+    dot.classList.add('orange');
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.classList.remove('orange');
+    dot.classList.remove('orange');
+  });
+});
 
   renderCalendar();
   renderSelLabel();
