@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
       </a>
     `;
 
-    // 클릭 시 로그아웃 여부 확인
     document.querySelector(".user_icon_btn").addEventListener("click", (e) => {
       e.preventDefault();
       if (confirm(`${userName}\nLog out?`)) {
@@ -41,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo(0, scrollY);
   });
 
+
   /* ── 탑버튼 ── */
   const topBtn = document.querySelector('.top_btn');
 
@@ -48,12 +48,11 @@ document.addEventListener("DOMContentLoaded", () => {
     topBtn.classList.toggle('active', window.scrollY > 300);
   });
 
+
   /* ── 헤더 shrink / hide ── */
   const header = document.querySelector(".header");
   let lastScroll = 0;
-  let scrollUpStart = 0;
   let headerLockedByIntro = false;
-  let headerPermanentHide = false;
 
   window.addEventListener("scroll", () => {
     if (headerLockedByIntro) return;
@@ -63,20 +62,16 @@ document.addEventListener("DOMContentLoaded", () => {
     header.classList.toggle("shrink", cur > 60);
 
     if (cur > lastScroll && cur > 100) {
+      // 아래로 스크롤 → 헤더 숨김
       header.classList.add("hide");
-      scrollUpStart = cur;
-    } else {
-      if (scrollUpStart - cur > 60) {
-        if (headerPermanentHide && cur < 80) {
-          header.classList.add("hide");
-        } else {
-          header.classList.remove("hide");
-        }
-      }
+    } else if (lastScroll - cur > 60) {
+      // 위로 60px 이상 스크롤 → 헤더 표시
+      header.classList.remove("hide");
     }
 
     lastScroll = cur;
   });
+
 
   /* ── museum nav GSAP 애니메이션 ── */
   const museumNav = document.querySelector('.museum_nav');
@@ -113,9 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       header.classList.add('hide');
 
       lastScroll = window.scrollY;
-      scrollUpStart = window.scrollY;
       headerLockedByIntro = false;
-      headerPermanentHide = true;
     });
 
   } else {

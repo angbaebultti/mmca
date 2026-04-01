@@ -118,6 +118,11 @@ body.menu_open {
   transform: translateY(-100vh);
 }
 
+.header.hide .nav_bottom {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .header.shrink {
   height: 60px;
   background: transparent;
