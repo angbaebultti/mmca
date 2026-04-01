@@ -1,4 +1,5 @@
 
+document.addEventListener("DOMContentLoaded", () => {
   if (window.innerWidth > 480) {
 
     // 중복 생성 방지
@@ -11,7 +12,7 @@
       );
 
       const ring = document.getElementById("cursorRing");
-      const dot  = document.getElementById("cursorDot");
+      const dot = document.getElementById("cursorDot");
 
       let mx = 0, my = 0;
       let rx = window.innerWidth / 2;
@@ -23,7 +24,7 @@
         my = e.clientY;
 
         dot.style.left = mx + "px";
-        dot.style.top  = my + "px";
+        dot.style.top = my + "px";
       });
 
       // ring (부드럽게)
@@ -32,7 +33,7 @@
         ry += (my - ry) * 0.1;
 
         ring.style.left = rx + "px";
-        ring.style.top  = ry + "px";
+        ring.style.top = ry + "px";
 
         requestAnimationFrame(animateCursor);
       }
@@ -49,3 +50,26 @@
 
     }
   }
+
+  const DUMMY_ACCOUNTS = [
+    { email: "test@mmca.com", password: "1234" },
+    { email: "admin@mmca.com", password: "admin123" }
+  ];
+
+  document.querySelector(".login_btn").addEventListener("click", () => {
+    const email = document.querySelector("input[type='text']").value;
+    const password = document.querySelector("input[type='password']").value;
+
+    const matched = DUMMY_ACCOUNTS.find(
+      (acc) => acc.email === email && acc.password === password
+    );
+
+ if (matched) {
+    location.href = "main.html";
+  } else {
+    const errorMsg = document.querySelector(".error_msg");
+    errorMsg.textContent = "Invalid email or password. Please try again.";
+    errorMsg.style.display = "block";
+  }
+  });
+})
