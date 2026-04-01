@@ -29,16 +29,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  const cube               = document.getElementById("cube");
-  const cubeStage          = document.querySelector(".cube_stage");
-  const introScene         = document.querySelector(".intro_scene");
-  const museumWrap         = document.getElementById("museumWrap");
-  const museumSections     = document.querySelectorAll(".museum_exhibit_section");
+  const cube = document.getElementById("cube");
+  const cubeStage = document.querySelector(".cube_stage");
+  const introScene = document.querySelector(".intro_scene");
+  const museumWrap = document.getElementById("museumWrap");
+  const museumSections = document.querySelectorAll(".museum_exhibit_section");
   const horizontalSections = document.querySelectorAll(".museum_exhibit_section.is_horizontal");
-  const cubeFaces          = document.querySelectorAll(".cube_face");
-  const topBtn             = document.querySelector(".top_btn a");
-  const topBtnWrap         = document.querySelector(".top_btn");
-  const header             = document.querySelector(".header");
+  const cubeFaces = document.querySelectorAll(".cube_face");
+  const topBtn = document.querySelector(".top_btn a");
+  const topBtnWrap = document.querySelector(".top_btn");
+  const header = document.querySelector(".header");
 
   if (typeof Lenis === "undefined" || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
     console.error("[MMCA] Lenis / GSAP / ScrollTrigger 라이브러리를 먼저 로드해주세요.");
@@ -56,15 +56,15 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 
-  let isTransitioning    = false;
+  let isTransitioning = false;
   let hasTriggeredExpand = false;
-  let isMuseumReady      = false;
-  let horizontalRafId    = null;
-  let cubeScrollTrigger  = null;
-  const currentX         = new WeakMap();
+  let isMuseumReady = false;
+  let horizontalRafId = null;
+  let cubeScrollTrigger = null;
+  const currentX = new WeakMap();
 
   const HORIZONTAL_STICKY_TOP = 100;
-  const NORMAL_SPEED    = 0.95;
+  const NORMAL_SPEED = 0.95;
   const LAST_CARD_SPEED = 0.92;
 
   function lerp(a, b, t) { return a + (b - a) * t; }
@@ -83,11 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getFaceRotation(targetId) {
     switch (targetId) {
-      case "seoul":      return 0;
+      case "seoul": return 0;
       case "deoksugung": return -90;
-      case "gwacheon":   return 180;
-      case "cheongju":   return 90;
-      default:           return 0;
+      case "gwacheon": return 180;
+      case "cheongju": return 90;
+      default: return 0;
     }
   }
 
@@ -136,8 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const metrics = getHorizontalMetrics(section);
     if (!metrics) return 0;
 
-    const sectionTop     = getAbsoluteTop(section);
-    const rawProgress    = Math.max(window.scrollY - sectionTop, 0);
+    const sectionTop = getAbsoluteTop(section);
+    const rawProgress = Math.max(window.scrollY - sectionTop, 0);
     const { maxTranslate, lastCardStart } = metrics;
     const normalProgress = rawProgress * NORMAL_SPEED;
 
@@ -174,9 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!section.classList.contains("active")) return;
       const track = section.querySelector(".museum_h_track");
       if (!track) return;
-      const target  = getTargetX(section);
+      const target = getTargetX(section);
       const current = currentX.has(section) ? currentX.get(section) : 0;
-      const next    = lerp(current, target, 0.28);
+      const next = lerp(current, target, 0.28);
       currentX.set(section, next);
       track.style.transform = `translate3d(${-next}px, 0, 0)`;
       if (Math.abs(next - target) > 0.3) stillMoving = true;
@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCompactHeader();
       resetHorizontalSection(targetSection);
 
-      isMuseumReady   = true;
+      isMuseumReady = true;
       isTransitioning = false;
       lenis.start();
 
@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function expandSelectedFace(face) {
-    const targetId      = face.dataset.target;
+    const targetId = face.dataset.target;
     const targetSection = document.getElementById(targetId);
 
     if (!targetSection) { lenis.start(); isTransitioning = false; return; }
@@ -285,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function triggerAutoExpand() {
     if (isTransitioning || hasTriggeredExpand) return;
     hasTriggeredExpand = true;
-    isTransitioning    = true;
+    isTransitioning = true;
     const seoulFace = document.querySelector('[data-target="seoul"]');
     if (!seoulFace) { isTransitioning = false; return; }
     lenis.stop();
@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     cubeFaces.forEach((face) => face.classList.remove("is_active", "is_hidden"));
-    isTransitioning    = false;
+    isTransitioning = false;
     hasTriggeredExpand = false;
 
     gsap.set(cube, { rotateY: 0 });
@@ -385,7 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cubeFaces.forEach((face) => {
     face.addEventListener("click", () => {
       if (isTransitioning) return;
-      isTransitioning    = true;
+      isTransitioning = true;
       hasTriggeredExpand = true;
       lenis.stop();
       expandSelectedFace(face);
@@ -397,7 +397,21 @@ document.addEventListener("DOMContentLoaded", () => {
     let lastScrollY = 0;
     lenis.on("scroll", ({ scroll }) => {
       if (isTransitioning) return;
-      header.style.transform = (scroll > lastScrollY && scroll > 80) ? "translateY(-100%)" : "translateY(0)";
+
+      const scrollingDown = scroll > lastScrollY;
+      const pastThreshold = scroll > 80;
+
+      // 큐브 인트로 구간에서는 헤더 숨기지 않음
+      if (!isMuseumReady) {
+        header.style.transform = "translateY(0)";
+        lastScrollY = scroll;
+        return;
+      }
+
+      header.style.transform = (scrollingDown && pastThreshold)
+        ? "translateY(-100vh)"   
+        : "translateY(0)";
+
       lastScrollY = scroll;
     });
   }
@@ -415,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function initMobileSlide() {
     if (window.innerWidth > 1024) return;
-    const cubeEl    = document.getElementById("cube");
+    const cubeEl = document.getElementById("cube");
     const cubePinEl = document.querySelector(".cube_pin");
     if (!cubeEl || !cubePinEl) return;
 
@@ -468,7 +482,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hashTarget) {
     const targetSection = document.getElementById(hashTarget);
     if (targetSection) {
-      isTransitioning    = true;
+      isTransitioning = true;
       hasTriggeredExpand = true;
       lenis.stop();
       const targetFace = document.querySelector(`[data-target="${hashTarget}"]`);
@@ -483,7 +497,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `<div class="cursor-ring" id="cursorRing"></div><div class="cursor-dot" id="cursorDot"></div>`
     );
     const ring = document.getElementById("cursorRing");
-    const dot  = document.getElementById("cursorDot");
+    const dot = document.getElementById("cursorDot");
     let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
 
     document.addEventListener("mousemove", (e) => {
@@ -499,12 +513,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let isInLight = false;
     document.querySelectorAll('[data-cursor="light"]').forEach((el) => {
-      el.addEventListener("mouseenter", () => { isInLight = true;  dot.classList.add("orange");    ring.classList.add("orange"); });
+      el.addEventListener("mouseenter", () => { isInLight = true; dot.classList.add("orange"); ring.classList.add("orange"); });
       el.addEventListener("mouseleave", () => { isInLight = false; dot.classList.remove("orange"); ring.classList.remove("orange"); });
     });
 
     document.addEventListener("mousedown", () => dot.classList.add("orange"));
-    document.addEventListener("mouseup",   () => { if (!isInLight) dot.classList.remove("orange"); });
+    document.addEventListener("mouseup", () => { if (!isInLight) dot.classList.remove("orange"); });
   })();
 
 });
