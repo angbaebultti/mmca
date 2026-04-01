@@ -57,8 +57,6 @@ a {
   overflow: hidden;
 }
 
-/* [BUG FIX] transform: translate(-50%, -50%) 제거 → GSAP이 scale/y 건드릴 때 위치 날아가는 문제 수정
-   대신 margin으로 중앙 정렬 처리 */
 .cube_stage {
   position: absolute;
   top: 50%;
@@ -98,7 +96,7 @@ a {
   background: #000;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
   isolation: isolate;
-  transition: opacity 0.45s ease, filter 0.45s ease, border-radius 0.6s ease;;
+  transition: opacity 0.45s ease, filter 0.45s ease, border-radius 0.6s ease;
 }
 
 .cube_face.is_active {
@@ -110,6 +108,7 @@ a {
   opacity: 0;
   pointer-events: none;
 }
+
 .cube_face::after {
   content: "";
   position: absolute;
@@ -145,9 +144,6 @@ a {
   left: 50%;
   z-index: 2;
   color: var(--main_white);
-  /* [BUG FIX] 확대 시 글씨 깨짐 방지
-     - 폰트를 3배 크게 렌더링 후 scale(0.333)으로 축소
-     - GPU가 고해상도 텍스트를 미리 확보해두므로 확대해도 선명하게 유지됨 */
   font-size: clamp(168px, 18vw, 288px);
   transform: translate(-50%, -50%) scale(0.333);
   transform-origin: center center;
@@ -178,15 +174,6 @@ a {
   transform: rotateY(-90deg) translateZ(var(--depth));
 }
 
-.cube_face.is_hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.cube_face.is_active {
-  z-index: 10;
-}
-
 /* ---------------- museum base ---------------- */
 
 .museum_wrap {
@@ -197,8 +184,8 @@ a {
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.6s ease;
-  margin-bottom: 200px;
-  padding-bottom: 30vh;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .museum_wrap.active {
@@ -256,6 +243,7 @@ a {
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0.04em;
+  padding-top: 20px;
 }
 
 .museum_tabs {
@@ -290,24 +278,35 @@ a {
   padding: 0;
 }
 
+/* 핵심: museum_inner도 높이를 section과 같게 맞춰야 sticky 작동 */
+.museum_exhibit_section.is_horizontal .museum_inner {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .museum_h_sticky {
   position: sticky;
   top: 0;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .museum_exhibit_section.is_horizontal .museum_head {
   position: relative;
   z-index: 3;
   width: 1500px;
-  margin: 0 auto 40px;
-  padding-top: 0px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  flex-shrink: 0;
 }
 
 .museum_exhibit_section.is_horizontal.is_compact .museum_head {
   padding-top: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .museum_exhibit_section.is_horizontal.is_compact .museum_label {
@@ -324,7 +323,7 @@ a {
 
 .museum_h_scroll {
   width: 100%;
-  height: 100vh;
+  flex: 1;
   overflow: hidden;
 }
 
@@ -338,9 +337,9 @@ a {
   width: 100vw;
   min-width: 100vw;
   flex: 0 0 100vw;
-  height: calc(100vh - 220px);
-  margin-top: 50px;
-  padding: 0 0 80px;
+  height: 100%;
+  margin-top: 0;
+  padding: 30px 0 80px;
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
@@ -457,11 +456,10 @@ a {
   border-left: 2px dashed var(--gray_01);
 }
 
-.ticket_stub i{
+.ticket_stub i {
   font-size: 32px;
 }
 
-/* 호버 */
 .museum_ticket:hover {
   transform: rotate(-5deg);
 }
@@ -470,7 +468,6 @@ a {
 .museum_ticket:hover .ticket_stub {
   color: var(--main_white);
   background: #FF6624;
-
 }
 
 .museum_ticket:hover .ticket_main {
@@ -569,7 +566,7 @@ a {
   width: 60px;
   height: 60px;
   background: var(--main_white);
-  color: #000;
+  color: var(--main_black);
   border-radius: 50%;
   font-size: 18px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
