@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const normalDistance = metrics.lastCardStart / NORMAL_SPEED;
     const lastCardDistance = metrics.lastCardSpan / (NORMAL_SPEED * LAST_CARD_SPEED);
 
-    return window.innerHeight + normalDistance + lastCardDistance;
+    return window.innerHeight + normalDistance + lastCardDistance + 600;
   }
 
   function updateCompactHeader() {

@@ -30,7 +30,7 @@ a {
   text-decoration: none;
 }
 
-/* ---------------- intro / cube ---------------- */
+/* ===================== CUBE / INTRO ===================== */
 
 .intro_scene {
   position: relative;
@@ -75,12 +75,9 @@ a {
 }
 
 .cube {
-  --face-w: 1000px;
-  --face-h: 560px;
-  --depth: 500px;
   position: relative;
-  width: var(--face-w);
-  height: var(--face-h);
+  width: 1000px;
+  height: 560px;
   transform-style: preserve-3d;
   will-change: transform;
 }
@@ -89,8 +86,8 @@ a {
   position: absolute;
   top: 0;
   left: 0;
-  width: var(--face-w);
-  height: var(--face-h);
+  width: 1000px;
+  height: 560px;
   overflow: hidden;
   backface-visibility: hidden;
   background: #000;
@@ -157,33 +154,32 @@ a {
 }
 
 .face_seoul {
-  transform: rotateY(0deg) translateZ(var(--depth));
+  transform: rotateY(0deg) translateZ(500px);
 }
 
 .face_deoksugung {
-  transform: rotateY(90deg) translateZ(var(--depth));
+  transform: rotateY(90deg) translateZ(500px);
 }
 
 .face_gwacheon {
-  transform: rotateY(180deg) translateZ(var(--depth));
+  transform: rotateY(180deg) translateZ(500px);
 }
 
 .face_cheongju {
-  transform: rotateY(-90deg) translateZ(var(--depth));
+  transform: rotateY(-90deg) translateZ(500px);
 }
 
-/* ---------------- museum base ---------------- */
+
+/* ===================== MUSEUM BASE ===================== */
 
 .museum_wrap {
   position: relative;
   width: 100%;
-  padding-top: 50px;
+  padding-bottom: 0;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.6s ease;
-  margin-bottom: 0;
-  padding-bottom: 0;
 }
 
 .museum_wrap.active {
@@ -191,7 +187,6 @@ a {
   visibility: visible;
   pointer-events: auto;
   height: auto;
-  padding-bottom: 200px;
 }
 
 .museum_exhibit_section {
@@ -206,28 +201,19 @@ a {
 .museum_exhibit_section .museum_inner {
   width: 1500px;
   margin: 0 auto;
-  padding: 140px 0;
 }
 
-/* ---------------- head ---------------- */
+
+/* ===================== HEAD ===================== */
 
 .museum_head {
   margin-bottom: 30px;
   transition: padding-top 0.35s ease, margin 0.35s ease;
 }
 
-.museum_h_track {
-  transform: translate3d(0, 0, 0);
-}
-
 .museum_head_left {
   display: flex;
   flex-direction: column;
-}
-
-.museum_label,
-.museum_tabs {
-  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .museum_label {
@@ -236,11 +222,13 @@ a {
   margin-bottom: 10px;
   color: var(--gray_05);
   letter-spacing: 0.05em;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .museum_name {
   font-size: clamp(56px, 4.4vw, 76px);
   font-weight: 700;
+  line-height: 1.1;
   letter-spacing: 0.04em;
 }
 
@@ -249,6 +237,7 @@ a {
   gap: clamp(24px, 2.8vw, 55px);
   margin-top: clamp(20px, 2.1vw, 40px);
   letter-spacing: 0.05em;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .museum_tabs button {
@@ -262,25 +251,18 @@ a {
   border-bottom: 2px solid var(--gray_06);
 }
 
-/* ---------------- horizontal section ---------------- */
+
+/* ===================== HORIZONTAL SECTION =====================
+   ★ 비율 조정 포인트 (숫자만 바꾸면 됨)
+   - 좌우 여백  : .museum_h_sticky head의 width calc(100vw - 320px) → 320 = 160 * 2
+   - 카드 패딩  : .museum_exhibit_card padding 중간값 160px
+   - 포스터 너비: .museum_exhibit_card > .museum_poster width clamp(280px, 22vw, 420px)
+   - 카드 간격  : .museum_exhibit_card gap clamp(36px, 4vw, 80px)
+================================================================ */
 
 .museum_exhibit_section.is_horizontal {
-  --museum-sticky-top: 100px;
-  --museum-sticky-height: calc(100vh - var(--museum-sticky-top) + 200px);
-  --museum-head-height: 240px;
-  --museum-shell-padding-inline: clamp(32px, 4vw, 96px);
-  --museum-shell-width: min(1500px, calc(100vw - (var(--museum-shell-padding-inline) * 2)));
-  --museum-card-gap: clamp(20px, 2vw, 40px);
-  --museum-poster-width: clamp(180px, 14vw, 280px);
   position: relative;
   height: auto;
-}
-
-.museum_exhibit_section.is_horizontal .museum_inner {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 .museum_exhibit_section.is_horizontal .museum_inner {
@@ -291,9 +273,9 @@ a {
 
 .museum_h_sticky {
   position: sticky;
-  top: var(--museum-sticky-top);
+  top: 100px;
   height: auto;
-  min-height: var(--museum-sticky-height);
+  min-height: calc(100vh - 100px + 200px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -303,9 +285,9 @@ a {
 .museum_exhibit_section.is_horizontal .museum_head {
   position: relative;
   z-index: 3;
-  width: var(--museum-shell-width);
+  width: calc(100vw - 320px);
   margin: 0 auto;
-  padding-top: clamp(18px, 1.8vw, 30px);
+  padding-top: 10px;
   padding-bottom: clamp(18px, 1.5vw, 24px);
   flex-shrink: 0;
   background: var(--main_black);
@@ -329,7 +311,7 @@ a {
 
 .museum_h_scroll {
   height: auto;
-  min-height: max(0px, calc(var(--museum-sticky-height) - var(--museum-head-height)));
+  min-height: calc(100vh - 100px + 200px - 240px);
   overflow: hidden;
   flex: 1 1 auto;
 }
@@ -346,34 +328,37 @@ a {
   min-width: 100vw;
   flex: 0 0 100vw;
   height: auto;
-  margin-top: 0;
-  padding: clamp(8px, 1vw, 16px) var(--museum-shell-padding-inline) clamp(40px, 4vw, 80px);
+  margin: 40px 0 200px;
+  padding: 0 160px;
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
-  gap: var(--museum-card-gap);
+  gap: clamp(36px, 4vw, 80px);
 }
 
 .museum_exhibit_section.is_horizontal .museum_exhibit_card>.museum_poster {
+  width: clamp(280px, 22vw, 420px);
+  flex-shrink: 0;
   margin-left: 0;
 }
 
 .museum_exhibit_section.is_horizontal .museum_content {
+  flex: 1;
   min-width: 0;
-  max-width: none;
 }
 
-/* ---------------- card layout ---------------- */
+
+/* ===================== CARD LAYOUT ===================== */
 
 .museum_exhibit_card {
   display: flex;
-  gap: var(--museum-card-gap);
-  margin-top: 100px;
+  gap: clamp(36px, 4vw, 80px);
+  margin: 40px 0 120px;
   height: auto;
 }
 
 .museum_poster {
-  width: var(--museum-poster-width);
+  width: clamp(280px, 22vw, 420px);
   flex-shrink: 0;
 }
 
@@ -422,7 +407,8 @@ a {
   letter-spacing: 0.04em;
 }
 
-/* ---------------- ticket ---------------- */
+
+/* ===================== TICKET ===================== */
 
 .museum_ticket {
   display: inline-flex;
@@ -443,10 +429,7 @@ a {
   font-size: clamp(18px, 1.25vw, 24px);
   font-weight: 600;
   letter-spacing: 0.01em;
-  transition:
-    background 0.35s ease,
-    color 0.35s ease,
-    transform 0.35s ease;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.35s ease;
 }
 
 .ticket_stub {
@@ -456,12 +439,9 @@ a {
   border-radius: 6px;
   background: var(--gray_06);
   color: var(--main_black);
-  transform-origin: left center;
-  transition:
-    background 0.35s ease,
-    color 0.35s ease,
-    transform 0.4s ease;
   border-left: 2px dashed var(--gray_01);
+  transform-origin: left center;
+  transition: background 0.35s ease, color 0.35s ease, transform 0.4s ease;
 }
 
 .ticket_stub i {
@@ -487,7 +467,8 @@ a {
   border-left: 2px dashed var(--gray_01);
 }
 
-/* ---------------- highlights ---------------- */
+
+/* ===================== HIGHLIGHTS ===================== */
 
 .museum_highlights {
   margin-top: clamp(28px, 3vw, 50px);
@@ -508,7 +489,7 @@ a {
   flex: 1;
   height: 1px;
   background: var(--gray_03);
-  min-width: 0;
+  min-width: 100px;
 }
 
 .highlight_list {
@@ -517,9 +498,9 @@ a {
 }
 
 .highlight_item {
-  flex: 1 1 0;
-  min-width: 0;
-  height: auto;
+  width: 350px;
+  height: 180px;
+  flex: none;
   aspect-ratio: 16 / 9;
   overflow: hidden;
 }
@@ -530,7 +511,8 @@ a {
   object-fit: cover;
 }
 
-/* ---------------- empty ---------------- */
+
+/* ===================== EMPTY STATE ===================== */
 
 .museum_empty {
   padding: 140px 0;
@@ -549,7 +531,8 @@ a {
   color: var(--gray_04);
 }
 
-/* ---------------- top button ---------------- */
+
+/* ===================== TOP BUTTON ===================== */
 
 .top_btn {
   position: fixed;
@@ -585,6 +568,9 @@ a {
 .top_btn a:hover {
   transform: translateY(-4px);
 }
+
+
+/* ===================== CURSOR ===================== */
 
 .cursor-ring.cube-hover {
   width: 130px;
