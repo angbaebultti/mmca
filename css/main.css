@@ -542,7 +542,7 @@
 /* ✅ 수정: 카드 width를 vw, 높이는 자동으로 화면 비율에 맞게 */
 .artist_card {
   height: clamp(480px, 50vh, 960px);
-  aspect-ratio: 300 / 450;
+  aspect-ratio: 250 / 420;
   width: auto;
   flex-shrink: 0;
   transform: rotate(-6deg);
@@ -573,9 +573,9 @@
 /* ✅ 수정: 연도 텍스트 크기를 vh 기반으로 */
 .artist_card p {
   margin: 12px 0 0;
-  font-weight: 800;
-  font-size: clamp(28px, 2.4vw, 52px);
-  line-height: 1;
+  font-weight: 600;
+  font-size: clamp(28px, 2.4vw, 42px);
+  line-height: 7vh;
   text-align: center;
 }
 
