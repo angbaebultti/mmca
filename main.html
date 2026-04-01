@@ -1,876 +1,787 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="MMCA (National Museum of Modern and Contemporary Art) English Website Redesign Project"
-    />
-    <meta
-      name="keywords"
-      content="MMCA, National Museum of Modern and Contemporary Art, museum, exhibition, web design"
-    />
-    <meta name="author" content="TEAM 아이조아" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:title"
-      content="MMCA — National Museum of Modern and Contemporary Art"
-    />
-    <meta
-      property="og:description"
-      content="Discover Korean contemporary art at the MMCA. Explore exhibitions and plan your visit."
-    />
-    <meta
-      property="og:image"
-      content="https://raw.githubusercontent.com/angbaebultti/mmca/main/img/og_img.jpg"
-    />
-    <meta property="og:url" content="https://angbaebultti.github.io/mmca/" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/b43057b3ba.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-    <title>National Museum of Modern and Contemporary Art, Korea</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/common.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/common_media.css" />
-    <link rel="stylesheet" href="css/main_media.css" />
-    <script src="js/common.js" defer></script>
-    <script src="js/main.js" defer></script>
-  </head>
 
-  <body>
-    <div class="wrap">
-      <div class="top_btn" data-cursor="light">
-        <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description"
+    content="MMCA (National Museum of Modern and Contemporary Art) English Website Redesign Project" />
+  <meta name="keywords"
+    content="MMCA, National Museum of Modern and Contemporary Art, museum, exhibition, web design" />
+  <meta name="author" content="TEAM 아이조아" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MMCA — National Museum of Modern and Contemporary Art" />
+  <meta property="og:description"
+    content="Discover Korean contemporary art at the MMCA. Explore exhibitions and plan your visit." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/angbaebultti/mmca/main/img/og_img.jpg" />
+  <meta property="og:url" content="https://angbaebultti.github.io/mmca/" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://kit.fontawesome.com/b43057b3ba.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  <title>National Museum of Modern and Contemporary Art, Korea</title>
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/common.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/common_media.css" />
+  <link rel="stylesheet" href="css/main_media.css" />
+  <script src="js/common.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
 
-      <header class="header">
-        <div class="inner">
-          <div class="header_top">
-            <h1>
-              <a href="main.html"><img src="img/logo_icon.png" />MMCA</a>
-            </h1>
-          </div>
-          <div class="nav">
-            <div class="nav_bottom">
-              <ul class="gnb_l">
-                <li><a href="info.html">VISIT</a></li>
-                <li><a href="artist_award.html">ARTIST</a></li>
-                <li><a href="#">EXPLORE</a></li>
-                <li><a href="#">PROGRAM</a></li>
-                <li><a href="museum.html">ABOUT</a></li>
-                <li><a href="plan.html">TICKETS</a></li>
-              </ul>
-              <div class="gnb_r">
-                <a href="signin.html"><span>Sign in</span></a>
-                <!-- 모바일 티켓 아이콘 -->
-                <a href="plan.html" class="mobile_ticket_btn">
-                  <img src="img/mobile_ticket.svg" alt="ticket" />
-                </a>
-                <a href="#"
-                  ><img src="img/ham_w.svg" alt="ham menu button" id="menu_btn"
-                /></a>
-              </div>
-            </div>
-          </div>
-          <div class="museum_nav">
-            <div class="row_top">
-              <a href="museum.html#seoul">
-                <div class="item seoul">
-                  <span class="text">SEOUL</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-              <a href="">
-                <div class="item deoksugung">
-                  <span class="text">DEOKSUGUNG</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-            </div>
-            <div class="row_bottom">
-              <a href="museum.html#gwacheon">
-                <div class="item gwacheon">
-                  <span class="text">GWACHEON</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-              <a href="museum.html#cheongju">
-                <div class="item cheongju">
-                  <span class="text">CHEONGJU</span>
-                  <div class="bg"></div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div class="menu_overlay" id="menu">
-        <div class="menu_top">
-          <h1>
-            <a href="#"><img src="img/logo_icon.png" />MMCA</a>
-          </h1>
-          <span class="close_btn" id="close_btn">✕</span>
-        </div>
-        <div class="menu_all">
-          <div class="menu_top_row">
-            <div class="menu_col">
-              <h3><a href="#">ABOUT</a></h3>
-              <ul>
-                <li><a href="#">Location</a></li>
-                <li class="active"><a href="museum.html#seoul">Seoul</a></li>
-                <li class="active">
-                  <a href="museum.html#gwacheon">Gwacheon</a>
-                </li>
-                <li class="active">
-                  <a href="">Deoksugung</a>
-                </li>
-                <li class="active">
-                  <a href="museum.html#cheongju">Cheongju</a>
-                </li>
-              </ul>
-            </div>
-            <div class="menu_col">
-              <h3><a href="#">PROGRAM</a></h3>
-              <ul>
-                <li><a href="#">Event</a></li>
-                <li><a href="#">Education</a></li>
-                <li><a href="#">Tour</a></li>
-              </ul>
-            </div>
-            <div class="menu_col">
-              <h3><a href="#">EXPLORE</a></h3>
-              <ul>
-                <li><a href="#">Collection</a></li>
-                <li><a href="#">Research</a></li>
-                <li><a href="#">Archive</a></li>
-                <li><a href="#">Digital Museum</a></li>
-              </ul>
-            </div>
-            <div class="menu_col">
-              <h3><a href="#">ARTIST</a></h3>
-              <ul>
-                <li class="active"><a href="artist_award.html">Prize</a></li>
-                <li><a href="#">Residency</a></li>
-                <li><a href="#">Art Bank</a></li>
-              </ul>
-            </div>
-            <div class="menu_col">
-              <h3><a href="#">VISIT</a></h3>
-              <ul>
-                <li class="active"><a href="info.html">About MMCA</a></li>
-                <li><a href="#">History</a></li>
-                <li><a href="#">Mission</a></li>
-                <li><a href="#">Organization</a></li>
-                <li><a href="#">News</a></li>
-              </ul>
-            </div>
-            <div class="menu_col">
-              <h3 class="tickets"><a href="plan.html">TICKETS</a></h3>
-              <ul>
-                <li><a href="#">Purchase</a></li>
-                <li class="active"><a href="plan.html">Reservation</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="menu_bottom_row">
-            <div class="menu_col">
-              <h3><a href="#">MEMBERSHIP</a></h3>
-              <ul>
-                <li><a href="">Membership</a></li>
-                <li><a href="">Benefits</a></li>
-                <li><a href="">Program</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ========== MAIN VISUAL ========== -->
-      <section class="main_visual">
-        <div class="visual_bg"></div>
-        <div class="visual_inner">
-          <h2 class="main_title" data-cursor="light">
-            Sak-da:<br />
-            The Poetics of Decomposition
-          </h2>
-          <div class="ticket" data-cursor="light">
-            <div class="ticket_left">
-              <a href="./plan.html"
-                ><img src="img/ticket_left.png" alt="ticket left"
-              /></a>
-            </div>
-            <div class="ticket_right">
-              <a href="./plan.html"
-                ><img src="img/ticket_right.png" alt="ticket right"
-              /></a>
-            </div>
-          </div>
-          <div class="info_wrap">
-            <div class="info_left">
-              <p class="label" data-cursor="light">Opening Hours</p>
-              <div class="info_block" data-cursor="light">
-                <p class="day" data-cursor="light">Mon, Tue, Thu, Fri, Sun</p>
-                <p class="time" data-cursor="light">10:00 - 18:00</p>
-              </div>
-              <div class="info_block">
-                <p class="day" data-cursor="light">Wed, Sat (Night Opening)</p>
-                <p class="time" data-cursor="light">10:00 - 21:00</p>
-              </div>
-            </div>
-            <div class="info_right">
-              <p class="label" data-cursor="light">Admission</p>
-              <div class="info_block">
-                <p class="price" data-cursor="light">2,000 KRW</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="scroll_indicator">
-          <div class="scroll_chevrons">
-            <span></span>
-            <span></span>
-          </div>
-          <p>Scroll</p>
-        </div>
-      </section>
-
-      <!-- ========== ABOUT ========== -->
-      <section class="about">
-        <div class="about_scene">
-          <div class="about_inner">
-            <div class="about_hero">
-              <p class="about_desc_large" data-cursor="light">
-                MMCA,<br data-cursor="light" />Beyond the Museum
-              </p>
-            </div>
-            <div class="about_content">
-              <p class="about_sub" data-cursor="light">About MMCA</p>
-              <h2 class="about_title" data-cursor="light">
-                Expanding Korean contemporary art<br />
-                through collections, spaces, and everyday experiences
-              </h2>
-              <div class="stats_wrap">
-                <div class="line_left"></div>
-                <div class="stats_bg">
-                  <img src="img/ticket.png" alt="티켓더미" />
-                </div>
-                <div class="stats" data-cursor="light">
-                  <div class="stat">
-                    <span class="label_small">FOUNDED</span>
-                    <strong>1969</strong>
-                  </div>
-                  <div class="stat">
-                    <span class="label_small">COLLECTION</span>
-                    <strong>9,600+</strong>
-                  </div>
-                  <div class="stat">
-                    <span class="label_small">VENUES</span>
-                    <strong>4</strong>
-                  </div>
-                  <div class="stat">
-                    <span class="label_small">VISITORS / YEAR</span>
-                    <strong>3M+</strong>
-                  </div>
-                </div>
-                <div class="line_right"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ========== ARTIST PRIZE ========== -->
-      <section class="artist_prize">
-        <div class="title">
-          <h2 class="title_main">
-            <div class="line">
-              <span>K</span><span>O</span><span>R</span><span>E</span
-              ><span>A</span>
-            </div>
-            <div class="line">
-              <span>A</span><span>R</span><span>T</span><span>I</span
-              ><span>S</span><span>T</span>
-            </div>
-            <div class="line">
-              <span>P</span><span>R</span><span>I</span><span>Z</span
-              ><span>E</span>
-            </div>
-          </h2>
-        </div>
-
-        <div class="artist_wrap">
-          <div class="artist_track">
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2025_nologo.png" />
-                <p>2025</p></a
-              >
-            </div>
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2024_nologo.png" />
-                <p>2024</p></a
-              >
-            </div>
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2023_nologo.png" />
-                <p>2023</p></a
-              >
-            </div>
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2022_nologo.png" />
-                <p>2022</p></a
-              >
-            </div>
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2021_nologo.png" />
-                <p>2021</p></a
-              >
-            </div>
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2020_nologo.png" />
-                <p>2020</p></a
-              >
-            </div>
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2019_nologo.png" />
-                <p>2019</p></a
-              >
-            </div>
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2018_nologo.png" />
-                <p>2018</p></a
-              >
-            </div>
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2017_nologo.png" />
-                <p>2017</p></a
-              >
-            </div>
-            <div class="artist_card" data-cursor="light">
-              <a href="artist_award.html"
-                ><img src="img/2016_nologo.png" />
-                <p>2016</p></a
-              >
-            </div>
-            <div class="artist_card view_btn_card">
-              <a href="artist_award.html" class="view_btn_inline">
-                <span>VIEW ALL<br />NOMINEES</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ========== SHOP ========== -->
-      <section class="shop">
-        <!-- 모바일 전용 샵 -->
-        <div class="shop_mobile">
-          <div class="shop_mobile_head">
-            <h2 class="shop_mobile_title">SHOPS</h2>
-            <a href="#" class="shop_mobile_more">View More &gt;</a>
-          </div>
-          <div class="shop_mobile_grid">
-            <div class="shop_mobile_item">
-              <img src="img/mobile_shop_1.jpg" alt="product" />
-            </div>
-            <div class="shop_mobile_item">
-              <img src="img/mobile_shop_2.jpg" alt="product" />
-            </div>
-            <div class="shop_mobile_item">
-              <img src="img/mobile_shop_3.jpg" alt="product" />
-            </div>
-            <div class="shop_mobile_item">
-              <img src="img/mobile_shop_4.jpg" alt="product" />
-            </div>
-          </div>
-          <a href="#" class="shop_mobile_banner">
-            <p>THE COLLECTION STORE</p>
-            <h3>MUSEUM SHOP↗</h3>
-          </a>
-        </div>
-
-        <div class="shop_sticky">
-          <div class="glow_bg"></div>
-          <div class="glass_box">
-            <div class="glass_inner">
-              <img src="img/product01.png" class="p p1" />
-              <img src="img/product02.png" class="p p2" />
-              <img src="img/product03.png" class="p p3" />
-              <img src="img/product04.png" class="p p4" />
-              <img src="img/product05.png" class="p p5" />
-              <img src="img/product06.png" class="p p6" />
-              <img src="img/product07.png" class="p p7" />
-              <img src="img/product08.png" class="p p8" />
-              <img src="img/product09.png" class="p p9" />
-            </div>
-            <div class="glass_front">
-              <p class="shop_sub">MMCA</p>
-              <h2 class="shop_title">
-                <a href="https://www.mmcashop.co.kr/" target="_blank">
-                  MUSEUM <br />SHOP<span>↗</span>
-                </a>
-              </h2>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ========== NEWS ========== -->
-      <section class="news" data-cursor="light">
-        <div class="news_inner">
-          <div class="news_group events">
-            <div class="news_head">
-              <h2>EVENTS</h2>
-              <a href="#" class="news_more">View More &gt;</a>
-            </div>
-            <div class="news_body">
-              <div class="news_list">
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/event_01.png" alt="event01" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>
-                        MMCA Performing Arts 2026: Deep Time, Ryoji
-                        Ikeda/Ensemble Modern, Music for Strings
-                      </h3>
-                      <p>Ryoji Ikeda / Ensemble Modern, Music for Strings</p>
-                      <span class="news_date">2026-04-01 - 2026-04-02</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/event02.png" alt="event02" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Sak-da: The Poetics of Decomposition: Artist Talk</h3>
-                      <p>Participating artists share their practices</p>
-                      <span class="news_date">2026-01-30 ~ 2026-01-30</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/event03.png" alt="event03" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>HWI-PAN Performance</h3>
-                      <p>Tickets open Jan 9 at 2PM</p>
-                      <span class="news_date">2026-01-23 - 2026-01-25</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/event04.png" alt="event04" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Korea Artist Prize Talk</h3>
-                      <p>Artists & jury discussion</p>
-                      <span class="news_date">2026-01-13</span>
-                    </div>
-                  </a>
-                </article>
-              </div>
-            </div>
-          </div>
-          <div class="news_group press">
-            <div class="news_head">
-              <h2>PRESS</h2>
-            </div>
-            <a href="#" class="news_more"
-              >View More <i class="fa-solid fa-angle-right"></i
-            ></a>
-            <div class="news_body">
-              <div class="news_list">
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/press01.png" alt="press01" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Lecture by Alexander Alberro</h3>
-                      <p>Mar 25 at MMCA Seoul</p>
-                      <span class="news_date">2026-03-16</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/press02.png" alt="press02" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Damien Hirst Early Tickets</h3>
-                      <p>Available from Feb 23</p>
-                      <span class="news_date">2026-02-23</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/press03.png" alt="press03" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Christine Sun Kim Selected</h3>
-                      <p>MMCA X LG OLED Series 2026</p>
-                      <span class="news_date">2026-02-11</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/press04.png" alt="press04" />
-                    </div>
-                    <div class="news_txt">
-                      <h3>Collection Exhibition Guide</h3>
-                      <p>Lee Kun-hee Collection Tour</p>
-                      <span class="news_date">2026-02-03</span>
-                    </div>
-                  </a>
-                </article>
-              </div>
-            </div>
-          </div>
-          <div class="news_group notice">
-            <div class="news_head">
-              <h2>NOTICE</h2>
-            </div>
-            <a href="#" class="news_more"
-              >View More <i class="fa-solid fa-angle-right"></i
-            ></a>
-            <div class="news_body">
-              <div class="news_list">
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/notice01.png" alt="notice01" />
-                    </div>
-                    <div class="news_txt">
-                      <strong class="news_cate">Gwacheon</strong>
-                      <h3>Temporary Closure Notice</h3>
-                      <p>Closed March 3 - April 21</p>
-                      <span class="news_date">2026-02-27</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/notice02.png" alt="notice02" />
-                    </div>
-                    <div class="news_txt">
-                      <strong class="news_cate">Seoul</strong>
-                      <h3>Early Bird Ticket Release</h3>
-                      <p>Damien Hirst Exhibition</p>
-                      <span class="news_date">2026-02-11</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/notice03.png" alt="notice03" />
-                    </div>
-                    <div class="news_txt">
-                      <strong class="news_cate">Recruit</strong>
-                      <h3>#helloMMCA Supporters</h3>
-                      <p>Recruiting 20 participants</p>
-                      <span class="news_date">2026-01-16</span>
-                    </div>
-                  </a>
-                </article>
-                <article class="news_card">
-                  <a href="#">
-                    <div class="news_thumb">
-                      <img src="img/notice04.png" alt="notice04" />
-                    </div>
-                    <div class="news_txt">
-                      <strong class="news_cate">Tour</strong>
-                      <h3>Collection Viewing Guide</h3>
-                      <p>Chicago exhibition info</p>
-                      <span class="news_date">2026-02-03</span>
-                    </div>
-                  </a>
-                </article>
-              </div>
-            </div>
-          </div>
-          <section class="news_mobile_tabs" aria-label="Notice and Press">
-            <div
-              class="news_mobile_tab_buttons"
-              role="tablist"
-              aria-label="Notice and Press Tabs"
-            >
-              <button
-                type="button"
-                class="news_mobile_tab_btn is-active"
-                id="newsNoticeTab"
-                role="tab"
-                aria-selected="true"
-                aria-controls="newsNoticePanel"
-                data-tab-target="notice"
-              >
-                NOTICE
-              </button>
-              <button
-                type="button"
-                class="news_mobile_tab_btn"
-                id="newsPressTab"
-                role="tab"
-                aria-selected="false"
-                aria-controls="newsPressPanel"
-                data-tab-target="press"
-              >
-                PRESS
-              </button>
-            </div>
-
-            <div
-              class="news_mobile_tab_panel is-active"
-              id="newsNoticePanel"
-              role="tabpanel"
-              aria-labelledby="newsNoticeTab"
-              data-tab-panel="notice"
-            >
-              <ul class="news_mobile_tab_list">
-                <li class="news_mobile_tab_item">
-                  <a href="#" class="news_mobile_tab_link">
-                    <div class="news_mobile_meta">
-                      <strong class="news_mobile_cate gwacheon"
-                        >Gwacheon</strong
-                      >
-                      <span class="news_mobile_date">2026-02-27</span>
-                    </div>
-                    <p class="news_mobile_title">
-                      MMCA Collection: Korean Modern and Contemporary Art I
-                      Temporary Closure Notice
-                    </p>
-                    <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
-                  </a>
-                </li>
-                <li class="news_mobile_tab_item">
-                  <a href="#" class="news_mobile_tab_link">
-                    <div class="news_mobile_meta">
-                      <strong class="news_mobile_cate seoul">Seoul</strong>
-                      <span class="news_mobile_date">2026-02-11</span>
-                    </div>
-                    <p class="news_mobile_title">
-                      MMCA to Release Early Bird Tickets for Damien Hirst
-                      Exhibition & Pre-opening Event
-                    </p>
-                    <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
-                  </a>
-                </li>
-                <li class="news_mobile_tab_item">
-                  <a href="#" class="news_mobile_tab_link">
-                    <div class="news_mobile_meta">
-                      <strong class="news_mobile_cate recruit">Recruit</strong>
-                      <span class="news_mobile_date">2026-01-16</span>
-                    </div>
-                    <p class="news_mobile_title">
-                      Recruitment Notice: 7th #helloMMCA foreign supporters
-                    </p>
-                    <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div
-              class="news_mobile_tab_panel"
-              id="newsPressPanel"
-              role="tabpanel"
-              aria-labelledby="newsPressTab"
-              data-tab-panel="press"
-              hidden
-            >
-              <ul class="news_mobile_tab_list">
-                <li class="news_mobile_tab_item">
-                  <a href="#" class="news_mobile_tab_link">
-                    <div class="news_mobile_meta">
-                      <span class="news_mobile_date">2026-03-16</span>
-                    </div>
-                    <p class="news_mobile_title">
-                      MMCA to Host Lecture by Alexander Alberro, 2026 Fellow of
-                      the MMCA Research Program
-                    </p>
-                    <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
-                  </a>
-                </li>
-                <li class="news_mobile_tab_item">
-                  <a href="#" class="news_mobile_tab_link">
-                    <div class="news_mobile_meta">
-                      <span class="news_mobile_date">2026-02-23</span>
-                    </div>
-                    <p class="news_mobile_title">
-                      MMCA Begin Early-bird Ticket Sales for the Exhibition
-                      Hirst: Nothing Is True, Everything Is Possible
-                    </p>
-                    <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
-                  </a>
-                </li>
-                <li class="news_mobile_tab_item">
-                  <a href="#" class="news_mobile_tab_link">
-                    <div class="news_mobile_meta">
-                      <span class="news_mobile_date">2026-02-11</span>
-                    </div>
-                    <p class="news_mobile_title">
-                      MMCA Selects Christine Sun Kim as the participating Artist
-                      for MMCA X LG OLED Series
-                    </p>
-                    <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </section>
-        </div>
-      </section>
-      <footer>
-        <div class="banner" aria-label="museum locations">
-          <ul class="banner_track" data-cursor="light">
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-            <li>MMCA SEOUL</li>
-            <li>MMCA DEOKSUGUNG</li>
-            <li>MMCA GWACHEON</li>
-            <li>MMCA CHEONGJU</li>
-          </ul>
-          <!-- //.banner_track -->
-        </div>
-        <!-- //.banner -->
-        <div class="f_top">
-          <!-- f_left -->
-          <ul class="f_left">
-            <li class="branch">
-              <span class="branch_name seoul">Seoul</span>
-              <p class="tel">02-3701-9500</p>
-              <p>30 Samcheong-ro,<br />Jongno-gu,<br />Seoul</p>
-            </li>
-            <li class="branch">
-              <span class="branch_name deoksugung">Deoksugung</span>
-              <p class="tel">02-2022-0600</p>
-              <p>
-                99 Sejong-daero,<br />Jung-gu, Seoul<br />Inside Deoksugung
-                Palace
-              </p>
-            </li>
-            <li class="branch">
-              <span class="branch_name gwacheon">Gwacheon</span>
-              <p class="tel">02-2188-6000</p>
-              <p>313 Gwangmyeong-ro,<br />Gwacheon-si,<br />Gyeonggi-do</p>
-            </li>
-            <li class="branch">
-              <span class="branch_name cheongju">Cheongju</span>
-              <p class="tel">043-261-1400</p>
-              <p>314 Sangdang-ro,<br />Cheongwon-gu,<br />Chungcheongbuk-do</p>
-            </li>
-          </ul>
-          <!-- f_right -->
-          <div class="f_right">
-            <div class="f_right_col" data-cursor="light">
-              <h4>SNS</h4>
-              <ul>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon icon="mdi:instagram"></iconify-icon></span
-                    >Instagram</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon
-                        icon="mingcute:facebook-fill"
-                      ></iconify-icon
-                    ></span>
-                    Facebook</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon icon="mdi:youtube"></iconify-icon
-                    ></span>
-                    YouTube</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><img src="img/blog_icon.svg" alt="Naver Blog" /> Naver
-                    Blog</a
-                  >
-                </li>
-                <li>
-                  <a href="#"
-                    ><span
-                      ><iconify-icon
-                        icon="fa6-brands:square-x-twitter"
-                      ></iconify-icon
-                    ></span>
-                    X</a
-                  >
-                </li>
-              </ul>
-            </div>
-            <!-- //.f_right_col -->
-            <div class="f_right_col" data-cursor="light">
-              <h4>Legal</h4>
-              <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms</a></li>
-                <li><a href="#">Copyright</a></li>
-                <li><a href="#">Complaints</a></li>
-                <li><a href="#">Information Disclosure</a></li>
-                <li><a href="#">Integrity Report</a></li>
-              </ul>
-            </div>
-            <!-- //.f_right_col -->
-          </div>
-          <!-- //.f_right -->
-        </div>
-        <!-- //.f_top -->
-        <div class="f_bottom">
-          <div class="f_logo">
-            <span data-cursor="light">MMCA</span>
-          </div>
-          <!-- //.f_logo -->
-          <p class="copyright" data-cursor="light">
-            © 2026 IZoa Team. MMCA Website Redesign Concept. <br />
-            All images on this site are virtually generated through AI. They are
-            not related to real people, places, or objects.
-          </p>
-        </div>
-        <!-- //.f_bottom -->
-      </footer>
+<body>
+  <div class="wrap">
+    <div class="top_btn" data-cursor="light">
+      <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
     </div>
-  </body>
+
+    <header class="header">
+      <div class="inner">
+        <div class="header_top">
+          <h1>
+            <a href="main.html"><img src="img/logo_icon.png" />MMCA</a>
+          </h1>
+        </div>
+        <div class="nav">
+          <div class="nav_bottom">
+            <ul class="gnb_l">
+              <li><a href="info.html">VISIT</a></li>
+              <li><a href="artist_award.html">ARTIST</a></li>
+              <li><a href="#">EXPLORE</a></li>
+              <li><a href="#">PROGRAM</a></li>
+              <li><a href="museum.html">ABOUT</a></li>
+              <li><a href="plan.html">TICKETS</a></li>
+            </ul>
+            <div class="gnb_r">
+              <a href="signin.html"><span>Sign in</span></a>
+              <!-- 모바일 티켓 아이콘 -->
+              <a href="plan.html" class="mobile_ticket_btn">
+                <img src="img/mobile_ticket.svg" alt="ticket" />
+              </a>
+              <a href="#"><img src="img/ham_w.svg" alt="ham menu button" id="menu_btn" /></a>
+            </div>
+          </div>
+        </div>
+        <div class="museum_nav">
+          <div class="row_top">
+            <a href="museum.html#seoul">
+              <div class="item seoul">
+                <span class="text">SEOUL</span>
+                <div class="bg"></div>
+              </div>
+            </a>
+            <a href="">
+              <div class="item deoksugung">
+                <span class="text">DEOKSUGUNG</span>
+                <div class="bg"></div>
+              </div>
+            </a>
+          </div>
+          <div class="row_bottom">
+            <a href="museum.html#gwacheon">
+              <div class="item gwacheon">
+                <span class="text">GWACHEON</span>
+                <div class="bg"></div>
+              </div>
+            </a>
+            <a href="museum.html#cheongju">
+              <div class="item cheongju">
+                <span class="text">CHEONGJU</span>
+                <div class="bg"></div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="menu_overlay" id="menu">
+      <div class="menu_top">
+        <h1>
+          <a href="#"><img src="img/logo_icon.png" />MMCA</a>
+        </h1>
+        <span class="close_btn" id="close_btn">✕</span>
+      </div>
+      <div class="menu_all">
+        <div class="menu_top_row">
+          <div class="menu_col">
+            <h3><a href="#">ABOUT</a></h3>
+            <ul>
+              <li><a href="#">Location</a></li>
+              <li class="active"><a href="museum.html#seoul">Seoul</a></li>
+              <li class="active">
+                <a href="museum.html#gwacheon">Gwacheon</a>
+              </li>
+              <li class="active">
+                <a href="">Deoksugung</a>
+              </li>
+              <li class="active">
+                <a href="museum.html#cheongju">Cheongju</a>
+              </li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">PROGRAM</a></h3>
+            <ul>
+              <li><a href="#">Event</a></li>
+              <li><a href="#">Education</a></li>
+              <li><a href="#">Tour</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">EXPLORE</a></h3>
+            <ul>
+              <li><a href="#">Collection</a></li>
+              <li><a href="#">Research</a></li>
+              <li><a href="#">Archive</a></li>
+              <li><a href="#">Digital Museum</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">ARTIST</a></h3>
+            <ul>
+              <li class="active"><a href="artist_award.html">Prize</a></li>
+              <li><a href="#">Residency</a></li>
+              <li><a href="#">Art Bank</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3><a href="#">VISIT</a></h3>
+            <ul>
+              <li class="active"><a href="info.html">About MMCA</a></li>
+              <li><a href="#">History</a></li>
+              <li><a href="#">Mission</a></li>
+              <li><a href="#">Organization</a></li>
+              <li><a href="#">News</a></li>
+            </ul>
+          </div>
+          <div class="menu_col">
+            <h3 class="tickets"><a href="plan.html">TICKETS</a></h3>
+            <ul>
+              <li><a href="#">Purchase</a></li>
+              <li class="active"><a href="plan.html">Reservation</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="menu_bottom_row">
+          <div class="menu_col">
+            <h3><a href="#">MEMBERSHIP</a></h3>
+            <ul>
+              <li><a href="">Membership</a></li>
+              <li><a href="">Benefits</a></li>
+              <li><a href="">Program</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== MAIN VISUAL ========== -->
+    <section class="main_visual">
+      <div class="visual_bg"></div>
+      <div class="visual_inner">
+        <h2 class="main_title" data-cursor="light">
+          Sak-da:<br />
+          The Poetics of Decomposition
+        </h2>
+        <div class="ticket" data-cursor="light">
+          <div class="ticket_left">
+            <a href="./plan.html"><img src="img/ticket_left.png" alt="ticket left" /></a>
+          </div>
+          <div class="ticket_right">
+            <a href="./plan.html"><img src="img/ticket_right.png" alt="ticket right" /></a>
+          </div>
+        </div>
+        <div class="info_wrap">
+          <div class="info_left">
+            <p class="label" data-cursor="light">Opening Hours</p>
+            <div class="info_block" data-cursor="light">
+              <p class="day" data-cursor="light">Mon, Tue, Thu, Fri, Sun</p>
+              <p class="time" data-cursor="light">10:00 - 18:00</p>
+            </div>
+            <div class="info_block">
+              <p class="day" data-cursor="light">Wed, Sat (Night Opening)</p>
+              <p class="time" data-cursor="light">10:00 - 21:00</p>
+            </div>
+          </div>
+          <div class="info_right">
+            <p class="label" data-cursor="light">Admission</p>
+            <div class="info_block">
+              <p class="price" data-cursor="light">2,000 KRW</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll_indicator">
+        <div class="scroll_chevrons">
+          <span></span>
+          <span></span>
+        </div>
+        <p>Scroll</p>
+      </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="about">
+      <div class="about_scene">
+        <div class="about_inner">
+          <div class="about_hero">
+            <p class="about_desc_large" data-cursor="light">
+              MMCA,<br data-cursor="light" />Beyond the Museum
+            </p>
+          </div>
+          <div class="about_content">
+            <p class="about_sub" data-cursor="light">About MMCA</p>
+            <h2 class="about_title" data-cursor="light">
+              Expanding Korean contemporary art<br />
+              through collections, spaces, and everyday experiences
+            </h2>
+            <div class="stats_wrap">
+              <div class="line_left"></div>
+              <div class="stats_bg">
+                <img src="img/ticket.png" alt="티켓더미" />
+              </div>
+              <div class="stats" data-cursor="light">
+                <div class="stat">
+                  <span class="label_small">FOUNDED</span>
+                  <strong>1969</strong>
+                </div>
+                <div class="stat">
+                  <span class="label_small">COLLECTION</span>
+                  <strong>9,600+</strong>
+                </div>
+                <div class="stat">
+                  <span class="label_small">VENUES</span>
+                  <strong>4</strong>
+                </div>
+                <div class="stat">
+                  <span class="label_small">VISITORS / YEAR</span>
+                  <strong>3M+</strong>
+                </div>
+              </div>
+              <div class="line_right"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== ARTIST PRIZE ========== -->
+    <section class="artist_prize">
+      <div class="title">
+        <h2 class="title_main">
+          <div class="line">
+            <span>K</span><span>O</span><span>R</span><span>E</span><span>A</span>
+          </div>
+          <div class="line">
+            <span>A</span><span>R</span><span>T</span><span>I</span><span>S</span><span>T</span>
+          </div>
+          <div class="line">
+            <span>P</span><span>R</span><span>I</span><span>Z</span><span>E</span>
+          </div>
+        </h2>
+      </div>
+
+      <div class="artist_wrap">
+        <div class="artist_track">
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2025_nologo.png" />
+              <p>2025</p>
+            </a>
+          </div>
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2024_nologo.png" />
+              <p>2024</p>
+            </a>
+          </div>
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2023_nologo.png" />
+              <p>2023</p>
+            </a>
+          </div>
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2022_nologo.png" />
+              <p>2022</p>
+            </a>
+          </div>
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2021_nologo.png" />
+              <p>2021</p>
+            </a>
+          </div>
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2020_nologo.png" />
+              <p>2020</p>
+            </a>
+          </div>
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2019_nologo.png" />
+              <p>2019</p>
+            </a>
+          </div>
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2018_nologo.png" />
+              <p>2018</p>
+            </a>
+          </div>
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2017_nologo.png" />
+              <p>2017</p>
+            </a>
+          </div>
+          <div class="artist_card" data-cursor="light">
+            <a href="artist_award.html"><img src="img/2016_nologo.png" />
+              <p>2016</p>
+            </a>
+          </div>
+          <div class="artist_card view_btn_card">
+            <a href="artist_award.html" class="view_btn_inline">
+              <span>VIEW ALL<br />NOMINEES</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== SHOP ========== -->
+    <section class="shop">
+      <!-- 모바일 전용 샵 -->
+      <div class="shop_mobile">
+        <div class="shop_mobile_head">
+          <h2 class="shop_mobile_title">SHOPS</h2>
+          <a href="#" class="shop_mobile_more">View More &gt;</a>
+        </div>
+        <div class="shop_mobile_grid">
+          <div class="shop_mobile_item">
+            <img src="img/mobile_shop_1.jpg" alt="product" />
+          </div>
+          <div class="shop_mobile_item">
+            <img src="img/mobile_shop_2.jpg" alt="product" />
+          </div>
+          <div class="shop_mobile_item">
+            <img src="img/mobile_shop_3.jpg" alt="product" />
+          </div>
+          <div class="shop_mobile_item">
+            <img src="img/mobile_shop_4.jpg" alt="product" />
+          </div>
+        </div>
+        <a href="#" class="shop_mobile_banner">
+          <p>THE COLLECTION STORE</p>
+          <h3>MUSEUM SHOP↗</h3>
+        </a>
+      </div>
+
+      <div class="shop_sticky">
+        <div class="glow_bg"></div>
+        <div class="glass_box">
+          <div class="glass_inner">
+            <img src="img/product01.png" class="p p1" />
+            <img src="img/product02.png" class="p p2" />
+            <img src="img/product03.png" class="p p3" />
+            <img src="img/product04.png" class="p p4" />
+            <img src="img/product05.png" class="p p5" />
+            <img src="img/product06.png" class="p p6" />
+            <img src="img/product07.png" class="p p7" />
+            <img src="img/product08.png" class="p p8" />
+            <img src="img/product09.png" class="p p9" />
+          </div>
+          <div class="glass_front">
+            <p class="shop_sub">MMCA</p>
+            <h2 class="shop_title">
+              <a href="https://www.mmcashop.co.kr/" target="_blank">
+                MUSEUM <br />SHOP<span>↗</span>
+              </a>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== NEWS ========== -->
+    <section class="news" data-cursor="light">
+      <div class="news_inner">
+        <div class="news_group events">
+          <div class="news_head">
+            <h2>EVENTS</h2>
+            <a href="#" class="news_more">View More &gt;</a>
+          </div>
+          <div class="news_body">
+            <div class="news_list">
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/event_01.png" alt="event01" />
+                  </div>
+                  <div class="news_txt">
+                    <h3>
+                      MMCA Performing Arts 2026: Deep Time, Ryoji
+                      Ikeda/Ensemble Modern, Music for Strings
+                    </h3>
+                    <p>Ryoji Ikeda / Ensemble Modern, Music for Strings</p>
+                    <span class="news_date">2026-04-01 - 2026-04-02</span>
+                  </div>
+                </a>
+              </article>
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/event02.png" alt="event02" />
+                  </div>
+                  <div class="news_txt">
+                    <h3>Sak-da: The Poetics of Decomposition: Artist Talk</h3>
+                    <p>Participating artists share their practices</p>
+                    <span class="news_date">2026-01-30 ~ 2026-01-30</span>
+                  </div>
+                </a>
+              </article>
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/event03.png" alt="event03" />
+                  </div>
+                  <div class="news_txt">
+                    <h3>HWI-PAN Performance</h3>
+                    <p>Tickets open Jan 9 at 2PM</p>
+                    <span class="news_date">2026-01-23 - 2026-01-25</span>
+                  </div>
+                </a>
+              </article>
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/event04.png" alt="event04" />
+                  </div>
+                  <div class="news_txt">
+                    <h3>Korea Artist Prize Talk</h3>
+                    <p>Artists & jury discussion</p>
+                    <span class="news_date">2026-01-13</span>
+                  </div>
+                </a>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="news_group press">
+          <div class="news_head">
+            <h2>PRESS</h2>
+          </div>
+          <a href="#" class="news_more">View More <i class="fa-solid fa-angle-right"></i></a>
+          <div class="news_body">
+            <div class="news_list">
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/press01.png" alt="press01" />
+                  </div>
+                  <div class="news_txt">
+                    <h3>Lecture by Alexander Alberro</h3>
+                    <p>Mar 25 at MMCA Seoul</p>
+                    <span class="news_date">2026-03-16</span>
+                  </div>
+                </a>
+              </article>
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/press02.png" alt="press02" />
+                  </div>
+                  <div class="news_txt">
+                    <h3>Damien Hirst Early Tickets</h3>
+                    <p>Available from Feb 23</p>
+                    <span class="news_date">2026-02-23</span>
+                  </div>
+                </a>
+              </article>
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/press03.png" alt="press03" />
+                  </div>
+                  <div class="news_txt">
+                    <h3>Christine Sun Kim Selected</h3>
+                    <p>MMCA X LG OLED Series 2026</p>
+                    <span class="news_date">2026-02-11</span>
+                  </div>
+                </a>
+              </article>
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/press04.png" alt="press04" />
+                  </div>
+                  <div class="news_txt">
+                    <h3>Collection Exhibition Guide</h3>
+                    <p>Lee Kun-hee Collection Tour</p>
+                    <span class="news_date">2026-02-03</span>
+                  </div>
+                </a>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="news_group notice">
+          <div class="news_head">
+            <h2>NOTICE</h2>
+          </div>
+          <a href="#" class="news_more">View More <i class="fa-solid fa-angle-right"></i></a>
+          <div class="news_body">
+            <div class="news_list">
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/notice01.png" alt="notice01" />
+                  </div>
+                  <div class="news_txt">
+                    <strong class="news_cate">Gwacheon</strong>
+                    <h3>Temporary Closure Notice</h3>
+                    <p>Closed March 3 - April 21</p>
+                    <span class="news_date">2026-02-27</span>
+                  </div>
+                </a>
+              </article>
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/notice02.png" alt="notice02" />
+                  </div>
+                  <div class="news_txt">
+                    <strong class="news_cate">Seoul</strong>
+                    <h3>Early Bird Ticket Release</h3>
+                    <p>Damien Hirst Exhibition</p>
+                    <span class="news_date">2026-02-11</span>
+                  </div>
+                </a>
+              </article>
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/notice03.png" alt="notice03" />
+                  </div>
+                  <div class="news_txt">
+                    <strong class="news_cate">Recruit</strong>
+                    <h3>#helloMMCA Supporters</h3>
+                    <p>Recruiting 20 participants</p>
+                    <span class="news_date">2026-01-16</span>
+                  </div>
+                </a>
+              </article>
+              <article class="news_card">
+                <a href="#">
+                  <div class="news_thumb">
+                    <img src="img/notice04.png" alt="notice04" />
+                  </div>
+                  <div class="news_txt">
+                    <strong class="news_cate">Tour</strong>
+                    <h3>Collection Viewing Guide</h3>
+                    <p>Chicago exhibition info</p>
+                    <span class="news_date">2026-02-03</span>
+                  </div>
+                </a>
+              </article>
+            </div>
+          </div>
+        </div>
+        <section class="news_mobile_tabs" aria-label="Notice and Press">
+          <div class="news_mobile_tab_buttons" role="tablist" aria-label="Notice and Press Tabs">
+            <button type="button" class="news_mobile_tab_btn is-active" id="newsNoticeTab" role="tab"
+              aria-selected="true" aria-controls="newsNoticePanel" data-tab-target="notice">
+              NOTICE
+            </button>
+            <button type="button" class="news_mobile_tab_btn" id="newsPressTab" role="tab" aria-selected="false"
+              aria-controls="newsPressPanel" data-tab-target="press">
+              PRESS
+            </button>
+          </div>
+
+          <div class="news_mobile_tab_panel is-active" id="newsNoticePanel" role="tabpanel"
+            aria-labelledby="newsNoticeTab" data-tab-panel="notice">
+            <ul class="news_mobile_tab_list">
+              <li class="news_mobile_tab_item">
+                <a href="#" class="news_mobile_tab_link">
+                  <div class="news_mobile_meta">
+                    <strong class="news_mobile_cate gwacheon">Gwacheon</strong>
+                    <span class="news_mobile_date">2026-02-27</span>
+                  </div>
+                  <p class="news_mobile_title">
+                    MMCA Collection: Korean Modern and Contemporary Art I
+                    Temporary Closure Notice
+                  </p>
+                  <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="news_mobile_tab_item">
+                <a href="#" class="news_mobile_tab_link">
+                  <div class="news_mobile_meta">
+                    <strong class="news_mobile_cate seoul">Seoul</strong>
+                    <span class="news_mobile_date">2026-02-11</span>
+                  </div>
+                  <p class="news_mobile_title">
+                    MMCA to Release Early Bird Tickets for Damien Hirst
+                    Exhibition & Pre-opening Event
+                  </p>
+                  <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="news_mobile_tab_item">
+                <a href="#" class="news_mobile_tab_link">
+                  <div class="news_mobile_meta">
+                    <strong class="news_mobile_cate recruit">Recruit</strong>
+                    <span class="news_mobile_date">2026-01-16</span>
+                  </div>
+                  <p class="news_mobile_title">
+                    Recruitment Notice: 7th #helloMMCA foreign supporters
+                  </p>
+                  <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="news_mobile_tab_panel" id="newsPressPanel" role="tabpanel" aria-labelledby="newsPressTab"
+            data-tab-panel="press" hidden>
+            <ul class="news_mobile_tab_list">
+              <li class="news_mobile_tab_item">
+                <a href="#" class="news_mobile_tab_link">
+                  <div class="news_mobile_meta">
+                    <span class="news_mobile_date">2026-03-16</span>
+                  </div>
+                  <p class="news_mobile_title">
+                    MMCA to Host Lecture by Alexander Alberro, 2026 Fellow of
+                    the MMCA Research Program
+                  </p>
+                  <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="news_mobile_tab_item">
+                <a href="#" class="news_mobile_tab_link">
+                  <div class="news_mobile_meta">
+                    <span class="news_mobile_date">2026-02-23</span>
+                  </div>
+                  <p class="news_mobile_title">
+                    MMCA Begin Early-bird Ticket Sales for the Exhibition
+                    Hirst: Nothing Is True, Everything Is Possible
+                  </p>
+                  <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="news_mobile_tab_item">
+                <a href="#" class="news_mobile_tab_link">
+                  <div class="news_mobile_meta">
+                    <span class="news_mobile_date">2026-02-11</span>
+                  </div>
+                  <p class="news_mobile_title">
+                    MMCA Selects Christine Sun Kim as the participating Artist
+                    for MMCA X LG OLED Series
+                  </p>
+                  <i class="fa-solid fa-angle-right" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </section>
+    <footer>
+      <div class="banner" aria-label="museum locations">
+        <ul class="banner_track" data-cursor="light">
+          <li>MMCA SEOUL</li>
+          <li>MMCA DEOKSUGUNG</li>
+          <li>MMCA GWACHEON</li>
+          <li>MMCA CHEONGJU</li>
+          <li>MMCA SEOUL</li>
+          <li>MMCA DEOKSUGUNG</li>
+          <li>MMCA GWACHEON</li>
+          <li>MMCA CHEONGJU</li>
+        </ul>
+        <!-- //.banner_track -->
+      </div>
+      <!-- //.banner -->
+      <div class="f_top">
+        <!-- f_left -->
+        <ul class="f_left">
+          <li class="branch">
+            <span class="branch_name seoul">Seoul</span>
+            <p class="tel">02-3701-9500</p>
+            <p>30 Samcheong-ro,<br />Jongno-gu,<br />Seoul</p>
+          </li>
+          <li class="branch">
+            <span class="branch_name deoksugung">Deoksugung</span>
+            <p class="tel">02-2022-0600</p>
+            <p>
+              99 Sejong-daero,<br />Jung-gu, Seoul<br />Inside Deoksugung
+              Palace
+            </p>
+          </li>
+          <li class="branch">
+            <span class="branch_name gwacheon">Gwacheon</span>
+            <p class="tel">02-2188-6000</p>
+            <p>313 Gwangmyeong-ro,<br />Gwacheon-si,<br />Gyeonggi-do</p>
+          </li>
+          <li class="branch">
+            <span class="branch_name cheongju">Cheongju</span>
+            <p class="tel">043-261-1400</p>
+            <p>314 Sangdang-ro,<br />Cheongwon-gu,<br />Chungcheongbuk-do</p>
+          </li>
+        </ul>
+        <!-- f_right -->
+        <div class="f_right">
+          <div class="f_right_col" data-cursor="light">
+            <h4>SNS</h4>
+            <ul>
+              <li>
+                <a href="#"><span><iconify-icon icon="mdi:instagram"></iconify-icon></span>Instagram</a>
+              </li>
+              <li>
+                <a href="#"><span><iconify-icon icon="mingcute:facebook-fill"></iconify-icon></span>
+                  Facebook</a>
+              </li>
+              <li>
+                <a href="#"><span><iconify-icon icon="mdi:youtube"></iconify-icon></span>
+                  YouTube</a>
+              </li>
+              <li>
+                <a href="#"><img src="img/blog_icon.svg" alt="Naver Blog" /> Naver
+                  Blog</a>
+              </li>
+              <li>
+                <a href="#"><span><iconify-icon icon="fa6-brands:square-x-twitter"></iconify-icon></span>
+                  X</a>
+              </li>
+            </ul>
+          </div>
+          <!-- //.f_right_col -->
+          <div class="f_right_col" data-cursor="light">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Copyright</a></li>
+              <li><a href="#">Complaints</a></li>
+              <li><a href="#">Information Disclosure</a></li>
+              <li><a href="#">Integrity Report</a></li>
+            </ul>
+          </div>
+          <!-- //.f_right_col -->
+        </div>
+        <!-- //.f_right -->
+      </div>
+      <!-- //.f_top -->
+      <div class="f_bottom">
+        <div class="f_logo">
+          <span data-cursor="light">MMCA</span>
+        </div>
+        <!-- //.f_logo -->
+        <p class="copyright" data-cursor="light">
+          © 2026 IZoa Team. MMCA Website Redesign Concept. <br />
+          All images on this site are virtually generated through AI. They are
+          not related to real people, places, or objects.
+        </p>
+      </div>
+      <!-- //.f_bottom -->
+    </footer>
+  </div>
+</body>
+
 </html>
