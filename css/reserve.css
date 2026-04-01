@@ -104,6 +104,10 @@
     padding: 0;
 }
 
+.form_group input:focus {
+    outline: none;
+}
+
 .input_row {
     display: flex;
     gap: 10px;
@@ -211,6 +215,12 @@
     gap: 20px;
 }
 
+.agree_error_wrap {
+    height: 28px;
+    text-align: center;
+    max-width: 800px;
+}
+
 .agree {
     display: flex;
     align-items: center;
@@ -295,9 +305,13 @@
 }
 
 .purchase_btn {
-    width: fit-content;
-    padding: 14px 287px;
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    padding: 14px 0;
+    text-align: center;
     margin-top: 40px;
+    /* 기존 10px → 40px 고정 */
     border: 1px solid #fff;
     background: transparent;
     color: #fff;
@@ -305,6 +319,7 @@
     font-weight: 300;
     font-size: 20px;
 }
+
 
 .purchase_btn.active {
     background: #FF6624;
@@ -628,11 +643,11 @@
 
 .agree_error {
     display: block;
-    margin-top: 8px;
     font-size: 15px;
     color: #FF6624;
     font-family: var(--pretendard);
     letter-spacing: 0.01em;
+    text-align: center;
 }
 
 .card_error,
@@ -679,4 +694,3 @@ input[type="text"],
 .form_group input:focus {
     outline: none;
 }
-

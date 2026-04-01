@@ -47,16 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 동의 체크 안 됐으면 경고
         if (!agreeCheckbox.checked) {
-            const existing = document.querySelector('.agree_error');
-            if (!existing) {
-                const err = document.createElement("span");
-                err.className = "agree_error";
-                err.textContent = "Please agree to the Terms of Service before completing your purchase.";
-                agreeCheckbox.closest('label').insertAdjacentElement("afterend", err);
-
-                setTimeout(() => err.remove(), 3000);
-            }
-            return; // 구매 진행 막기
+            const wrap = document.querySelector('.agree_error_wrap');
+            wrap.textContent = "Please agree to the Terms of Service before completing your purchase.";
+            wrap.classList.add('agree_error');
+            setTimeout(() => {
+                wrap.textContent = "";
+                wrap.classList.remove('agree_error');
+            }, 3000);
+            return;
         }
 
         this.classList.add('active');

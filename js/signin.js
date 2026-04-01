@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 로그인 로직 (기존과 동일)
   const DUMMY_ACCOUNTS = [
-    { email: "test@mmca.com", password: "1234" },
-    { email: "admin@mmca.com", password: "admin123" }
+    { email: "test@mmca.com", password: "1234", name: "Jane Doe" },
+    { email: "admin@mmca.com", password: "admin123", name: "Admin User" }
   ];
 
   function handleLogin() {
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (matched) {
-      const userName = matched.email === "test@mmca.com" ? "Jane Doe" : "Admin User";
+      const userName = matched.name;
       sessionStorage.setItem("userEmail", matched.email);
       sessionStorage.setItem("userName", userName);
 

@@ -308,7 +308,6 @@
   letter-spacing: 0.01em;
 }
 
-/* 커서 - signin 페이지에서는 커스텀 커서 숨김 */
 .cursor-ring,
 .cursor-dot {
   display: none !important;
@@ -324,7 +323,6 @@ label,
 label *,
 input[type="submit"],
 input[type="checkbox"],
-/* 공백 제거 + 쉼표 추가 */
 .sns_btn,
 .sns_btn * {
   cursor: pointer !important;
