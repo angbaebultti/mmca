@@ -549,5 +549,17 @@ window.addEventListener('scroll', () => {
   }
 });
 
+// data-cursor="light" → 커서 주황색
+document.querySelectorAll('[data-cursor="light"]').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    ring.classList.add('orange');
+    dot.classList.add('orange');
+  });
+  el.addEventListener('mouseleave', () => {
+    ring.classList.remove('orange');
+    dot.classList.remove('orange');
+  });
+});
+
   window.addEventListener("resize", () => ScrollTrigger.refresh());
 });
