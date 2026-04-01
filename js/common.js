@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
   /* ── 메뉴 ── */
   const menuBtn = document.getElementById("menu_btn");
   const closeBtn = document.getElementById("close_btn");
@@ -40,14 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo(0, scrollY);
   });
 
-
   /* ── 탑버튼 ── */
   const topBtn = document.querySelector('.top_btn');
 
   window.addEventListener('scroll', () => {
     topBtn.classList.toggle('active', window.scrollY > 300);
   });
-
 
   /* ── 헤더 shrink / hide ── */
   const header = document.querySelector(".header");
@@ -62,16 +59,13 @@ document.addEventListener("DOMContentLoaded", () => {
     header.classList.toggle("shrink", cur > 60);
 
     if (cur > lastScroll && cur > 100) {
-      // 아래로 스크롤 → 헤더 숨김
       header.classList.add("hide");
     } else if (lastScroll - cur > 60) {
-      // 위로 60px 이상 스크롤 → 헤더 표시
       header.classList.remove("hide");
     }
 
     lastScroll = cur;
   });
-
 
   /* ── museum nav GSAP 애니메이션 ── */
   const museumNav = document.querySelector('.museum_nav');

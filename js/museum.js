@@ -393,7 +393,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if (header) {
-    header.style.transition = "transform 0.35s ease";
     let lastScrollY = 0;
     lenis.on("scroll", ({ scroll }) => {
       if (isTransitioning) return;
@@ -401,16 +400,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const scrollingDown = scroll > lastScrollY;
       const pastThreshold = scroll > 80;
 
-      // 큐브 인트로 구간에서는 헤더 숨기지 않음
       if (!isMuseumReady) {
-        header.style.transform = "translateY(0)";
+        header.classList.remove("hide");
         lastScrollY = scroll;
         return;
       }
 
-      header.style.transform = (scrollingDown && pastThreshold)
-        ? "translateY(-100vh)"   
-        : "translateY(0)";
+      if (scrollingDown && pastThreshold) {
+        header.classList.add("hide");
+      } else {
+        header.classList.remove("hide");
+        // shrink는 common.js가 담당하므로 여기선 건드리지 않음
+      }
 
       lastScrollY = scroll;
     });
