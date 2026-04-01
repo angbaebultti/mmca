@@ -5,13 +5,23 @@
   display: none;
 }
 
+
+
 @media screen and (max-width: 1024px) {
+
+  .scroll_indicator {
+    display: none;
+  }
+
+  
   .nav {
-    padding: 0 32px; /* 65px → 32px */
+    padding: 0 32px;
+    /* 65px → 32px */
   }
 
   .header.shrink .nav_bottom {
-    padding: 15px 32px; /* 65px → 32px */
+    padding: 15px 32px;
+    /* 65px → 32px */
   }
 
   .gnb_l {
@@ -45,8 +55,7 @@
     margin-left: 16px;
   }
 
-  .f_logo {
-  }
+  .f_logo {}
 
   .top_btn {
     right: 24px;
@@ -101,6 +110,7 @@
     width: 20px;
     height: 20px;
   }
+
   .museum_nav {
     border-bottom: none;
   }
@@ -195,12 +205,13 @@
     0% {
       transform: translateX(0);
     }
+
     100% {
       transform: translateX(-50%);
     }
   }
 
-   .f_logo span{
+  .f_logo span {
     font-size: 320px;
   }
 
@@ -209,6 +220,7 @@
     flex-direction: row;
     align-items: flex-start;
   }
+
   .f_left {
     gap: 0;
     flex-direction: row;
@@ -271,6 +283,7 @@
     width: 13px;
     height: 13px;
   }
+
   .f_bottom {
     padding-top: 30px;
     padding-bottom: 20px;
@@ -344,6 +357,7 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 32px 20px;
   }
+
   .branch {
     width: 100%;
   }
@@ -367,6 +381,7 @@
   .f_logo span {
     font-size: 150px;
   }
+
   .menu_overlay {
     padding: 24px 32px;
     overflow-y: auto;
@@ -388,6 +403,7 @@
 }
 
 @media (max-width: 480px) {
+
   /* === HEADER === */
   .header {
     padding-top: 20px;
@@ -449,7 +465,7 @@
     gap: 15px;
   }
 
-  .gnb_r > a:first-child {
+  .gnb_r>a:first-child {
     display: none;
   }
 
@@ -587,7 +603,7 @@
     background: #1f1f1f;
   }
 
- 
+
   .f_top {
     align-items: center;
     flex-direction: column;

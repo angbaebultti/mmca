@@ -85,8 +85,8 @@ body.menu_open {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   background: var(--main_white);
   color: #000;
   border-radius: 50%;
@@ -766,8 +766,8 @@ footer {
 
 .cursor-dot {
   position: fixed;
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   transform: translate(-50%, -50%);
@@ -778,8 +778,8 @@ footer {
 
 .cursor-ring {
   position: fixed;
-  width: 44px;
-  height: 44px;
+  width: 55px;
+  height: 55px;
   border: 1.5px solid rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   transform: translate(-50%, -50%);
