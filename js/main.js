@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const isMobile = window.innerWidth <= 1024;
   const isMobile480 = window.innerWidth <= 480;
+  const isTablet = window.innerWidth <= 1024 && window.innerWidth > 480;
 
   if (!isMobile480) {
     gsap.set(ticketLeft, {
@@ -86,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     mainTL
       .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: "power2.out", duration: 0.4 }, 0)
-      /* ✅ 수정: 위로 사라지던 것 → 아래로 내려가며 사라짐 */
       .to(".info_wrap", { opacity: 0, y: 40, ease: "power1.out", duration: 0.3 }, 0.3)
       .to(mainTitle, { opacity: 0, y: 40, ease: "power1.out", duration: 0.3 }, 0.3)
       .to(ticketLeft, {
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const letters = gsap.utils.toArray(".title_main span");
 
   if (!isMobile480) {
-    gsap.set(artistCards, { opacity: 0, xPercent: 30 });
+    gsap.set(artistCards, { opacity: isMobile ? 1 : 0, xPercent: isMobile ? 0 : 30 });
 
     function getScrollAmount() {
       const track = qs(".artist_track");
@@ -216,8 +216,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.03, ease: "power3.out", duration: 0.15 });
     if (letters.length) { masterTL.to(letters, { opacity: 0.3, ease: "power2.out", duration: 0.1 }, "<"); }
- masterTL.to(".artist_track", { x: getScrollAmount, ease: "none", duration: 2.2 });
-masterTL.to({}, { duration: 1.2 });
+    masterTL.to(".artist_track", { x: getScrollAmount, ease: "none", duration: 2.2 });
+    masterTL.to({}, { duration: 1.2 });
   }
 
   /* =========================================================
@@ -319,14 +319,19 @@ masterTL.to({}, { duration: 1.2 });
     { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
     { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 },
   ];
+const positionsTablet = [
+    { x: -460, y: -220, r: -15 }, { x: 100, y: -260, r: 10 }, { x: 440, y: -160, r: 20 },
+    { x: -500, y: 18, r: 8 }, { x: 480, y: 50, r: -12 }, { x: -380, y: 225, r: -20 },
+    { x: -65, y: 270, r: 5 }, { x: 300, y: 245, r: 18 }, { x: 500, y: 210, r: -10 },
+  ];
   const positionsMobile = [
     { x: -280, y: -190, r: -15 }, { x: 80, y: -220, r: 10 }, { x: 260, y: -140, r: 20 },
     { x: -300, y: 5, r: 8 }, { x: 270, y: 40, r: -12 }, { x: -220, y: 180, r: -20 },
     { x: -40, y: 210, r: 5 }, { x: 200, y: 190, r: 18 }, { x: 290, y: 160, r: -10 },
   ];
 
-  const positions = isMobile ? positionsMobile : positionsDesktop;
-  const scale = isMobile ? 0.6 : 1;
+  const positions = isTablet ? positionsTablet : (isMobile ? positionsMobile : positionsDesktop);
+  const scale = isTablet ? 0.75 : (isMobile ? 0.6 : 1);
   const scaledPositions = positions.map((p) => ({ x: p.x * scale, y: p.y * scale, r: p.r }));
 
   if (!isMobile480) {
