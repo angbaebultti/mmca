@@ -78,17 +78,16 @@ document.addEventListener("DOMContentLoaded", () => {
         start: "top top",
         end: "+=1800",
         scrub: 1.2,
-        pin: !isMobile,
-        pinSpacing: !isMobile,
+        pin: true,
+        pinSpacing: true,
         anticipatePin: 1,
       },
     });
 
     mainTL
       .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: "power2.out", duration: 0.4 }, 0)
-      /* ✅ 수정: 위로 사라지던 것 → 아래로 내려가며 사라짐 */
-      .to(".info_wrap", { opacity: 0, y: 40, ease: "power1.out", duration: 0.3 }, 0.3)
-      .to(mainTitle, { opacity: 0, y: 40, ease: "power1.out", duration: 0.3 }, 0.3)
+      .to(".info_wrap", { opacity: 0, y: -20, ease: "power1.out", duration: 0.3 }, 0.3)
+      .to(mainTitle, { opacity: 0, y: -30, ease: "power1.out", duration: 0.3 }, 0.3)
       .to(ticketLeft, {
         rotation: -25, x: isMobile ? -40 : -150, y: isMobile ? 20 : 100,
         scale: isMobile ? 0.65 : 1, ease: "none", duration: 0.4,
@@ -201,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const masterTL = gsap.timeline({
       scrollTrigger: {
         trigger: ".artist_prize", start: "top 10%",
-        end: () => "+=" + Math.abs(getScrollAmount()) * 2.2,
+        end: () => "+=" + Math.abs(getScrollAmount()),
         scrub: 1.2, pin: true, anticipatePin: 1, pinSpacing: true,
       },
     });
@@ -216,8 +215,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.03, ease: "power3.out", duration: 0.15 });
     if (letters.length) { masterTL.to(letters, { opacity: 0.3, ease: "power2.out", duration: 0.1 }, "<"); }
- masterTL.to(".artist_track", { x: getScrollAmount, ease: "none", duration: 2.2 });
-masterTL.to({}, { duration: 1.2 });
+    masterTL.to(".artist_track", { x: getScrollAmount, ease: "none", duration: 1 });
+    masterTL.to({}, { duration: 0.1 });
   }
 
   /* =========================================================
@@ -260,25 +259,8 @@ masterTL.to({}, { duration: 1.2 });
         if (group.classList.contains("is-open")) return;
 
         const current = groups.find((g) => g.classList.contains("is-open"));
-        if (current) {
-          const currentCards = current.querySelectorAll(".news_card");
-          gsap.to(currentCards, {
-            opacity: 0, duration: 0.2, ease: "power2.in",
-            onComplete: () => {
-              current.classList.remove("is-open");
-              gsap.set(currentCards, { opacity: 0 });
-              group.classList.add("is-open");
-              const newCards = group.querySelectorAll(".news_card");
-              gsap.set(newCards, { opacity: 0 });
-              gsap.to(newCards, { opacity: 1, stagger: 0.06, duration: 0.4, ease: "power3.out" });
-            },
-          });
-        } else {
-          group.classList.add("is-open");
-          const newCards = group.querySelectorAll(".news_card");
-          gsap.set(newCards, { opacity: 0 });
-          gsap.to(newCards, { opacity: 1, stagger: 0.06, duration: 0.4, ease: "power3.out" });
-        }
+        if (current) current.classList.remove("is-open");
+        group.classList.add("is-open");
       });
 
       const cards = group.querySelectorAll(".news_card");
@@ -290,13 +272,7 @@ masterTL.to({}, { duration: 1.2 });
       });
     });
 
-    const initCards = groups[0].querySelectorAll(".news_card");
-    if (isMobile480) {
-      gsap.set(initCards, { opacity: 1 });
-    } else {
-      gsap.set(initCards, { opacity: 0 });
-      gsap.to(initCards, { opacity: 1, stagger: 0.08, duration: 0.6, ease: "power3.out", delay: 0.3 });
-    }
+    // 첫 탭 카드는 CSS 애니메이션으로 처리
   }
 
   if (isMobile480) {
