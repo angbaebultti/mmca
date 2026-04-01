@@ -45,7 +45,7 @@
   </head>
   <body>
     <div class="wrap">
-      <div class="top_btn">
+      <div class="top_btn" data-cursor="light">
         <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
       </div>
       <header class="header">
@@ -207,7 +207,7 @@
                   <img src="img/seoulposter1.png" alt="seoulposter1" />
                 </div>
                 <div class="hero_desc">
-                  <p>
+                  <p data-cursor="light">
                     This exhibition challenges the idea of permanence by
                     presenting "decaying art" as a process of transformation,
                     collaboration, and coexistence beyond the human.
@@ -224,7 +224,7 @@
               </div>
               <div class="date_inner">
                 <div class="cal_outer">
-                  <div class="cal_two" id="cal_two"></div>
+                  <div class="cal_two" id="cal_two" data-cursor="light"></div>
                   <div class="sel_label" id="sel_label">
                     Please select a date.
                   </div>
@@ -354,7 +354,7 @@
           <!-- //.plan_left -->
 
           <!-- RIGHT COLUMN — SUMMARY -->
-          <aside class="plan_right">
+          <aside class="plan_right" data-cursor="light">
             <div class="summary_card" id="summary_card">
               <div class="summary_clip"></div>
               <h3>Summary</h3>
@@ -489,11 +489,14 @@
         <div class="f_bottom">
           <div class="f_logo"><span>MMCA</span></div>
           <p class="copyright">
-            © 2026 IZoa Team. MMCA Website Redesign Concept.
-            All images on this site are virtually generated through AI. They are not related to real people, places, or objects.
+            © 2026 IZoa Team. MMCA Website Redesign Concept. All images on this
+            site are virtually generated through AI. They are not related to
+            real people, places, or objects.
           </p>
         </div>
       </footer>
+      <div class="cursor-ring" id="cursorRing"></div>
+      <div class="cursor-dot" id="cursorDot"></div>
     </div>
   </body>
 </html>
