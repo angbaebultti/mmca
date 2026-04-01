@@ -152,20 +152,24 @@ document.addEventListener("DOMContentLoaded", () => {
     return Math.max(0, Math.min(normalProgress, maxTranslate));
   }
 
-  function getHorizontalScrollHeight(section) {
-    const metrics = getHorizontalMetrics(section);
+function getHorizontalScrollHeight(section) {
+  const metrics = getHorizontalMetrics(section);
+  const head = section.querySelector(".museum_head");
+  const card = section.querySelector(".museum_exhibit_card");
 
-    // 카드 실제 높이 측정
-    const card = section.querySelector(".museum_exhibit_card");
-    const cardHeight = card ? card.getBoundingClientRect().height : 0;
+  const headHeight = head ? head.getBoundingClientRect().height : 0;
+  const cardHeight = card ? card.getBoundingClientRect().height : 0;
 
-    if (!metrics || metrics.maxTranslate === 0) return cardHeight + window.innerHeight;
-
-    const normalDistance = metrics.lastCardStart / NORMAL_SPEED;
-    const lastCardDistance = metrics.lastCardSpan / (NORMAL_SPEED * LAST_CARD_SPEED);
-
-    return cardHeight + normalDistance + lastCardDistance + 1200 + 300;
+  if (!metrics || metrics.maxTranslate === 0) {
+    return headHeight + cardHeight + window.innerHeight * 0.8;
   }
+
+  const normalDistance = metrics.lastCardStart / NORMAL_SPEED;
+  const lastCardDistance = metrics.lastCardSpan / (NORMAL_SPEED * LAST_CARD_SPEED);
+
+  /* 마지막 카드 다 본 뒤 footer로 자연스럽게 넘어가기 위한 최소 여유만 둠 */
+  return headHeight + cardHeight + normalDistance + lastCardDistance + 220;
+}
 
   function updateCompactHeader() {
     horizontalSections.forEach((section) => {
@@ -276,14 +280,14 @@ document.addEventListener("DOMContentLoaded", () => {
     face.classList.add("is_active");
     cubeFaces.forEach((item) => { if (item !== face) item.classList.add("is_hidden"); });
 
-    if (window.innerWidth <= 1440) {
-      switchToMuseum(targetSection);
-      gsap.fromTo(introScene,
-        { opacity: 1 },
-        { opacity: 0, duration: 0.35, ease: "power2.out" }
-      );
-      return;
-    }
+  if (window.innerWidth <= 1024) {
+  switchToMuseum(targetSection);
+  gsap.fromTo(introScene,
+    { opacity: 1 },
+    { opacity: 0, duration: 0.35, ease: "power2.out" }
+  );
+  return;
+}
 
     const rotateY = getFaceRotation(targetId);
     gsap.timeline({
