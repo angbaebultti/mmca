@@ -231,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return -(track.scrollWidth - window.innerWidth);
     }
 
-    /* 글자 초기 상태 — 흩어진 위치로 세팅 */
     if (letters.length) {
       letters.forEach((letter) => {
         gsap.set(letter, {
@@ -256,13 +255,9 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     });
 
-    /* 1단계 — 흩어진 글자가 제자리로 모이면서 색상 채워짐 */
     if (letters.length) {
       masterTL.to(letters, {
-        x: 0,
-        y: 0,
-        rotation: 0,
-        opacity: 1,
+        x: 0, y: 0, rotation: 0, opacity: 1,
         filter: "blur(0px)",
         color: "#ffffff",
         "-webkit-text-stroke": "0px transparent",
@@ -272,33 +267,28 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 0);
     }
 
-    /* 2단계 — 카드 등장 + 텍스트 opacity 0.3으로 동시에 */
     masterTL.to(artistCards, {
-      opacity: 1,
-      xPercent: 0,
-      stagger: 0.03,
-      ease: "power3.out",
-      duration: 0.15,
+      opacity: 1, xPercent: 0,
+      stagger: 0.03, ease: "power3.out", duration: 0.15,
     });
 
     if (letters.length) {
       masterTL.to(letters, {
-        opacity: 0.3,
-        ease: "power2.out",
-        duration: 0.1,
+        opacity: 0.3, ease: "power2.out", duration: 0.1,
       }, "<");
     }
 
-    /* 3단계 — 카드 가로 슬라이드 */
     masterTL.to(".artist_track", {
-      x: getScrollAmount,
-      ease: "none",
-      duration: 1,
+      x: getScrollAmount, ease: "none", duration: 1,
     });
 
     masterTL.to({}, { duration: 0.1 });
   }
 
+  /* =========================================================
+   * 11. NEWS - 탭 전환
+   * ✅ 수정: y 이동 제거 — opacity만으로 전환, 레이아웃 밀림 없음
+   * ========================================================= */
   const groups = Array.from(qsa(".news_group"));
 
   let newsPreview = null;
@@ -341,42 +331,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
       group.addEventListener("click", () => {
         if (isMobile480) return;
-
-        if (group.classList.contains("is-open")) {
-          const currentCards = group.querySelectorAll(".news_card");
-          gsap.to(currentCards, {
-            opacity: 0, y: -16, stagger: 0.04, duration: 0.2, ease: "power2.in",
-            onComplete: () => {
-              group.classList.remove("is-open");
-              gsap.set(currentCards, { opacity: 0, y: 24 });
-              group.style.cursor = "pointer";
-            },
-          });
-          return;
-        }
+        if (group.classList.contains("is-open")) return;
 
         const current = groups.find((g) => g.classList.contains("is-open"));
         if (current) {
           const currentCards = current.querySelectorAll(".news_card");
+          /* ✅ opacity만, y 이동 없음 */
           gsap.to(currentCards, {
-            opacity: 0, y: -16, stagger: 0.04, duration: 0.2, ease: "power2.in",
+            opacity: 0,
+            duration: 0.2,
+            ease: "power2.in",
             onComplete: () => {
               current.classList.remove("is-open");
-              gsap.set(currentCards, { opacity: 0, y: 24 });
+              gsap.set(currentCards, { opacity: 0 });
               group.classList.add("is-open");
               const newCards = group.querySelectorAll(".news_card");
-              gsap.set(newCards, { opacity: 0, y: 24 });
+              gsap.set(newCards, { opacity: 0 });
               gsap.to(newCards, {
-                opacity: 1, y: 0, stagger: 0.08, duration: 0.5, ease: "power3.out", delay: 0.05,
+                opacity: 1,
+                stagger: 0.06,
+                duration: 0.4,
+                ease: "power3.out",
               });
             },
           });
         } else {
           group.classList.add("is-open");
           const newCards = group.querySelectorAll(".news_card");
-          gsap.set(newCards, { opacity: 0, y: 24 });
+          gsap.set(newCards, { opacity: 0 });
           gsap.to(newCards, {
-            opacity: 1, y: 0, stagger: 0.08, duration: 0.5, ease: "power3.out",
+            opacity: 1,
+            stagger: 0.06,
+            duration: 0.4,
+            ease: "power3.out",
           });
         }
       });
@@ -397,11 +384,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const initCards = groups[0].querySelectorAll(".news_card");
     if (isMobile480) {
-      gsap.set(initCards, { opacity: 1, y: 0 });
+      gsap.set(initCards, { opacity: 1 });
     } else {
-      gsap.set(initCards, { opacity: 0, y: 24 });
+      gsap.set(initCards, { opacity: 0 });
       gsap.to(initCards, {
-        opacity: 1, y: 0, stagger: 0.08, duration: 0.6, ease: "power3.out", delay: 0.3,
+        opacity: 1,
+        stagger: 0.08,
+        duration: 0.6,
+        ease: "power3.out",
+        delay: 0.3,
       });
     }
   }
@@ -519,47 +510,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-let isInNews = false;
-let isOnTopBtn = false;
+  let isInNews = false;
+  let isOnTopBtn = false;
 
-document.addEventListener("mousedown", () => dot.classList.add("orange"));
-document.addEventListener("mouseup", () => {
-  if (!isInNews && !isOnTopBtn) dot.classList.remove("orange");
-});
+  document.addEventListener("mousedown", () => dot.classList.add("orange"));
+  document.addEventListener("mouseup", () => {
+    if (!isInNews && !isOnTopBtn) dot.classList.remove("orange");
+  });
 
-const newsSection = qs(".news");
-if (newsSection) {
-  newsSection.addEventListener("mouseenter", () => { isInNews = true; dot.classList.add("orange"); });
-  newsSection.addEventListener("mouseleave", () => { isInNews = false; dot.classList.remove("orange"); });
-}
-
-const topBtn = qs(".top_btn");
-if (topBtn) {
-  topBtn.addEventListener("mouseenter", () => { isOnTopBtn = true; dot.classList.add("orange"); });
-  topBtn.addEventListener("mouseleave", () => { isOnTopBtn = false; dot.classList.remove("orange"); });
-}
-
-const scrollIndicator = document.querySelector('.scroll_indicator');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 80) {
-    scrollIndicator.classList.add('hidden');
-  } else {
-    scrollIndicator.classList.remove('hidden');
+  const newsSection = qs(".news");
+  if (newsSection) {
+    newsSection.addEventListener("mouseenter", () => { isInNews = true; dot.classList.add("orange"); });
+    newsSection.addEventListener("mouseleave", () => { isInNews = false; dot.classList.remove("orange"); });
   }
-});
 
-// data-cursor="light" → 커서 주황색
-document.querySelectorAll('[data-cursor="light"]').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    ring.classList.add('orange');
-    dot.classList.add('orange');
+  const topBtn = qs(".top_btn");
+  if (topBtn) {
+    topBtn.addEventListener("mouseenter", () => { isOnTopBtn = true; dot.classList.add("orange"); });
+    topBtn.addEventListener("mouseleave", () => { isOnTopBtn = false; dot.classList.remove("orange"); });
+  }
+
+  const scrollIndicator = document.querySelector('.scroll_indicator');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      scrollIndicator.classList.add('hidden');
+    } else {
+      scrollIndicator.classList.remove('hidden');
+    }
   });
-  el.addEventListener('mouseleave', () => {
-    ring.classList.remove('orange');
-    dot.classList.remove('orange');
+
+  document.querySelectorAll('[data-cursor="light"]').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.classList.add('orange');
+      dot.classList.add('orange');
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.classList.remove('orange');
+      dot.classList.remove('orange');
+    });
   });
-});
 
   window.addEventListener("resize", () => ScrollTrigger.refresh());
 });
