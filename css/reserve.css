@@ -98,7 +98,7 @@
     border-bottom: 1px solid #fff;
     background: transparent;
     color: #fff;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 500;
     font-family: var(--pretendard);
     padding: 0;
@@ -647,9 +647,30 @@
 }
 
 * {
-    cursor: none !important;
+    cursor: auto !important;
 }
 
-.cursor-ing,.cursor-dot{
-    display: none;
+.cursor-ring,
+.cursor-dot {
+    display: none !important;
+}
+
+/* 클릭 가능한 요소들은 포인터로 */
+.gnb,
+a,
+button,
+input[type="checkbox"],
+input[type="text"],
+.send_code label,
+.send_code .text,
+.send_code .box,
+.step .checkmark,
+.agree,
+.purchase_btn,
+.autofill_btn {
+    cursor: pointer !important;
+}
+
+.form_group input:focus {
+    outline: none;
 }
