@@ -57,6 +57,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const cur = window.scrollY;
 
+    // 480px 모바일 전용 헤더 동작
+    if (window.innerWidth <= 480) {
+      if (cur <= 10) {
+        // 맨 위: 기본 검은 헤더
+        header.classList.remove("shrink");
+        header.classList.remove("hide");
+      } else if (cur > lastScroll && cur > 100) {
+        // 스크롤 내릴 때: 헤더 숨김
+        header.classList.add("hide");
+      } else if (lastScroll - cur > 10) {
+        // 스크롤 올릴 때: 반투명 헤더
+        header.classList.remove("hide");
+        header.classList.add("shrink");
+      }
+      lastScroll = cur;
+      return;
+    }
+
     if (!introDone) {
       // 인트로 전엔 기존 로직 유지
       header.classList.toggle("shrink", cur > 10);
@@ -84,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const museumNav = document.querySelector('.museum_nav');
   const items = document.querySelectorAll('.item');
 
-  if (museumNav && items.length > 0) {
+  if (museumNav && items.length > 0 && window.innerWidth > 480) {
     headerLockedByIntro = true;
 
     museumNav.classList.remove('nav_locked');
@@ -120,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       introDone = true; // 추가
     });
 
-  } else {
+  } else if (window.innerWidth > 480) {
     header.classList.add('hide');
   }
 
