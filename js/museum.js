@@ -3,66 +3,29 @@ document.addEventListener("DOMContentLoaded", () => {
   const isMobile480 = window.innerWidth <= 480;
 
   if (isMobile480) {
-    const slides = Array.from(document.querySelectorAll(".museum_mobile_slide"));
-    const sections = Array.from(
-      document.querySelectorAll(".museum_wrap .museum_exhibit_section[data-museum-section]")
-    );
-    const museumIds = sections
-      .map((section) => section.dataset.museumSection)
-      .filter(Boolean);
+    const slides = document.querySelectorAll(".museum_mobile_slide");
+    const sections = document.querySelectorAll(".museum_wrap .museum_exhibit_section[data-museum-section]");
 
-    function resolveMuseum(targetMuseum) {
-      return museumIds.includes(targetMuseum) ? targetMuseum : "seoul";
-    }
-
-    function syncMobileMuseum(targetMuseum, options = {}) {
-      const museum = resolveMuseum(targetMuseum);
-      const scrollBehavior = options.instant ? "auto" : "smooth";
-
+    function changeMuseum(targetMuseum) {
       slides.forEach((slide) => {
-        slide.classList.toggle("is_active", slide.dataset.museum === museum);
+        slide.classList.toggle("is_active", slide.dataset.museum === targetMuseum);
       });
-
       sections.forEach((section) => {
         section.classList.toggle(
           "is_mobile_active",
-          section.dataset.museumSection === museum
+          section.dataset.museumSection === targetMuseum
         );
       });
-
-      const activeSlide = slides.find((slide) => slide.dataset.museum === museum);
-      if (activeSlide) {
-        activeSlide.scrollIntoView({
-          behavior: scrollBehavior,
-          inline: "center",
-          block: "nearest",
-        });
-      }
-
-      if (options.updateHash) {
-        const nextHash = `#${museum}`;
-        if (window.location.hash !== nextHash) {
-          history.replaceState(null, "", nextHash);
-        }
-      }
-    }
-
-    function getMuseumFromHash() {
-      return resolveMuseum(window.location.hash.replace("#", "").trim());
     }
 
     slides.forEach((slide) => {
       slide.addEventListener("click", () => {
-        syncMobileMuseum(slide.dataset.museum, { updateHash: true });
+        changeMuseum(slide.dataset.museum);
+        slide.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
       });
     });
 
-    window.addEventListener("hashchange", () => {
-      syncMobileMuseum(getMuseumFromHash(), { instant: true });
-      window.scrollTo(0, 0);
-    });
-
-    syncMobileMuseum(getMuseumFromHash(), { instant: true });
+    changeMuseum("seoul");
     return;
   }
 
