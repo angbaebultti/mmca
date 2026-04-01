@@ -29,9 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  /* =========================================================
-   * 1. 기본 DOM / 라이브러리 체크
-   * ========================================================= */
   const cube               = document.getElementById("cube");
   const cubeStage          = document.querySelector(".cube_stage");
   const introScene         = document.querySelector(".intro_scene");
@@ -54,17 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   gsap.registerPlugin(ScrollTrigger);
 
-  /* =========================================================
-   * 2. Lenis 스크롤 세팅
-   * ========================================================= */
   const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
   lenis.on("scroll", ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 
-  /* =========================================================
-   * 3. 전역 상태값
-   * ========================================================= */
   let isTransitioning    = false;
   let hasTriggeredExpand = false;
   let isMuseumReady      = false;
@@ -72,9 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let cubeScrollTrigger  = null;
   const currentX         = new WeakMap();
 
-  /* =========================================================
-   * 4. 공통 유틸
-   * ========================================================= */
+  const NORMAL_SPEED    = 0.1;
+  const LAST_CARD_SPEED = 0.45;
+
   function lerp(a, b, t) { return a + (b - a) * t; }
 
   function hideAllMuseumSections() {
@@ -99,9 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* =========================================================
-   * 5. 가로 스크롤 초기화 / 리셋
-   * ========================================================= */
   function resetHorizontalSection(section) {
     if (!section) return;
     const track = section.querySelector(".museum_h_track");
@@ -120,22 +108,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================================================
-   * 6. 가로 스크롤 목표값 계산
-   * ========================================================= */
   function getTargetX(section) {
     const track = section.querySelector(".museum_h_track");
     if (!track) return 0;
-    const sectionTop   = getAbsoluteTop(section);
-    const rawProgress  = Math.max(window.scrollY - sectionTop, 0);
-    const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
-    const targetX      = rawProgress <= 600 ? 0 : rawProgress - 600;
-    return Math.max(0, Math.min(targetX, maxTranslate));
+    const sectionTop    = getAbsoluteTop(section);
+    const rawProgress   = Math.max(window.scrollY - sectionTop, 0);
+    const maxTranslate  = Math.max(track.scrollWidth - window.innerWidth, 0);
+    const lastCardStart = Math.max(maxTranslate - window.innerWidth, 0);
+    const normalProgress = rawProgress * NORMAL_SPEED;
+
+    if (normalProgress > lastCardStart) {
+      const slow = lastCardStart + (normalProgress - lastCardStart) * LAST_CARD_SPEED;
+      return Math.max(0, Math.min(slow, maxTranslate));
+    }
+    return Math.max(0, Math.min(normalProgress, maxTranslate));
   }
 
-  /* =========================================================
-   * 7. 전시 헤더 압축 상태 제어
-   * ========================================================= */
   function updateCompactHeader() {
     horizontalSections.forEach((section) => {
       if (!section.classList.contains("active")) { section.classList.remove("is_compact"); return; }
@@ -144,9 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================================================
-   * 8. 가로 스크롤 애니메이션
-   * ========================================================= */
   function animateHorizontal() {
     if (!isMuseumReady) { horizontalRafId = null; return; }
     let stillMoving = false;
@@ -167,87 +152,71 @@ document.addEventListener("DOMContentLoaded", () => {
     horizontalRafId = stillMoving ? requestAnimationFrame(animateHorizontal) : null;
   }
 
-  /* =========================================================
-   * 9. 가로 스크롤 섹션 높이 세팅
-   * ========================================================= */
   function setupHorizontalSections(callback) {
-    // rAF 없이 동기적으로 높이 계산 → 타이밍 지연 없음
     horizontalSections.forEach((section) => {
       if (!section.classList.contains("active")) return;
       const track = section.querySelector(".museum_h_track");
       if (!track) return;
       resetHorizontalSection(section);
-      const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
-      section.style.height = `${window.innerHeight + totalScrollX + 600 + 120}px`;
+      const totalScrollX  = Math.max(track.scrollWidth - window.innerWidth, 0);
+      const lastCardExtra = window.innerWidth * (1 / LAST_CARD_SPEED - 1);
+      const totalHeight   = window.innerHeight + (totalScrollX / NORMAL_SPEED) + lastCardExtra;
+      section.style.height = `${totalHeight}px`;
+
+      const inner = section.querySelector(".museum_inner");
+      if (inner) inner.style.height = `${totalHeight}px`;
     });
     if (typeof callback === "function") callback();
   }
 
-  /* =========================================================
-   * 10. 큐브 → 전시 섹션 전환
-   *
-   * [핵심 수정] 순서를 바꿈:
-   *   기존: 페이드아웃 끝 → 레이아웃 세팅 → 스크롤 이동
-   *   변경: introScene 즉시 숨김 → 레이아웃 세팅 → 스크롤 이동 → museumWrap 표시
-   *
-   * 페이드아웃 애니메이션이 끝나기를 기다리는 동안 브라우저가
-   * 엉뚱한 스크롤 위치(푸터)를 잠깐 보여주는 문제를 제거.
-   * ========================================================= */
   function switchToMuseum(targetSection) {
     isMuseumReady = false;
     cancelHorizontalAnimation();
     if (cubeScrollTrigger) { cubeScrollTrigger.kill(); cubeScrollTrigger = null; }
 
-    // 1) introScene 즉시 제거 + 동기적으로 scroll 0 고정
-    //    → display:none 으로 페이지 높이가 줄어드는 순간
-    //      브라우저가 스크롤을 푸터로 튕기는 것을 막음
+    lenis.stop();
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    window.scrollTo(0, 0);
+
     introScene.style.display = "none";
     introScene.style.opacity = "";
+    introScene.style.pointerEvents = "";
     introScene.classList.remove("is_leaving");
-    window.scrollTo(0, 0);                        // ★ 동기 즉시 고정
-    lenis.scrollTo(0, { immediate: true });
 
-    // 2) museumWrap / 섹션 활성화
     museumWrap.classList.add("active");
     hideAllMuseumSections();
     targetSection.classList.add("active");
     targetSection.classList.remove("is_compact");
     if (topBtnWrap) topBtnWrap.classList.add("active");
 
-    // 3) 섹션 높이 세팅 → ScrollTrigger 갱신 → 정확한 위치로 최종 스크롤
     setupHorizontalSections(() => {
       resetAllHorizontalSections();
       resetHorizontalSection(targetSection);
-      ScrollTrigger.refresh();
 
-      requestAnimationFrame(() => {
-        const targetTop = getAbsoluteTop(targetSection);
-        window.scrollTo(0, targetTop);
-        lenis.scrollTo(targetTop, { immediate: true });
+      const museumWrapPaddingTop = 210;
+      const headerHeight = header ? header.offsetHeight : 0;
+      const targetTop = targetSection.getBoundingClientRect().top - museumWrapPaddingTop + headerHeight;
 
-        updateCompactHeader();
-        resetHorizontalSection(targetSection);
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
 
-        isMuseumReady   = true;
-        isTransitioning = false;
-        lenis.start();
+      window.scrollTo(0, targetTop);
+      lenis.scrollTo(targetTop, { immediate: true });
 
-        if (!horizontalRafId) {
-          horizontalRafId = requestAnimationFrame(animateHorizontal);
-        }
-      });
+      updateCompactHeader();
+      resetHorizontalSection(targetSection);
+
+      isMuseumReady   = true;
+      isTransitioning = false;
+      lenis.start();
+
+      if (!horizontalRafId) {
+        horizontalRafId = requestAnimationFrame(animateHorizontal);
+      }
     });
   }
 
-  /* =========================================================
-   * 11. 선택한 큐브 면 확대
-   *
-   * [핵심 수정] 페이드아웃을 switchToMuseum과 병렬로 실행.
-   *   기존: 페이드아웃 onComplete 콜백 안에서 switchToMuseum 호출
-   *         → 애니메이션 끝날 때까지 스크롤 이동이 지연됨
-   *   변경: switchToMuseum 먼저 호출(레이아웃·스크롤 즉시 처리),
-   *         페이드아웃은 별도로 동시에 실행
-   * ========================================================= */
   function expandSelectedFace(face) {
     const targetId      = face.dataset.target;
     const targetSection = document.getElementById(targetId);
@@ -260,7 +229,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cubeFaces.forEach((item) => { if (item !== face) item.classList.add("is_hidden"); });
 
     if (window.innerWidth <= 1440) {
-      // 스크롤·레이아웃을 먼저, 페이드아웃은 동시에
       switchToMuseum(targetSection);
       gsap.fromTo(introScene,
         { opacity: 1 },
@@ -269,9 +237,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 1440px 초과: 큐브 확대 애니 → 페이드아웃과 switchToMuseum 병렬 실행
     const rotateY = getFaceRotation(targetId);
-    gsap.timeline()
+    gsap.timeline({
+      onStart: () => { switchToMuseum(targetSection); }
+    })
       .to(cube, { rotateY, duration: 0.9, ease: "power2.inOut" })
       .to(cubeStage, {
         scale: Math.max(window.innerWidth / 1000, window.innerHeight / 560) * 1.1,
@@ -279,13 +248,9 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 1.5,
         ease: "power3.out",
       }, "-=0.1")
-      .to(introScene, { opacity: 0, duration: 0.7, ease: "power2.out" }, "-=0.75")
-      .call(() => { switchToMuseum(targetSection); });
+      .to(introScene, { opacity: 0, duration: 0.7, ease: "power2.out" }, "-=0.75");
   }
 
-  /* =========================================================
-   * 12. 자동 진입
-   * ========================================================= */
   function triggerAutoExpand() {
     if (isTransitioning || hasTriggeredExpand) return;
     hasTriggeredExpand = true;
@@ -296,9 +261,6 @@ document.addEventListener("DOMContentLoaded", () => {
     expandSelectedFace(seoulFace);
   }
 
-  /* =========================================================
-   * 13. 큐브 스크롤 인터랙션
-   * ========================================================= */
   function initCubeScrollTrigger() {
     if (cubeScrollTrigger) { cubeScrollTrigger.kill(); cubeScrollTrigger = null; }
 
@@ -323,9 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================================================
-   * 14. 전시 → 다시 큐브로 복귀
-   * ========================================================= */
   function returnToCube() {
     isMuseumReady = false;
     cancelHorizontalAnimation();
@@ -337,6 +296,8 @@ document.addEventListener("DOMContentLoaded", () => {
     horizontalSections.forEach((section) => {
       resetHorizontalSection(section);
       section.style.height = "";
+      const inner = section.querySelector(".museum_inner");
+      if (inner) inner.style.height = "";
       section.classList.remove("is_compact");
       currentX.delete(section);
     });
@@ -350,6 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     introScene.style.display = "";
     introScene.style.opacity = "";
+    introScene.style.pointerEvents = "";
     introScene.classList.remove("is_leaving");
     gsap.set(introScene, { clearProps: "opacity" });
 
@@ -365,23 +327,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================================================
-   * 15. 초기 실행
-   * ========================================================= */
   initCubeScrollTrigger();
 
-  /* =========================================================
-   * 16. 전시 섹션 스크롤 이벤트
-   * ========================================================= */
   window.addEventListener("scroll", () => {
     if (!isMuseumReady) return;
     if (!horizontalRafId) horizontalRafId = requestAnimationFrame(animateHorizontal);
     updateCompactHeader();
   }, { passive: true });
 
-  /* =========================================================
-   * 17. 리사이즈 대응
-   * ========================================================= */
   window.addEventListener("resize", () => {
     if (!museumWrap.classList.contains("active")) return;
     setupHorizontalSections(() => {
@@ -394,16 +347,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* =========================================================
-   * 18. 탑 버튼 클릭 시 큐브로 복귀
-   * ========================================================= */
   if (topBtn) {
     topBtn.addEventListener("click", (e) => { e.preventDefault(); returnToCube(); });
   }
 
-  /* =========================================================
-   * 19. 큐브 면 클릭 시 해당 전시로 진입
-   * ========================================================= */
   cubeFaces.forEach((face) => {
     face.addEventListener("click", () => {
       if (isTransitioning) return;
@@ -414,9 +361,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* =========================================================
-   * 20. 헤더 스크롤 숨김
-   * ========================================================= */
   if (header) {
     header.style.transition = "transform 0.35s ease";
     let lastScrollY = 0;
@@ -427,9 +371,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  /* =========================================================
-   * 21. 큐브 커서 호버 효과
-   * ========================================================= */
   cubeFaces.forEach((face) => {
     face.addEventListener("mouseenter", () => {
       const ring = document.getElementById("cursorRing");
@@ -441,9 +382,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  /* =========================================================
-   * 22. 모바일 슬라이드 모드 (1024px 이하)
-   * ========================================================= */
   function initMobileSlide() {
     if (window.innerWidth > 1024) return;
     const cubeEl    = document.getElementById("cube");
@@ -495,9 +433,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (window.innerWidth <= 1024) initMobileSlide();
 
-  /* =========================================================
-   * 23. 외부 해시 링크로 진입 시 해당 섹션으로 바로 이동
-   * ========================================================= */
   const hashTarget = window.location.hash?.replace("#", "");
   if (hashTarget) {
     const targetSection = document.getElementById(hashTarget);
@@ -511,9 +446,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  /* =========================================================
-   * 24. 커스텀 커서
-   * ========================================================= */
   (function initCursor() {
     if (window.innerWidth <= 480) return;
     document.body.insertAdjacentHTML("beforeend",

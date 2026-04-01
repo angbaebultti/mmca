@@ -28,8 +28,8 @@
   /* ---------------- layout ---------------- */
 
   .museum_wrap {
-    padding-top: 80px;
-    margin-bottom: 120px;
+    padding-top: 0;
+    margin-bottom: 0;
   }
 
   .museum_exhibit_section .museum_inner {
