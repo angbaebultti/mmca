@@ -231,7 +231,7 @@ a {
 }
 
 .museum_label {
-  font-size: 32px;
+  font-size: clamp(22px, 1.7vw, 32px);
   margin-top: 10px;
   margin-bottom: 10px;
   color: var(--gray_05);
@@ -239,22 +239,22 @@ a {
 }
 
 .museum_name {
-  font-size: 76px;
+  font-size: clamp(56px, 4.4vw, 76px);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: 0.04em;
-  padding-top: 20px;
+  padding-top: clamp(10px, 1.1vw, 20px);
 }
 
 .museum_tabs {
   display: flex;
-  gap: 55px;
-  margin-top: 40px;
+  gap: clamp(24px, 2.8vw, 55px);
+  margin-top: clamp(20px, 2.1vw, 40px);
   letter-spacing: 0.05em;
 }
 
 .museum_tabs button {
-  font-size: 32px;
+  font-size: clamp(22px, 1.7vw, 32px);
   color: var(--gray_03);
   padding-bottom: 14px;
 }
@@ -270,6 +270,10 @@ a {
   --museum-sticky-top: 100px;
   --museum-sticky-height: calc(100vh - var(--museum-sticky-top));
   --museum-head-height: 240px;
+  --museum-shell-padding-inline: clamp(32px, 4vw, 96px);
+  --museum-shell-width: min(1500px, calc(100vw - (var(--museum-shell-padding-inline) * 2)));
+  --museum-card-gap: clamp(36px, 5vw, 120px);
+  --museum-poster-width: clamp(280px, 22vw, 420px);
   position: relative;
   height: auto;
 }
@@ -301,16 +305,16 @@ a {
 .museum_exhibit_section.is_horizontal .museum_head {
   position: relative;
   z-index: 3;
-  width: 1500px;
+  width: var(--museum-shell-width);
   margin: 0 auto;
-  padding-top: 30px;
-  padding-bottom: 24px;
+  padding-top: clamp(18px, 1.8vw, 30px);
+  padding-bottom: clamp(18px, 1.5vw, 24px);
   flex-shrink: 0;
   background: var(--main_black);
 }
 
 .museum_exhibit_section.is_horizontal.is_compact .museum_head {
-  padding-top: 30px;
+  padding-top: clamp(18px, 1.8vw, 30px);
   margin-bottom: 0;
 }
 
@@ -323,7 +327,7 @@ a {
 }
 
 .museum_exhibit_section.is_horizontal.is_compact .museum_tabs {
-  margin-top: 40px;
+  margin-top: clamp(20px, 2.4vw, 40px);
 }
 
 .museum_h_scroll {
@@ -346,33 +350,37 @@ a {
   flex: 0 0 100vw;
   height: 100%;
   margin-top: 0;
-  padding: 0 0 36px;
+  padding:
+    clamp(8px, 1vw, 16px)
+    var(--museum-shell-padding-inline)
+    clamp(24px, 2vw, 36px);
   box-sizing: border-box;
   display: flex;
-  align-items: center;
-  gap: 120px;
+  align-items: flex-start;
+  gap: var(--museum-card-gap);
 }
 
 .museum_exhibit_section.is_horizontal .museum_exhibit_card > .museum_poster {
-  margin-left: max(calc((100vw - 1500px) / 2), 0px);
+  margin-left: 0;
 }
 
 .museum_exhibit_section.is_horizontal .museum_content {
-  flex: 0 0 calc(1500px - 420px - 120px);
-  max-width: calc(1500px - 420px - 120px);
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: none;
 }
 
 /* ---------------- card layout ---------------- */
 
 .museum_exhibit_card {
   display: flex;
-  gap: 120px;
+  gap: var(--museum-card-gap);
   margin-top: 100px;
   height: 80vh;
 }
 
 .museum_poster {
-  width: 420px;
+  width: var(--museum-poster-width);
   flex-shrink: 0;
 }
 
@@ -387,11 +395,11 @@ a {
 }
 
 .museum_title {
-  font-size: 72px;
+  font-size: clamp(52px, 4.2vw, 72px);
   font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 30px;
-  letter-spacing: 0.06em;
+  line-height: 1.08;
+  margin-bottom: clamp(18px, 1.8vw, 30px);
+  letter-spacing: 0.03em;
 }
 
 .museum_meta {
@@ -401,21 +409,21 @@ a {
 .museum_meta li {
   display: flex;
   align-items: center;
-  gap: 20px;
-  font-size: 20px;
+  gap: clamp(12px, 1vw, 20px);
+  font-size: clamp(16px, 1.05vw, 20px);
   color: var(--gray_06);
   margin-bottom: 6px;
   letter-spacing: 0.04em;
 }
 
 .museum_meta i {
-  font-size: 26px;
+  font-size: clamp(20px, 1.35vw, 26px);
 }
 
 .museum_desc {
-  max-width: 920px;
-  margin-top: 30px;
-  font-size: 18px;
+  max-width: 60ch;
+  margin-top: clamp(20px, 1.8vw, 30px);
+  font-size: clamp(15px, 0.95vw, 18px);
   line-height: 1.6;
   color: var(--gray_03);
   letter-spacing: 0.04em;
@@ -425,7 +433,7 @@ a {
 
 .museum_ticket {
   display: inline-flex;
-  margin-top: 40px;
+  margin-top: clamp(24px, 2.2vw, 40px);
   transition: transform 0.35s ease;
   transform-origin: center;
 }
@@ -439,7 +447,7 @@ a {
   border-right: 2px dashed var(--gray_01);
   background: var(--main_white);
   color: var(--main_black);
-  font-size: 24px;
+  font-size: clamp(18px, 1.25vw, 24px);
   font-weight: 600;
   letter-spacing: 0.01em;
   transition:
@@ -464,7 +472,7 @@ a {
 }
 
 .ticket_stub i {
-  font-size: 32px;
+  font-size: clamp(24px, 1.65vw, 32px);
 }
 
 .museum_ticket:hover {
@@ -489,15 +497,15 @@ a {
 /* ---------------- highlights ---------------- */
 
 .museum_highlights {
-  margin-top: 50px;
+  margin-top: clamp(28px, 3vw, 50px);
 }
 
 .museum_highlights strong {
   display: flex;
   align-items: center;
-  gap: 40px;
-  margin-bottom: 24px;
-  font-size: 30px;
+  gap: clamp(16px, 2vw, 40px);
+  margin-bottom: clamp(16px, 1.5vw, 24px);
+  font-size: clamp(22px, 1.6vw, 30px);
   letter-spacing: 0.04em;
   color: var(--gray_05);
 }
@@ -512,14 +520,15 @@ a {
 
 .highlight_list {
   display: flex;
-  gap: 20px;
+  gap: clamp(12px, 1vw, 20px);
 }
 
 .highlight_item {
-  width: 320px;
-  height: 180px;
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .highlight_item img {
