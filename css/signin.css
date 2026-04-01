@@ -4,12 +4,14 @@
   display: flex;
   width: 100%;
   min-height: 150vh;
+  padding-bottom: 120px;
   color: #fff;
+  box-sizing: border-box;
 }
 
 /* 왼쪽 */
 .login_left {
-  width: 60%;
+  width: 50%;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -50,11 +52,12 @@
 
 /* 오른쪽 */
 .login_right {
-  width: 80%;
+  width: 50%;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 100px 48px;
   box-sizing: border-box;
 }
 

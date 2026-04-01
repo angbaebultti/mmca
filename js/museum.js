@@ -150,14 +150,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getHorizontalScrollHeight(section) {
     const metrics = getHorizontalMetrics(section);
-    const stickyHeight = Math.max(window.innerHeight - HORIZONTAL_STICKY_TOP, 0);
-    if (!metrics || metrics.maxTranslate === 0) return stickyHeight;
+    if (!metrics || metrics.maxTranslate === 0) return window.innerHeight;
 
-    // Match section height to the exact vertical distance needed to finish the horizontal travel.
+    // Sticky has a top offset, but the containing section still needs full viewport height
+    // so the header does not start sliding away before the horizontal motion is complete.
     const normalDistance = metrics.lastCardStart / NORMAL_SPEED;
     const lastCardDistance = metrics.lastCardSpan / (NORMAL_SPEED * LAST_CARD_SPEED);
 
-    return stickyHeight + normalDistance + lastCardDistance;
+    return window.innerHeight + normalDistance + lastCardDistance;
   }
 
   function updateCompactHeader() {
