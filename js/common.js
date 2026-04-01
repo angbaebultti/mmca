@@ -50,23 +50,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector(".header");
   let lastScroll = 0;
   let headerLockedByIntro = false;
+  let introDone = false; // 추가
 
   window.addEventListener("scroll", () => {
     if (headerLockedByIntro) return;
 
     const cur = window.scrollY;
 
-    header.classList.toggle("shrink", cur > 60);
+    if (!introDone) {
+      // 인트로 전엔 기존 로직 유지
+      header.classList.toggle("shrink", cur > 10);
+      if (cur > lastScroll && cur > 100) header.classList.add("hide");
+      else if (lastScroll - cur > 10) header.classList.remove("hide");
+      lastScroll = cur;
+      return;
+    }
+
+    // 인트로 완료 후: shrink 헤더만 운용
+    header.classList.add("shrink");
 
     if (cur > lastScroll && cur > 100) {
       header.classList.add("hide");
-    } else if (lastScroll - cur > 60) {
+    } else if (lastScroll - cur > 60 && cur > 0) {
+      // cur > 0 조건으로 맨 위 깜빡임 방지
+      header.classList.remove("hide");
+    } else if (cur === 0) {
       header.classList.remove("hide");
     }
 
     lastScroll = cur;
   });
-
   /* ── museum nav GSAP 애니메이션 ── */
   const museumNav = document.querySelector('.museum_nav');
   const items = document.querySelectorAll('.item');
@@ -100,9 +113,11 @@ document.addEventListener("DOMContentLoaded", () => {
     fillTl.call(() => {
       gsap.set(header, { clearProps: 'transform,opacity' });
       header.classList.add('hide');
+      header.classList.add('shrink'); // 추가
 
       lastScroll = window.scrollY;
       headerLockedByIntro = false;
+      introDone = true; // 추가
     });
 
   } else {
