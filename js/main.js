@@ -289,17 +289,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* =========================================================
-   * 12. SHOP
-   * ========================================================= */
+ * 12. SHOP
+ * ========================================================= */
   const positionsDesktop = [
     { x: -580, y: -280, r: -15 }, { x: 120, y: -320, r: 10 }, { x: 560, y: -200, r: 20 },
     { x: -620, y: 20, r: 8 }, { x: 600, y: 60, r: -12 }, { x: -480, y: 280, r: -20 },
     { x: -80, y: 340, r: 5 }, { x: 380, y: 300, r: 18 }, { x: 620, y: 260, r: -10 },
-  ];
-const positionsTablet = [
-    { x: -460, y: -220, r: -15 }, { x: 100, y: -260, r: 10 }, { x: 440, y: -160, r: 20 },
-    { x: -500, y: 18, r: 8 }, { x: 480, y: 50, r: -12 }, { x: -380, y: 225, r: -20 },
-    { x: -65, y: 270, r: 5 }, { x: 300, y: 245, r: 18 }, { x: 500, y: 210, r: -10 },
   ];
   const positionsMobile = [
     { x: -280, y: -190, r: -15 }, { x: 80, y: -220, r: 10 }, { x: 260, y: -140, r: 20 },
@@ -307,7 +302,7 @@ const positionsTablet = [
     { x: -40, y: 210, r: 5 }, { x: 200, y: 190, r: 18 }, { x: 290, y: 160, r: -10 },
   ];
 
-  const positions = isTablet ? positionsTablet : (isMobile ? positionsMobile : positionsDesktop);
+  const positions = isTablet ? positionsDesktop : (isMobile ? positionsMobile : positionsDesktop);
   const scale = isTablet ? 0.75 : (isMobile ? 0.6 : 1);
   const scaledPositions = positions.map((p) => ({ x: p.x * scale, y: p.y * scale, r: p.r }));
 
@@ -325,7 +320,6 @@ const positionsTablet = [
     shopTL.to(".glow_bg", { opacity: 0.7, scale: 1.8, filter: "blur(80px)", duration: 0.5 }, 0.25);
     shopTL.to(".glass_box", { scale: 1.04, z: 80, duration: 0.8, ease: "power3.out" }, 0.25);
   }
-
   /* =========================================================
    * 13. 커서 UI
    * ========================================================= */

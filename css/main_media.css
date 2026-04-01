@@ -243,23 +243,32 @@
     margin: 20px 0 8px 4px;
   }
 
+  /* 1024px 미디어쿼리 안 */
   .view_btn_card {
     min-width: 280px;
     height: 420px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .view_btn_inline {
     font-size: 14px;
     gap: 10px;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: none;
+    background: var(--main_white);
+    color: var(--main_black);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    width: auto;
+    height: auto;
   }
 
   .view_btn_inline i {
     width: 32px;
     height: 32px;
     font-size: 22px;
+    color: var(--main_black);
   }
 
   .view_btn_inline::before {
