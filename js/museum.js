@@ -151,16 +151,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function getHorizontalScrollHeight(section) {
     const metrics = getHorizontalMetrics(section);
     if (!metrics || metrics.maxTranslate === 0) return window.innerHeight;
-    const head = section.querySelector(".museum_head");
-    const headHeight = head ? Math.ceil(head.getBoundingClientRect().height) : 0;
-    const releaseBuffer = Math.max(HORIZONTAL_STICKY_TOP, headHeight);
 
     // Sticky has a top offset, but the containing section still needs full viewport height
-    // plus a release buffer so the header stays fully visible before the footer starts pushing in.
+    // so the header does not start sliding away before the horizontal motion is complete.
     const normalDistance = metrics.lastCardStart / NORMAL_SPEED;
     const lastCardDistance = metrics.lastCardSpan / (NORMAL_SPEED * LAST_CARD_SPEED);
 
-    return window.innerHeight + normalDistance + lastCardDistance + releaseBuffer;
+    return window.innerHeight + normalDistance + lastCardDistance;
   }
 
   function updateCompactHeader() {
