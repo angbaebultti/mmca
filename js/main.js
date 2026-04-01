@@ -71,14 +71,14 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.set(mainTitle, { opacity: 1, y: 0, clearProps: "all" });
   }
 
-if (!isMobile480) {
+  if (!isMobile480) {
     const mainTL = gsap.timeline({
       scrollTrigger: {
         trigger: ".main_visual",
         start: "top top",
         end: "+=1800",
         scrub: 1.2,
-        pin: !isMobile,       
+        pin: !isMobile,
         pinSpacing: !isMobile,
         anticipatePin: 1,
       },
@@ -201,7 +201,7 @@ if (!isMobile480) {
     const masterTL = gsap.timeline({
       scrollTrigger: {
         trigger: ".artist_prize", start: "top 10%",
-        end: () => "+=" + Math.abs(getScrollAmount()),
+        end: () => "+=" + Math.abs(getScrollAmount()) * 2.2,
         scrub: 1.2, pin: true, anticipatePin: 1, pinSpacing: true,
       },
     });
@@ -216,8 +216,8 @@ if (!isMobile480) {
 
     masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.03, ease: "power3.out", duration: 0.15 });
     if (letters.length) { masterTL.to(letters, { opacity: 0.3, ease: "power2.out", duration: 0.1 }, "<"); }
-    masterTL.to(".artist_track", { x: getScrollAmount, ease: "none", duration: 1 });
-    masterTL.to({}, { duration: 0.1 });
+ masterTL.to(".artist_track", { x: getScrollAmount, ease: "none", duration: 2.2 });
+masterTL.to({}, { duration: 1.2 });
   }
 
   /* =========================================================
