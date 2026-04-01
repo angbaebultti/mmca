@@ -71,23 +71,24 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.set(mainTitle, { opacity: 1, y: 0, clearProps: "all" });
   }
 
-  if (!isMobile480) {
+if (!isMobile480) {
     const mainTL = gsap.timeline({
       scrollTrigger: {
         trigger: ".main_visual",
         start: "top top",
         end: "+=1800",
         scrub: 1.2,
-        pin: true,
-        pinSpacing: true,
+        pin: !isMobile,       
+        pinSpacing: !isMobile,
         anticipatePin: 1,
       },
     });
 
     mainTL
       .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: "power2.out", duration: 0.4 }, 0)
-      .to(".info_wrap", { opacity: 0, y: -20, ease: "power1.out", duration: 0.3 }, 0.3)
-      .to(mainTitle, { opacity: 0, y: -30, ease: "power1.out", duration: 0.3 }, 0.3)
+      /* ✅ 수정: 위로 사라지던 것 → 아래로 내려가며 사라짐 */
+      .to(".info_wrap", { opacity: 0, y: 40, ease: "power1.out", duration: 0.3 }, 0.3)
+      .to(mainTitle, { opacity: 0, y: 40, ease: "power1.out", duration: 0.3 }, 0.3)
       .to(ticketLeft, {
         rotation: -25, x: isMobile ? -40 : -150, y: isMobile ? 20 : 100,
         scale: isMobile ? 0.65 : 1, ease: "none", duration: 0.4,
