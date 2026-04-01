@@ -1,5 +1,15 @@
 @charset "utf-8";
 
+.nav {
+  border-bottom: 1px solid #fff;
+}
+
+
+.museum_nav {
+  display: none;
+}
+
+
 .login_page {
   display: flex;
   width: 100%;
@@ -126,6 +136,12 @@
   gap: 10px;
   font-size: 18px;
   color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+
+.keep_login span {
+  font-size: 13px;
+
 }
 
 .keep_login input {
@@ -153,7 +169,7 @@
   margin-top: 22px;
   border: none;
   border-radius: 12px;
-  background: #2e55d4;
+  background: #e47b26;
   color: #fff;
   font-size: 28px;
   font-weight: 500;
@@ -261,17 +277,17 @@
   display: block;
   width: fit-content;
   height: auto;
-  margin: 22px auto 28px;
+  margin: 22px auto 22px;
   padding: 0;
   border: 0;
   background: transparent;
-  color: rgba(255, 255, 255, 0.42);
-  font-size: 13px;
+  color: #fff;
+  font-size: 20px;
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.01em;
   text-decoration: underline;
-  text-decoration-color: rgba(255, 255, 255, 0.24);
+  text-decoration-color: #fff;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
   cursor: pointer !important;
@@ -280,8 +296,8 @@
 }
 
 .dummy_fill_btn:hover {
-  color: rgba(255, 255, 255, 0.72);
-  text-decoration-color: rgba(255, 255, 255, 0.5);
+  color: #e47b26;
+  text-decoration-color: #fff;
 }
 
 .error_msg {
@@ -305,7 +321,10 @@
 a,
 button,
 label,
+label *,
 input[type="submit"],
+input[type="checkbox"],
+/* 공백 제거 + 쉼표 추가 */
 .sns_btn,
 .sns_btn * {
   cursor: pointer !important;
@@ -314,4 +333,27 @@ input[type="submit"],
 input,
 textarea {
   cursor: text !important;
+}
+
+.login_toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #ff6400;
+  /* MMCA 오렌지 */
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.login_toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }

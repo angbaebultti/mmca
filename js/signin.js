@@ -70,15 +70,36 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (matched) {
-      // 로그인 성공 시 세션에 저장
+      const userName = matched.email === "test@mmca.com" ? "Jane Doe" : "Admin User";
       sessionStorage.setItem("userEmail", matched.email);
-      sessionStorage.setItem("userName", matched.email === "test@mmca.com" ? "Jane Doe" : "Admin User");
-      location.href = "main.html";
+      sessionStorage.setItem("userName", userName);
+
+      // 토스트 표시
+      showToast("Welcome, " + userName + "!");
+
+      // 1.5초 후 이동
+      setTimeout(() => {
+        location.href = "main.html";
+      }, 1500);
+
     } else {
       const errorMsg = document.querySelector(".error_msg");
       errorMsg.textContent = "Invalid email or password. Please try again.";
       errorMsg.style.display = "block";
     }
+  }
+
+  function showToast(message) {
+    const toast = document.createElement("div");
+    toast.className = "login_toast";
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // 살짝 딜레이 후 페이드인
+    setTimeout(() => toast.classList.add("show"), 50);
+
+    // 1.2초 후 페이드아웃
+    setTimeout(() => toast.classList.remove("show"), 1200);
   }
   // 더미 계정 자동입력 버튼 생성
   const dummyBtn = document.createElement("button");

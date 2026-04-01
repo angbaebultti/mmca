@@ -152,6 +152,10 @@
 
 @media (max-width: 480px) {
 
+  .nav {
+    border-bottom: none;
+  }
+
   .login_page {
     flex-direction: column;
     gap: 0;
