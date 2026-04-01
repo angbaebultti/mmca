@@ -46,7 +46,7 @@
 
 .main_title {
     font-size: 64px;
-    margin: 10px 0 100px;
+    margin: 10px 0 40px;
 }
 
 .step {
@@ -137,6 +137,23 @@
     height: 24px;
     flex-shrink: 0;
     border: 1px solid #fff;
+    position: relative;
+    overflow: visible;
+}
+
+.send_code input:checked+label .box::after {
+    content: "✓";
+    position: absolute;
+    inset: -8px -6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 600;
+    color: #2e2e2e;
+    line-height: 1;
+    transform: rotate(-10deg);
+    z-index: 2;
 }
 
 .send_code .text {
@@ -145,13 +162,12 @@
 }
 
 .send_code input:checked+label {
-    border-color: #F47A38;
+    border-color: #fff;
 }
 
-/* 네모 채워짐 */
 .send_code input:checked+label .box {
-    background: #F47A38;
-    border-color: #F47A38;
+    background: #fff;
+    border-color: #fff;
 }
 
 /* hover */
@@ -164,6 +180,7 @@
     color: #f5f5f5;
     font-weight: 300;
     font-family: var(--pretendard);
+    letter-spacing: 0.01em;
 }
 
 .card_box {
@@ -175,6 +192,8 @@
 .card_box .title {
     display: flex;
     gap: 20px;
+    align-items: center;
+    margin-bottom: 24px;
 }
 
 .card_box .title i {
@@ -182,10 +201,9 @@
 }
 
 .card_title {
-    margin-bottom: 20px;
+    margin-bottom: 0;
     font-size: 25px;
     font-weight: 500;
-
 }
 
 .row {
@@ -215,27 +233,48 @@
     border: 1px solid #fff;
     position: relative;
     display: inline-block;
-    overflow: hidden;
+    overflow: visible;
     cursor: pointer;
+    flex-shrink: 0;
 }
 
-.checkmark::after {
+.checkmark::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: #F47A38;
+    background: #fff;
     transform: scale(0);
     transition: transform 0.2s ease;
+}
 
+.checkmark::after {
+    content: "✓";
+    position: absolute;
+    inset: -8px -6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 600;
+    color: #2e2e2e;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    transform: scale(0.6) rotate(-10deg);
+    z-index: 2;
 }
 
 .agree input:checked+.checkmark {
-    border: 1px solid #F47A38;
+    border: 1px solid #fff;
+}
+
+.agree input:checked+.checkmark::before {
+    transform: scale(1);
 }
 
 .agree input:checked+.checkmark::after {
-    transform: scale(1);
-
+    opacity: 1;
+    transform: scale(1) rotate(-10deg);
 }
 
 .notice {
@@ -274,11 +313,10 @@
 
 .checkout_right {
     width: 380px;
-
     margin-right: 0;
     margin-left: 0;
     transform: translateX(40px);
-     position: sticky;
+    position: sticky;
     top: 120px;
     align-self: start;
 }
@@ -299,9 +337,6 @@
     flex-direction: column;
     gap: 0;
 }
-
-
-
 
 .ticket::after {
     content: "";
@@ -422,12 +457,14 @@
     color: #585858;
     font-weight: 500;
 }
+
 .meta::after {
     content: "";
     display: block;
     border-top: 1px dashed #bbb;
     margin: 18px 0;
 }
+
 .qr {
     display: flex;
     justify-content: center;
@@ -450,7 +487,6 @@
     margin-left: -40px;
     transform: translateX(-77px);
 }
-
 
 .awards_line .line {
     position: absolute;
@@ -498,4 +534,114 @@
     background-size: 30px 22px;
     background-repeat: repeat-x;
     z-index: 10;
+}
+
+.autofill_banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 40px;
+    margin-bottom: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    width: 100%;
+    max-width: 800px;
+}
+
+.autofill_banner p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.autofill_banner span {
+    color: #2ed43c;
+}
+
+.autofill_banner strong {
+    color: #fff;
+}
+
+.autofill_btn {
+    flex-shrink: 0;
+    height: 38px;
+    padding: 0 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 18px;
+}
+
+.autofill_btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #fff;
+}
+
+.notice_banner {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.notice_banner p {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+}
+
+.notice_banner strong {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.notice_banner a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.notice_banner a:hover {
+    opacity: 0.7;
+}
+
+.verify_error {
+    display: block;
+    margin-top: 6px;
+    font-size: 15px;
+    color: #FF6624;
+    font-family: var(--pretendard);
+    letter-spacing: 0.01em;
+}
+
+.email_error {
+    display: block;
+    margin-top: 6px;
+    font-size: 15px;
+    color: #FF6624;
+    font-family: var(--pretendard);
+    letter-spacing: 0.01em;
+}
+
+.agree_error {
+    display: block;
+    margin-top: 8px;
+    font-size: 15px;
+    color: #FF6624;
+    font-family: var(--pretendard);
+    letter-spacing: 0.01em;
+}
+
+.card_error,
+.expiry_error,
+.cvc_error {
+    display: block;
+    margin-top: 6px;
+    font-size: 15px;
+    color: #FF6624;
+    font-family: var(--pretendard);
+    letter-spacing: 0.01em;
 }

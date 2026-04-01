@@ -70,6 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     if (matched) {
+      // 로그인 성공 시 세션에 저장
+      sessionStorage.setItem("userEmail", matched.email);
+      sessionStorage.setItem("userName", matched.email === "test@mmca.com" ? "Jane Doe" : "Admin User");
       location.href = "main.html";
     } else {
       const errorMsg = document.querySelector(".error_msg");
@@ -77,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
       errorMsg.style.display = "block";
     }
   }
-
   // 더미 계정 자동입력 버튼 생성
   const dummyBtn = document.createElement("button");
   dummyBtn.type = "button";
