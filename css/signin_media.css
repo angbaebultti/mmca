@@ -1,8 +1,20 @@
 @charset "utf-8";
 
 @media (max-width: 1024px) {
+
+  .nav {
+    border-bottom: 1px solid #fff;
+  }
+
+  .museum_nav {
+    display: none;
+  }
+
+
   .login_page {
     min-height: 100vh;
+    padding-top: 120px;
+    box-sizing: border-box;
   }
 
   /* 왼쪽 */
@@ -53,7 +65,7 @@
     margin-top: 28px;
   }
 
-  .login_input_wrap + .login_input_wrap {
+  .login_input_wrap+.login_input_wrap {
     margin-top: 12px;
   }
 
@@ -157,7 +169,7 @@
   }
 
   .login_box {
-    max-width: 560px; 
+    max-width: 560px;
     width: 100%;
     padding: 40px 28px 30px;
     border-radius: 22px;
