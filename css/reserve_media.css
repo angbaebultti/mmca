@@ -646,4 +646,7 @@
     color: #fff;
   }
  
+  .notice_banner p{
+    font-size: 14px
+  }
 }

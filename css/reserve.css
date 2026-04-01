@@ -645,3 +645,11 @@
     font-family: var(--pretendard);
     letter-spacing: 0.01em;
 }
+
+* {
+    cursor: none !important;
+}
+
+.cursor-ing,.cursor-dot{
+    display: none;
+}
