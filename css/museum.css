@@ -267,6 +267,9 @@ a {
 /* ---------------- horizontal section ---------------- */
 
 .museum_exhibit_section.is_horizontal {
+  --museum-sticky-top: 100px;
+  --museum-sticky-height: calc(100vh - var(--museum-sticky-top));
+  --museum-head-height: 240px;
   position: relative;
   height: auto;
 }
@@ -287,11 +290,12 @@ a {
 
 .museum_h_sticky {
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: var(--museum-sticky-top);
+  height: var(--museum-sticky-height);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .museum_exhibit_section.is_horizontal .museum_head {
@@ -300,36 +304,39 @@ a {
   width: 1500px;
   margin: 0 auto;
   padding-top: 30px;
-  padding-bottom: 10px;
+  padding-bottom: 24px;
   flex-shrink: 0;
+  background: var(--main_black);
 }
 
 .museum_exhibit_section.is_horizontal.is_compact .museum_head {
-  padding-top: 12px;
-  margin-bottom: 10px;
+  padding-top: 30px;
+  margin-bottom: 0;
 }
 
 .museum_exhibit_section.is_horizontal.is_compact .museum_label {
-  opacity: 0;
-  transform: translateY(-12px);
-  max-height: 0;
-  margin-bottom: 0;
-  pointer-events: none;
+  opacity: 1;
+  transform: none;
+  max-height: none;
+  margin-bottom: 10px;
+  pointer-events: auto;
 }
 
 .museum_exhibit_section.is_horizontal.is_compact .museum_tabs {
-  margin-top: 18px;
+  margin-top: 40px;
 }
 
 .museum_h_scroll {
   width: 100%;
-  flex: 1;
+  height: max(0px, calc(var(--museum-sticky-height) - var(--museum-head-height)));
+  flex: 0 0 auto;
   overflow: hidden;
 }
 
 .museum_h_track {
   display: flex;
   height: 100%;
+  align-items: stretch;
   will-change: transform;
 }
 
@@ -339,10 +346,10 @@ a {
   flex: 0 0 100vw;
   height: 100%;
   margin-top: 0;
-  padding: 30px 0 80px;
+  padding: 0 0 36px;
   box-sizing: border-box;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 120px;
 }
 

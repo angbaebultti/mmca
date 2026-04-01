@@ -63,8 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let cubeScrollTrigger  = null;
   const currentX         = new WeakMap();
 
-  const NORMAL_SPEED    = 0.1;
-  const LAST_CARD_SPEED = 0.45;
+  const HORIZONTAL_STICKY_TOP = 100;
+  const NORMAL_SPEED    = 0.95;
+  const LAST_CARD_SPEED = 0.92;
 
   function lerp(a, b, t) { return a + (b - a) * t; }
 
@@ -108,13 +109,36 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function getTargetX(section) {
+  function syncHorizontalLayout(section) {
+    if (!section) return;
+    const head = section.querySelector(".museum_head");
+    if (!head) return;
+
+    const stickyHeight = Math.max(window.innerHeight - HORIZONTAL_STICKY_TOP, 0);
+    const headHeight = Math.ceil(head.getBoundingClientRect().height);
+    section.style.setProperty("--museum-sticky-top", `${HORIZONTAL_STICKY_TOP}px`);
+    section.style.setProperty("--museum-sticky-height", `${stickyHeight}px`);
+    section.style.setProperty("--museum-head-height", `${headHeight}px`);
+  }
+
+  function getHorizontalMetrics(section) {
     const track = section.querySelector(".museum_h_track");
-    if (!track) return 0;
-    const sectionTop    = getAbsoluteTop(section);
-    const rawProgress   = Math.max(window.scrollY - sectionTop, 0);
-    const maxTranslate  = Math.max(track.scrollWidth - window.innerWidth, 0);
-    const lastCardStart = Math.max(maxTranslate - window.innerWidth, 0);
+    if (!track) return null;
+
+    const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
+    const lastCardSpan = Math.min(window.innerWidth, maxTranslate);
+    const lastCardStart = Math.max(maxTranslate - lastCardSpan, 0);
+
+    return { track, maxTranslate, lastCardSpan, lastCardStart };
+  }
+
+  function getTargetX(section) {
+    const metrics = getHorizontalMetrics(section);
+    if (!metrics) return 0;
+
+    const sectionTop     = getAbsoluteTop(section);
+    const rawProgress    = Math.max(window.scrollY - sectionTop, 0);
+    const { maxTranslate, lastCardStart } = metrics;
     const normalProgress = rawProgress * NORMAL_SPEED;
 
     if (normalProgress > lastCardStart) {
@@ -124,11 +148,21 @@ document.addEventListener("DOMContentLoaded", () => {
     return Math.max(0, Math.min(normalProgress, maxTranslate));
   }
 
+  function getHorizontalScrollHeight(section) {
+    const metrics = getHorizontalMetrics(section);
+    const stickyHeight = Math.max(window.innerHeight - HORIZONTAL_STICKY_TOP, 0);
+    if (!metrics || metrics.maxTranslate === 0) return stickyHeight;
+
+    // Match section height to the exact vertical distance needed to finish the horizontal travel.
+    const normalDistance = metrics.lastCardStart / NORMAL_SPEED;
+    const lastCardDistance = metrics.lastCardSpan / (NORMAL_SPEED * LAST_CARD_SPEED);
+
+    return stickyHeight + normalDistance + lastCardDistance;
+  }
+
   function updateCompactHeader() {
     horizontalSections.forEach((section) => {
-      if (!section.classList.contains("active")) { section.classList.remove("is_compact"); return; }
-      const scrolled = window.scrollY - getAbsoluteTop(section);
-      section.classList.toggle("is_compact", scrolled > 40);
+      section.classList.remove("is_compact");
     });
   }
 
@@ -142,7 +176,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!track) return;
       const target  = getTargetX(section);
       const current = currentX.has(section) ? currentX.get(section) : 0;
-      const next    = lerp(current, target, 0.12);
+      const next    = lerp(current, target, 0.28);
       currentX.set(section, next);
       track.style.transform = `translate3d(${-next}px, 0, 0)`;
       if (Math.abs(next - target) > 0.3) stillMoving = true;
@@ -157,10 +191,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!section.classList.contains("active")) return;
       const track = section.querySelector(".museum_h_track");
       if (!track) return;
+      syncHorizontalLayout(section);
       resetHorizontalSection(section);
-      const totalScrollX  = Math.max(track.scrollWidth - window.innerWidth, 0);
-      const lastCardExtra = window.innerWidth * (1 / LAST_CARD_SPEED - 1);
-      const totalHeight   = window.innerHeight + (totalScrollX / NORMAL_SPEED) + lastCardExtra;
+      const totalHeight = getHorizontalScrollHeight(section);
       section.style.height = `${totalHeight}px`;
 
       const inner = section.querySelector(".museum_inner");
@@ -194,9 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
       resetAllHorizontalSections();
       resetHorizontalSection(targetSection);
 
-      const museumWrapPaddingTop = 210;
-      const headerHeight = header ? header.offsetHeight : 0;
-      const targetTop = targetSection.getBoundingClientRect().top - museumWrapPaddingTop + headerHeight;
+      const targetTop = Math.max(getAbsoluteTop(targetSection) - HORIZONTAL_STICKY_TOP, 0);
 
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
