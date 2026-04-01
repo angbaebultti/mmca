@@ -656,7 +656,7 @@
 }
 
 /* 클릭 가능한 요소들은 포인터로 */
-.gnb,
+.gnb_r,
 a,
 button,
 input[type="checkbox"],
@@ -667,10 +667,16 @@ input[type="text"],
 .step .checkmark,
 .agree,
 .purchase_btn,
-.autofill_btn {
+.autofill_btn,
+#menu_btn,
+.user_icon_btn,
+#close_btn,
+.gnb_r span,
+.gnb_r img {
     cursor: pointer !important;
 }
 
 .form_group input:focus {
     outline: none;
 }
+
