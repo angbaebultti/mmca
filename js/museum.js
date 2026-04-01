@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
       slides.forEach((slide) => {
         slide.classList.toggle("is_active", slide.dataset.museum === targetMuseum);
       });
-
       sections.forEach((section) => {
         section.classList.toggle(
           "is_mobile_active",
@@ -22,12 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     slides.forEach((slide) => {
       slide.addEventListener("click", () => {
         changeMuseum(slide.dataset.museum);
-
-        slide.scrollIntoView({
-          behavior: "smooth",
-          inline: "center",
-          block: "nearest",
-        });
+        slide.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
       });
     });
 
@@ -38,28 +32,21 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================================================
    * 1. 기본 DOM / 라이브러리 체크
    * ========================================================= */
-  const cube = document.getElementById("cube");
-  const cubeStage = document.querySelector(".cube_stage");
-  const introScene = document.querySelector(".intro_scene");
-  const museumWrap = document.getElementById("museumWrap");
-  const museumSections = document.querySelectorAll(".museum_exhibit_section");
-  const horizontalSections = document.querySelectorAll(
-    ".museum_exhibit_section.is_horizontal"
-  );
-  const cubeFaces = document.querySelectorAll(".cube_face");
-  const topBtn = document.querySelector(".top_btn a");
-  const topBtnWrap = document.querySelector(".top_btn");
-  const header = document.querySelector(".header");
+  const cube               = document.getElementById("cube");
+  const cubeStage          = document.querySelector(".cube_stage");
+  const introScene         = document.querySelector(".intro_scene");
+  const museumWrap         = document.getElementById("museumWrap");
+  const museumSections     = document.querySelectorAll(".museum_exhibit_section");
+  const horizontalSections = document.querySelectorAll(".museum_exhibit_section.is_horizontal");
+  const cubeFaces          = document.querySelectorAll(".cube_face");
+  const topBtn             = document.querySelector(".top_btn a");
+  const topBtnWrap         = document.querySelector(".top_btn");
+  const header             = document.querySelector(".header");
 
-  if (
-    typeof Lenis === "undefined" ||
-    typeof gsap === "undefined" ||
-    typeof ScrollTrigger === "undefined"
-  ) {
+  if (typeof Lenis === "undefined" || typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
     console.error("[MMCA] Lenis / GSAP / ScrollTrigger 라이브러리를 먼저 로드해주세요.");
     return;
   }
-
   if (!cube || !cubeStage || !introScene || !museumWrap || !museumSections.length) {
     console.error("[MMCA] 필수 DOM 요소를 찾지 못했습니다.");
     return;
@@ -70,11 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================================================
    * 2. Lenis 스크롤 세팅
    * ========================================================= */
-  const lenis = new Lenis({
-    lerp: 0.08,
-    smoothWheel: true,
-  });
-
+  const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
   lenis.on("scroll", ScrollTrigger.update);
   gsap.ticker.add((time) => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
@@ -82,30 +65,24 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================================================
    * 3. 전역 상태값
    * ========================================================= */
-  let isTransitioning = false;
+  let isTransitioning    = false;
   let hasTriggeredExpand = false;
-  let isMuseumReady = false;
-  let horizontalRafId = null;
-  let cubeScrollTrigger = null;
-
-  const currentX = new WeakMap();
+  let isMuseumReady      = false;
+  let horizontalRafId    = null;
+  let cubeScrollTrigger  = null;
+  const currentX         = new WeakMap();
 
   /* =========================================================
    * 4. 공통 유틸
    * ========================================================= */
-  function lerp(a, b, t) {
-    return a + (b - a) * t;
-  }
+  function lerp(a, b, t) { return a + (b - a) * t; }
 
   function hideAllMuseumSections() {
-    museumSections.forEach((section) => section.classList.remove("active"));
+    museumSections.forEach((s) => s.classList.remove("active"));
   }
 
   function cancelHorizontalAnimation() {
-    if (horizontalRafId) {
-      cancelAnimationFrame(horizontalRafId);
-      horizontalRafId = null;
-    }
+    if (horizontalRafId) { cancelAnimationFrame(horizontalRafId); horizontalRafId = null; }
   }
 
   function getAbsoluteTop(el) {
@@ -114,16 +91,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getFaceRotation(targetId) {
     switch (targetId) {
-      case "seoul":
-        return 0;
-      case "deoksugung":
-        return -90;
-      case "gwacheon":
-        return 180;
-      case "cheongju":
-        return 90;
-      default:
-        return 0;
+      case "seoul":      return 0;
+      case "deoksugung": return -90;
+      case "gwacheon":   return 180;
+      case "cheongju":   return 90;
+      default:           return 0;
     }
   }
 
@@ -134,7 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!section) return;
     const track = section.querySelector(".museum_h_track");
     if (!track) return;
-
     track.style.transform = "translate3d(0, 0, 0)";
     currentX.set(section, 0);
   }
@@ -143,7 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
     horizontalSections.forEach((section) => {
       const track = section.querySelector(".museum_h_track");
       if (!track) return;
-
       track.style.transform = "translate3d(0, 0, 0)";
       currentX.set(section, 0);
       section.classList.remove("is_compact");
@@ -156,20 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function getTargetX(section) {
     const track = section.querySelector(".museum_h_track");
     if (!track) return 0;
-
-    const sectionTop = getAbsoluteTop(section);
-    const rawProgress = Math.max(window.scrollY - sectionTop, 0);
+    const sectionTop   = getAbsoluteTop(section);
+    const rawProgress  = Math.max(window.scrollY - sectionTop, 0);
     const maxTranslate = Math.max(track.scrollWidth - window.innerWidth, 0);
-
-    const startHold = 600;
-    let targetX = 0;
-
-    if (rawProgress <= startHold) {
-      targetX = 0;
-    } else {
-      targetX = rawProgress - startHold;
-    }
-
+    const targetX      = rawProgress <= 600 ? 0 : rawProgress - 600;
     return Math.max(0, Math.min(targetX, maxTranslate));
   }
 
@@ -178,19 +138,9 @@ document.addEventListener("DOMContentLoaded", () => {
    * ========================================================= */
   function updateCompactHeader() {
     horizontalSections.forEach((section) => {
-      if (!section.classList.contains("active")) {
-        section.classList.remove("is_compact");
-        return;
-      }
-
-      const sectionTop = getAbsoluteTop(section);
-      const scrolled = window.scrollY - sectionTop;
-
-      if (scrolled > 40) {
-        section.classList.add("is_compact");
-      } else {
-        section.classList.remove("is_compact");
-      }
+      if (!section.classList.contains("active")) { section.classList.remove("is_compact"); return; }
+      const scrolled = window.scrollY - getAbsoluteTop(section);
+      section.classList.toggle("is_compact", scrolled > 40);
     });
   }
 
@@ -198,192 +148,139 @@ document.addEventListener("DOMContentLoaded", () => {
    * 8. 가로 스크롤 애니메이션
    * ========================================================= */
   function animateHorizontal() {
-    if (!isMuseumReady) {
-      horizontalRafId = null;
-      return;
-    }
-
+    if (!isMuseumReady) { horizontalRafId = null; return; }
     let stillMoving = false;
 
     horizontalSections.forEach((section) => {
       if (!section.classList.contains("active")) return;
-
       const track = section.querySelector(".museum_h_track");
       if (!track) return;
-
-      const target = getTargetX(section);
+      const target  = getTargetX(section);
       const current = currentX.has(section) ? currentX.get(section) : 0;
-      const next = lerp(current, target, 0.12);
-
+      const next    = lerp(current, target, 0.12);
       currentX.set(section, next);
       track.style.transform = `translate3d(${-next}px, 0, 0)`;
-
       if (Math.abs(next - target) > 0.3) stillMoving = true;
     });
 
     updateCompactHeader();
-
     horizontalRafId = stillMoving ? requestAnimationFrame(animateHorizontal) : null;
   }
 
   /* =========================================================
- * 9. 가로 스크롤 섹션 높이 세팅
- * - footer가 보이도록 필요한 높이만 최소한으로 계산
- * ========================================================= */
+   * 9. 가로 스크롤 섹션 높이 세팅
+   * ========================================================= */
   function setupHorizontalSections(callback) {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        horizontalSections.forEach((section) => {
-          if (!section.classList.contains("active")) return;
-
-          const track = section.querySelector(".museum_h_track");
-          if (!track) return;
-
-          resetHorizontalSection(section);
-
-          const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
-          const startHold = 600;
-          const endGap = 120; // footer 직전 아주 작은 여유만
-
-          section.style.height = `${window.innerHeight + totalScrollX + startHold + endGap
-            }px`;
-        });
-
-        if (typeof callback === "function") callback();
-      });
+    // rAF 없이 동기적으로 높이 계산 → 타이밍 지연 없음
+    horizontalSections.forEach((section) => {
+      if (!section.classList.contains("active")) return;
+      const track = section.querySelector(".museum_h_track");
+      if (!track) return;
+      resetHorizontalSection(section);
+      const totalScrollX = Math.max(track.scrollWidth - window.innerWidth, 0);
+      section.style.height = `${window.innerHeight + totalScrollX + 600 + 120}px`;
     });
+    if (typeof callback === "function") callback();
   }
 
   /* =========================================================
    * 10. 큐브 → 전시 섹션 전환
+   *
+   * [핵심 수정] 순서를 바꿈:
+   *   기존: 페이드아웃 끝 → 레이아웃 세팅 → 스크롤 이동
+   *   변경: introScene 즉시 숨김 → 레이아웃 세팅 → 스크롤 이동 → museumWrap 표시
+   *
+   * 페이드아웃 애니메이션이 끝나기를 기다리는 동안 브라우저가
+   * 엉뚱한 스크롤 위치(푸터)를 잠깐 보여주는 문제를 제거.
    * ========================================================= */
   function switchToMuseum(targetSection) {
     isMuseumReady = false;
     cancelHorizontalAnimation();
+    if (cubeScrollTrigger) { cubeScrollTrigger.kill(); cubeScrollTrigger = null; }
 
-    if (cubeScrollTrigger) {
-      cubeScrollTrigger.kill();
-      cubeScrollTrigger = null;
-    }
+    // 1) introScene 즉시 제거 + 동기적으로 scroll 0 고정
+    //    → display:none 으로 페이지 높이가 줄어드는 순간
+    //      브라우저가 스크롤을 푸터로 튕기는 것을 막음
+    introScene.style.display = "none";
+    introScene.style.opacity = "";
+    introScene.classList.remove("is_leaving");
+    window.scrollTo(0, 0);                        // ★ 동기 즉시 고정
+    lenis.scrollTo(0, { immediate: true });
 
+    // 2) museumWrap / 섹션 활성화
     museumWrap.classList.add("active");
     hideAllMuseumSections();
     targetSection.classList.add("active");
     targetSection.classList.remove("is_compact");
-
     if (topBtnWrap) topBtnWrap.classList.add("active");
 
+    // 3) 섹션 높이 세팅 → ScrollTrigger 갱신 → 정확한 위치로 최종 스크롤
     setupHorizontalSections(() => {
+      resetAllHorizontalSections();
+      resetHorizontalSection(targetSection);
+      ScrollTrigger.refresh();
+
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          resetAllHorizontalSections();
-          resetHorizontalSection(targetSection);
-          ScrollTrigger.refresh();
+        const targetTop = getAbsoluteTop(targetSection);
+        window.scrollTo(0, targetTop);
+        lenis.scrollTo(targetTop, { immediate: true });
 
-          const targetTop = getAbsoluteTop(targetSection);
+        updateCompactHeader();
+        resetHorizontalSection(targetSection);
 
-          window.scrollTo(0, targetTop);
-          lenis.scrollTo(targetTop, { immediate: true });
+        isMuseumReady   = true;
+        isTransitioning = false;
+        lenis.start();
 
-          introScene.classList.add("is_leaving");
-
-          gsap.to(introScene, {
-            opacity: 0,
-            duration: 0.55,
-            ease: "power2.out",
-            onComplete() {
-              introScene.style.display = "none";
-              introScene.classList.remove("is_leaving");
-              introScene.style.opacity = "";
-
-              resetHorizontalSection(targetSection);
-              updateCompactHeader();
-
-              isMuseumReady = true;
-              isTransitioning = false;
-              lenis.start();
-
-              if (!horizontalRafId) {
-                horizontalRafId = requestAnimationFrame(animateHorizontal);
-              }
-            },
-          });
-        });
+        if (!horizontalRafId) {
+          horizontalRafId = requestAnimationFrame(animateHorizontal);
+        }
       });
     });
   }
 
   /* =========================================================
    * 11. 선택한 큐브 면 확대
+   *
+   * [핵심 수정] 페이드아웃을 switchToMuseum과 병렬로 실행.
+   *   기존: 페이드아웃 onComplete 콜백 안에서 switchToMuseum 호출
+   *         → 애니메이션 끝날 때까지 스크롤 이동이 지연됨
+   *   변경: switchToMuseum 먼저 호출(레이아웃·스크롤 즉시 처리),
+   *         페이드아웃은 별도로 동시에 실행
    * ========================================================= */
   function expandSelectedFace(face) {
-    const targetId = face.dataset.target;
+    const targetId      = face.dataset.target;
     const targetSection = document.getElementById(targetId);
 
-    if (!targetSection) {
-      lenis.start();
-      isTransitioning = false;
-      return;
-    }
+    if (!targetSection) { lenis.start(); isTransitioning = false; return; }
+    if (cubeScrollTrigger) { cubeScrollTrigger.kill(); cubeScrollTrigger = null; }
 
-    if (cubeScrollTrigger) {
-      cubeScrollTrigger.kill();
-      cubeScrollTrigger = null;
-    }
-
-    cubeFaces.forEach((item) => {
-      item.classList.remove("is_active", "is_hidden");
-    });
-
+    cubeFaces.forEach((item) => item.classList.remove("is_active", "is_hidden"));
     face.classList.add("is_active");
-
-    cubeFaces.forEach((item) => {
-      if (item !== face) item.classList.add("is_hidden");
-    });
+    cubeFaces.forEach((item) => { if (item !== face) item.classList.add("is_hidden"); });
 
     if (window.innerWidth <= 1440) {
-      gsap.to(introScene, {
-        opacity: 0,
-        duration: 0.4,
-        ease: "power2.out",
-        onComplete() {
-          switchToMuseum(targetSection);
-        },
-      });
+      // 스크롤·레이아웃을 먼저, 페이드아웃은 동시에
+      switchToMuseum(targetSection);
+      gsap.fromTo(introScene,
+        { opacity: 1 },
+        { opacity: 0, duration: 0.35, ease: "power2.out" }
+      );
       return;
     }
 
+    // 1440px 초과: 큐브 확대 애니 → 페이드아웃과 switchToMuseum 병렬 실행
     const rotateY = getFaceRotation(targetId);
-
-    const tl = gsap.timeline();
-
-    tl.to(cube, {
-      rotateY,
-      duration: 0.9,
-      ease: "power2.inOut",
-    })
-      .to(
-        cubeStage,
-        {
-          scale: Math.max(window.innerWidth / 1000, window.innerHeight / 560) * 1.1,
-          y: -20,
-          duration: 1.5,
-          ease: "power3.out",
-        },
-        "-=0.1"
-      )
-      .to(
-        introScene,
-        {
-          opacity: 0.35,
-          duration: 0.7,
-          ease: "power2.out",
-        },
-        "-=0.75"
-      )
-      .call(() => {
-        switchToMuseum(targetSection);
-      });
+    gsap.timeline()
+      .to(cube, { rotateY, duration: 0.9, ease: "power2.inOut" })
+      .to(cubeStage, {
+        scale: Math.max(window.innerWidth / 1000, window.innerHeight / 560) * 1.1,
+        y: -20,
+        duration: 1.5,
+        ease: "power3.out",
+      }, "-=0.1")
+      .to(introScene, { opacity: 0, duration: 0.7, ease: "power2.out" }, "-=0.75")
+      .call(() => { switchToMuseum(targetSection); });
   }
 
   /* =========================================================
@@ -391,16 +288,10 @@ document.addEventListener("DOMContentLoaded", () => {
    * ========================================================= */
   function triggerAutoExpand() {
     if (isTransitioning || hasTriggeredExpand) return;
-
     hasTriggeredExpand = true;
-    isTransitioning = true;
-
+    isTransitioning    = true;
     const seoulFace = document.querySelector('[data-target="seoul"]');
-    if (!seoulFace) {
-      isTransitioning = false;
-      return;
-    }
-
+    if (!seoulFace) { isTransitioning = false; return; }
     lenis.stop();
     expandSelectedFace(seoulFace);
   }
@@ -409,10 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
    * 13. 큐브 스크롤 인터랙션
    * ========================================================= */
   function initCubeScrollTrigger() {
-    if (cubeScrollTrigger) {
-      cubeScrollTrigger.kill();
-      cubeScrollTrigger = null;
-    }
+    if (cubeScrollTrigger) { cubeScrollTrigger.kill(); cubeScrollTrigger = null; }
 
     cubeScrollTrigger = ScrollTrigger.create({
       trigger: introScene,
@@ -421,32 +309,16 @@ document.addEventListener("DOMContentLoaded", () => {
       scrub: 2,
       onUpdate(self) {
         if (isTransitioning) return;
-
         const p = self.progress;
         let rotation;
-
         if (p < 0.8) {
-          const spinProgress = p / 0.8;
-          const easedSpin = 1 - Math.pow(1 - spinProgress, 3);
-          rotation = easedSpin * 540;
+          rotation = (1 - Math.pow(1 - p / 0.8, 3)) * 540;
         } else {
-          const settleProgress = (p - 0.8) / 0.2;
-          const currentRotation = 540;
-          const targetRotation = 720;
-          rotation =
-            currentRotation + (targetRotation - currentRotation) * settleProgress;
+          rotation = 540 + ((p - 0.8) / 0.2) * 180;
         }
-
         gsap.set(cube, { rotateY: rotation });
-
-        gsap.set(cubeStage, {
-          scale: 1,
-          opacity: 1,
-        });
-
-        if (p >= 0.95 && !hasTriggeredExpand) {
-          triggerAutoExpand();
-        }
+        gsap.set(cubeStage, { scale: 1, opacity: 1 });
+        if (p >= 0.95 && !hasTriggeredExpand) triggerAutoExpand();
       },
     });
   }
@@ -460,7 +332,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     museumWrap.classList.remove("active");
     hideAllMuseumSections();
-
     if (topBtnWrap) topBtnWrap.classList.remove("active");
 
     horizontalSections.forEach((section) => {
@@ -470,23 +341,17 @@ document.addEventListener("DOMContentLoaded", () => {
       currentX.delete(section);
     });
 
-    cubeFaces.forEach((face) => {
-      face.classList.remove("is_active", "is_hidden");
-    });
-
-    isTransitioning = false;
+    cubeFaces.forEach((face) => face.classList.remove("is_active", "is_hidden"));
+    isTransitioning    = false;
     hasTriggeredExpand = false;
 
     gsap.set(cube, { rotateY: 0 });
-    gsap.set(cubeStage, {
-      scale: 1,
-      opacity: 1,
-      clearProps: "transform,opacity",
-    });
+    gsap.set(cubeStage, { scale: 1, opacity: 1, clearProps: "transform,opacity" });
 
     introScene.style.display = "";
+    introScene.style.opacity = "";
     introScene.classList.remove("is_leaving");
-    gsap.set(introScene, { opacity: 1, clearProps: "opacity" });
+    gsap.set(introScene, { clearProps: "opacity" });
 
     window.scrollTo(0, 0);
     lenis.scrollTo(0, { immediate: true });
@@ -508,39 +373,23 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =========================================================
    * 16. 전시 섹션 스크롤 이벤트
    * ========================================================= */
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!isMuseumReady) return;
-
-      if (!horizontalRafId) {
-        horizontalRafId = requestAnimationFrame(animateHorizontal);
-      }
-
-      updateCompactHeader();
-    },
-    { passive: true }
-  );
+  window.addEventListener("scroll", () => {
+    if (!isMuseumReady) return;
+    if (!horizontalRafId) horizontalRafId = requestAnimationFrame(animateHorizontal);
+    updateCompactHeader();
+  }, { passive: true });
 
   /* =========================================================
    * 17. 리사이즈 대응
    * ========================================================= */
   window.addEventListener("resize", () => {
     if (!museumWrap.classList.contains("active")) return;
-
     setupHorizontalSections(() => {
       horizontalSections.forEach((section) => {
-        if (section.classList.contains("active")) {
-          resetHorizontalSection(section);
-        }
+        if (section.classList.contains("active")) resetHorizontalSection(section);
       });
-
       updateCompactHeader();
-
-      if (isMuseumReady && !horizontalRafId) {
-        horizontalRafId = requestAnimationFrame(animateHorizontal);
-      }
-
+      if (isMuseumReady && !horizontalRafId) horizontalRafId = requestAnimationFrame(animateHorizontal);
       ScrollTrigger.refresh();
     });
   });
@@ -549,10 +398,7 @@ document.addEventListener("DOMContentLoaded", () => {
    * 18. 탑 버튼 클릭 시 큐브로 복귀
    * ========================================================= */
   if (topBtn) {
-    topBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      returnToCube();
-    });
+    topBtn.addEventListener("click", (e) => { e.preventDefault(); returnToCube(); });
   }
 
   /* =========================================================
@@ -561,8 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cubeFaces.forEach((face) => {
     face.addEventListener("click", () => {
       if (isTransitioning) return;
-
-      isTransitioning = true;
+      isTransitioning    = true;
       hasTriggeredExpand = true;
       lenis.stop();
       expandSelectedFace(face);
@@ -574,18 +419,10 @@ document.addEventListener("DOMContentLoaded", () => {
    * ========================================================= */
   if (header) {
     header.style.transition = "transform 0.35s ease";
-
     let lastScrollY = 0;
-
     lenis.on("scroll", ({ scroll }) => {
       if (isTransitioning) return;
-
-      if (scroll > lastScrollY && scroll > 80) {
-        header.style.transform = "translateY(-100%)";
-      } else {
-        header.style.transform = "translateY(0)";
-      }
-
+      header.style.transform = (scroll > lastScrollY && scroll > 80) ? "translateY(-100%)" : "translateY(0)";
       lastScrollY = scroll;
     });
   }
@@ -595,19 +432,12 @@ document.addEventListener("DOMContentLoaded", () => {
    * ========================================================= */
   cubeFaces.forEach((face) => {
     face.addEventListener("mouseenter", () => {
-      const cursorRing = document.getElementById("cursorRing");
-      if (cursorRing) {
-        cursorRing.classList.add("cube-hover");
-        cursorRing.textContent = "CLICK HERE !";
-      }
+      const ring = document.getElementById("cursorRing");
+      if (ring) { ring.classList.add("cube-hover"); ring.textContent = "CLICK HERE !"; }
     });
-
     face.addEventListener("mouseleave", () => {
-      const cursorRing = document.getElementById("cursorRing");
-      if (cursorRing) {
-        cursorRing.classList.remove("cube-hover");
-        cursorRing.textContent = "";
-      }
+      const ring = document.getElementById("cursorRing");
+      if (ring) { ring.classList.remove("cube-hover"); ring.textContent = ""; }
     });
   });
 
@@ -616,46 +446,37 @@ document.addEventListener("DOMContentLoaded", () => {
    * ========================================================= */
   function initMobileSlide() {
     if (window.innerWidth > 1024) return;
-
-    const cubeEl = document.getElementById("cube");
+    const cubeEl    = document.getElementById("cube");
     const cubePinEl = document.querySelector(".cube_pin");
     if (!cubeEl || !cubePinEl) return;
 
-    
-
     cubeEl.classList.add("is_slide_mode");
-
     let currentIndex = 0;
     const faces = Array.from(cubeFaces);
     const total = faces.length;
 
     const dots = document.createElement("div");
     dots.className = "slide_dots";
-
     faces.forEach((_, i) => {
       const dot = document.createElement("span");
       if (i === 0) dot.classList.add("is_active");
       dot.addEventListener("click", () => goTo(i));
       dots.appendChild(dot);
     });
-
     cubePinEl.appendChild(dots);
 
     const prevBtn = document.createElement("button");
     prevBtn.className = "slide_prev";
     prevBtn.innerHTML = '<i class="fa-solid fa-chevron-left"></i>';
-
     const nextBtn = document.createElement("button");
     nextBtn.className = "slide_next";
     nextBtn.innerHTML = '<i class="fa-solid fa-chevron-right"></i>';
-
     cubePinEl.appendChild(prevBtn);
     cubePinEl.appendChild(nextBtn);
 
     function goTo(index) {
       currentIndex = (index + total) % total;
       cubeEl.style.transform = `translateX(-${currentIndex * 100}vw)`;
-
       document.querySelectorAll(".slide_dots span").forEach((dot, i) => {
         dot.classList.toggle("is_active", i === currentIndex);
       });
@@ -665,30 +486,14 @@ document.addEventListener("DOMContentLoaded", () => {
     nextBtn.addEventListener("click", () => goTo(currentIndex + 1));
 
     let startX = 0;
-
-    cubeEl.addEventListener(
-      "touchstart",
-      (e) => {
-        startX = e.touches[0].clientX;
-      },
-      { passive: true }
-    );
-
-    cubeEl.addEventListener(
-      "touchend",
-      (e) => {
-        const diff = startX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-          goTo(diff > 0 ? currentIndex + 1 : currentIndex - 1);
-        }
-      },
-      { passive: true }
-    );
+    cubeEl.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    cubeEl.addEventListener("touchend", (e) => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+    }, { passive: true });
   }
 
-  if (window.innerWidth <= 1024) {
-    initMobileSlide();
-  }
+  if (window.innerWidth <= 1024) initMobileSlide();
 
   /* =========================================================
    * 23. 외부 해시 링크로 진입 시 해당 섹션으로 바로 이동
@@ -697,66 +502,46 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hashTarget) {
     const targetSection = document.getElementById(hashTarget);
     if (targetSection) {
-      // 큐브 애니메이션 스킵하고 바로 해당 전시로 진입
-      isTransitioning = true;
+      isTransitioning    = true;
       hasTriggeredExpand = true;
       lenis.stop();
-
       const targetFace = document.querySelector(`[data-target="${hashTarget}"]`);
-      if (targetFace) {
-        expandSelectedFace(targetFace);
-      } else {
-        // 큐브 face가 없는 경우 직접 섹션 전환
-        switchToMuseum(targetSection);
-      }
+      if (targetFace) expandSelectedFace(targetFace);
+      else switchToMuseum(targetSection);
     }
   }
 
+  /* =========================================================
+   * 24. 커스텀 커서
+   * ========================================================= */
+  (function initCursor() {
+    if (window.innerWidth <= 480) return;
+    document.body.insertAdjacentHTML("beforeend",
+      `<div class="cursor-ring" id="cursorRing"></div><div class="cursor-dot" id="cursorDot"></div>`
+    );
+    const ring = document.getElementById("cursorRing");
+    const dot  = document.getElementById("cursorDot");
+    let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
 
-  // common.js 하단에 추가
-(function initCursor() {
-  if (window.innerWidth <= 480) return;
+    document.addEventListener("mousemove", (e) => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + "px"; dot.style.top = my + "px";
+    });
 
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    `<div class="cursor-ring" id="cursorRing"></div>
-     <div class="cursor-dot" id="cursorDot"></div>`
-  );
+    (function lerpRing() {
+      rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+      ring.style.left = rx + "px"; ring.style.top = ry + "px";
+      requestAnimationFrame(lerpRing);
+    })();
 
-  const ring = document.getElementById("cursorRing");
-  const dot  = document.getElementById("cursorDot");
-  let mx = 0, my = 0, rx = window.innerWidth / 2, ry = window.innerHeight / 2;
+    let isInLight = false;
+    document.querySelectorAll('[data-cursor="light"]').forEach((el) => {
+      el.addEventListener("mouseenter", () => { isInLight = true;  dot.classList.add("orange");    ring.classList.add("orange"); });
+      el.addEventListener("mouseleave", () => { isInLight = false; dot.classList.remove("orange"); ring.classList.remove("orange"); });
+    });
 
-  document.addEventListener("mousemove", (e) => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + "px";
-    dot.style.top  = my + "px";
-  });
-
-  (function lerpRing() {
-    rx += (mx - rx) * 0.1;
-    ry += (my - ry) * 0.1;
-    ring.style.left = rx + "px";
-    ring.style.top  = ry + "px";
-    requestAnimationFrame(lerpRing);
+    document.addEventListener("mousedown", () => dot.classList.add("orange"));
+    document.addEventListener("mouseup",   () => { if (!isInLight) dot.classList.remove("orange"); });
   })();
 
-  // data-cursor="light" 섹션 자동 처리
-  let isInLight = false;
-  document.querySelectorAll('[data-cursor="light"]').forEach((el) => {
-    el.addEventListener("mouseenter", () => {
-      isInLight = true;
-      dot.classList.add("orange");
-      ring.classList.add("orange");
-    });
-    el.addEventListener("mouseleave", () => {
-      isInLight = false;
-      dot.classList.remove("orange");
-      ring.classList.remove("orange");
-    });
-  });
-
-  document.addEventListener("mousedown", () => dot.classList.add("orange"));
-  document.addEventListener("mouseup",   () => { if (!isInLight) dot.classList.remove("orange"); });
-})();
 });
