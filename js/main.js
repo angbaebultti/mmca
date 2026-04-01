@@ -87,13 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     mainTL
       .to(ticketWrap, { opacity: 1, x: 0, y: 0, ease: "power2.out", duration: 0.4 }, 0)
-<<<<<<< HEAD
       .to(".info_wrap", { opacity: 0, y: -20, ease: "power1.out", duration: 0.3 }, 0.3)
       .to(mainTitle, { opacity: 0, y: -30, ease: "power1.out", duration: 0.3 }, 0.3)
-=======
-      .to(".info_wrap", { opacity: 0, y: 40, ease: "power1.out", duration: 0.3 }, 0.3)
-      .to(mainTitle, { opacity: 0, y: 40, ease: "power1.out", duration: 0.3 }, 0.3)
->>>>>>> 552609427d4aebb3563bb85773776d3c2cb8710c
       .to(ticketLeft, {
         rotation: -25, x: isMobile ? -40 : -150, y: isMobile ? 20 : 100,
         scale: isMobile ? 0.65 : 1, ease: "none", duration: 0.4,
@@ -221,13 +216,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     masterTL.to(artistCards, { opacity: 1, xPercent: 0, stagger: 0.03, ease: "power3.out", duration: 0.15 });
     if (letters.length) { masterTL.to(letters, { opacity: 0.3, ease: "power2.out", duration: 0.1 }, "<"); }
-<<<<<<< HEAD
     masterTL.to(".artist_track", { x: getScrollAmount, ease: "none", duration: 1 });
     masterTL.to({}, { duration: 0.1 });
-=======
-    masterTL.to(".artist_track", { x: getScrollAmount, ease: "none", duration: 2.2 });
-    masterTL.to({}, { duration: 1.2 });
->>>>>>> 552609427d4aebb3563bb85773776d3c2cb8710c
   }
 
   /* =========================================================
