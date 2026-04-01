@@ -210,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     ScrollTrigger.create({
       trigger: about,
-      start: "top 80%",
+      start: "top 50%",
       onEnter: () => runStatAnimation(),
       onEnterBack: () => runStatAnimation(),
     });

@@ -287,7 +287,7 @@
 
 /* ===================== ABOUT ===================== */
 .about {
-  height: 550vh;
+  height: 300vh;
   position: relative;
   background: var(--bg_about);
   width: 100%;
