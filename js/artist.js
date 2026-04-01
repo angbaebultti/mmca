@@ -863,7 +863,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const titleReachedMidpoint =
           tabletMedia.matches && sectionTitle
             ? sectionTitle.getBoundingClientRect().top <=
-              window.innerHeight * 0.58
+            window.innerHeight * 0.58
             : false;
 
         items.forEach((item, i) => {
@@ -903,6 +903,18 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       { passive: true },
     );
+
+    // data-cursor="light" → 커서 주황색
+    document.querySelectorAll('[data-cursor="light"]').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        ring.classList.add('orange');
+        dot.classList.add('orange');
+      });
+      el.addEventListener('mouseleave', () => {
+        ring.classList.remove('orange');
+        dot.classList.remove('orange');
+      });
+    });
 
     window.dispatchEvent(new Event("scroll"));
   })();
