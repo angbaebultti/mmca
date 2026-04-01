@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // 1.5초 후 이동
       setTimeout(() => {
         location.href = "main.html";
-      }, 1500);
+      }, 2000);
 
     } else {
       const errorMsg = document.querySelector(".error_msg");
@@ -92,13 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function showToast(message) {
     const toast = document.createElement("div");
     toast.className = "login_toast";
-    toast.textContent = message;
+    toast.innerHTML = `
+    <span class="toast_icon">✓</span>
+    <span class="toast_msg">${message}</span>
+  `;
     document.body.appendChild(toast);
 
-    // 살짝 딜레이 후 페이드인
     setTimeout(() => toast.classList.add("show"), 50);
-
-    // 1.2초 후 페이드아웃
     setTimeout(() => toast.classList.remove("show"), 1200);
   }
   // 더미 계정 자동입력 버튼 생성
