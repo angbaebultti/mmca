@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
 const museumNav = document.querySelector('.museum_nav');
 const items     = document.querySelectorAll('.item');
 
-// ↓ 이 조건 추가!
 if (museumNav && items.length > 0) {
   museumNav.classList.remove('nav_locked');
   items.forEach(item => {
