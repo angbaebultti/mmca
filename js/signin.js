@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   if (window.innerWidth > 480) {
-
+    if (document.querySelector(".login_page")) return;
     // 중복 생성 방지
     if (!document.querySelector(".cursor-dot")) {
 
@@ -64,12 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
       (acc) => acc.email === email && acc.password === password
     );
 
- if (matched) {
-    location.href = "main.html";
-  } else {
-    const errorMsg = document.querySelector(".error_msg");
-    errorMsg.textContent = "Invalid email or password. Please try again.";
-    errorMsg.style.display = "block";
-  }
+    if (matched) {
+      location.href = "main.html";
+    } else {
+      const errorMsg = document.querySelector(".error_msg");
+      errorMsg.textContent = "Invalid email or password. Please try again.";
+      errorMsg.style.display = "block";
+    }
   });
 })

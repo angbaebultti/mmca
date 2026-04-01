@@ -47,16 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
     lastScroll = cur;
   });
 
-  /* ── museum nav GSAP 애니메이션 ── */
-  const museumNav = document.querySelector('.museum_nav');
-  const items     = document.querySelectorAll('.item');
+/* ── museum nav GSAP 애니메이션 ── */
+const museumNav = document.querySelector('.museum_nav');
+const items     = document.querySelectorAll('.item');
 
+// ↓ 이 조건 추가!
+if (museumNav && items.length > 0) {
   museumNav.classList.remove('nav_locked');
   items.forEach(item => {
     item.querySelector('.bg').style.transition = 'none';
   });
-
-  const navHeight = museumNav.offsetHeight;
 
   const fillTl = gsap.timeline();
 
@@ -69,19 +69,21 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   });
 
-fillTl.to(header, {
-  yPercent: -100,
-  opacity: 0,
-  duration: 0.6,
-  ease: 'power2.inOut',
-}, '+=0.5');
+  fillTl.to(header, {
+    yPercent: -100,
+    opacity: 0,
+    duration: 0.6,
+    ease: 'power2.inOut',
+  }, '+=0.5');
 
-// 애니메이션 끝나면 GSAP 인라인 스타일 제거 → CSS 클래스가 다시 제어
-fillTl.call(() => {
-  gsap.set(header, { clearProps: 'transform,opacity' });
+  fillTl.call(() => {
+    gsap.set(header, { clearProps: 'transform,opacity' });
+    header.classList.add('hide');
+  });
+
+} else {
+  // signin 등 museum nav 없는 페이지에서는 헤더 바로 숨김
   header.classList.add('hide');
-});
-
-
+}
 
 }); // DOMContentLoaded end
