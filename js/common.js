@@ -27,10 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── 헤더 shrink / hide ── */
   const header = document.querySelector(".header");
-  let lastScroll    = 0;
-  let scrollUpStart = 0;
+  let lastScroll        = 0;
+  let scrollUpStart     = 0;
+  let headerLockedByIntro  = false;
+  let headerPermanentHide  = false; 
 
   window.addEventListener("scroll", () => {
+    if (headerLockedByIntro) return;
+
     const cur = window.scrollY;
 
     header.classList.toggle("shrink", cur > 60);
@@ -40,49 +44,59 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollUpStart = cur;
     } else {
       if (scrollUpStart - cur > 60) {
-        header.classList.remove("hide");
+        if (headerPermanentHide && cur < 80) {
+          header.classList.add("hide");
+        } else {
+          header.classList.remove("hide");
+        }
       }
     }
 
     lastScroll = cur;
   });
 
-/* ── museum nav GSAP 애니메이션 ── */
-const museumNav = document.querySelector('.museum_nav');
-const items     = document.querySelectorAll('.item');
+  /* ── museum nav GSAP 애니메이션 ── */
+  const museumNav = document.querySelector('.museum_nav');
+  const items     = document.querySelectorAll('.item');
 
-if (museumNav && items.length > 0) {
-  museumNav.classList.remove('nav_locked');
-  items.forEach(item => {
-    item.querySelector('.bg').style.transition = 'none';
-  });
+  if (museumNav && items.length > 0) {
+    headerLockedByIntro = true;
 
-  const fillTl = gsap.timeline();
+    museumNav.classList.remove('nav_locked');
+    items.forEach(item => {
+      item.querySelector('.bg').style.transition = 'none';
+    });
 
-  items.forEach((item, i) => {
-    fillTl.fromTo(
-      item.querySelector('.bg'),
-      { width: '0%' },
-      { width: '100%', duration: 0.9, ease: 'power3.out' },
-      i * 0.3
-    );
-  });
+    const fillTl = gsap.timeline();
 
-  fillTl.to(header, {
-    yPercent: -100,
-    opacity: 0,
-    duration: 0.6,
-    ease: 'power2.inOut',
-  }, '+=0.5');
+    items.forEach((item, i) => {
+      fillTl.fromTo(
+        item.querySelector('.bg'),
+        { width: '0%' },
+        { width: '100%', duration: 0.9, ease: 'power3.out' },
+        i * 0.3
+      );
+    });
 
-  fillTl.call(() => {
-    gsap.set(header, { clearProps: 'transform,opacity' });
+    fillTl.to(header, {
+      yPercent: -100,
+      opacity: 0,
+      duration: 0.6,
+      ease: 'power2.inOut',
+    }, '+=0.5');
+
+    fillTl.call(() => {
+      gsap.set(header, { clearProps: 'transform,opacity' });
+      header.classList.add('hide');
+
+      lastScroll          = window.scrollY;
+      scrollUpStart       = window.scrollY;
+      headerLockedByIntro = false;
+      headerPermanentHide = true; 
+    });
+
+  } else {
     header.classList.add('hide');
-  });
-
-} else {
-  // signin 등 museum nav 없는 페이지에서는 헤더 바로 숨김
-  header.classList.add('hide');
-}
+  }
 
 }); // DOMContentLoaded end
