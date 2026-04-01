@@ -187,6 +187,7 @@ a {
   visibility: visible;
   pointer-events: auto;
   height: auto;
+  padding-bottom: 80px;
 }
 
 .museum_exhibit_section {
@@ -269,15 +270,17 @@ a {
   width: 100%;
   margin: 0;
   padding: 0;
-  height: 200vh;
+  /* height: 200vh; */
 }
 
 .museum_h_sticky {
   position: sticky;
-  top: 100px;
+  top: 0;
   height: auto;
-  min-height: calc(100vh - 100px + 200px);
-  overflow: hidden;
+  /* ← 100vh → auto */
+  min-height: 100vh;
+  /* ← 이건 유지 */
+  overflow: visible;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -288,7 +291,7 @@ a {
   z-index: 3;
   width: calc(100vw - 320px);
   margin: 0 auto;
-  padding-top: 10px;
+  padding-top: 100px;
   padding-bottom: clamp(18px, 1.5vw, 24px);
   flex-shrink: 0;
   background: var(--main_black);
@@ -312,8 +315,8 @@ a {
 
 .museum_h_scroll {
   height: auto;
-  min-height: calc(100vh - 100px + 200px - 240px);
-  overflow: hidden;
+  min-height: unset;
+  overflow: visible;
   flex: 1 1 auto;
 }
 
@@ -322,6 +325,8 @@ a {
   height: auto;
   align-items: flex-start;
   will-change: transform;
+  padding-top: 40px;
+  /* ← 이걸 추가, 값 키울수록 카드가 아래로 */
 }
 
 .museum_exhibit_section.is_horizontal .museum_exhibit_card {
@@ -329,8 +334,8 @@ a {
   min-width: 100vw;
   flex: 0 0 100vw;
   height: auto;
-  margin: 40px 0 200px;
-  padding: 0 160px;
+  margin: 40px 0 0;
+  padding: 0 160px 80px;
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
@@ -364,9 +369,10 @@ a {
 }
 
 .museum_poster img {
-  display: block;
   width: 100%;
   height: auto;
+  /* ← 비율대로 자연스럽게 */
+  object-fit: unset;
 }
 
 .museum_content {

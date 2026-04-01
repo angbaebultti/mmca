@@ -137,7 +137,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!metrics) return 0;
 
     const sectionTop = getAbsoluteTop(section);
-    const rawProgress = Math.max(window.scrollY - sectionTop, 0);
+
+    const START_OFFSET = window.innerHeight * 0.3; // 👈 핵심
+
+    const rawProgress = Math.max(window.scrollY - sectionTop - START_OFFSET, 0);
+
     const { maxTranslate, lastCardStart } = metrics;
     const normalProgress = rawProgress * NORMAL_SPEED;
 
@@ -157,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const normalDistance = metrics.lastCardStart / NORMAL_SPEED;
     const lastCardDistance = metrics.lastCardSpan / (NORMAL_SPEED * LAST_CARD_SPEED);
 
-    return window.innerHeight + normalDistance + lastCardDistance + 600;
+    return window.innerHeight + normalDistance + lastCardDistance + 1200 + 300;
   }
 
   function updateCompactHeader() {
@@ -207,6 +211,10 @@ document.addEventListener("DOMContentLoaded", () => {
     cancelHorizontalAnimation();
     if (cubeScrollTrigger) { cubeScrollTrigger.kill(); cubeScrollTrigger = null; }
 
+    // 커서 강제 초기화
+    const ring = document.getElementById("cursorRing");
+    if (ring) { ring.classList.remove("cube-hover"); ring.textContent = ""; }
+
     lenis.stop();
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
@@ -251,6 +259,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function expandSelectedFace(face) {
     const targetId = face.dataset.target;
     const targetSection = document.getElementById(targetId);
+
+    // 커서 강제 초기화
+    const ring = document.getElementById("cursorRing");
+    if (ring) { ring.classList.remove("cube-hover"); ring.textContent = ""; }
 
     if (!targetSection) { lenis.start(); isTransitioning = false; return; }
     if (cubeScrollTrigger) { cubeScrollTrigger.kill(); cubeScrollTrigger = null; }
