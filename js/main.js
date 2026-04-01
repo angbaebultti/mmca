@@ -465,25 +465,23 @@ document.addEventListener("DOMContentLoaded", () => {
     // 첫 탭 카드는 CSS 애니메이션으로 처리
   }
 
-  if (isMobile480) {
-    const mobileTabButtons = Array.from(qsa(".news_mobile_tab_btn"));
-    const mobileTabPanels = Array.from(qsa(".news_mobile_tab_panel"));
-    mobileTabButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const target = button.dataset.tabTarget;
-        mobileTabButtons.forEach((btn) => {
-          const isActive = btn === button;
-          btn.classList.toggle("is-active", isActive);
-          btn.setAttribute("aria-selected", isActive ? "true" : "false");
-        });
-        mobileTabPanels.forEach((panel) => {
-          const isActive = panel.dataset.tabPanel === target;
-          panel.classList.toggle("is-active", isActive);
-          panel.hidden = !isActive;
-        });
+  const mobileTabButtons = Array.from(qsa(".news_mobile_tab_btn"));
+  const mobileTabPanels = Array.from(qsa(".news_mobile_tab_panel"));
+  mobileTabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const target = button.dataset.tabTarget;
+      mobileTabButtons.forEach((btn) => {
+        const isActive = btn === button;
+        btn.classList.toggle("is-active", isActive);
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+      mobileTabPanels.forEach((panel) => {
+        const isActive = panel.dataset.tabPanel === target;
+        panel.classList.toggle("is-active", isActive);
+        panel.hidden = !isActive;
       });
     });
-  }
+  });
 
   /* =========================================================
   * 12. SHOP
