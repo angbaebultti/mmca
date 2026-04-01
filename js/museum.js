@@ -154,14 +154,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function getHorizontalScrollHeight(section) {
     const metrics = getHorizontalMetrics(section);
-    if (!metrics || metrics.maxTranslate === 0) return window.innerHeight;
 
-    // Sticky has a top offset, but the containing section still needs full viewport height
-    // so the header does not start sliding away before the horizontal motion is complete.
+    // 카드 실제 높이 측정
+    const card = section.querySelector(".museum_exhibit_card");
+    const cardHeight = card ? card.getBoundingClientRect().height : 0;
+
+    if (!metrics || metrics.maxTranslate === 0) return cardHeight + window.innerHeight;
+
     const normalDistance = metrics.lastCardStart / NORMAL_SPEED;
     const lastCardDistance = metrics.lastCardSpan / (NORMAL_SPEED * LAST_CARD_SPEED);
 
-    return window.innerHeight + normalDistance + lastCardDistance + 1200 + 300;
+    return cardHeight + normalDistance + lastCardDistance + 1200 + 300;
   }
 
   function updateCompactHeader() {
@@ -235,7 +238,9 @@ document.addEventListener("DOMContentLoaded", () => {
       resetAllHorizontalSections();
       resetHorizontalSection(targetSection);
 
-      const targetTop = Math.max(getAbsoluteTop(targetSection) - HORIZONTAL_STICKY_TOP, 0);
+      const head = targetSection.querySelector(".museum_head");
+      const headHeight = head ? head.getBoundingClientRect().height : 0;
+      const targetTop = Math.max(getAbsoluteTop(targetSection) - HORIZONTAL_STICKY_TOP + headHeight * 0.3, 0);
 
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";

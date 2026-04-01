@@ -270,16 +270,14 @@ a {
   width: 100%;
   margin: 0;
   padding: 0;
-  /* height: 200vh; */
+ min-height: 250vh;  /* JS 계산 전 임시 확보 */
 }
 
 .museum_h_sticky {
   position: sticky;
   top: 0;
   height: auto;
-  /* ← 100vh → auto */
   min-height: 100vh;
-  /* ← 이건 유지 */
   overflow: visible;
   display: flex;
   flex-direction: column;
